@@ -1,0 +1,597 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		192EBFE02C90F62E00AF8528 /* VineyardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192EBFDF2C90F62E00AF8528 /* VineyardApp.swift */; };
+		192EBFE22C90F62E00AF8528 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192EBFE12C90F62E00AF8528 /* ContentView.swift */; };
+		192EBFE42C90F62F00AF8528 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 192EBFE32C90F62F00AF8528 /* Assets.xcassets */; };
+		192EBFE72C90F62F00AF8528 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 192EBFE62C90F62F00AF8528 /* Preview Assets.xcassets */; };
+		192EBFF12C90F62F00AF8528 /* VineyardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192EBFF02C90F62F00AF8528 /* VineyardTests.swift */; };
+		192EBFFB2C90F62F00AF8528 /* VineyardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192EBFFA2C90F62F00AF8528 /* VineyardUITests.swift */; };
+		192EBFFD2C90F62F00AF8528 /* VineyardUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192EBFFC2C90F62F00AF8528 /* VineyardUITestsLaunchTests.swift */; };
+		192EC00A2C90F64300AF8528 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192EC0092C90F64300AF8528 /* Model.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		192EBFED2C90F62F00AF8528 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 192EBFD42C90F62D00AF8528 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 192EBFDB2C90F62D00AF8528;
+			remoteInfo = Vineyard;
+		};
+		192EBFF72C90F62F00AF8528 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 192EBFD42C90F62D00AF8528 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 192EBFDB2C90F62D00AF8528;
+			remoteInfo = Vineyard;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		192EBFDC2C90F62E00AF8528 /* Vineyard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vineyard.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		192EBFDF2C90F62E00AF8528 /* VineyardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VineyardApp.swift; sourceTree = "<group>"; };
+		192EBFE12C90F62E00AF8528 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		192EBFE32C90F62F00AF8528 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		192EBFE62C90F62F00AF8528 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		192EBFEC2C90F62F00AF8528 /* VineyardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VineyardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		192EBFF02C90F62F00AF8528 /* VineyardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VineyardTests.swift; sourceTree = "<group>"; };
+		192EBFF62C90F62F00AF8528 /* VineyardUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VineyardUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		192EBFFA2C90F62F00AF8528 /* VineyardUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VineyardUITests.swift; sourceTree = "<group>"; };
+		192EBFFC2C90F62F00AF8528 /* VineyardUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VineyardUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		192EC0092C90F64300AF8528 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		192EBFD92C90F62D00AF8528 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		192EBFE92C90F62F00AF8528 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		192EBFF32C90F62F00AF8528 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		192EBFD32C90F62D00AF8528 = {
+			isa = PBXGroup;
+			children = (
+				192EBFDE2C90F62E00AF8528 /* Vineyard */,
+				192EBFEF2C90F62F00AF8528 /* VineyardTests */,
+				192EBFF92C90F62F00AF8528 /* VineyardUITests */,
+				192EBFDD2C90F62E00AF8528 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		192EBFDD2C90F62E00AF8528 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				192EBFDC2C90F62E00AF8528 /* Vineyard.app */,
+				192EBFEC2C90F62F00AF8528 /* VineyardTests.xctest */,
+				192EBFF62C90F62F00AF8528 /* VineyardUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		192EBFDE2C90F62E00AF8528 /* Vineyard */ = {
+			isa = PBXGroup;
+			children = (
+				192EBFDF2C90F62E00AF8528 /* VineyardApp.swift */,
+				192EC0092C90F64300AF8528 /* Model.swift */,
+				192EBFE12C90F62E00AF8528 /* ContentView.swift */,
+				192EBFE32C90F62F00AF8528 /* Assets.xcassets */,
+				192EBFE52C90F62F00AF8528 /* Preview Content */,
+			);
+			path = Vineyard;
+			sourceTree = "<group>";
+		};
+		192EBFE52C90F62F00AF8528 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				192EBFE62C90F62F00AF8528 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		192EBFEF2C90F62F00AF8528 /* VineyardTests */ = {
+			isa = PBXGroup;
+			children = (
+				192EBFF02C90F62F00AF8528 /* VineyardTests.swift */,
+			);
+			path = VineyardTests;
+			sourceTree = "<group>";
+		};
+		192EBFF92C90F62F00AF8528 /* VineyardUITests */ = {
+			isa = PBXGroup;
+			children = (
+				192EBFFA2C90F62F00AF8528 /* VineyardUITests.swift */,
+				192EBFFC2C90F62F00AF8528 /* VineyardUITestsLaunchTests.swift */,
+			);
+			path = VineyardUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		192EBFDB2C90F62D00AF8528 /* Vineyard */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 192EC0002C90F62F00AF8528 /* Build configuration list for PBXNativeTarget "Vineyard" */;
+			buildPhases = (
+				192EBFD82C90F62D00AF8528 /* Sources */,
+				192EBFD92C90F62D00AF8528 /* Frameworks */,
+				192EBFDA2C90F62D00AF8528 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Vineyard;
+			productName = Vineyard;
+			productReference = 192EBFDC2C90F62E00AF8528 /* Vineyard.app */;
+			productType = "com.apple.product-type.application";
+		};
+		192EBFEB2C90F62F00AF8528 /* VineyardTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 192EC0032C90F62F00AF8528 /* Build configuration list for PBXNativeTarget "VineyardTests" */;
+			buildPhases = (
+				192EBFE82C90F62F00AF8528 /* Sources */,
+				192EBFE92C90F62F00AF8528 /* Frameworks */,
+				192EBFEA2C90F62F00AF8528 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				192EBFEE2C90F62F00AF8528 /* PBXTargetDependency */,
+			);
+			name = VineyardTests;
+			productName = VineyardTests;
+			productReference = 192EBFEC2C90F62F00AF8528 /* VineyardTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		192EBFF52C90F62F00AF8528 /* VineyardUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 192EC0062C90F62F00AF8528 /* Build configuration list for PBXNativeTarget "VineyardUITests" */;
+			buildPhases = (
+				192EBFF22C90F62F00AF8528 /* Sources */,
+				192EBFF32C90F62F00AF8528 /* Frameworks */,
+				192EBFF42C90F62F00AF8528 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				192EBFF82C90F62F00AF8528 /* PBXTargetDependency */,
+			);
+			name = VineyardUITests;
+			productName = VineyardUITests;
+			productReference = 192EBFF62C90F62F00AF8528 /* VineyardUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		192EBFD42C90F62D00AF8528 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1530;
+				LastUpgradeCheck = 1530;
+				TargetAttributes = {
+					192EBFDB2C90F62D00AF8528 = {
+						CreatedOnToolsVersion = 15.3;
+					};
+					192EBFEB2C90F62F00AF8528 = {
+						CreatedOnToolsVersion = 15.3;
+						TestTargetID = 192EBFDB2C90F62D00AF8528;
+					};
+					192EBFF52C90F62F00AF8528 = {
+						CreatedOnToolsVersion = 15.3;
+						TestTargetID = 192EBFDB2C90F62D00AF8528;
+					};
+				};
+			};
+			buildConfigurationList = 192EBFD72C90F62D00AF8528 /* Build configuration list for PBXProject "Vineyard" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 192EBFD32C90F62D00AF8528;
+			productRefGroup = 192EBFDD2C90F62E00AF8528 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				192EBFDB2C90F62D00AF8528 /* Vineyard */,
+				192EBFEB2C90F62F00AF8528 /* VineyardTests */,
+				192EBFF52C90F62F00AF8528 /* VineyardUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		192EBFDA2C90F62D00AF8528 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				192EBFE72C90F62F00AF8528 /* Preview Assets.xcassets in Resources */,
+				192EBFE42C90F62F00AF8528 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		192EBFEA2C90F62F00AF8528 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		192EBFF42C90F62F00AF8528 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		192EBFD82C90F62D00AF8528 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				192EBFE22C90F62E00AF8528 /* ContentView.swift in Sources */,
+				192EC00A2C90F64300AF8528 /* Model.swift in Sources */,
+				192EBFE02C90F62E00AF8528 /* VineyardApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		192EBFE82C90F62F00AF8528 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				192EBFF12C90F62F00AF8528 /* VineyardTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		192EBFF22C90F62F00AF8528 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				192EBFFD2C90F62F00AF8528 /* VineyardUITestsLaunchTests.swift in Sources */,
+				192EBFFB2C90F62F00AF8528 /* VineyardUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		192EBFEE2C90F62F00AF8528 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 192EBFDB2C90F62D00AF8528 /* Vineyard */;
+			targetProxy = 192EBFED2C90F62F00AF8528 /* PBXContainerItemProxy */;
+		};
+		192EBFF82C90F62F00AF8528 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 192EBFDB2C90F62D00AF8528 /* Vineyard */;
+			targetProxy = 192EBFF72C90F62F00AF8528 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		192EBFFE2C90F62F00AF8528 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		192EBFFF2C90F62F00AF8528 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		192EC0012C90F62F00AF8528 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Vineyard/Preview Content\"";
+				DEVELOPMENT_TEAM = D46454C83G;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Vineyard;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		192EC0022C90F62F00AF8528 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Vineyard/Preview Content\"";
+				DEVELOPMENT_TEAM = D46454C83G;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Vineyard;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		192EC0042C90F62F00AF8528 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D46454C83G;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.VineyardTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vineyard.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Vineyard";
+			};
+			name = Debug;
+		};
+		192EC0052C90F62F00AF8528 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D46454C83G;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.VineyardTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vineyard.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Vineyard";
+			};
+			name = Release;
+		};
+		192EC0072C90F62F00AF8528 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D46454C83G;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.VineyardUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Vineyard;
+			};
+			name = Debug;
+		};
+		192EC0082C90F62F00AF8528 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D46454C83G;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.VineyardUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Vineyard;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		192EBFD72C90F62D00AF8528 /* Build configuration list for PBXProject "Vineyard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				192EBFFE2C90F62F00AF8528 /* Debug */,
+				192EBFFF2C90F62F00AF8528 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		192EC0002C90F62F00AF8528 /* Build configuration list for PBXNativeTarget "Vineyard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				192EC0012C90F62F00AF8528 /* Debug */,
+				192EC0022C90F62F00AF8528 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		192EC0032C90F62F00AF8528 /* Build configuration list for PBXNativeTarget "VineyardTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				192EC0042C90F62F00AF8528 /* Debug */,
+				192EC0052C90F62F00AF8528 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		192EC0062C90F62F00AF8528 /* Build configuration list for PBXNativeTarget "VineyardUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				192EC0072C90F62F00AF8528 /* Debug */,
+				192EC0082C90F62F00AF8528 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 192EBFD42C90F62D00AF8528 /* Project object */;
+}
