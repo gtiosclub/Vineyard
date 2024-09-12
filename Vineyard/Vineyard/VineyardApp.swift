@@ -9,12 +9,14 @@ import SwiftUI
 
 @main
 struct VineyardApp: App {
+
     @State private var isAuthenticated = false
     
     var body: some Scene {
         WindowGroup {
             if isAuthenticated {
                 ContentView()
+                    .environmentObject(viewModel)
             } else {
                 LoginView(isAuthenticated: $isAuthenticated)
             }

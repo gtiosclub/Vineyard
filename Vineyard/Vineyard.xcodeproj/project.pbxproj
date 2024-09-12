@@ -18,6 +18,8 @@
 		F18B0B092C9371EE002DE456 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18B0B082C9371EE002DE456 /* LoginView.swift */; };
 		F18B0B0B2C9372C2002DE456 /* ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18B0B0A2C9372C2002DE456 /* ResetPassword.swift */; };
 		F18B0B0D2C93733A002DE456 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18B0B0C2C93733A002DE456 /* SignUpView.swift */; };
+		B40B894C2C9364F4006B1771 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40B894B2C9364F4006B1771 /* ViewModel.swift */; };
+		B40B894E2C936DE0006B1771 /* ResolutionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40B894D2C936DE0006B1771 /* ResolutionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,9 +51,12 @@
 		192EBFFA2C90F62F00AF8528 /* VineyardUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VineyardUITests.swift; sourceTree = "<group>"; };
 		192EBFFC2C90F62F00AF8528 /* VineyardUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VineyardUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		192EC0092C90F64300AF8528 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+
 		F18B0B082C9371EE002DE456 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		F18B0B0A2C9372C2002DE456 /* ResetPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassword.swift; sourceTree = "<group>"; };
 		F18B0B0C2C93733A002DE456 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		B40B894B2C9364F4006B1771 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		B40B894D2C936DE0006B1771 /* ResolutionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolutionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +115,8 @@
 				192EBFE12C90F62E00AF8528 /* ContentView.swift */,
 				192EBFE32C90F62F00AF8528 /* Assets.xcassets */,
 				192EBFE52C90F62F00AF8528 /* Preview Content */,
+				B40B894B2C9364F4006B1771 /* ViewModel.swift */,
+				B40B894D2C936DE0006B1771 /* ResolutionView.swift */,
 			);
 			path = Vineyard;
 			sourceTree = "<group>";
@@ -274,7 +281,9 @@
 				F18B0B0B2C9372C2002DE456 /* ResetPassword.swift in Sources */,
 				F18B0B092C9371EE002DE456 /* LoginView.swift in Sources */,
 				F18B0B0D2C93733A002DE456 /* SignUpView.swift in Sources */,
+				B40B894C2C9364F4006B1771 /* ViewModel.swift in Sources */,
 				192EBFE02C90F62E00AF8528 /* VineyardApp.swift in Sources */,
+				B40B894E2C936DE0006B1771 /* ResolutionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
