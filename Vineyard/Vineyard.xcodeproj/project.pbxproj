@@ -15,6 +15,8 @@
 		192EBFFB2C90F62F00AF8528 /* VineyardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192EBFFA2C90F62F00AF8528 /* VineyardUITests.swift */; };
 		192EBFFD2C90F62F00AF8528 /* VineyardUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192EBFFC2C90F62F00AF8528 /* VineyardUITestsLaunchTests.swift */; };
 		192EC00A2C90F64300AF8528 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192EC0092C90F64300AF8528 /* Model.swift */; };
+		B40B894C2C9364F4006B1771 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40B894B2C9364F4006B1771 /* ViewModel.swift */; };
+		B40B894E2C936DE0006B1771 /* ResolutionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40B894D2C936DE0006B1771 /* ResolutionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +48,8 @@
 		192EBFFA2C90F62F00AF8528 /* VineyardUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VineyardUITests.swift; sourceTree = "<group>"; };
 		192EBFFC2C90F62F00AF8528 /* VineyardUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VineyardUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		192EC0092C90F64300AF8528 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		B40B894B2C9364F4006B1771 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		B40B894D2C936DE0006B1771 /* ResolutionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolutionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +105,8 @@
 				192EBFE12C90F62E00AF8528 /* ContentView.swift */,
 				192EBFE32C90F62F00AF8528 /* Assets.xcassets */,
 				192EBFE52C90F62F00AF8528 /* Preview Content */,
+				B40B894B2C9364F4006B1771 /* ViewModel.swift */,
+				B40B894D2C936DE0006B1771 /* ResolutionView.swift */,
 			);
 			path = Vineyard;
 			sourceTree = "<group>";
@@ -262,7 +268,9 @@
 			files = (
 				192EBFE22C90F62E00AF8528 /* ContentView.swift in Sources */,
 				192EC00A2C90F64300AF8528 /* Model.swift in Sources */,
+				B40B894C2C9364F4006B1771 /* ViewModel.swift in Sources */,
 				192EBFE02C90F62E00AF8528 /* VineyardApp.swift in Sources */,
+				B40B894E2C936DE0006B1771 /* ResolutionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
