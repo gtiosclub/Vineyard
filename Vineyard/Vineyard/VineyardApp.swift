@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct VineyardApp: App {
+    @State private var viewModel = ViewModel()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().environment(viewModel)
         }
     }
 }
