@@ -27,21 +27,21 @@ struct SignUpView: View {
                 .background(Color(.secondarySystemBackground))
                 .cornerRadius(8)
                 .autocapitalization(.none)
-                .padding(.horizontal, 20)
+                .padding(.horizontal, 40)
 
             SecureField("Password", text: $password)
                 .padding(.horizontal, 10)
                 .frame(height: 40)
                 .background(Color(.secondarySystemBackground))
                 .cornerRadius(8)
-                .padding(.horizontal, 20)
+                .padding(.horizontal, 40)
 
             SecureField("Confirm Password", text: $confirmPassword)
                 .padding(.horizontal, 10)
                 .frame(height: 40)
                 .background(Color(.secondarySystemBackground))
                 .cornerRadius(8)
-                .padding(.horizontal, 20)
+                .padding(.horizontal, 40)
 
             if !errorMessage.isEmpty {
                 Text(errorMessage)

@@ -22,42 +22,53 @@ struct LoginView: View {
     ]
     
     var body: some View {
-        VStack(spacing: 20) {
-            //title goes here
-            
-            TextField("Enter username", text: $username)
-                .padding()
-                .background(Color.gray.opacity(0.2))
-                .cornerRadius(5)
-                .padding(.horizontal, 20)
-            
-            SecureField("Enter password", text: $password)
-                .padding()
-                .background(Color.gray.opacity(0.2))
-                .cornerRadius(5)
-                .padding(.horizontal, 20)
-            
-            Button(action: {
-                authenticateUser()
-            }) {
-                Text("Login")
-                    .foregroundColor(.white)
+        NavigationView {
+            VStack(spacing: 10) {
+                Text("Vineyard")
+                    .font(.largeTitle)
+                    .bold()
+                    .padding(.top, 0)
+                    .padding(.bottom, 20)
+                
+                TextField("Enter username", text: $username)
                     .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.blue)
+                    .frame(height: 40)
+                    .background(Color.gray.opacity(0.2))
                     .cornerRadius(5)
-                    .padding(.horizontal, 20)
+                    .padding(.horizontal, 40)
+                
+                SecureField("Enter password", text: $password)
+                    .padding()
+                    .frame(height: 40)
+                    .background(Color.gray.opacity(0.2))
+                    .cornerRadius(5)
+                    .padding(.horizontal, 40)
+                
+                Button(action: {
+                    authenticateUser()
+                }) {
+                    Text("Login")
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(height: 40)
+                        .frame(maxWidth: .infinity)
+                        .background(Color.blue)
+                        .cornerRadius(5)
+                        .padding(.horizontal, 40)
+                }
+                
+                NavigationLink(destination: ResetPasswordView()) {
+                    Text("Forgot Password?")
+                }
             }
-            NavigationLink(destination: ResetPasswordView()) {
-                Text("Forgot Password?")
-            }
+            
+            .padding(.top, -120)
+            
+            .alert(isPresented: $showAlert) {
+                Alert(title: Text(alertMessage))
+            } //temp
             
         }
-        
-        .alert(isPresented: $showAlert) {
-            Alert(title: Text(alertMessage))
-        } //temp
-        
     }
     
     func authenticateUser() {
