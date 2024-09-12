@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ResolutionView: View {
     @Environment(ViewModel.self) private var viewModel
-    var group: Group
+    let group: Group
     @State var showAddItemPrompt: Bool = false
     @State var newResolutionName: String = ""
     @State var timebound: TimeBound = TimeBound.day
@@ -84,5 +84,5 @@ struct ResolutionView: View {
 }
 
 #Preview {
-    ResolutionView(group: Group(people:[Person(name: "BRuh", age: 101)], groupName: "", yearlyResolution: ""))
+    ResolutionView(group: Group(people:[Person(name: "BRuh", age: 101)], groupName: "", yearlyResolution: "")).environment(ViewModel())
 }
