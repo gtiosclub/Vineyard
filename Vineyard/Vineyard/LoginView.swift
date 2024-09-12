@@ -60,6 +60,11 @@ struct LoginView: View {
                 NavigationLink(destination: ResetPasswordView()) {
                     Text("Forgot Password?")
                 }
+                
+                NavigationLink(destination: SignUpView()) {
+                    Text("New here?")
+                }
+                
             }
             
             .padding(.top, -120)
