@@ -12,7 +12,18 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                Text("\(viewModel.user.name)")
+                HStack {
+                    Spacer()
+                    Text("\(viewModel.user.name)")
+                        .frame(maxWidth: 275, alignment: .center)
+                    NavigationLink(destination: ProfileView()) {
+                        Image(systemName: "person.crop.circle.fill")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                            .padding(.trailing, 22)
+                            .foregroundColor(.black)
+                    }
+                }
                 List(viewModel.user.participatingGroups) { group in
                     // TODO: Use a NavigationLink to select a list.
                     NavigationLink(group.groupName) {
