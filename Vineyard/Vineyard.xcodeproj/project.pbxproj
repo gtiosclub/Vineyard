@@ -17,6 +17,7 @@
 		192EC00A2C90F64300AF8528 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192EC0092C90F64300AF8528 /* Model.swift */; };
 		B40B894C2C9364F4006B1771 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40B894B2C9364F4006B1771 /* ViewModel.swift */; };
 		B40B894E2C936DE0006B1771 /* ResolutionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40B894D2C936DE0006B1771 /* ResolutionView.swift */; };
+		F00648272C9758D20093E556 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00648262C9758D20093E556 /* ProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		192EC0092C90F64300AF8528 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		B40B894B2C9364F4006B1771 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		B40B894D2C936DE0006B1771 /* ResolutionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolutionView.swift; sourceTree = "<group>"; };
+		F00648262C9758D20093E556 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				192EBFDF2C90F62E00AF8528 /* VineyardApp.swift */,
 				192EC0092C90F64300AF8528 /* Model.swift */,
 				192EBFE12C90F62E00AF8528 /* ContentView.swift */,
+				F00648262C9758D20093E556 /* ProfileView.swift */,
 				192EBFE32C90F62F00AF8528 /* Assets.xcassets */,
 				192EBFE52C90F62F00AF8528 /* Preview Content */,
 				B40B894B2C9364F4006B1771 /* ViewModel.swift */,
@@ -270,6 +273,7 @@
 				192EC00A2C90F64300AF8528 /* Model.swift in Sources */,
 				B40B894C2C9364F4006B1771 /* ViewModel.swift in Sources */,
 				192EBFE02C90F62E00AF8528 /* VineyardApp.swift in Sources */,
+				F00648272C9758D20093E556 /* ProfileView.swift in Sources */,
 				B40B894E2C936DE0006B1771 /* ResolutionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
