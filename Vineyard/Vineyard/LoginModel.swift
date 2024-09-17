@@ -11,8 +11,8 @@ struct LoginModel {
     func createUser(email: String, password: String) async throws {
         do {
             try await auth.createUser(withEmail:email, password: password)
-            guard let currentUser = Auth.auth().currentUser else {
-                print("Failed to fetch currentUser in createUser")
+            guard Auth.auth().currentUser != nil else {
+                print("Failed to create currentUser in createUser")
                 return
             }
             print("User \(email) created")

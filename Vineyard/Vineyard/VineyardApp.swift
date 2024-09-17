@@ -6,22 +6,26 @@
 //
 
 import SwiftUI
+import Firebase
 
+      
 @main
 struct VineyardApp: App {
-
-    @State private var isAuthenticated = false
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @State private var viewModel = ViewModel()
     @StateObject private var loginViewModel = LoginViewModel()
     var body: some Scene {
         WindowGroup {
-            if isAuthenticated {
-                ContentView()
-                    .environmentObject(viewModel)
-                    .environmentObject(loginViewModel)
-            } else {
-                LoginView(isAuthenticated: $isAuthenticated)
-            }
+            ContentView()
+                .environmentObject(viewModel)
+                .environmentObject(loginViewModel)
         }
+    }
+    class AppDelegate: NSObject, UIApplicationDelegate {
+      func application(_ application: UIApplication,
+                       didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        FirebaseApp.configure()
+        return true
+      }
     }
 }

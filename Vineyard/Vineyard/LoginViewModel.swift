@@ -48,7 +48,12 @@ class LoginViewModel: ObservableObject {
         }
         isLoading = false
     }
-    
+    func checkLoggedIn() -> Bool {
+        if Auth.auth().currentUser != nil {
+            return true
+        }
+        return false
+    }
     func createUser(email: String, password: String, name: String, age: Int) async {
         isLoading = true
         errorMessage = nil
