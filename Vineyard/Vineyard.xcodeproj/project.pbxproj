@@ -8,15 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		192EBFE02C90F62E00AF8528 /* VineyardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192EBFDF2C90F62E00AF8528 /* VineyardApp.swift */; };
-		192EBFE22C90F62E00AF8528 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192EBFE12C90F62E00AF8528 /* ContentView.swift */; };
+		192EBFE22C90F62E00AF8528 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192EBFE12C90F62E00AF8528 /* HomeView.swift */; };
 		192EBFE42C90F62F00AF8528 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 192EBFE32C90F62F00AF8528 /* Assets.xcassets */; };
 		192EBFE72C90F62F00AF8528 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 192EBFE62C90F62F00AF8528 /* Preview Assets.xcassets */; };
 		192EBFF12C90F62F00AF8528 /* VineyardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192EBFF02C90F62F00AF8528 /* VineyardTests.swift */; };
 		192EBFFB2C90F62F00AF8528 /* VineyardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192EBFFA2C90F62F00AF8528 /* VineyardUITests.swift */; };
 		192EBFFD2C90F62F00AF8528 /* VineyardUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192EBFFC2C90F62F00AF8528 /* VineyardUITestsLaunchTests.swift */; };
-		192EC00A2C90F64300AF8528 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192EC0092C90F64300AF8528 /* Model.swift */; };
-		B40B894C2C9364F4006B1771 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40B894B2C9364F4006B1771 /* ViewModel.swift */; };
+		B40B894C2C9364F4006B1771 /* GroupsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40B894B2C9364F4006B1771 /* GroupsListViewModel.swift */; };
 		B40B894E2C936DE0006B1771 /* ResolutionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40B894D2C936DE0006B1771 /* ResolutionView.swift */; };
+		BB40EDF62C991C8A006BA1E3 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EDF52C991C8A006BA1E3 /* Group.swift */; };
+		BB40EDF82C991C93006BA1E3 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EDF72C991C93006BA1E3 /* Person.swift */; };
+		BB40EDFA2C991C9D006BA1E3 /* Resolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EDF92C991C9D006BA1E3 /* Resolution.swift */; };
+		BB40EE062C992566006BA1E3 /* FirebaseDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EE052C992566006BA1E3 /* FirebaseDataManager.swift */; };
+		BB40EE082C99258B006BA1E3 /* DatabaseServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EE072C99258B006BA1E3 /* DatabaseServiceProtocol.swift */; };
+		BB40EE0A2C9926A6006BA1E3 /* GroupsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EE092C9926A6006BA1E3 /* GroupsListView.swift */; };
+		BB40EE0C2C992871006BA1E3 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EE0B2C992871006BA1E3 /* DashboardView.swift */; };
+		BB40EE0E2C99288A006BA1E3 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EE0D2C99288A006BA1E3 /* ProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +46,7 @@
 /* Begin PBXFileReference section */
 		192EBFDC2C90F62E00AF8528 /* Vineyard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vineyard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		192EBFDF2C90F62E00AF8528 /* VineyardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VineyardApp.swift; sourceTree = "<group>"; };
-		192EBFE12C90F62E00AF8528 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		192EBFE12C90F62E00AF8528 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		192EBFE32C90F62F00AF8528 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		192EBFE62C90F62F00AF8528 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		192EBFEC2C90F62F00AF8528 /* VineyardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VineyardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -47,9 +54,16 @@
 		192EBFF62C90F62F00AF8528 /* VineyardUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VineyardUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		192EBFFA2C90F62F00AF8528 /* VineyardUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VineyardUITests.swift; sourceTree = "<group>"; };
 		192EBFFC2C90F62F00AF8528 /* VineyardUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VineyardUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		192EC0092C90F64300AF8528 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		B40B894B2C9364F4006B1771 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		B40B894B2C9364F4006B1771 /* GroupsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsListViewModel.swift; sourceTree = "<group>"; };
 		B40B894D2C936DE0006B1771 /* ResolutionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolutionView.swift; sourceTree = "<group>"; };
+		BB40EDF52C991C8A006BA1E3 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		BB40EDF72C991C93006BA1E3 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		BB40EDF92C991C9D006BA1E3 /* Resolution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resolution.swift; sourceTree = "<group>"; };
+		BB40EE052C992566006BA1E3 /* FirebaseDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDataManager.swift; sourceTree = "<group>"; };
+		BB40EE072C99258B006BA1E3 /* DatabaseServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseServiceProtocol.swift; sourceTree = "<group>"; };
+		BB40EE092C9926A6006BA1E3 /* GroupsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsListView.swift; sourceTree = "<group>"; };
+		BB40EE0B2C992871006BA1E3 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		BB40EE0D2C99288A006BA1E3 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,12 +115,14 @@
 			isa = PBXGroup;
 			children = (
 				192EBFDF2C90F62E00AF8528 /* VineyardApp.swift */,
-				192EC0092C90F64300AF8528 /* Model.swift */,
-				192EBFE12C90F62E00AF8528 /* ContentView.swift */,
+				192EBFE12C90F62E00AF8528 /* HomeView.swift */,
+				BB40EDF42C991C69006BA1E3 /* Database */,
+				BB40EDF32C991C59006BA1E3 /* Core Models */,
+				BB40EDF22C991C42006BA1E3 /* Profile */,
+				BB40EDF12C991C10006BA1E3 /* Dashboard */,
+				BB40EDF02C991BF2006BA1E3 /* Groups */,
 				192EBFE32C90F62F00AF8528 /* Assets.xcassets */,
 				192EBFE52C90F62F00AF8528 /* Preview Content */,
-				B40B894B2C9364F4006B1771 /* ViewModel.swift */,
-				B40B894D2C936DE0006B1771 /* ResolutionView.swift */,
 			);
 			path = Vineyard;
 			sourceTree = "<group>";
@@ -134,6 +150,123 @@
 				192EBFFC2C90F62F00AF8528 /* VineyardUITestsLaunchTests.swift */,
 			);
 			path = VineyardUITests;
+			sourceTree = "<group>";
+		};
+		BB40EDF02C991BF2006BA1E3 /* Groups */ = {
+			isa = PBXGroup;
+			children = (
+				BB40EDFD2C991DC3006BA1E3 /* Views */,
+				BB40EDFC2C991DB7006BA1E3 /* ViewModels */,
+				BB40EDFB2C991DB3006BA1E3 /* Models */,
+			);
+			name = Groups;
+			sourceTree = "<group>";
+		};
+		BB40EDF12C991C10006BA1E3 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				BB40EE002C991E07006BA1E3 /* Views */,
+				BB40EDFF2C991E03006BA1E3 /* ViewModels */,
+				BB40EDFE2C991DFC006BA1E3 /* Models */,
+			);
+			name = Dashboard;
+			sourceTree = "<group>";
+		};
+		BB40EDF22C991C42006BA1E3 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				BB40EE032C991E14006BA1E3 /* Views */,
+				BB40EE022C991E0F006BA1E3 /* ViewModels */,
+				BB40EE012C991E0C006BA1E3 /* Models */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
+		BB40EDF32C991C59006BA1E3 /* Core Models */ = {
+			isa = PBXGroup;
+			children = (
+				BB40EDF52C991C8A006BA1E3 /* Group.swift */,
+				BB40EDF72C991C93006BA1E3 /* Person.swift */,
+				BB40EDF92C991C9D006BA1E3 /* Resolution.swift */,
+			);
+			name = "Core Models";
+			sourceTree = "<group>";
+		};
+		BB40EDF42C991C69006BA1E3 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				BB40EE052C992566006BA1E3 /* FirebaseDataManager.swift */,
+				BB40EE072C99258B006BA1E3 /* DatabaseServiceProtocol.swift */,
+			);
+			name = Database;
+			sourceTree = "<group>";
+		};
+		BB40EDFB2C991DB3006BA1E3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		BB40EDFC2C991DB7006BA1E3 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				B40B894B2C9364F4006B1771 /* GroupsListViewModel.swift */,
+			);
+			name = ViewModels;
+			sourceTree = "<group>";
+		};
+		BB40EDFD2C991DC3006BA1E3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B40B894D2C936DE0006B1771 /* ResolutionView.swift */,
+				BB40EE092C9926A6006BA1E3 /* GroupsListView.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		BB40EDFE2C991DFC006BA1E3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		BB40EDFF2C991E03006BA1E3 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ViewModels;
+			sourceTree = "<group>";
+		};
+		BB40EE002C991E07006BA1E3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BB40EE0B2C992871006BA1E3 /* DashboardView.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		BB40EE012C991E0C006BA1E3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		BB40EE022C991E0F006BA1E3 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ViewModels;
+			sourceTree = "<group>";
+		};
+		BB40EE032C991E14006BA1E3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BB40EE0D2C99288A006BA1E3 /* ProfileView.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,11 +399,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				192EBFE22C90F62E00AF8528 /* ContentView.swift in Sources */,
-				192EC00A2C90F64300AF8528 /* Model.swift in Sources */,
-				B40B894C2C9364F4006B1771 /* ViewModel.swift in Sources */,
+				192EBFE22C90F62E00AF8528 /* HomeView.swift in Sources */,
+				B40B894C2C9364F4006B1771 /* GroupsListViewModel.swift in Sources */,
+				BB40EE0A2C9926A6006BA1E3 /* GroupsListView.swift in Sources */,
+				BB40EE062C992566006BA1E3 /* FirebaseDataManager.swift in Sources */,
+				BB40EE0E2C99288A006BA1E3 /* ProfileView.swift in Sources */,
+				BB40EDF62C991C8A006BA1E3 /* Group.swift in Sources */,
+				BB40EDF82C991C93006BA1E3 /* Person.swift in Sources */,
+				BB40EE0C2C992871006BA1E3 /* DashboardView.swift in Sources */,
 				192EBFE02C90F62E00AF8528 /* VineyardApp.swift in Sources */,
 				B40B894E2C936DE0006B1771 /* ResolutionView.swift in Sources */,
+				BB40EE082C99258B006BA1E3 /* DatabaseServiceProtocol.swift in Sources */,
+				BB40EDFA2C991C9D006BA1E3 /* Resolution.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

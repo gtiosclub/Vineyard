@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ResolutionView: View {
-    @Environment(ViewModel.self) private var viewModel
+    @Environment(GroupsListViewModel.self) private var viewModel
     let group: Group
     @State var showAddItemPrompt: Bool = false
     @State var newResolutionName: String = ""
@@ -84,5 +84,5 @@ struct ResolutionView: View {
 }
 
 #Preview {
-    ResolutionView(group: Group(people:[Person(name: "BRuh", age: 101)], groupName: "", yearlyResolution: "")).environment(ViewModel())
+    ResolutionView(group: Group.sampleGroups[0]).environment(GroupsListViewModel())
 }
