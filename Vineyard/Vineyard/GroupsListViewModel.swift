@@ -1,5 +1,5 @@
 //
-//  ViewModel.swift
+//  GroupsListViewModel.swift
 //  Vineyard
 //
 //  Created by Yashasvi Karri on 9/12/24.
@@ -8,13 +8,8 @@
 import SwiftUI
 
 @Observable
-class ViewModel {
-    var user: Person = Person(name: "Andrew", age: 21, participatingGroups: [
-        Group(people: [Person(name: "Yash", age: 21)], groupName: "New Group Name", yearlyResolution: "eat healthy", resolutions: [Resolution(timeBound: TimeBound.day, name: "String", goal: 9.0, freq: 10)]),
-        Group(people: [Person(name: "Yash", age: 21)], groupName: "New Group Name 2", yearlyResolution: "eat healthy"),
-        Group(people: [Person(name: "Yash", age: 21)], groupName: "New Group Name 3", yearlyResolution: "eat healthy")
-    ])
-    var group: Group = Group(people: [Person(name: "Yash", age: 21)], groupName: "New Group Name", yearlyResolution: "eat healthy")
+class GroupsListViewModel {
+    var user: Person = Person.samplePersons[0]
     
     init() {}
     
