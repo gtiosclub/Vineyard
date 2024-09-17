@@ -15,15 +15,15 @@
 		192EBFFB2C90F62F00AF8528 /* VineyardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192EBFFA2C90F62F00AF8528 /* VineyardUITests.swift */; };
 		192EBFFD2C90F62F00AF8528 /* VineyardUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192EBFFC2C90F62F00AF8528 /* VineyardUITestsLaunchTests.swift */; };
 		192EC00A2C90F64300AF8528 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192EC0092C90F64300AF8528 /* Model.swift */; };
-		F18B0B092C9371EE002DE456 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18B0B082C9371EE002DE456 /* LoginView.swift */; };
-		F18B0B0B2C9372C2002DE456 /* ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18B0B0A2C9372C2002DE456 /* ResetPassword.swift */; };
-		F18B0B0D2C93733A002DE456 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18B0B0C2C93733A002DE456 /* SignUpView.swift */; };
 		B40B894C2C9364F4006B1771 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40B894B2C9364F4006B1771 /* ViewModel.swift */; };
 		B40B894E2C936DE0006B1771 /* ResolutionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40B894D2C936DE0006B1771 /* ResolutionView.swift */; };
 		EA2C1DCD2C9779E4005001E8 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C1DCC2C9779E4005001E8 /* LoginViewModel.swift */; };
 		EA2C1DCF2C977A58005001E8 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C1DCE2C977A58005001E8 /* LoginModel.swift */; };
 		EA2C1DD22C977B3E005001E8 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = EA2C1DD12C977B3E005001E8 /* FirebaseAuth */; };
 		EA2C1DD42C97807F005001E8 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = EA2C1DD32C97807F005001E8 /* FirebaseFirestore */; };
+		F18B0B092C9371EE002DE456 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18B0B082C9371EE002DE456 /* LoginView.swift */; };
+		F18B0B0B2C9372C2002DE456 /* ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18B0B0A2C9372C2002DE456 /* ResetPassword.swift */; };
+		F18B0B0D2C93733A002DE456 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18B0B0C2C93733A002DE456 /* SignUpView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,14 +55,13 @@
 		192EBFFA2C90F62F00AF8528 /* VineyardUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VineyardUITests.swift; sourceTree = "<group>"; };
 		192EBFFC2C90F62F00AF8528 /* VineyardUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VineyardUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		192EC0092C90F64300AF8528 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-
-		F18B0B082C9371EE002DE456 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		F18B0B0A2C9372C2002DE456 /* ResetPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassword.swift; sourceTree = "<group>"; };
-		F18B0B0C2C93733A002DE456 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		B40B894B2C9364F4006B1771 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		B40B894D2C936DE0006B1771 /* ResolutionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolutionView.swift; sourceTree = "<group>"; };
 		EA2C1DCC2C9779E4005001E8 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		EA2C1DCE2C977A58005001E8 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		F18B0B082C9371EE002DE456 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		F18B0B0A2C9372C2002DE456 /* ResetPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassword.swift; sourceTree = "<group>"; };
+		F18B0B0C2C93733A002DE456 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

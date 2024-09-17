@@ -8,7 +8,7 @@
 import SwiftUI
 
 @Observable
-class ViewModel {
+class ViewModel: ObservableObject {
     var user: Person = Person(name: "Andrew", age: 21, participatingGroups: [
         Group(people: [Person(name: "Yash", age: 21)], groupName: "New Group Name", yearlyResolution: "eat healthy", resolutions: [Resolution(timeBound: TimeBound.day, name: "String", goal: 9.0, freq: 10)]),
         Group(people: [Person(name: "Yash", age: 21)], groupName: "New Group Name 2", yearlyResolution: "eat healthy"),

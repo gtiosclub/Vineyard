@@ -8,18 +8,14 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State private var username: String = ""
+    @State private var email: String = ""
     @State private var password: String = ""
     @Binding var isAuthenticated: Bool
     
     @State private var showAlert = false //temp
     @State private var alertMessage = "" //temp
-    
-    //dict
-    let userCred: [String: String] = [
-        "Test1": "pass123",
-        "Test2": "pass456",
-    ]
+    @EnvironmentObject private var loginViewModel: LoginViewModel
+
     
     var body: some View {
         NavigationView {
@@ -30,7 +26,7 @@ struct LoginView: View {
                     .padding(.top, 0)
                     .padding(.bottom, 20)
                 
-                TextField("Enter username", text: $username)
+                TextField("Enter username", text: $email)
                     .padding()
                     .frame(height: 40)
                     .background(Color.gray.opacity(0.2))
@@ -45,7 +41,9 @@ struct LoginView: View {
                     .padding(.horizontal, 40)
                 
                 Button(action: {
-                    authenticateUser()
+                    Task {
+                        await loginViewModel.signIn(email:email, password:password)
+                    }
                 }) {
                     Text("Login")
                         .foregroundColor(.white)
@@ -74,19 +72,6 @@ struct LoginView: View {
             } //temp
             
         }
-    }
-    
-    func authenticateUser() {
-        if let storedPassword = userCred[username], storedPassword == password {
-            isAuthenticated = true
-            
-            alertMessage = "Login Successful" //temp
-        } else {
-            isAuthenticated = false
-            alertMessage = "Login Failed" //temp
-        }
-        
-        showAlert = true //temp
     }
 }
 
