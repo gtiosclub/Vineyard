@@ -7,41 +7,24 @@
 
 import Foundation
 
-enum TimeBound {
-    case day
-    case week
-    case month
+enum Frequency {
+    case daily(count: Int)
+    case weekly(count: Int)
+    case monthly(count: Int)
 }
 
-enum SuccessProof {
-    case none
-    case photo
-    case video
+enum DifficultyLevel {
+    case easy(score: Int)
+    case medium(score: Int)
+    case hard(score: Int)
 }
 
 struct Resolution: Identifiable {
     var id: UUID = .init()
-    var timeBound: TimeBound
-    var name: String
-    var successProof: SuccessProof = SuccessProof.none
-    var progress: Float = 0.0
-    var goal: Float
-    var freq: Int // Discuss the ways to make this work
-    var isCompleted: Bool = false
-
-    init(timeBound: TimeBound, name: String, goal: Float, freq: Int) {
-        self.timeBound = timeBound
-        self.name = name
-        self.goal = goal
-        self.freq = freq
-    }
-    
-    init(timeBound: TimeBound, name: String, successProof: SuccessProof, progress: Float, goal: Float, freq: Int) {
-        self.timeBound = timeBound
-        self.name = name
-        self.successProof = successProof
-        self.progress = progress
-        self.goal = goal
-        self.freq = freq
-    }
+    var title: String
+    var description: String
+    var quantity: Int?
+    var frequency: Frequency
+    var diffLevel: DifficultyLevel
 }
+
