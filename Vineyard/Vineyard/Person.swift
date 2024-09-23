@@ -11,6 +11,6 @@ struct Person: Identifiable {
     var id: UUID = .init()
     var name: String
     var groups: [Group] = []
-    var resolutions: [Resolution] // Temp until progress gets implemented.
+    var resolutions: [Int: Resolution]
     var emails: String
 }

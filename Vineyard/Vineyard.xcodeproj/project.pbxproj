@@ -24,6 +24,8 @@
 		BB40EE0A2C9926A6006BA1E3 /* GroupsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EE092C9926A6006BA1E3 /* GroupsListView.swift */; };
 		BB40EE0C2C992871006BA1E3 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EE0B2C992871006BA1E3 /* DashboardView.swift */; };
 		BB40EE0E2C99288A006BA1E3 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EE0D2C99288A006BA1E3 /* ProfileView.swift */; };
+		F10167602CA220130004260E /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = F101675F2CA2200E0004260E /* Badge.swift */; };
+		F10167622CA221900004260E /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10167612CA2218D0004260E /* Progress.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +66,8 @@
 		BB40EE092C9926A6006BA1E3 /* GroupsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsListView.swift; sourceTree = "<group>"; };
 		BB40EE0B2C992871006BA1E3 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		BB40EE0D2C99288A006BA1E3 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		F101675F2CA2200E0004260E /* Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
+		F10167612CA2218D0004260E /* Progress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Progress.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +189,8 @@
 		BB40EDF32C991C59006BA1E3 /* Core Models */ = {
 			isa = PBXGroup;
 			children = (
+				F10167612CA2218D0004260E /* Progress.swift */,
+				F101675F2CA2200E0004260E /* Badge.swift */,
 				BB40EDF52C991C8A006BA1E3 /* Group.swift */,
 				BB40EDF72C991C93006BA1E3 /* Person.swift */,
 				BB40EDF92C991C9D006BA1E3 /* Resolution.swift */,
@@ -409,7 +415,9 @@
 				BB40EE0C2C992871006BA1E3 /* DashboardView.swift in Sources */,
 				192EBFE02C90F62E00AF8528 /* VineyardApp.swift in Sources */,
 				B40B894E2C936DE0006B1771 /* ResolutionView.swift in Sources */,
+				F10167622CA221900004260E /* Progress.swift in Sources */,
 				BB40EE082C99258B006BA1E3 /* DatabaseServiceProtocol.swift in Sources */,
+				F10167602CA220130004260E /* Badge.swift in Sources */,
 				BB40EDFA2C991C9D006BA1E3 /* Resolution.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

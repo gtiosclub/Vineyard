@@ -27,4 +27,3 @@ struct Resolution: Identifiable {
     var frequency: Frequency
     var diffLevel: DifficultyLevel
 }
-
