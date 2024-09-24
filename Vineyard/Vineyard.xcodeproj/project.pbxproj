@@ -24,14 +24,13 @@
 		BB40EE0A2C9926A6006BA1E3 /* GroupsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EE092C9926A6006BA1E3 /* GroupsListView.swift */; };
 		BB40EE0C2C992871006BA1E3 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EE0B2C992871006BA1E3 /* DashboardView.swift */; };
 		BB40EE0E2C99288A006BA1E3 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EE0D2C99288A006BA1E3 /* ProfileView.swift */; };
-		EA4130DA2CA366C300CCF8B2 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4130D92CA366C300CCF8B2 /* SignUpView.swift */; };
-		EA4130DC2CA366C800CCF8B2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4130DB2CA366C800CCF8B2 /* LoginView.swift */; };
-		EA4130DE2CA366CC00CCF8B2 /* ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4130DD2CA366CC00CCF8B2 /* ResetPassword.swift */; };
-		EA4130E02CA366DD00CCF8B2 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4130DF2CA366DD00CCF8B2 /* LoginViewModel.swift */; };
-		EA4130E22CA366EF00CCF8B2 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4130E12CA366EF00CCF8B2 /* LoginModel.swift */; };
-		EA4130E42CA3686700CCF8B2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EA4130E32CA3686600CCF8B2 /* GoogleService-Info.plist */; };
 		EA4130E72CA3689400CCF8B2 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = EA4130E62CA3689400CCF8B2 /* FirebaseAuth */; };
 		EA4130E92CA368D500CCF8B2 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = EA4130E82CA368D500CCF8B2 /* FirebaseFirestore */; };
+		EAC380692CA36B3100EBEF4C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC380682CA36B3100EBEF4C /* LoginView.swift */; };
+		EAC3806B2CA36B5600EBEF4C /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC3806A2CA36B5600EBEF4C /* SignUpView.swift */; };
+		EAC3806D2CA36B7400EBEF4C /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC3806C2CA36B7400EBEF4C /* ResetPasswordView.swift */; };
+		EAC3806F2CA36B8800EBEF4C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC3806E2CA36B8800EBEF4C /* LoginViewModel.swift */; };
+		EAC380712CA36B9A00EBEF4C /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC380702CA36B9A00EBEF4C /* LoginModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,12 +71,11 @@
 		BB40EE092C9926A6006BA1E3 /* GroupsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsListView.swift; sourceTree = "<group>"; };
 		BB40EE0B2C992871006BA1E3 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		BB40EE0D2C99288A006BA1E3 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		EA4130D92CA366C300CCF8B2 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignUpView.swift; path = ../../../Vineyardlogintofirebase/Vineyard/Vineyard/SignUpView.swift; sourceTree = "<group>"; };
-		EA4130DB2CA366C800CCF8B2 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginView.swift; path = ../../../Vineyardlogintofirebase/Vineyard/Vineyard/LoginView.swift; sourceTree = "<group>"; };
-		EA4130DD2CA366CC00CCF8B2 /* ResetPassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResetPassword.swift; path = ../../../Vineyardlogintofirebase/Vineyard/Vineyard/ResetPassword.swift; sourceTree = "<group>"; };
-		EA4130DF2CA366DD00CCF8B2 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewModel.swift; path = ../../../Vineyardlogintofirebase/Vineyard/Vineyard/LoginViewModel.swift; sourceTree = "<group>"; };
-		EA4130E12CA366EF00CCF8B2 /* LoginModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginModel.swift; path = ../../../Vineyardlogintofirebase/Vineyard/Vineyard/LoginModel.swift; sourceTree = "<group>"; };
-		EA4130E32CA3686600CCF8B2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/untitled folder/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EAC380682CA36B3100EBEF4C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		EAC3806A2CA36B5600EBEF4C /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		EAC3806C2CA36B7400EBEF4C /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
+		EAC3806E2CA36B8800EBEF4C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		EAC380702CA36B9A00EBEF4C /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,7 +108,6 @@
 		192EBFD32C90F62D00AF8528 = {
 			isa = PBXGroup;
 			children = (
-				EA4130E32CA3686600CCF8B2 /* GoogleService-Info.plist */,
 				192EBFDE2C90F62E00AF8528 /* Vineyard */,
 				192EBFEF2C90F62F00AF8528 /* VineyardTests */,
 				192EBFF92C90F62F00AF8528 /* VineyardUITests */,
@@ -202,10 +199,10 @@
 		BB40EDF32C991C59006BA1E3 /* Core Models */ = {
 			isa = PBXGroup;
 			children = (
-				EA4130E12CA366EF00CCF8B2 /* LoginModel.swift */,
 				BB40EDF52C991C8A006BA1E3 /* Group.swift */,
 				BB40EDF72C991C93006BA1E3 /* Person.swift */,
 				BB40EDF92C991C9D006BA1E3 /* Resolution.swift */,
+				EAC380702CA36B9A00EBEF4C /* LoginModel.swift */,
 			);
 			name = "Core Models";
 			sourceTree = "<group>";
@@ -275,7 +272,7 @@
 		BB40EE022C991E0F006BA1E3 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				EA4130DF2CA366DD00CCF8B2 /* LoginViewModel.swift */,
+				EAC3806E2CA36B8800EBEF4C /* LoginViewModel.swift */,
 			);
 			name = ViewModels;
 			sourceTree = "<group>";
@@ -283,10 +280,10 @@
 		BB40EE032C991E14006BA1E3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				EA4130DD2CA366CC00CCF8B2 /* ResetPassword.swift */,
-				EA4130DB2CA366C800CCF8B2 /* LoginView.swift */,
-				EA4130D92CA366C300CCF8B2 /* SignUpView.swift */,
+				EAC380682CA36B3100EBEF4C /* LoginView.swift */,
 				BB40EE0D2C99288A006BA1E3 /* ProfileView.swift */,
+				EAC3806A2CA36B5600EBEF4C /* SignUpView.swift */,
+				EAC3806C2CA36B7400EBEF4C /* ResetPasswordView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -404,7 +401,6 @@
 			files = (
 				192EBFE72C90F62F00AF8528 /* Preview Assets.xcassets in Resources */,
 				192EBFE42C90F62F00AF8528 /* Assets.xcassets in Resources */,
-				EA4130E42CA3686700CCF8B2 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,19 +429,19 @@
 				B40B894C2C9364F4006B1771 /* GroupsListViewModel.swift in Sources */,
 				BB40EE0A2C9926A6006BA1E3 /* GroupsListView.swift in Sources */,
 				BB40EE062C992566006BA1E3 /* FirebaseDataManager.swift in Sources */,
-				EA4130E02CA366DD00CCF8B2 /* LoginViewModel.swift in Sources */,
 				BB40EE0E2C99288A006BA1E3 /* ProfileView.swift in Sources */,
 				BB40EDF62C991C8A006BA1E3 /* Group.swift in Sources */,
 				BB40EDF82C991C93006BA1E3 /* Person.swift in Sources */,
-				EA4130E22CA366EF00CCF8B2 /* LoginModel.swift in Sources */,
 				BB40EE0C2C992871006BA1E3 /* DashboardView.swift in Sources */,
-				EA4130DC2CA366C800CCF8B2 /* LoginView.swift in Sources */,
-				EA4130DA2CA366C300CCF8B2 /* SignUpView.swift in Sources */,
+				EAC380712CA36B9A00EBEF4C /* LoginModel.swift in Sources */,
+				EAC380692CA36B3100EBEF4C /* LoginView.swift in Sources */,
+				EAC3806F2CA36B8800EBEF4C /* LoginViewModel.swift in Sources */,
 				192EBFE02C90F62E00AF8528 /* VineyardApp.swift in Sources */,
 				B40B894E2C936DE0006B1771 /* ResolutionView.swift in Sources */,
-				EA4130DE2CA366CC00CCF8B2 /* ResetPassword.swift in Sources */,
 				BB40EE082C99258B006BA1E3 /* DatabaseServiceProtocol.swift in Sources */,
+				EAC3806B2CA36B5600EBEF4C /* SignUpView.swift in Sources */,
 				BB40EDFA2C991C9D006BA1E3 /* Resolution.swift in Sources */,
+				EAC3806D2CA36B7400EBEF4C /* ResetPasswordView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

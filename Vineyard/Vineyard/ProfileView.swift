@@ -8,8 +8,16 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @EnvironmentObject private var loginViewModel: LoginViewModel
     var body: some View {
-        Text("Welcome to the profile")
+        VStack {
+            Text("Welcome to the profile")
+            Button(action: {
+                loginViewModel.signOut()
+            }) {
+                Text("Logout")
+            }
+        }
     }
 }
 
