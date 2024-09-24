@@ -120,6 +120,7 @@
 				BB40EDF32C991C59006BA1E3 /* Core Models */,
 				BB40EDF22C991C42006BA1E3 /* Profile */,
 				BB40EDF12C991C10006BA1E3 /* Dashboard */,
+				BB2BCB972CA3818400E56EA8 /* To Do Tab */,
 				BB40EDF02C991BF2006BA1E3 /* Groups */,
 				192EBFE32C90F62F00AF8528 /* Assets.xcassets */,
 				192EBFE52C90F62F00AF8528 /* Preview Content */,
@@ -150,6 +151,37 @@
 				192EBFFC2C90F62F00AF8528 /* VineyardUITestsLaunchTests.swift */,
 			);
 			path = VineyardUITests;
+			sourceTree = "<group>";
+		};
+		BB2BCB972CA3818400E56EA8 /* To Do Tab */ = {
+			isa = PBXGroup;
+			children = (
+				BB2BCB9A2CA381B300E56EA8 /* Models */,
+				BB2BCB992CA381A600E56EA8 /* ViewModels */,
+				BB2BCB982CA381A200E56EA8 /* Views */,
+			);
+			path = "To Do Tab";
+			sourceTree = "<group>";
+		};
+		BB2BCB982CA381A200E56EA8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BB2BCB992CA381A600E56EA8 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		BB2BCB9A2CA381B300E56EA8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		BB40EDF02C991BF2006BA1E3 /* Groups */ = {
