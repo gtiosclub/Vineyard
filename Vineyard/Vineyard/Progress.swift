@@ -8,7 +8,7 @@
 import Foundation
 
 struct Progress: Identifiable {
-    var id: UUID = .init()
+    let id: UUID = .init()
     var resolution: Resolution
     var progress: Double //didSet{} [0.0, 1.0] if needed
     
@@ -20,14 +20,14 @@ struct Progress: Identifiable {
     //    progress == 1.0
     //}
     
-    static var sampleProgress: Progress {
+    static var samples: [Progress] {
 
-        let resolution1 = Resolution(timeBound: .week, name: "person1", goal: 12, freq: 12)
-        let currentProgress1 = Progress(resolution: resolution1, progress: 0.50)
+        let resolution1 = Resolution.samples[0]
+        let progress1 = Progress(resolution: resolution1, progress: 0.50)
         
-        let resolution2 = Resolution(timeBound: .day, name: "person2", goal: 10, freq: 10)
-        let currentProgress2 = Progress(resolution: resolution2, progress: 0.75)
+        let resolution2 = Resolution.samples[1]
+        let progress2 = Progress(resolution: resolution2, progress: 0.75)
         
-        return currentProgress1
+        return [progress1, progress2]
     }
 }

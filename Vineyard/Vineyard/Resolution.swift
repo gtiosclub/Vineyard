@@ -19,12 +19,28 @@ enum DifficultyLevel {
     case hard(score: Int)
 }
 
-struct Resolution: Identifiable {
-    var id: UUID = .init()
+class Resolution: Identifiable {
+    let id: UUID
     var title: String
     var description: String
-    var quantity: Int?
+    var quantity: Int? = nil
     var frequency: Frequency
     var diffLevel: DifficultyLevel
+    
+    init(title: String, description: String, quantity: Int? = nil, frequency: Frequency, diffLevel: DifficultyLevel) {
+        self.id = UUID()
+        self.title = title
+        self.description = description
+        self.quantity = quantity
+        self.frequency = frequency
+        self.diffLevel = diffLevel
+    }
+    
+    static var samples: [Resolution] {
+        let resolution1 = Resolution(title: "Run miles", description: "Run a certain number of miles", quantity: 5, frequency: Frequency.weekly(count: 1), diffLevel: DifficultyLevel.medium(score: 5))
+        let resolution2 = Resolution(title: "Drink 7 cups of water", description: "Drink more water", frequency: Frequency.daily(count: 1), diffLevel: DifficultyLevel.easy(score: 2))
+        
+        return [resolution1, resolution2]
+    }
 }
 

@@ -13,10 +13,10 @@ struct GroupsListView: View {
         NavigationStack {
             List {
                 Text("\(viewModel.user.name)'s groups")
-                ForEach(viewModel.user.participatingGroups) { group in
+                ForEach($viewModel.user.groups) { $group in
                     // TODO: Use a NavigationLink to select a list.
-                    NavigationLink(group.groupName) {
-                        ResolutionView(group: group)
+                    NavigationLink(group.name) {
+                        ResolutionView(group: $group)
                     }
                 }
             }.navigationTitle("Group Menu")
