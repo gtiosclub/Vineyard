@@ -7,41 +7,40 @@
 
 import Foundation
 
-enum TimeBound {
-    case day
-    case week
-    case month
+enum Frequency {
+    case daily(count: Int)
+    case weekly(count: Int)
+    case monthly(count: Int)
 }
 
-enum SuccessProof {
-    case none
-    case photo
-    case video
+enum DifficultyLevel {
+    case easy(score: Int)
+    case medium(score: Int)
+    case hard(score: Int)
 }
 
-struct Resolution: Identifiable {
-    var id: UUID = .init()
-    var timeBound: TimeBound
-    var name: String
-    var successProof: SuccessProof = SuccessProof.none
-    var progress: Float = 0.0
-    var goal: Float
-    var freq: Int // Discuss the ways to make this work
-    var isCompleted: Bool = false
-
-    init(timeBound: TimeBound, name: String, goal: Float, freq: Int) {
-        self.timeBound = timeBound
-        self.name = name
-        self.goal = goal
-        self.freq = freq
+class Resolution: Identifiable {
+    let id: UUID
+    var title: String
+    var description: String
+    var quantity: Int? = nil
+    var frequency: Frequency
+    var diffLevel: DifficultyLevel
+    
+    init(title: String, description: String, quantity: Int? = nil, frequency: Frequency, diffLevel: DifficultyLevel) {
+        self.id = UUID()
+        self.title = title
+        self.description = description
+        self.quantity = quantity
+        self.frequency = frequency
+        self.diffLevel = diffLevel
     }
     
-    init(timeBound: TimeBound, name: String, successProof: SuccessProof, progress: Float, goal: Float, freq: Int) {
-        self.timeBound = timeBound
-        self.name = name
-        self.successProof = successProof
-        self.progress = progress
-        self.goal = goal
-        self.freq = freq
+    static var samples: [Resolution] {
+        let resolution1 = Resolution(title: "Run miles", description: "Run a certain number of miles", quantity: 5, frequency: Frequency.weekly(count: 1), diffLevel: DifficultyLevel.medium(score: 5))
+        let resolution2 = Resolution(title: "Drink 7 cups of water", description: "Drink more water", frequency: Frequency.daily(count: 1), diffLevel: DifficultyLevel.easy(score: 2))
+        
+        return [resolution1, resolution2]
     }
 }
+

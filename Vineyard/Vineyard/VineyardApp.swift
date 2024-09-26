@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct VineyardApp: App {
-    @State private var viewModel = GroupsListViewModel()
+    @ObservedObject private var viewModel = GroupsListViewModel()
     var body: some Scene {
         WindowGroup {
             HomeView().environment(viewModel)

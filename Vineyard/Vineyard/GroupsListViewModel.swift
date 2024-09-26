@@ -8,27 +8,27 @@
 import SwiftUI
 
 @Observable
-class GroupsListViewModel {
-    var user: Person = Person.samplePersons[0]
+class GroupsListViewModel: ObservableObject {
+    var user: Person = Person.samples[0]
     
     init() {}
     
-    func createGroup(withGroupName groupName: String, withYearlyResolution yearlyResolution: String) {
-        let newGroup = Group(people: [user], groupName: groupName, yearlyResolution: yearlyResolution)
-        user.participatingGroups.append(newGroup)
+    func createGroup(withGroupName name: String, withGroupGoal groupGoal: String, withDeadline deadline: Date) {
+        let newGroup = Group(name: name, groupGoal: groupGoal, people: [user], deadline: deadline)
+        self.user.addGroup(newGroup)
     }
     
-    func addResolution(toGroup group: Group, resolution: Resolution) {
-        group.addResolution(newResolution: resolution)
+    func addResolution(_ resolution: Resolution, toGroup group: Group) {
+        group.addResolution(resolution)
     }
     
     func joinGroup(toGroup group: Group) {
-        self.user.participatingGroups.append(group)
+        self.user.addGroup(group)
     }
     
-    func toggleResolutionAsCompleted(_ resolution: Resolution, inGroup group: Group) {
-        group.toggleResolutionAsCompleted(resolution)
-    }
-    
+//    func toggleResolutionAsCompleted(_ resolution: Resolution, inGroup group: Group) {
+//        group.toggleResolutionAsCompleted(resolution)
+//    }
     
 }
+
