@@ -13,6 +13,7 @@ struct VineyardApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @State private var viewModel = GroupsListViewModel()
     @StateObject private var loginViewModel = LoginViewModel()
+    @ObservedObject private var viewModel = GroupsListViewModel()
     var body: some Scene {
         WindowGroup {
             HomeView().environment(viewModel)
