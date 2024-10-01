@@ -41,11 +41,11 @@ class Group: Identifiable {
     }
     
     static var samples: [Group] {
-        var andrew = Person(name: "Andrew", emails: "a@gmail.com")
-        var yash = Person(name: "Yash", emails: "y@outlook.com")
-        var sankaet = Person(name: "Sankaet", emails: "s@yahoo.com")
-        var rahul = Person(name: "Rahul", emails: "r@apple.com")
-        var vishnesh = Person(name: "Vishnesh", emails: "v@aol.com")
+        var andrew = Person(name: "Andrew", email: "a@gmail.com")
+        var yash = Person(name: "Yash", email: "y@outlook.com")
+        var sankaet = Person(name: "Sankaet", email: "s@yahoo.com")
+        var rahul = Person(name: "Rahul", email: "r@apple.com")
+        var vishnesh = Person(name: "Vishnesh", email: "v@aol.com")
         
         let resolution1 = Resolution.samples[0]
         let resolution2 = Resolution.samples[1]
