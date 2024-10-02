@@ -17,7 +17,7 @@ struct GroupsListView: View {
                 ForEach($viewModel.user.groups) { $group in
                     // TODO: Use a NavigationLink to select a list.
                     Section {
-                        NavigationLink(destination: ResolutionView(group: $group)) {
+                        NavigationLink(destination: GroupView(group: $group)) {
                             GroupCardView(group: group)
                         }
                     }
