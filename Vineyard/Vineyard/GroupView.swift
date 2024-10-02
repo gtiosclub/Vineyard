@@ -111,7 +111,7 @@ struct GroupView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text("Your Group")
+                    Text("\(group.name)")
                         .font(.system(size: 24, weight: .bold))
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
