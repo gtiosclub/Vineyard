@@ -8,18 +8,16 @@
 import SwiftUI
 
 struct TodoView: View {
-    @State private var viewModel = GroupsListViewModel()
+    @State private var viewModel = TodoViewModel()
     
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 10){
-                    ForEach($viewModel.user.groups) { $group in
-                        ForEach(group.resolutions) { resolution in
-                            VStack(alignment: .leading, spacing: 5) {
-                                Text("\(resolution.title)")
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                            }
+                    ForEach($viewModel.user.allProgress) {$progress in
+                        VStack(alignment: .leading, spacing: 5) {
+                            Text("\(progress.resolution.title)")
+                                .frame(maxWidth: .infinity, alignment: .leading)
                         }
                         .padding()
                         .background(.gray.opacity(0.5))
@@ -40,4 +38,5 @@ struct TodoView: View {
 
 #Preview {
     TodoView()
+    
 }

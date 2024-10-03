@@ -8,11 +8,6 @@
 import SwiftUI
 
 class TodoViewModel: ObservableObject {
-    var group: Group = Group.samples[0]
-    
+    var user: Person = Person.samples[0]
     init() {}
-    
-    func getResolutions(_ resolution: Resolution, toGroup group: Group) {
-        //
-    }
 }
