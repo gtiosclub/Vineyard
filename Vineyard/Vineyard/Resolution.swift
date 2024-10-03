@@ -23,16 +23,16 @@ class Resolution: Identifiable {
     let id: UUID
     var title: String
     var description: String
-    var quantity: Int? = nil
-    var frequency: Frequency
+    var defaultQuantity: Int? = nil
+    var defaultFrequency: Frequency
     var diffLevel: DifficultyLevel
     
     init(title: String, description: String, quantity: Int? = nil, frequency: Frequency, diffLevel: DifficultyLevel) {
         self.id = UUID()
         self.title = title
         self.description = description
-        self.quantity = quantity
-        self.frequency = frequency
+        self.defaultQuantity = quantity
+        self.defaultFrequency = frequency
         self.diffLevel = diffLevel
     }
     
@@ -43,4 +43,3 @@ class Resolution: Identifiable {
         return [resolution1, resolution2]
     }
 }
-
