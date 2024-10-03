@@ -10,7 +10,6 @@ import FirebaseAuth
 struct ResetPasswordView: View {
     @State var Submitted: Bool = false
     @State var email: String = ""
-    @State var errorHandling: String = ""
     @EnvironmentObject var loginViewModel: LoginViewModel
     var body: some View {
         if Submitted {
@@ -28,7 +27,7 @@ struct ResetPasswordView: View {
                 
                 Button(action: {
                     Task {
-                        try await loginViewModel.resetPassWithEmail()
+                        await loginViewModel.resetPassWithEmail(email: email)
                     }
                 }) {
                     Text("Resend Email")
@@ -36,9 +35,12 @@ struct ResetPasswordView: View {
                         .foregroundColor(.white)
                         .background(Color.blue)
                         .cornerRadius(8)
-                    Text(errorHandling)
                 }
+                Text(loginViewModel.errorMessage)
                 .padding(.top, 20)
+            }
+            .onAppear() {
+                loginViewModel.errorMessage = ""
             }
             .padding()
         } else {
@@ -59,10 +61,10 @@ struct ResetPasswordView: View {
                 
                 Button(action: {
                     Task {
-                        try await loginViewModel.resetPassWithEmail()
-
+                        Submitted = await loginViewModel.resetPassWithEmail(email: email)
+                        
                     }
-                    Submitted = true
+
                 }, label: { Text("Send Email Reset")
                         .padding(.horizontal, 30)
                         .padding(.vertical, 8)
@@ -71,17 +73,15 @@ struct ResetPasswordView: View {
                         .cornerRadius(8)
                         .padding()
                     })
-                Text(errorHandling)
+                Text(loginViewModel.errorMessage)
             }
             .padding()
+            .onAppear() {
+                loginViewModel.errorMessage = ""
+            }
         }
     }
-    func isValidEmail(_ email: String) -> Bool {
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-
-        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        return emailPred.evaluate(with: email)
-    }
+    
 }
 
 struct PasswordResetView_Previews: PreviewProvider {

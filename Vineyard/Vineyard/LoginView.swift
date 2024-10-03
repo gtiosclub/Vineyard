@@ -9,23 +9,23 @@ import SwiftUI
 
 struct LoginView: View {
     @State private var email: String = ""
+    @State private var username: String = ""
+
     @State private var password: String = ""
     @State var isAuthenticated: Bool = false
     @State private var showAlert = false //temp
-    @State private var alertMessage = "" //temp
     @EnvironmentObject private var loginViewModel: LoginViewModel
 
     
     var body: some View {
         NavigationView {
             VStack(spacing: 10) {
-                Text("Vineyazsdfasdfasdfard")
+                Text("Vineyard")
                     .font(.largeTitle)
                     .bold()
                     .padding(.top, 0)
                     .padding(.bottom, 20)
-                
-                TextField("Enter username", text: $email)
+                TextField("Enter email", text: $email)
                     .padding()
                     .frame(height: 40)
                     .background(Color.gray.opacity(0.2))
@@ -53,7 +53,10 @@ struct LoginView: View {
                         .cornerRadius(5)
                         .padding(.horizontal, 40)
                 }
-                
+                if (!loginViewModel.errorMessage.isEmpty) {
+                    Text(loginViewModel.errorMessage)
+                        .foregroundColor(.red)
+                }
                 NavigationLink(destination: ResetPasswordView()) {
                     Text("Forgot Password?")
                 }
@@ -65,11 +68,10 @@ struct LoginView: View {
             }
             
             .padding(.top, -120)
-            
-            .alert(isPresented: $showAlert) {
-                Alert(title: Text(alertMessage))
-            } //temp
-            
+
+            .onAppear() {
+                loginViewModel.errorMessage = ""
+            }
         }
     }
 }

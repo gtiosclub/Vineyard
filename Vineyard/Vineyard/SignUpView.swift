@@ -9,9 +9,10 @@ import SwiftUI
 
 struct SignUpView: View {
     @State private var email: String = ""
+    @State private var username: String = ""
+
     @State private var password: String = ""
     @State private var confirmPassword: String = ""
-    @State private var errorMessage: String = ""
     @EnvironmentObject private var loginViewModel: LoginViewModel
     var body: some View {
         VStack(spacing: 10) {
@@ -21,7 +22,14 @@ struct SignUpView: View {
                 .padding(.top, 180)
                 .padding(.bottom, 10)
 
-            TextField("Username", text: $email)
+            TextField("Username", text: $username)
+                .padding(.horizontal, 10)
+                .frame(height: 40)
+                .background(Color(.secondarySystemBackground))
+                .cornerRadius(8)
+                .autocapitalization(.none)
+                .padding(.horizontal, 40)
+            TextField("Email", text: $email)
                 .padding(.horizontal, 10)
                 .frame(height: 40)
                 .background(Color(.secondarySystemBackground))
@@ -43,13 +51,13 @@ struct SignUpView: View {
                 .cornerRadius(8)
                 .padding(.horizontal, 40)
 
-            if !errorMessage.isEmpty {
-                Text(errorMessage)
+            if (!loginViewModel.errorMessage.isEmpty) {
+                Text(loginViewModel.errorMessage)
                     .foregroundColor(.red)
             }
             Button(action: {
                 Task {
-                    await loginViewModel.createUser(email: email, password: password, name: "NA", age: 1)
+                    await loginViewModel.createUser(email: email, password: password, name: username, age: 1)
                 }
             }) {
                 Text("Sign Up")
@@ -64,6 +72,9 @@ struct SignUpView: View {
             .padding(.top, 10)
             
             Spacer()
+        }
+        .onAppear() {
+            loginViewModel.errorMessage = ""
         }
         .padding()
     }
