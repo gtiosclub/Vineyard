@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GroupView: View {
-    @Binding var group: Group
+    let group: Group
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -19,7 +19,7 @@ struct GroupView: View {
                     
                     VStack(alignment: .leading, spacing: 10) {
                         Spacer()
-                        SwiftUI.ProgressView(value: 0.20)
+                        ProgressView(value: 0.20)
                             .accentColor(.white)
                             .background(Color.gray.opacity(0.5))
                             .frame(height: 10)
@@ -41,7 +41,7 @@ struct GroupView: View {
                                     .frame(width: 30, height: 30)
                                 Text("\(people.name)")
                                 Spacer()
-                                SwiftUI.ProgressView(value: 0.20)
+                                ProgressView(value: 0.20)
                                     .accentColor(.white)
                                     .frame(width: 200, height: 10)
                                     .background(Color.gray.opacity(0.5))
@@ -124,6 +124,6 @@ struct GroupView: View {
 }
 
 
-#Preview {
-    GroupView(group: .constant(Group.samples[0])).environment(GroupsListViewModel())
-}
+//#Preview {
+//    GroupView(group: .constant(Group.samples[0])).environment(GroupsListViewModel())
+//}
