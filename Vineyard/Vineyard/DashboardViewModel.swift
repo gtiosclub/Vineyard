@@ -8,10 +8,4 @@
 import SwiftUI
 
 class DashboardViewModel: ObservableObject {
-    //array of widgets on the dashboard
-    @Published var widgets: [WidgetType] = []
-
-    init() {
-        //loadWidgets()
-    }
 }

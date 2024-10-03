@@ -26,7 +26,7 @@
 		BB40EE0E2C99288A006BA1E3 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EE0D2C99288A006BA1E3 /* ProfileView.swift */; };
 		F10167642CA37B080004260E /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10167632CA37B060004260E /* Badge.swift */; };
 		F10167662CA37B180004260E /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10167652CA37B150004260E /* Progress.swift */; };
-		F1E19F872CAB58DC00463111 /* WidgetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E19F862CAB58D800463111 /* WidgetType.swift */; };
+		F1E19F872CAB58DC00463111 /* Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E19F862CAB58D800463111 /* Widget.swift */; };
 		F1E19F892CAB5B9F00463111 /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E19F882CAB5B9500463111 /* DashboardViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -70,7 +70,7 @@
 		BB40EE0D2C99288A006BA1E3 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		F10167632CA37B060004260E /* Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
 		F10167652CA37B150004260E /* Progress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Progress.swift; sourceTree = "<group>"; };
-		F1E19F862CAB58D800463111 /* WidgetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetType.swift; sourceTree = "<group>"; };
+		F1E19F862CAB58D800463111 /* Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Widget.swift; sourceTree = "<group>"; };
 		F1E19F882CAB5B9500463111 /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -225,7 +225,7 @@
 		BB40EDF32C991C59006BA1E3 /* Core Models */ = {
 			isa = PBXGroup;
 			children = (
-				F1E19F862CAB58D800463111 /* WidgetType.swift */,
+				F1E19F862CAB58D800463111 /* Widget.swift */,
 				F10167652CA37B150004260E /* Progress.swift */,
 				F10167632CA37B060004260E /* Badge.swift */,
 				BB40EDF52C991C8A006BA1E3 /* Group.swift */,
@@ -445,7 +445,7 @@
 			files = (
 				192EBFE22C90F62E00AF8528 /* HomeView.swift in Sources */,
 				B40B894C2C9364F4006B1771 /* GroupsListViewModel.swift in Sources */,
-				F1E19F872CAB58DC00463111 /* WidgetType.swift in Sources */,
+				F1E19F872CAB58DC00463111 /* Widget.swift in Sources */,
 				BB40EE0A2C9926A6006BA1E3 /* GroupsListView.swift in Sources */,
 				BB40EE062C992566006BA1E3 /* FirebaseDataManager.swift in Sources */,
 				BB40EE0E2C99288A006BA1E3 /* ProfileView.swift in Sources */,
