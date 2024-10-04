@@ -24,9 +24,9 @@
 		BB40EE0A2C9926A6006BA1E3 /* GroupsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EE092C9926A6006BA1E3 /* GroupsListView.swift */; };
 		BB40EE0C2C992871006BA1E3 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EE0B2C992871006BA1E3 /* DashboardView.swift */; };
 		BB40EE0E2C99288A006BA1E3 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EE0D2C99288A006BA1E3 /* ProfileView.swift */; };
+		DAB3AC312CAF5AD700DD0DA8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DAB3AC302CAF5AD700DD0DA8 /* GoogleService-Info.plist */; };
 		EA4130E72CA3689400CCF8B2 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = EA4130E62CA3689400CCF8B2 /* FirebaseAuth */; };
 		EA4130E92CA368D500CCF8B2 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = EA4130E82CA368D500CCF8B2 /* FirebaseFirestore */; };
-		EA78FA6A2CAC3B4B0042CC60 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EA78FA692CAC3B4B0042CC60 /* GoogleService-Info.plist */; };
 		EAC380692CA36B3100EBEF4C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC380682CA36B3100EBEF4C /* LoginView.swift */; };
 		EAC3806B2CA36B5600EBEF4C /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC3806A2CA36B5600EBEF4C /* SignUpView.swift */; };
 		EAC3806D2CA36B7400EBEF4C /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC3806C2CA36B7400EBEF4C /* ResetPasswordView.swift */; };
@@ -74,7 +74,7 @@
 		BB40EE092C9926A6006BA1E3 /* GroupsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsListView.swift; sourceTree = "<group>"; };
 		BB40EE0B2C992871006BA1E3 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		BB40EE0D2C99288A006BA1E3 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		EA78FA692CAC3B4B0042CC60 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/untitled folder/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DAB3AC302CAF5AD700DD0DA8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EAC380682CA36B3100EBEF4C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		EAC3806A2CA36B5600EBEF4C /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		EAC3806C2CA36B7400EBEF4C /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
@@ -114,7 +114,7 @@
 		192EBFD32C90F62D00AF8528 = {
 			isa = PBXGroup;
 			children = (
-				EA78FA692CAC3B4B0042CC60 /* GoogleService-Info.plist */,
+				DAB3AC302CAF5AD700DD0DA8 /* GoogleService-Info.plist */,
 				192EBFDE2C90F62E00AF8528 /* Vineyard */,
 				192EBFEF2C90F62F00AF8528 /* VineyardTests */,
 				192EBFF92C90F62F00AF8528 /* VineyardUITests */,
@@ -442,7 +442,7 @@
 			files = (
 				192EBFE72C90F62F00AF8528 /* Preview Assets.xcassets in Resources */,
 				192EBFE42C90F62F00AF8528 /* Assets.xcassets in Resources */,
-				EA78FA6A2CAC3B4B0042CC60 /* GoogleService-Info.plist in Resources */,
+				DAB3AC312CAF5AD700DD0DA8 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -662,7 +662,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Vineyard;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iosclub.Vineyard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -691,7 +691,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Vineyard;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iosclub.Vineyard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

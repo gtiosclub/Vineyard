@@ -7,8 +7,8 @@
 
 import Foundation
 
-class Group: Identifiable {
-    let id: UUID
+class Group: Identifiable, Codable {
+    let id: String
     var name: String
     var groupGoal: String
     var people: [Person]
@@ -16,7 +16,7 @@ class Group: Identifiable {
     var deadline: Date
     
     init(name: String, groupGoal: String, people: [Person], resolutions: [Resolution] = [], deadline: Date) {
-        self.id = UUID()
+        self.id = UUID().uuidString
         self.name = name
         self.groupGoal = groupGoal
         self.people = people

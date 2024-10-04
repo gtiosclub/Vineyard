@@ -41,16 +41,19 @@ enum LoginErrors: Error, LocalizedError {
 }
 @MainActor
 class LoginViewModel: ObservableObject {
+    @Published var currentUser: Person?
     @Published var isLoading = false
     @Published var isLoggedIn = false
     @Published var errorMessage: String = ""
     private let db = Firestore.firestore()
+    private let auth = Auth.auth()
     private var loginModel = LoginModel()
 
     public func signIn(email: String, password: String) async {
         errorMessage = ""
         do {
             try await loginModel.signIn(email: email, password: password)
+            currentUser = try await db.collection("people").document(auth.currentUser!.uid).getDocument(as: Person.self)
             isLoggedIn = true
         } catch {
             isLoggedIn = false
@@ -72,7 +75,10 @@ class LoginViewModel: ObservableObject {
         errorMessage = ""
         do {
             try await loginModel.createUser(email: email, password: password)
-            let newUser = Person(name: "", emails: "")
+            let newUser = Person(id: auth.currentUser!.uid, name: name, email: email)
+            try db.collection("people").document(auth.currentUser!.uid).setData(from: newUser)
+            currentUser = newUser
+            
             //try await  db.document() create the firestore path here and add person or other data
             isLoggedIn = true
         } catch {
@@ -87,6 +93,7 @@ class LoginViewModel: ObservableObject {
     public func signOut() async {
         do {
             try await loginModel.signOut()
+            currentUser = nil
             isLoggedIn = false
         } catch {
             //add signout error handleFirebaseError(error: )
@@ -101,15 +108,6 @@ class LoginViewModel: ObservableObject {
             errorMessage = "Failed to send email"
         }
         return true
-    }
-    public func signOut() {
-        do {
-            try loginModel.signOut()
-            isLoggedIn = false
-        }
-        catch {
-            //handle these errors visually
-        }
     }
 
     private func handleFirebaseError(error: Error) {

@@ -28,8 +28,5 @@ struct LoginModel {
     public func resetPassWithEmail(email: String) async throws {
         try await Auth.auth().sendPasswordReset(withEmail: email)
     }
-    public func signOut() throws {
-        try Auth.auth().signOut()
-    }
 
 }

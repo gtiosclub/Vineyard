@@ -7,19 +7,19 @@
 
 import Foundation
 
-enum Frequency {
+enum Frequency: Codable {
     case daily(count: Int)
     case weekly(count: Int)
     case monthly(count: Int)
 }
 
-enum DifficultyLevel {
+enum DifficultyLevel: Codable {
     case easy(score: Int)
     case medium(score: Int)
     case hard(score: Int)
 }
 
-class Resolution: Identifiable {
+class Resolution: Identifiable, Codable {
     let id: UUID
     var title: String
     var description: String

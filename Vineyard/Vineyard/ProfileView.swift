@@ -13,7 +13,9 @@ struct ProfileView: View {
         VStack {
             Text("Welcome to the profile")
             Button(action: {
-                loginViewModel.signOut()
+                Task {
+                    await loginViewModel.signOut()
+                }
             }) {
                 Text("Logout")
             }
