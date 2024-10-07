@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-@Observable
 class ProfileViewModel: ObservableObject {
     var user: Person = Person.samples[1]
     

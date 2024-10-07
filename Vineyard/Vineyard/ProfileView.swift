@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ProfileView: View {
     @State private var viewModel = ProfileViewModel()
+    let columns = [GridItem(.flexible()), GridItem(.flexible())]
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -44,36 +45,15 @@ struct ProfileView: View {
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.top, 44)
+                    
                     Text("Winery")
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .font(.system(size: 20, weight: .bold))
                         .padding(.top, 44)
-                    VStack(alignment: .leading, spacing: 10) {
-                        ForEach(0..<((viewModel.user.badges.count + 1) / 2)) { rowIndex in
-                            HStack(spacing: 10) {
-                                VStack(alignment: .leading, spacing: 10) {
-                                    //just displaying date for now
-                                    Text("\(viewModel.user.badges[rowIndex * 2].dateObtained)")
-                                        .frame(maxWidth: .infinity)
-                                        .padding()
-                                        .frame(height: 100)
-                                        .background(Color.gray.opacity(0.5))
-                                        .cornerRadius(10)
-                                }.frame(maxWidth: .infinity)
-                                if rowIndex * 2 + 1 < viewModel.user.badges.count {
-                                    VStack(alignment: .leading, spacing: 10) {
-                                        Text("\(viewModel.user.badges[rowIndex * 2 + 1].dateObtained)")
-                                            .frame(maxWidth: .infinity)
-                                            .padding()
-                                            .frame(height: 100)
-                                            .background(Color.gray.opacity(0.5))
-                                            .cornerRadius(10)
-                                    }.frame(maxWidth: .infinity)
-                                }  else {
-                                    Spacer()
-                                        .frame(maxWidth: .infinity)
-                                }
-                            }
+                    
+                    LazyVGrid(columns: columns, spacing: 10) {
+                        ForEach(viewModel.user.badges) { badge in
+                            BadgeView(badge: badge)
                         }
                     }
                 }
@@ -87,6 +67,22 @@ struct ProfileView: View {
         }
     }
 }
+
+struct BadgeView: View {
+    let badge: Badge
+
+    var body: some View {
+        VStack {
+            Text("\(badge.dateObtained)")
+                .frame(maxWidth: .infinity)
+                .padding()
+                .frame(height: 100)
+                .background(Color.gray.opacity(0.5))
+                .cornerRadius(10)
+        }
+    }
+}
+
 
 #Preview {
     ProfileView()
