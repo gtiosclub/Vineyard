@@ -32,8 +32,14 @@
 		EAC3806D2CA36B7400EBEF4C /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC3806C2CA36B7400EBEF4C /* ResetPasswordView.swift */; };
 		EAC3806F2CA36B8800EBEF4C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC3806E2CA36B8800EBEF4C /* LoginViewModel.swift */; };
 		EAC380712CA36B9A00EBEF4C /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC380702CA36B9A00EBEF4C /* LoginModel.swift */; };
+		F04BEBD32CB43B46007EB113 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04BEBD22CB43B46007EB113 /* ProfileViewModel.swift */; };
+		F05361C62CAF0AA1009DE1E3 /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05361C52CAF0AA1009DE1E3 /* TodoView.swift */; };
+		F05361C82CAF1462009DE1E3 /* TodoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05361C72CAF1462009DE1E3 /* TodoViewModel.swift */; };
+		F0D913622CACB8A100E7CD81 /* GroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D913612CACB8A100E7CD81 /* GroupView.swift */; };
 		F10167642CA37B080004260E /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10167632CA37B060004260E /* Badge.swift */; };
 		F10167662CA37B180004260E /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10167652CA37B150004260E /* Progress.swift */; };
+		F1E19F872CAB58DC00463111 /* Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E19F862CAB58D800463111 /* Widget.swift */; };
+		F1E19F892CAB5B9F00463111 /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E19F882CAB5B9500463111 /* DashboardViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,8 +86,14 @@
 		EAC3806C2CA36B7400EBEF4C /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		EAC3806E2CA36B8800EBEF4C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		EAC380702CA36B9A00EBEF4C /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		F04BEBD22CB43B46007EB113 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		F05361C52CAF0AA1009DE1E3 /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TodoView.swift; path = Vineyard/TodoView.swift; sourceTree = SOURCE_ROOT; };
+		F05361C72CAF1462009DE1E3 /* TodoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TodoViewModel.swift; path = Vineyard/TodoViewModel.swift; sourceTree = SOURCE_ROOT; };
+		F0D913612CACB8A100E7CD81 /* GroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupView.swift; sourceTree = "<group>"; };
 		F10167632CA37B060004260E /* Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
 		F10167652CA37B150004260E /* Progress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Progress.swift; sourceTree = "<group>"; };
+		F1E19F862CAB58D800463111 /* Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Widget.swift; sourceTree = "<group>"; };
+		F1E19F882CAB5B9500463111 /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +199,7 @@
 		BB2BCB982CA381A200E56EA8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F05361C52CAF0AA1009DE1E3 /* TodoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -194,6 +207,7 @@
 		BB2BCB992CA381A600E56EA8 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				F05361C72CAF1462009DE1E3 /* TodoViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -238,6 +252,7 @@
 		BB40EDF32C991C59006BA1E3 /* Core Models */ = {
 			isa = PBXGroup;
 			children = (
+				F1E19F862CAB58D800463111 /* Widget.swift */,
 				F10167652CA37B150004260E /* Progress.swift */,
 				F10167632CA37B060004260E /* Badge.swift */,
 				BB40EDF52C991C8A006BA1E3 /* Group.swift */,
@@ -277,6 +292,7 @@
 			children = (
 				B40B894D2C936DE0006B1771 /* ResolutionView.swift */,
 				BB40EE092C9926A6006BA1E3 /* GroupsListView.swift */,
+				F0D913612CACB8A100E7CD81 /* GroupView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -291,6 +307,7 @@
 		BB40EDFF2C991E03006BA1E3 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				F1E19F882CAB5B9500463111 /* DashboardViewModel.swift */,
 			);
 			name = ViewModels;
 			sourceTree = "<group>";
@@ -314,6 +331,7 @@
 			isa = PBXGroup;
 			children = (
 				EAC3806E2CA36B8800EBEF4C /* LoginViewModel.swift */,
+				F04BEBD22CB43B46007EB113 /* ProfileViewModel.swift */,
 			);
 			name = ViewModels;
 			sourceTree = "<group>";
@@ -467,22 +485,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F05361C82CAF1462009DE1E3 /* TodoViewModel.swift in Sources */,
 				192EBFE22C90F62E00AF8528 /* HomeView.swift in Sources */,
 				B40B894C2C9364F4006B1771 /* GroupsListViewModel.swift in Sources */,
+				F0D913622CACB8A100E7CD81 /* GroupView.swift in Sources */,
+				F1E19F872CAB58DC00463111 /* Widget.swift in Sources */,
 				BB40EE0A2C9926A6006BA1E3 /* GroupsListView.swift in Sources */,
 				BB40EE062C992566006BA1E3 /* FirebaseDataManager.swift in Sources */,
 				BB40EE0E2C99288A006BA1E3 /* ProfileView.swift in Sources */,
 				BB40EDF62C991C8A006BA1E3 /* Group.swift in Sources */,
+				F1E19F892CAB5B9F00463111 /* DashboardViewModel.swift in Sources */,
 				BB40EDF82C991C93006BA1E3 /* Person.swift in Sources */,
 				BB40EE0C2C992871006BA1E3 /* DashboardView.swift in Sources */,
 				EAC380712CA36B9A00EBEF4C /* LoginModel.swift in Sources */,
 				EAC380692CA36B3100EBEF4C /* LoginView.swift in Sources */,
 				EAC3806F2CA36B8800EBEF4C /* LoginViewModel.swift in Sources */,
 				192EBFE02C90F62E00AF8528 /* VineyardApp.swift in Sources */,
+				F04BEBD32CB43B46007EB113 /* ProfileViewModel.swift in Sources */,
 				B40B894E2C936DE0006B1771 /* ResolutionView.swift in Sources */,
 				F10167662CA37B180004260E /* Progress.swift in Sources */,
 				BB40EE082C99258B006BA1E3 /* DatabaseServiceProtocol.swift in Sources */,
 				EAC3806B2CA36B5600EBEF4C /* SignUpView.swift in Sources */,
+				F05361C62CAF0AA1009DE1E3 /* TodoView.swift in Sources */,
 				F10167642CA37B080004260E /* Badge.swift in Sources */,
 				BB40EDFA2C991C9D006BA1E3 /* Resolution.swift in Sources */,
 				EAC3806D2CA36B7400EBEF4C /* ResetPasswordView.swift in Sources */,
