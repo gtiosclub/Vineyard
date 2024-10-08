@@ -8,7 +8,7 @@
 import SwiftUI
 
 @Observable
-class GroupsListViewModel: ObservableObject {
+class GroupsListViewModel {
     var user: Person = Person.samples[0]
     
     init() {}

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class TodoViewModel: ObservableObject {
+@Observable class TodoViewModel {
     var user: Person = Person.samples[0]
     init() {}
 }

@@ -7,5 +7,5 @@
 
 import SwiftUI
 
-class DashboardViewModel: ObservableObject {
+@Observable class DashboardViewModel {
 }
