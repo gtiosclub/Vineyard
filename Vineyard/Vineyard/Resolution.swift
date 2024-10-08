@@ -7,16 +7,25 @@
 
 import Foundation
 
-enum Frequency {
-    case daily(count: Int)
-    case weekly(count: Int)
-    case monthly(count: Int)
+struct Frequency {
+    var frequencyType: FrequencyType
+    var count: Int
+}
+
+enum FrequencyType {
+    case daily
+    case weekly
+    case monthly
+}
+struct Difficulty {
+    var difficultyLevel: DifficultyLevel
+    var score: Int
 }
 
 enum DifficultyLevel {
-    case easy(score: Int)
-    case medium(score: Int)
-    case hard(score: Int)
+    case easy
+    case medium
+    case hard
 }
 
 class Resolution: Identifiable {
@@ -25,9 +34,9 @@ class Resolution: Identifiable {
     var description: String
     var defaultQuantity: Int? = nil
     var defaultFrequency: Frequency
-    var diffLevel: DifficultyLevel
+    var diffLevel: Difficulty
     
-    init(title: String, description: String, quantity: Int? = nil, frequency: Frequency, diffLevel: DifficultyLevel) {
+    init(title: String, description: String, quantity: Int? = nil, frequency: Frequency, diffLevel: Difficulty) {
         self.id = UUID()
         self.title = title
         self.description = description
@@ -37,8 +46,8 @@ class Resolution: Identifiable {
     }
     
     static var samples: [Resolution] {
-        let resolution1 = Resolution(title: "Run miles", description: "Run a certain number of miles", quantity: 5, frequency: Frequency.weekly(count: 1), diffLevel: DifficultyLevel.medium(score: 5))
-        let resolution2 = Resolution(title: "Drink 7 cups of water", description: "Drink more water", frequency: Frequency.daily(count: 1), diffLevel: DifficultyLevel.easy(score: 2))
+        let resolution1 = Resolution(title: "Run miles", description: "Run a certain number of miles", quantity: 5, frequency: Frequency(frequencyType: FrequencyType.weekly, count: 1), diffLevel: Difficulty(difficultyLevel: DifficultyLevel.medium, score: 5))
+        let resolution2 = Resolution(title: "Drink 7 cups of water", description: "Drink more water", frequency: Frequency(frequencyType: FrequencyType.weekly, count: 1), diffLevel: Difficulty(difficultyLevel: DifficultyLevel.easy, score: 2))
         
         return [resolution1, resolution2]
     }
