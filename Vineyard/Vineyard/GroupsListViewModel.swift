@@ -8,13 +8,14 @@
 import SwiftUI
 
 @Observable
-class GroupsListViewModel: ObservableObject {
+class GroupsListViewModel {
     var user: Person = Person.samples[0]
     
     init() {}
     
     func createGroup(withGroupName name: String, withGroupGoal groupGoal: String, withDeadline deadline: Date) {
         let newGroup = Group(name: name, groupGoal: groupGoal, people: [user], deadline: deadline)
+        print(newGroup.deadline)
         self.user.addGroup(newGroup)
     }
     

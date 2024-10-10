@@ -7,16 +7,36 @@
 
 import Foundation
 
-enum Frequency {
+enum Frequency: Hashable {
     case daily(count: Int)
     case weekly(count: Int)
     case monthly(count: Int)
+    
+    var displayName: String {
+        switch self {
+        case .daily: return "Daily"
+        case .weekly: return "Weekly"
+        case .monthly: return "Monthly"
+        }
+    }
+    
+    var count: Int {
+        switch self {
+        case .daily(let count), .weekly(let count), .monthly(let count):
+            return count
+        }
+    }
 }
 
-enum DifficultyLevel {
+enum DifficultyLevel: Hashable {
+//    case easy = 10
+//    case medium = 20
+//    case hard = 30
+//    var id: Int { self.rawValue }
     case easy(score: Int)
     case medium(score: Int)
     case hard(score: Int)
+    
 }
 
 class Resolution: Identifiable {
