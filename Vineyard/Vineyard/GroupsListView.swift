@@ -35,20 +35,17 @@ struct GroupsListView: View {
                         print("Menu Clicked")
                     }) {
                         Image(systemName: "line.horizontal.3")
-                            .foregroundColor(.black)
                     }
                     Button(action: {
                         //search stuff here
                         print("Search tapped")
                     }) {
                         Image(systemName: "magnifyingglass")
-                            .foregroundColor(.black)
                     }
                     Button(action: {
                         isPresentingAddGroup = true
                     }) {
                         Image(systemName: "plus")
-                            .foregroundColor(.black)
                     }
                 }
             }.sheet(isPresented: $isPresentingAddGroup) {
@@ -77,12 +74,10 @@ struct GroupCardView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 30, height: 30)
-                    .foregroundColor(.black)
                     .padding(.top, 8)
             }
         }
         .frame(height: 80)
-        .background(Color.white)
         .cornerRadius(10)
     }
 }
