@@ -9,7 +9,8 @@ import SwiftUI
 
 struct GroupCreationFlowView: View {
 //    @Binding var isPresented: Bool
-    @ObservedObject var viewModel: GroupsListViewModel = GroupsListViewModel()
+    var viewModel: GroupsListViewModel
+    @Environment(\.dismiss) var dismiss
     
     @State private var groupName: String = ""
     @State private var resolution: String = ""
@@ -34,9 +35,9 @@ struct GroupCreationFlowView: View {
                 case .writeGoals :
                     GoalsListView(onNext: {
                         currentStep = .inviteFriends
-                    }, groupName: $groupName, resolution: $resolution, deadline: $deadline)
+                    }, viewModel: viewModel, groupName: $groupName, resolution: $resolution, deadline: $deadline)
                 case .inviteFriends:
-                    GroupsListView() // TEMPORARY FOR MID-SEM DEMO. should go to invite friends
+                    GroupsListView() // This should not be done like this but we currently never reach here
 //                    InviteFriendsView(onFinish: {
 //                        currentStep = .finalView
 //                    })
@@ -45,14 +46,12 @@ struct GroupCreationFlowView: View {
                 }
             }.toolbar(content: {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    if currentStep != .createGroup {
                         Button(action: {
-                            goToPreviousStep()
+                            currentStep == .createGroup ? dismiss() : goToPreviousStep()
                         }) {
                             Image(systemName: "chevron.left")
                             Text("Back")
                         }
-                    }
                 }
                 // Center Current Step Text
                 ToolbarItem(placement: .principal) {
@@ -160,12 +159,12 @@ struct TextFieldTitleView: View {
 
 struct GoalsListView: View {
     var onNext: () -> Void
+    @Environment(\.dismiss) var dismiss
+    var viewModel: GroupsListViewModel
     @State private var goals : [Resolution] = []
     @Binding var groupName: String
     @Binding var resolution: String
     @Binding var deadline: Date
-    
-    @ObservedObject var viewModel: GroupsListViewModel = GroupsListViewModel()
         
     var body: some View {
         VStack {
@@ -192,9 +191,7 @@ struct GoalsListView: View {
             
             Button {
                 viewModel.createGroup(withGroupName: groupName, withGroupGoal: resolution, withDeadline: deadline)
-                
-                onNext()
-                
+                dismiss()// TEMPORARY FOR MID-SEM DEMO. should go to invite friends
             } label: {
                 Text("Create Group")
                     .frame(maxWidth: .infinity)

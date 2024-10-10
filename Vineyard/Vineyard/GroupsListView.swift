@@ -52,10 +52,8 @@ struct GroupsListView: View {
                     }
                 }
             }.fullScreenCover(isPresented: $isPresentingAddGroup) {
-                GroupCreationFlowView()
+                GroupCreationFlowView(viewModel: viewModel)
             }
-            
-            
         }
         
     }
