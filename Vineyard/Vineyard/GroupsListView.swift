@@ -48,7 +48,7 @@ struct GroupsListView: View {
                     }
                 }
             }.fullScreenCover(isPresented: $isPresentingAddGroup) {
-                GroupCreationFlowView()
+                GroupCreationFlowView(viewModel: viewModel)
             }
             .onAppear {
                 viewModel.setUser(user: loginViewModel.currentUser)
