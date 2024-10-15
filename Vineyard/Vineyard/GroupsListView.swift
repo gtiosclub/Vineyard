@@ -49,7 +49,7 @@ struct GroupsListView: View {
                     }
                 }
             }.sheet(isPresented: $isPresentingAddGroup) {
-                AddGroupView(isPresented: $isPresentingAddGroup, viewModel: viewModel)
+                AddGroupView(isPresented: $isPresentingAddGroup, viewModel: $viewModel)
             }
             
             
@@ -84,7 +84,7 @@ struct GroupCardView: View {
 
 struct AddGroupView: View {
     @Binding var isPresented: Bool
-    @ObservedObject var viewModel: GroupsListViewModel
+    @Binding var viewModel: GroupsListViewModel
     
     @State private var groupName: String = ""
     @State private var groupDescription: String = ""
