@@ -79,7 +79,6 @@ class LoginViewModel: ObservableObject {
             try db.collection("people").document(auth.currentUser!.uid).setData(from: newUser)
             currentUser = newUser
             
-            //try await  db.document() create the firestore path here and add person or other data
             isLoggedIn = true
         } catch {
             handleFirebaseError(error: error)

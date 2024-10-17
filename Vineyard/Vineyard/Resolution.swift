@@ -7,22 +7,22 @@
 
 import Foundation
 
-struct Frequency {
+struct Frequency: Codable {
     var frequencyType: FrequencyType
     var count: Int
 }
 
-enum FrequencyType {
+enum FrequencyType: Codable {
     case daily
     case weekly
     case monthly
 }
-struct Difficulty {
+struct Difficulty: Codable {
     var difficultyLevel: DifficultyLevel
     var score: Int
 }
 
-enum DifficultyLevel {
+enum DifficultyLevel: Codable {
     case easy
     case medium
     case hard

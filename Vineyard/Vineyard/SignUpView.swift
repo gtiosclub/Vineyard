@@ -56,8 +56,10 @@ struct SignUpView: View {
                     .foregroundColor(.red)
             }
             Button(action: {
-                Task {
-                    await loginViewModel.createUser(email: email, password: password, name: username, age: 1)
+                if password == confirmPassword {
+                    Task {
+                        await loginViewModel.createUser(email: email, password: password, name: username, age: 1)
+                    }
                 }
             }) {
                 Text("Sign Up")
