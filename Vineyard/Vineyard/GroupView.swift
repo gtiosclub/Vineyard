@@ -50,12 +50,12 @@ struct GroupView: View {
 //                                    .frame(width: 200, height: 10)
 //                                    .background(Color.gray.opacity(0.5))
 //                            }
-                        }
-                        .padding()
-                        .frame(height: 60)
-                        .background(Color.gray.opacity(0.5))
-                        .cornerRadius(10)
-                    }
+//                        }
+//                        .padding()
+//                        .frame(height: 60)
+//                        .background(Color.gray.opacity(0.5))
+//                        .cornerRadius(10)
+//                    }
                     
                     ///
                     
@@ -110,7 +110,6 @@ struct GroupView: View {
 //                        .background(Color.gray.opacity(0.5))
 //                        .cornerRadius(10)
 //                    }
-
                     
                 }
                 .padding(.horizontal, 20)
