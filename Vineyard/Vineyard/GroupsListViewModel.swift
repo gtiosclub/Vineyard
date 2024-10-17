@@ -14,7 +14,7 @@ class GroupsListViewModel: ObservableObject {
     init() {}
     
     func createGroup(withGroupName name: String, withGroupGoal groupGoal: String, withDeadline deadline: Date) {
-        let newGroup = Group(name: name, groupGoal: groupGoal, people: [user], deadline: deadline)
+        let newGroup = Group(name: name, groupGoal: groupGoal, people: [user.id], deadline: deadline)
         self.user.addGroup(newGroup)
     }
     

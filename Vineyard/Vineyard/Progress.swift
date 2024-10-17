@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct Progress: Identifiable {
-    let id: UUID = .init()
+struct Progress: Identifiable, Codable {
+    var id: String = UUID().uuidString
     var resolution: Resolution
     var completionArray: [Date] = []
     var quantityGoal: Float

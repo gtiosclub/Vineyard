@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct Badge: Identifiable {
-    let id: UUID = .init()
+struct Badge: Identifiable, Codable {
+    let id: String = UUID().uuidString
     var resolution: Resolution
     var group: Group
     var dateObtained: Date
