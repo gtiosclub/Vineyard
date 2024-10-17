@@ -33,25 +33,31 @@ struct GroupView: View {
                         .font(.headline)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
-                    ForEach(group.people) {people in
-                        VStack(alignment: .leading, spacing: 10) {
-                            HStack {
-                                Image(systemName: "person.crop.circle")
-                                    .resizable()
-                                    .frame(width: 30, height: 30)
-                                Text("\(people.name)")
-                                Spacer()
-                                ProgressView(value: 0.20)
-                                    .accentColor(.white)
-                                    .frame(width: 200, height: 10)
-                                    .background(Color.gray.opacity(0.5))
-                            }
+                    ///
+                    
+//                    ForEach(group.people) {people in
+//                        
+//                        VStack(alignment: .leading, spacing: 10) {
+//                            HStack {
+//                                Image(systemName: "person.crop.circle")
+//                                    .resizable()
+//                                    .frame(width: 30, height: 30)
+//                                
+//                                Text("\(people.name)")
+//                                Spacer()
+//                                ProgressView(value: 0.20)
+//                                    .accentColor(.white)
+//                                    .frame(width: 200, height: 10)
+//                                    .background(Color.gray.opacity(0.5))
+//                            }
                         }
                         .padding()
                         .frame(height: 60)
                         .background(Color.gray.opacity(0.5))
                         .cornerRadius(10)
                     }
+                    
+                    ///
                     
                     Text("Todo")
                         .font(.headline)
@@ -81,29 +87,29 @@ struct GroupView: View {
                         .font(.headline)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
-                    ForEach(group.people) {people in
-                        VStack(alignment: .leading, spacing: 10) {
-                            HStack {
-                                Image(systemName: "person.crop.circle")
-                                    .resizable()
-                                    .frame(width: 30, height: 30)
-                                Text("\(people.name)")
-                                Spacer()
-                                
-                                VStack {
-                                    Text("Lorem Ipsum")
-                                        .font(.subheadline)
-                                    Text("Lorem Ipsum")
-                                        .font(.caption)
-                                        .foregroundColor(Color.black.opacity(0.5))
-                                }
-                            }
-                        }
-                        .padding()
-                        .frame(height: 60)
-                        .background(Color.gray.opacity(0.5))
-                        .cornerRadius(10)
-                    }
+//                    ForEach(group.people) {people in
+//                        VStack(alignment: .leading, spacing: 10) {
+//                            HStack {
+//                                Image(systemName: "person.crop.circle")
+//                                    .resizable()
+//                                    .frame(width: 30, height: 30)
+//                                Text("\(people.name)")
+//                                Spacer()
+//                                
+//                                VStack {
+//                                    Text("Lorem Ipsum")
+//                                        .font(.subheadline)
+//                                    Text("Lorem Ipsum")
+//                                        .font(.caption)
+//                                        .foregroundColor(Color.black.opacity(0.5))
+//                                }
+//                            }
+//                        }
+//                        .padding()
+//                        .frame(height: 60)
+//                        .background(Color.gray.opacity(0.5))
+//                        .cornerRadius(10)
+//                    }
 
                     
                 }

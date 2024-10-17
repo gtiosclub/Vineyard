@@ -8,7 +8,7 @@
 import Foundation
 
 struct Person: Identifiable {
-    let id: UUID = .init()
+    let id: String = UUID().uuidString
     var name: String
     var groups: [Group] = []
     var allProgress: [Progress] = []

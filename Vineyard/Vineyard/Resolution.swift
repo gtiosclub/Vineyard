@@ -29,7 +29,7 @@ enum DifficultyLevel {
 }
 
 class Resolution: Identifiable {
-    let id: UUID
+    let id: String
     var title: String
     var description: String
     var defaultQuantity: Int? = nil
@@ -37,7 +37,7 @@ class Resolution: Identifiable {
     var diffLevel: Difficulty
     
     init(title: String, description: String, quantity: Int? = nil, frequency: Frequency, diffLevel: Difficulty) {
-        self.id = UUID()
+        self.id = UUID().uuidString
         self.title = title
         self.description = description
         self.defaultQuantity = quantity
