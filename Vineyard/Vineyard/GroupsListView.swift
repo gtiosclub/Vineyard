@@ -17,7 +17,7 @@ struct GroupsListView: View {
                 ForEach($viewModel.user.groups) { $group in
                     // TODO: Use a NavigationLink to select a list.
                     Section {
-                        NavigationLink(destination: ResolutionView(group: $group)) {
+                        NavigationLink(destination: GroupView(group: group)) {
                             GroupCardView(group: group)
                         }
                     }
@@ -35,20 +35,17 @@ struct GroupsListView: View {
                         print("Menu Clicked")
                     }) {
                         Image(systemName: "line.horizontal.3")
-                            .foregroundColor(.black)
                     }
                     Button(action: {
                         //search stuff here
                         print("Search tapped")
                     }) {
                         Image(systemName: "magnifyingglass")
-                            .foregroundColor(.black)
                     }
                     Button(action: {
                         isPresentingAddGroup = true
                     }) {
                         Image(systemName: "plus")
-                            .foregroundColor(.black)
                     }
                 }
             }.sheet(isPresented: $isPresentingAddGroup) {
@@ -77,12 +74,10 @@ struct GroupCardView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 30, height: 30)
-                    .foregroundColor(.black)
                     .padding(.top, 8)
             }
         }
         .frame(height: 80)
-        .background(Color.white)
         .cornerRadius(10)
     }
 }
