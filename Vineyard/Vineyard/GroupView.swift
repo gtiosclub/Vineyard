@@ -33,8 +33,6 @@ struct GroupView: View {
                         .font(.headline)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
-                    ///
-                    
 //                    ForEach(group.people) {people in
 //                        
 //                        VStack(alignment: .leading, spacing: 10) {
@@ -56,8 +54,6 @@ struct GroupView: View {
 //                        .background(Color.gray.opacity(0.5))
 //                        .cornerRadius(10)
 //                    }
-                    
-                    ///
                     
                     Text("Todo")
                         .font(.headline)
