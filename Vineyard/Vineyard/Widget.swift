@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import SwiftUICore
+import SwiftUI
 
 protocol Widget {
     var title: String { get }
@@ -14,7 +14,7 @@ protocol Widget {
     func render() ->  AnyView
 }
 
-struct Task: Identifiable {
+struct Tsk: Identifiable {
     let id = UUID()
     let userName: String
     let taskText: String
@@ -22,10 +22,10 @@ struct Task: Identifiable {
 }
 
 struct TodaysTasksWidget: Widget {
-    var todayTasks: [Task] = [
-        Task(userName: "D", taskText: "Task 1", group: "groupD"),
-        Task(userName: "E", taskText: "Task 2", group: "groupE"),
-        Task(userName: "F", taskText: "Task 3", group: "groupF")
+    var todayTasks: [Tsk] = [
+        Tsk(userName: "D", taskText: "Task 1", group: "groupD"),
+        Tsk(userName: "E", taskText: "Task 2", group: "groupE"),
+        Tsk(userName: "F", taskText: "Task 3", group: "groupF")
     ]
     
     var title: String = "Todays Tasks"
@@ -71,10 +71,10 @@ struct TodaysTasksWidget: Widget {
 }
 
 struct RecentActivitiesWidget: Widget {
-    var recentActivities: [Task] = [
-        Task(userName: "A", taskText: "Completed task A", group: "groupA"),
-        Task(userName: "B", taskText: "Completed task B", group: "groupB"),
-        Task(userName: "C", taskText: "Completed task C", group: "groupC")
+    var recentActivities: [Tsk] = [
+        Tsk(userName: "A", taskText: "Completed task A", group: "groupA"),
+        Tsk(userName: "B", taskText: "Completed task B", group: "groupB"),
+        Tsk(userName: "C", taskText: "Completed task C", group: "groupC")
     ]
     
     var title: String = "Recent Activities"

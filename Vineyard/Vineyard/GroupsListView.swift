@@ -14,14 +14,14 @@ struct GroupsListView: View {
     var body: some View {
         NavigationStack {
             List {
-                ForEach($viewModel.user.groups) { $group in
-                    // TODO: Use a NavigationLink to select a list.
-                    Section {
-                        NavigationLink(destination: GroupView(group: group)) {
-                            GroupCardView(group: group)
-                        }
-                    }
-                }
+//                ForEach($viewModel.user.groups) { $group in
+//                    // TODO: Use a NavigationLink to select a list.
+//                    Section {
+//                        NavigationLink(destination: GroupView(group: group)) {
+//                            GroupCardView(group: group)
+//                        }
+//                    }
+//                }
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
