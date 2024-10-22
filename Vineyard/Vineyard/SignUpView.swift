@@ -43,6 +43,7 @@ struct SignUpView: View {
                 .background(Color(.secondarySystemBackground))
                 .cornerRadius(8)
                 .padding(.horizontal, 40)
+                .textInputAutocapitalization(.never)
 
             SecureField("Confirm Password", text: $confirmPassword)
                 .padding(.horizontal, 10)
@@ -50,6 +51,7 @@ struct SignUpView: View {
                 .background(Color(.secondarySystemBackground))
                 .cornerRadius(8)
                 .padding(.horizontal, 40)
+                .textInputAutocapitalization(.never)
 
             if (!loginViewModel.errorMessage.isEmpty) {
                 Text(loginViewModel.errorMessage)

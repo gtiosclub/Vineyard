@@ -28,7 +28,7 @@ struct ProfileView: View {
                             .frame(width: 75, height: 75)
                             .foregroundColor(.gray)
                         VStack(alignment: .leading, spacing: 2) {
-                            Text(viewModel.user.name)
+                            Text(loginViewModel.currentUser?.name ?? "no name")
                                 .font(.system(size: 20, weight: .bold))
                             HStack() {
                                 Text("x Friends")

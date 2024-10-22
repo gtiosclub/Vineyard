@@ -31,6 +31,7 @@ struct LoginView: View {
                     .background(Color.gray.opacity(0.2))
                     .cornerRadius(5)
                     .padding(.horizontal, 40)
+                    .textInputAutocapitalization(.never)
                 
                 SecureField("Enter password", text: $password)
                     .padding()
@@ -38,6 +39,7 @@ struct LoginView: View {
                     .background(Color.gray.opacity(0.2))
                     .cornerRadius(5)
                     .padding(.horizontal, 40)
+                    .textInputAutocapitalization(.never)
                 
                 Button(action: {
                     Task {
