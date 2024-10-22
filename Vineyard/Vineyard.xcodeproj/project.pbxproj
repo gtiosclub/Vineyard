@@ -14,6 +14,8 @@
 		192EBFF12C90F62F00AF8528 /* VineyardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192EBFF02C90F62F00AF8528 /* VineyardTests.swift */; };
 		192EBFFB2C90F62F00AF8528 /* VineyardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192EBFFA2C90F62F00AF8528 /* VineyardUITests.swift */; };
 		192EBFFD2C90F62F00AF8528 /* VineyardUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192EBFFC2C90F62F00AF8528 /* VineyardUITestsLaunchTests.swift */; };
+		951CF8F02CC5C0650016B06A /* GroupListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951CF8EF2CC5C0650016B06A /* GroupListView.swift */; };
+		951CF8F22CC5C0F90016B06A /* GroupListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951CF8F12CC5C0F90016B06A /* GroupListViewModel.swift */; };
 		B40B894C2C9364F4006B1771 /* GroupsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40B894B2C9364F4006B1771 /* GroupsListViewModel.swift */; };
 		B40B894E2C936DE0006B1771 /* ResolutionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40B894D2C936DE0006B1771 /* ResolutionView.swift */; };
 		BB40EDF62C991C8A006BA1E3 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EDF52C991C8A006BA1E3 /* Group.swift */; };
@@ -62,6 +64,8 @@
 		192EBFF62C90F62F00AF8528 /* VineyardUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VineyardUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		192EBFFA2C90F62F00AF8528 /* VineyardUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VineyardUITests.swift; sourceTree = "<group>"; };
 		192EBFFC2C90F62F00AF8528 /* VineyardUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VineyardUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		951CF8EF2CC5C0650016B06A /* GroupListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListView.swift; sourceTree = "<group>"; };
+		951CF8F12CC5C0F90016B06A /* GroupListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListViewModel.swift; sourceTree = "<group>"; };
 		B40B894B2C9364F4006B1771 /* GroupsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsListViewModel.swift; sourceTree = "<group>"; };
 		B40B894D2C936DE0006B1771 /* ResolutionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolutionView.swift; sourceTree = "<group>"; };
 		BB40EDF52C991C8A006BA1E3 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
@@ -290,6 +294,7 @@
 			isa = PBXGroup;
 			children = (
 				F1E19F882CAB5B9500463111 /* DashboardViewModel.swift */,
+				951CF8F12CC5C0F90016B06A /* GroupListViewModel.swift */,
 			);
 			name = ViewModels;
 			sourceTree = "<group>";
@@ -298,6 +303,7 @@
 			isa = PBXGroup;
 			children = (
 				BB40EE0B2C992871006BA1E3 /* DashboardView.swift */,
+				951CF8EF2CC5C0650016B06A /* GroupListView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -457,6 +463,7 @@
 			files = (
 				F05361C82CAF1462009DE1E3 /* TodoViewModel.swift in Sources */,
 				192EBFE22C90F62E00AF8528 /* HomeView.swift in Sources */,
+				951CF8F22CC5C0F90016B06A /* GroupListViewModel.swift in Sources */,
 				B40B894C2C9364F4006B1771 /* GroupsListViewModel.swift in Sources */,
 				F0D913622CACB8A100E7CD81 /* GroupView.swift in Sources */,
 				F1E19F872CAB58DC00463111 /* Widget.swift in Sources */,
@@ -471,6 +478,7 @@
 				F04BEBD32CB43B46007EB113 /* ProfileViewModel.swift in Sources */,
 				B40B894E2C936DE0006B1771 /* ResolutionView.swift in Sources */,
 				F10167662CA37B180004260E /* Progress.swift in Sources */,
+				951CF8F02CC5C0650016B06A /* GroupListView.swift in Sources */,
 				BB40EE082C99258B006BA1E3 /* DatabaseServiceProtocol.swift in Sources */,
 				F05361C62CAF0AA1009DE1E3 /* TodoView.swift in Sources */,
 				F10167642CA37B080004260E /* Badge.swift in Sources */,
