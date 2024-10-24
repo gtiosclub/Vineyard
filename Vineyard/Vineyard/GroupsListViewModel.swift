@@ -16,6 +16,7 @@ class GroupsListViewModel: ObservableObject {
     func createGroup(withGroupName name: String, withGroupGoal groupGoal: String, withDeadline deadline: Date) {
         let newGroup = Group(name: name, groupGoal: groupGoal, people: [user.id], deadline: deadline)
         self.user.addGroup(newGroup)
+        
     }
     
     func addResolution(_ resolution: Resolution, toGroup group: Group) {
@@ -25,6 +26,8 @@ class GroupsListViewModel: ObservableObject {
     func joinGroup(toGroup group: Group) {
         self.user.addGroup(group)
     }
+    
+    
     
 //    func toggleResolutionAsCompleted(_ resolution: Resolution, inGroup group: Group) {
 //        group.toggleResolutionAsCompleted(resolution)
