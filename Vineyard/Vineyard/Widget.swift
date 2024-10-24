@@ -205,7 +205,7 @@ struct TodaysTasksWidgetHalf: Widget {
                                     .overlay(
                                         task.isCompleted ? Image(systemName: "checkmark").foregroundColor(.white) : nil
                                     )
-                                    .offset(y: 5)
+
                             }
                             .buttonStyle(PlainButtonStyle())
                             .disabled(task.isCompleted)
