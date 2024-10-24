@@ -16,7 +16,7 @@ protocol Widget {
     func render() ->  AnyView
 }
 
-struct Task: Identifiable {
+struct Tsk: Identifiable {
     let id = UUID()
     var userName: String
     var taskText: String
