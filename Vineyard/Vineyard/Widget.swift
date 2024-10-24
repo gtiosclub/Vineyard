@@ -16,7 +16,7 @@ protocol Widget {
     func render() ->  AnyView
 }
 
-struct Task: Identifiable {
+struct Tsk: Identifiable {
     let id = UUID()
     var userName: String
     var taskText: String
@@ -88,10 +88,10 @@ struct Task: Identifiable {
 struct TodaysTasksWidgetFull: Widget {
     var span: Int { 2 }
     
-    @State var recentActivities: [Task] = [
-        Task(userName: "Amy", taskText: "Go complete task A", group: "groupA"),
-        Task(userName: "Bob", taskText: "Go complete task B", group: "groupB"),
-        Task(userName: "Chris", taskText: "Go complete task C, task D, and task E", group: "groupC")
+    @State var todaysTasks: [Task] = [
+        Tsk(userName: "Amy", taskText: "Go complete task A", group: "groupA", isCompleted: true),
+        Tsk(userName: "Bob", taskText: "Go complete task B", group: "groupB"),
+        Tsk(userName: "Chris", taskText: "Go complete task C, task D, and task E", group: "groupC")
     ]
     
     var title: String = "Today's Tasks"
@@ -123,7 +123,7 @@ struct TodaysTasksWidgetFull: Widget {
                 .padding(.top, -5)
                 
                 VStack(alignment: .leading, spacing: 15) {
-                    ForEach($recentActivities) { $task in
+                    ForEach($todaysTasks) { $task in
                         HStack(alignment: .top){
                             Button(action: {
                                 task.isCompleted = true
@@ -168,10 +168,10 @@ struct TodaysTasksWidgetFull: Widget {
 struct TodaysTasksWidgetHalf: Widget {
     var span: Int { 1 }
     
-    var recentActivities: [Task] = [
-        Task(userName: "Amy", taskText: "Go complete task A", group: "groupA"),
-        Task(userName: "Bob", taskText: "Go complete task B", group: "groupB"),
-        Task(userName: "Chris", taskText: "Go complete task C, task D, and task E", group: "groupC")
+    @State var todaysTasks: [Task] = [
+        Tsk(userName: "Amy", taskText: "Go complete task A", group: "groupA", isCompleted: true),
+        Tsk(userName: "Bob", taskText: "Go complete task B", group: "groupB"),
+        Tsk(userName: "Chris", taskText: "Go complete task C, task D, and task E", group: "groupC")
     ]
     
     var title: String = "Today's Tasks"
@@ -193,12 +193,22 @@ struct TodaysTasksWidgetHalf: Widget {
                 .padding(.top, -5)
                 
                 VStack(alignment: .leading, spacing: 12) {
-                    ForEach(recentActivities) { task in
+                    ForEach($todaysTasks) { $task in
                         HStack{
-                            Rectangle()
-                                .fill(Color.white.opacity(0.5))
-                                .frame(width: 25, height: 25)
-                                .cornerRadius(5)
+                            Button(action: {
+                                task.isCompleted = true
+                            }) {
+                                Rectangle()
+                                    .fill(task.isCompleted ? Color.green : Color.white.opacity(0.5))
+                                    .frame(width: 25, height: 25)
+                                    .cornerRadius(5)
+                                    .overlay(
+                                        task.isCompleted ? Image(systemName: "checkmark").foregroundColor(.white) : nil
+                                    )
+                                    .offset(y: 5)
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                            .disabled(task.isCompleted)
                             
                             
                             VStack(alignment: .leading, spacing: 2) {
@@ -295,9 +305,9 @@ struct RecentActivitiesWidgetFull: Widget {
     var span: Int { 2 }
     
     var recentActivities: [Task] = [
-        Task(userName: "Amy", taskText: "Completed task A", group: "groupA"),
-        Task(userName: "Bob", taskText: "Completed task B", group: "groupB"),
-        Task(userName: "Chris_Smith", taskText: "Completed task C, task D, and task E", group: "groupC")
+        Tsk(userName: "Amy", taskText: "Completed task A", group: "groupA"),
+        Tsk(userName: "Bob", taskText: "Completed task B", group: "groupB"),
+        Tsk(userName: "Chris_Smith", taskText: "Completed task C, task D, and task E", group: "groupC")
     ]
     
     var title: String = "Recent Activities"
@@ -373,9 +383,9 @@ struct RecentActivitiesWidgetHalf: Widget {
     var span: Int { 1 }
     
     var recentActivities: [Task] = [
-        Task(userName: "Amy", taskText: "Completed task A", group: "groupA"),
-        Task(userName: "Bob", taskText: "Completed task B", group: "groupB"),
-        Task(userName: "Chris", taskText: "Completed task C, task D, and task E", group: "groupC")
+        Tsk(userName: "Amy", taskText: "Completed task A", group: "groupA"),
+        Tsk(userName: "Bob", taskText: "Completed task B", group: "groupB"),
+        Tsk(userName: "Chris", taskText: "Completed task C, task D, and task E", group: "groupC")
     ]
     
     var title: String = "Recent Activities"
