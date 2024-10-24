@@ -88,7 +88,7 @@ struct Tsk: Identifiable {
 struct TodaysTasksWidgetFull: Widget {
     var span: Int { 2 }
     
-    @State var todaysTasks: [Task] = [
+    @State var todaysTasks: [Tsk] = [
         Tsk(userName: "Amy", taskText: "Go complete task A", group: "groupA", isCompleted: true),
         Tsk(userName: "Bob", taskText: "Go complete task B", group: "groupB"),
         Tsk(userName: "Chris", taskText: "Go complete task C, task D, and task E", group: "groupC")
@@ -168,7 +168,7 @@ struct TodaysTasksWidgetFull: Widget {
 struct TodaysTasksWidgetHalf: Widget {
     var span: Int { 1 }
     
-    @State var todaysTasks: [Task] = [
+    @State var todaysTasks: [Tsk] = [
         Tsk(userName: "Amy", taskText: "Go complete task A", group: "groupA", isCompleted: true),
         Tsk(userName: "Bob", taskText: "Go complete task B", group: "groupB"),
         Tsk(userName: "Chris", taskText: "Go complete task C, task D, and task E", group: "groupC")
@@ -304,7 +304,7 @@ struct TodaysTasksWidgetHalf: Widget {
 struct RecentActivitiesWidgetFull: Widget {
     var span: Int { 2 }
     
-    var recentActivities: [Task] = [
+    var recentActivities: [Tsk] = [
         Tsk(userName: "Amy", taskText: "Completed task A", group: "groupA"),
         Tsk(userName: "Bob", taskText: "Completed task B", group: "groupB"),
         Tsk(userName: "Chris_Smith", taskText: "Completed task C, task D, and task E", group: "groupC")
@@ -382,7 +382,7 @@ struct RecentActivitiesWidgetFull: Widget {
 struct RecentActivitiesWidgetHalf: Widget {
     var span: Int { 1 }
     
-    var recentActivities: [Task] = [
+    var recentActivities: [Tsk] = [
         Tsk(userName: "Amy", taskText: "Completed task A", group: "groupA"),
         Tsk(userName: "Bob", taskText: "Completed task B", group: "groupB"),
         Tsk(userName: "Chris", taskText: "Completed task C, task D, and task E", group: "groupC")
