@@ -122,7 +122,7 @@ struct TodaysTasksWidgetFull: Widget {
                 
                 .padding(.top, -5)
                 
-                VStack(alignment: .leading, spacing: 15) {
+                VStack(alignment: .leading, spacing: 12) {
                     ForEach($todaysTasks) { $task in
                         HStack(alignment: .top){
                             Button(action: {
@@ -158,6 +158,7 @@ struct TodaysTasksWidgetFull: Widget {
                 }
             }
             .padding()
+            .frame(height: 200)
             .background(Color.white.opacity(0.4)) //try 0.35
             .cornerRadius(10)
             .shadow(radius: 5)
@@ -170,7 +171,7 @@ struct TodaysTasksWidgetHalf: Widget {
     
     @State var todaysTasks: [Tsk] = [
         Tsk(userName: "Amy", taskText: "Go complete task A", group: "groupA", isCompleted: true),
-        Tsk(userName: "Bob", taskText: "Go complete task B", group: "groupB"),
+        Tsk(userName: "Bob", taskText: "Go complete task B and task C", group: "groupB"),
         Tsk(userName: "Chris", taskText: "Go complete task C, task D, and task E", group: "groupC")
     ]
     
@@ -192,7 +193,7 @@ struct TodaysTasksWidgetHalf: Widget {
                 
                 .padding(.top, -5)
                 
-                VStack(alignment: .leading, spacing: 12) {
+                VStack(alignment: .leading, spacing: 15) {
                     ForEach($todaysTasks) { $task in
                         HStack{
                             Button(action: {
@@ -215,7 +216,7 @@ struct TodaysTasksWidgetHalf: Widget {
                                 Text(task.taskText)
                                     .font(.caption)
                                     .foregroundColor(.white)
-                                    .fontWeight(.medium)
+                                    .fontWeight(.regular)
                                     .lineLimit(2)
                                     .truncationMode(.tail)
 //                                Text(task.group)
@@ -225,8 +226,10 @@ struct TodaysTasksWidgetHalf: Widget {
                         }
                     }
                 }
+                .padding(.top, -3)
             }
             .padding()
+            .frame(height: 200)
             .background(Color.purple.opacity(0.35))
             .cornerRadius(10)
             .shadow(radius: 5)
@@ -371,6 +374,7 @@ struct RecentActivitiesWidgetFull: Widget {
                 }
             }
             .padding()
+            .frame(height: 200)
             .background(Color.white.opacity(0.4))
             .cornerRadius(10)
             .shadow(radius: 5)
@@ -408,7 +412,7 @@ struct RecentActivitiesWidgetHalf: Widget {
                 
                 .padding(.top, -5)
                 
-                VStack(alignment: .leading, spacing: 11) {
+                VStack(alignment: .leading, spacing: 13) {
                     ForEach(recentActivities) { activity in
                         HStack{
                             Circle()
@@ -432,6 +436,7 @@ struct RecentActivitiesWidgetHalf: Widget {
                 }
             }
             .padding()
+            .frame(height: 200)
             .background(Color.purple.opacity(0.35))
             .cornerRadius(10)
             .shadow(radius: 5)

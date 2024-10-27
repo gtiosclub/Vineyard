@@ -53,7 +53,8 @@ struct DashboardView: View {
                                 ZStack(alignment: .topTrailing) {
                                     widget.render()
                                         .frame(
-                                            width: widget.span == 2 ? UIScreen.main.bounds.width - 35 : (UIScreen.main.bounds.width - 50) / 2
+                                            width: widget.span == 2 ? UIScreen.main.bounds.width - 35 : (UIScreen.main.bounds.width - 50) / 2,
+                                            height: 200
                                         )
                                         .background(Color.purple.opacity(0.55)) // Adjust for dark mode
                                         .cornerRadius(14)
