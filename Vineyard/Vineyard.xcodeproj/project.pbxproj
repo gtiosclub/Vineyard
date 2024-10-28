@@ -16,6 +16,8 @@
 		192EBFFD2C90F62F00AF8528 /* VineyardUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192EBFFC2C90F62F00AF8528 /* VineyardUITestsLaunchTests.swift */; };
 		951CF8F02CC5C0650016B06A /* GroupListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951CF8EF2CC5C0650016B06A /* GroupListView.swift */; };
 		951CF8F22CC5C0F90016B06A /* GroupListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951CF8F12CC5C0F90016B06A /* GroupListViewModel.swift */; };
+		95BD053D2CCF467600BEA15A /* AddGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BD053C2CCF467600BEA15A /* AddGroupView.swift */; };
+		95BE42E62CCEF4940031547F /* GroupCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BE42E52CCEF4940031547F /* GroupCardView.swift */; };
 		B40B894C2C9364F4006B1771 /* GroupsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40B894B2C9364F4006B1771 /* GroupsListViewModel.swift */; };
 		B40B894E2C936DE0006B1771 /* ResolutionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40B894D2C936DE0006B1771 /* ResolutionView.swift */; };
 		BB40EDF62C991C8A006BA1E3 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EDF52C991C8A006BA1E3 /* Group.swift */; };
@@ -23,7 +25,6 @@
 		BB40EDFA2C991C9D006BA1E3 /* Resolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EDF92C991C9D006BA1E3 /* Resolution.swift */; };
 		BB40EE062C992566006BA1E3 /* FirebaseDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EE052C992566006BA1E3 /* FirebaseDataManager.swift */; };
 		BB40EE082C99258B006BA1E3 /* DatabaseServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EE072C99258B006BA1E3 /* DatabaseServiceProtocol.swift */; };
-		BB40EE0A2C9926A6006BA1E3 /* GroupsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EE092C9926A6006BA1E3 /* GroupsListView.swift */; };
 		BB40EE0C2C992871006BA1E3 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EE0B2C992871006BA1E3 /* DashboardView.swift */; };
 		BB40EE0E2C99288A006BA1E3 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EE0D2C99288A006BA1E3 /* ProfileView.swift */; };
 		F04BEBD32CB43B46007EB113 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04BEBD22CB43B46007EB113 /* ProfileViewModel.swift */; };
@@ -66,6 +67,8 @@
 		192EBFFC2C90F62F00AF8528 /* VineyardUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VineyardUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		951CF8EF2CC5C0650016B06A /* GroupListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListView.swift; sourceTree = "<group>"; };
 		951CF8F12CC5C0F90016B06A /* GroupListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListViewModel.swift; sourceTree = "<group>"; };
+		95BD053C2CCF467600BEA15A /* AddGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroupView.swift; sourceTree = "<group>"; };
+		95BE42E52CCEF4940031547F /* GroupCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCardView.swift; sourceTree = "<group>"; };
 		B40B894B2C9364F4006B1771 /* GroupsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsListViewModel.swift; sourceTree = "<group>"; };
 		B40B894D2C936DE0006B1771 /* ResolutionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolutionView.swift; sourceTree = "<group>"; };
 		BB40EDF52C991C8A006BA1E3 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
@@ -73,7 +76,6 @@
 		BB40EDF92C991C9D006BA1E3 /* Resolution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resolution.swift; sourceTree = "<group>"; };
 		BB40EE052C992566006BA1E3 /* FirebaseDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDataManager.swift; sourceTree = "<group>"; };
 		BB40EE072C99258B006BA1E3 /* DatabaseServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseServiceProtocol.swift; sourceTree = "<group>"; };
-		BB40EE092C9926A6006BA1E3 /* GroupsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsListView.swift; sourceTree = "<group>"; };
 		BB40EE0B2C992871006BA1E3 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		BB40EE0D2C99288A006BA1E3 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		F04BEBD22CB43B46007EB113 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -277,8 +279,10 @@
 			isa = PBXGroup;
 			children = (
 				B40B894D2C936DE0006B1771 /* ResolutionView.swift */,
-				BB40EE092C9926A6006BA1E3 /* GroupsListView.swift */,
+				951CF8EF2CC5C0650016B06A /* GroupListView.swift */,
 				F0D913612CACB8A100E7CD81 /* GroupView.swift */,
+				95BE42E52CCEF4940031547F /* GroupCardView.swift */,
+				95BD053C2CCF467600BEA15A /* AddGroupView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -303,7 +307,6 @@
 			isa = PBXGroup;
 			children = (
 				BB40EE0B2C992871006BA1E3 /* DashboardView.swift */,
-				951CF8EF2CC5C0650016B06A /* GroupListView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -467,13 +470,14 @@
 				B40B894C2C9364F4006B1771 /* GroupsListViewModel.swift in Sources */,
 				F0D913622CACB8A100E7CD81 /* GroupView.swift in Sources */,
 				F1E19F872CAB58DC00463111 /* Widget.swift in Sources */,
-				BB40EE0A2C9926A6006BA1E3 /* GroupsListView.swift in Sources */,
+				95BD053D2CCF467600BEA15A /* AddGroupView.swift in Sources */,
 				BB40EE062C992566006BA1E3 /* FirebaseDataManager.swift in Sources */,
 				BB40EE0E2C99288A006BA1E3 /* ProfileView.swift in Sources */,
 				BB40EDF62C991C8A006BA1E3 /* Group.swift in Sources */,
 				F1E19F892CAB5B9F00463111 /* DashboardViewModel.swift in Sources */,
 				BB40EDF82C991C93006BA1E3 /* Person.swift in Sources */,
 				BB40EE0C2C992871006BA1E3 /* DashboardView.swift in Sources */,
+				95BE42E62CCEF4940031547F /* GroupCardView.swift in Sources */,
 				192EBFE02C90F62E00AF8528 /* VineyardApp.swift in Sources */,
 				F04BEBD32CB43B46007EB113 /* ProfileViewModel.swift in Sources */,
 				B40B894E2C936DE0006B1771 /* ResolutionView.swift in Sources */,

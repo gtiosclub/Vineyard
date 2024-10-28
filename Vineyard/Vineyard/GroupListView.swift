@@ -8,56 +8,63 @@
 import SwiftUI
 
 struct GroupListView: View {
-    @StateObject var viewModel = GroupListViewModel()
-    //let activityProg = progress.completionArray.count / progress.frequencyGoal.count
+    @StateObject var viewModel = GroupsListViewModel()
+    @State private var isPresentingAddGroup = false
+
     var body: some View {
-        VStack (alignment: .center) {
-            HStack {
-                VStack (alignment: .leading) {
-                    Text("Your Groups")
-                        .font(.system(size: 30, weight: .bold))
-                    Text("\(viewModel.person.groups.count) active group(s)")
-                }
-                Spacer()
-                Image(systemName: "list.bullet")
-                Image(systemName: "plus")
-            }.padding(40)
-            ForEach(viewModel.person.groups) { group in
-                VStack {
+        NavigationView {
+            ZStack(alignment: .top) {
+                Image("topBackground")
+                    .ignoresSafeArea()
+                VStack(alignment: .center) {
                     HStack {
-                        Text(group.name)
-                            .font(.system(size: 20, weight: .bold))
+                        VStack(alignment: .leading) {
+                            Text("Your Groups")
+                                .font(.system(size: 30, weight: .bold))
+                                .foregroundColor(.white)
+                            Text("\(viewModel.user.groups.count) active group(s)")
+                                .foregroundColor(.white)
+
+                        }
                         Spacer()
-                        let number = group.people.count
-                        Text("\(number) People")
-                        ZStack(alignment: .trailing) { // Use ZStack for overlapping circles
-                            ForEach(0..<number, id: \.self) { i in
-                                Circle()
-                                    .fill(Color.blue)
-                                    .frame(width: 40, height: 40)
-                                    .overlay(Circle().stroke(Color.black, lineWidth: 3))
-                                    .offset(x: CGFloat(i) * 15)
+                        Button(action: {
+                            print("changing mode")
+                        }) {
+                            Image(systemName: "list.bullet")
+                                .foregroundColor(.white)
+                                .font(.system(size: 25))
+                        }
+                        Button(action: {
+                            print("add")
+                            isPresentingAddGroup = true
+                        }) {
+                            Image(systemName: "plus")
+                                .foregroundColor(.white)
+                                .font(.system(size: 25))
+
+                        }
+                    }
+                    .padding(40)
+
+                    Spacer()
+                    ScrollView {
+                        VStack(spacing: 20) {
+                            ForEach(viewModel.user.groups) { group in
+                                NavigationLink(destination: GroupView(group: group)) {
+                                    GroupCardView(group: group).padding()
+                                }
+                                .buttonStyle(PlainButtonStyle())
                             }
                         }
-                    }.padding()
-                    HStack {
-                        Spacer()
-                        let userProg = 0.0 //What do we want here???
-                        ProgressView(value: 0.0, total: 100)
-                            .progressViewStyle(LinearProgressViewStyle())
-                            .frame(width: 100)
+                        .padding()
                     }
                 }
+                .navigationBarHidden(true)
             }
-                .frame(maxWidth: 250, minHeight: 70)
-                .padding(40)
-                .background(
-                RoundedRectangle(cornerRadius: 25)
-                    .fill(Color(.gray).opacity(0.3))
-                )
-            Spacer()
         }
-        
+        .sheet(isPresented: $isPresentingAddGroup) {
+            AddGroupView(isPresented: $isPresentingAddGroup, viewModel: viewModel)
+        }
     }
 }
 

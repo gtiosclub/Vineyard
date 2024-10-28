@@ -14,14 +14,19 @@ class Group: Identifiable {
     var people: [Person]
     var resolutions: [Resolution] = []
     var deadline: Date
+    //
+    var scoreGoal: Int
+    var currScore: Int
     
-    init(name: String, groupGoal: String, people: [Person], resolutions: [Resolution] = [], deadline: Date) {
+    init(name: String, groupGoal: String, people: [Person], resolutions: [Resolution] = [], deadline: Date, scoreGoal: Int) {
         self.id = UUID()
         self.name = name
         self.groupGoal = groupGoal
         self.people = people
         self.resolutions = resolutions
         self.deadline = deadline
+        self.scoreGoal = scoreGoal;
+        self.currScore = 3
     }
     
     func addResolution(_ resolution: Resolution) {
@@ -50,8 +55,8 @@ class Group: Identifiable {
         let resolution1 = Resolution.samples[0]
         let resolution2 = Resolution.samples[1]
         
-        let group1 = Group(name: "Group1", groupGoal: "Yearly Resolution 1", people:[andrew, yash, sankaet], resolutions: [resolution1, resolution2], deadline: Date(timeIntervalSinceNow: (7 * 24 * 60 * 60) * 7))
-        let group2 = Group(name: "Group2", groupGoal: "Yearly Resolution 2", people:[rahul, vishnesh], deadline: Date(timeIntervalSinceNow: (7 * 24 * 60 * 60) * 31))
+        let group1 = Group(name: "Group1", groupGoal: "Yearly Resolution 1", people:[andrew, yash, sankaet], resolutions: [resolution1, resolution2], deadline: Date(timeIntervalSinceNow: (7 * 24 * 60 * 60) * 7), scoreGoal: 5)
+        let group2 = Group(name: "Group2", groupGoal: "Yearly Resolution 2", people:[rahul, vishnesh], deadline: Date(timeIntervalSinceNow: (7 * 24 * 60 * 60) * 31), scoreGoal: 5)
         
         andrew.addGroup(group1)
         yash.addGroup(group1)
