@@ -4,7 +4,6 @@
 //
 //  Created by Vishnesh Jayanthi Ramanathan on 16/09/24.
 
-
  import FirebaseFirestore
 
 class FirebaseDataManager: DatabaseServiceProtocol {
@@ -219,5 +218,21 @@ class FirebaseDataManager: DatabaseServiceProtocol {
         try await groupRef.setData(groupData)
     }
     
-    
+    func fetchUserGroups(userID: String) async throws -> [Group] {
+        let db = Firestore.firestore()
+        let userDoc = try await db.collection("people").document(userID).getDocument()
+        
+        guard let data = userDoc.data(),
+              let groupIDs = data["groupIDs"] as? [String] else {
+            return []
+        }
+
+        var groups: [Group] = []
+        for groupID in groupIDs {
+            if let group = try await fetchGroupFromDB(groupID: groupID) {
+                groups.append(group)
+            }
+        }
+        return groups
+    }
 }
