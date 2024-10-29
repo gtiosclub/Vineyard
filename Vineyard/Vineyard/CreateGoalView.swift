@@ -16,8 +16,9 @@ struct CreateGoalView: View {
     @State private var action: String = "" // the name of the goal
     @State private var description: String = "" // the name of the goal
     @State private var quantity: String = ""
-    @State private var selectedDifficulty: DifficultyLevel = .medium(score: 20)
-    @State private var selectedFrequency: Frequency = .daily(count: 1)
+    
+    @State private var selectedDifficulty: Difficulty = .medium
+    @State private var selectedFrequency: FrequencyType = .daily
     @State private var selectedFrequencyText: String = "Daily"
     @State private var freqQuantity: Int = 0
     @Environment(\.dismiss) var dismiss
@@ -56,24 +57,23 @@ struct CreateGoalView: View {
             
             List {
                 Picker ("Difficulty", selection: $selectedDifficulty) {
-                    Text("Easy").tag(DifficultyLevel.easy(score: 10)).foregroundColor(.gray)
-                    Text("Medium").tag(DifficultyLevel.medium(score: 20)).foregroundColor(.gray)
-                    Text("Hard").tag(DifficultyLevel.hard(score: 30)).foregroundColor(.gray)
+                    Text("Easy").tag(Difficulty.easy).foregroundColor(.gray)
+                    Text("Medium").tag(Difficulty.medium).foregroundColor(.gray)
+                    Text("Hard").tag(Difficulty.hard).foregroundColor(.gray)
                 }
                 
                 Picker ("Frequency", selection: $selectedFrequency) {
-                    Text("Daily").tag(Frequency.daily(count: 1))
-                    Text("Weekly").tag(Frequency.weekly(count: 1))
-                    Text("Monthly").tag(Frequency.monthly(count: 1))
+                    Text("Daily").tag(FrequencyType.daily)
+                    Text("Weekly").tag(FrequencyType.weekly)
+                    Text("Monthly").tag(FrequencyType.monthly)
                 }
                 
                 HStack {
                     Stepper(value: $freqQuantity) {
-                        Text("\(selectedFrequency.displayName) count")
+                        Text("\(selectedFrequency.rawValue) count")
                     }
                     Text("\(freqQuantity)")
                 }
-                
             }
             .frame(maxWidth: .infinity)
             .background(.orange)
@@ -81,7 +81,7 @@ struct CreateGoalView: View {
             
             
             Button {
-                let resolution = Resolution(title: action, description: description, quantity: Int(quantity), frequency: selectedFrequency, diffLevel: selectedDifficulty)
+                let resolution = Resolution(title: action, description: description, quantity: Int(quantity), frequency: Frequency(frequencyType: selectedFrequency, count: freqQuantity), diffLevel: selectedDifficulty)
                 
                 goals.append(resolution)
                 
@@ -90,8 +90,8 @@ struct CreateGoalView: View {
                 action = "" // the name of the goal
                 description = "" // the name of the goal
                 quantity = ""
-                selectedDifficulty = .medium(score: 20)
-                selectedFrequency = .daily(count: 1)
+                selectedDifficulty = .medium
+                selectedFrequency = .daily
                 dismiss()
 
             } label: {
