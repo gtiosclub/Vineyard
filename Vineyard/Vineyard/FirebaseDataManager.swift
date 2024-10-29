@@ -4,7 +4,7 @@
 //
 //  Created by Vishnesh Jayanthi Ramanathan on 16/09/24.
 
- import FirebaseFirestore
+import FirebaseFirestore
 
 class FirebaseDataManager: DatabaseServiceProtocol {
     
@@ -34,33 +34,175 @@ class FirebaseDataManager: DatabaseServiceProtocol {
 
     }
     
-    func fetchPeopleFromDB(peopleIDs: [String]) async throws -> [Person] {
+    func fetchPersonFromDB(userID: String) async throws -> Person? {
         let db = Firestore.firestore()
+        let personRef = db.collection("people").document(userID)
+        let document = try await personRef.getDocument()
+        
+        guard let data = document.data(),
+              let name = data["name"] as? String,
+              let email = data["email"] as? String,
+              let groupIDs = data["groupIDs"] as? [String] else {
+            return nil
+        }
+        
+        return Person(
+            id: userID,
+            name: name,
+            groups: groupIDs,
+            allProgress: [],
+            email: email,
+            badges: []
+        )
+    }
+    
+    func fetchPeopleFromDB(peopleIDs: [String]) async throws -> [Person] {
         var people: [Person] = []
 
-        for id in peopleIDs {
-            let personRef = db.collection("people").document(id)
-            let document = try await personRef.getDocument()
-
-            guard let data = document.data(),
-            let name = data["name"] as? String,
-            let email = data["email"] as? String,
-            let resolutionIDs = data["resolutionIDs"] as? [String] else { continue }
-            let groupIDs = data["groupIDs"] as? [String] ?? []
-            let progressIDs = data["progress"] as? String
-            let badgeIDs = data["badges"] as? [String]
-
-            let person = Person(
-                name: name,
-                groups: groupIDs,
-                allProgress: [],
-                email: email,
-                badges: []
-            )
-            people.append(person)
+        for personID in peopleIDs {
+            if let person = try await fetchPersonFromDB(userID: personID) {
+                people.append(person)
+            } else {
+                print("Failed to fetch person with ID \(personID)")
+            }
         }
 
         return people
+    }
+    
+    func fetchBadgesFromDB(badgeIDs: [String]) async throws -> [Badge] {
+        let db = Firestore.firestore()
+        var badges: [Badge] = []
+        
+        for badgeID in badgeIDs {
+            let badgeRef = db.collection("badges").document(badgeID)
+            let document = try await badgeRef.getDocument()
+            
+            guard let data = document.data(),
+                  let resolutionID = data["resolutionID"] as? String,
+                  let groupID = data["groupID"] as? String,
+                  let dateObtainedTimestamp = data["dateObtained"] as? Timestamp else {
+                continue
+            }
+            
+            let dateObtained = dateObtainedTimestamp.dateValue()
+            
+            if let resolution = try await fetchResolutionFromDB(resolutionID: resolutionID),
+               let group = try await fetchGroupFromDB(groupID: groupID) {
+                
+                let badge = Badge(resolution: resolution, group: group, dateObtained: dateObtained)
+                badges.append(badge)
+            }
+        }
+        
+        return badges
+    }
+    
+    func fetchProgressFromDB(progressIDs: [String]) async throws -> [Progress] {
+        let db = Firestore.firestore()
+        var progressList: [Progress] = []
+
+        for progressID in progressIDs {
+            let progressRef = db.collection("progress").document(progressID)
+            let document = try await progressRef.getDocument()
+
+            guard let data = document.data(),
+                  let personID = data["person"] as? String,
+                  let resolutionID = data["resolution"] as? String,
+                  let completion = data["completion"] as? [Timestamp],
+                  let frequencyData = data["frequencyGoal"] as? [String: Any],
+                  let quantityGoal = data["quantityGoal"] as? Float else {
+                continue
+            }
+            let completionDates = completion.map { $0.dateValue() }
+            
+            let frequency: Frequency
+            if let type = frequencyData["type"] as? String, let count = frequencyData["count"] as? Int {
+                switch type {
+                case "daily":
+                    frequency = Frequency(frequencyType: FrequencyType.daily, count: count)
+                case "weekly":
+                    frequency = Frequency(frequencyType: FrequencyType.weekly, count: count)
+                case "monthly":
+                    frequency = Frequency(frequencyType: FrequencyType.monthly, count: count)
+                default:
+                    throw NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Unknown frequency type"])
+                }
+            } else {
+                throw NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid frequency data"])
+            }
+
+            guard let person = try await fetchPersonFromDB(userID: personID),
+                  let resolution = try await fetchResolutionFromDB(resolutionID: resolutionID) else {
+                continue
+            }
+
+            let progress = Progress(
+                id: progressID,
+                resolution: resolution,
+                completionArray: completionDates,
+                quantityGoal: quantityGoal,
+                frequencyGoal: frequency,
+                person: person
+            )
+            progressList.append(progress)
+        }
+        
+        return progressList
+    }
+    
+    private func fetchResolutionFromDB(resolutionID: String) async throws -> Resolution? {
+        let db = Firestore.firestore()
+        let resolutionRef = db.collection("resolutions").document(resolutionID)
+        let document = try await resolutionRef.getDocument()
+        
+        guard let data = document.data(),
+              let title = data["title"] as? String,
+              let description = data["description"] as? String,
+              let frequencyData = data["frequency"] as? [String: Any],
+              let diffLevelData = data["difficultyLevel"] as? [String: Any] else { return nil }
+        
+        let frequency: Frequency
+        if let type = frequencyData["type"] as? String, let count = frequencyData["count"] as? Int {
+            switch type {
+            case "daily":
+                frequency = Frequency(frequencyType: FrequencyType.daily, count: count)
+            case "weekly":
+                frequency = Frequency(frequencyType: FrequencyType.weekly, count: count)
+            case "monthly":
+                frequency = Frequency(frequencyType: FrequencyType.monthly, count: count)
+            default:
+                throw NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Unknown frequency type"])
+            }
+        } else {
+            throw NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid frequency data"])
+        }
+
+        let difficulty: Difficulty
+        let _difficultyLevel: DifficultyLevel
+        if let type = diffLevelData["type"] as? String, let score = diffLevelData["score"] as? Int {
+            switch type {
+            case "easy":
+                difficulty = Difficulty(difficultyLevel: DifficultyLevel.easy, score: score)
+            case "medium":
+                difficulty = Difficulty(difficultyLevel: DifficultyLevel.medium, score: score)
+            case "hard":
+                difficulty = Difficulty(difficultyLevel: DifficultyLevel.hard, score: score)
+            default:
+                throw NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Unknown difficulty level type"])
+            }
+        } else {
+            throw NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid difficulty level data"])
+        }
+
+        
+        return Resolution(
+            title: title,
+            description: description,
+            quantity: data["quantity"] as? Int,
+            frequency: frequency,
+            diffLevel: difficulty
+        )
     }
     
     func fetchResolutionsFromDB(resolutionIDs: [String]) async throws -> [Resolution] {
@@ -94,7 +236,7 @@ class FirebaseDataManager: DatabaseServiceProtocol {
             }
 
             let difficulty: Difficulty
-            let difficultyLevel: DifficultyLevel
+            let _difficultyLevel: DifficultyLevel
             if let type = diffLevelData["type"] as? String, let score = diffLevelData["score"] as? Int {
                 switch type {
                 case "easy":
@@ -129,13 +271,25 @@ class FirebaseDataManager: DatabaseServiceProtocol {
     func addPersonToDB(person: Person) async throws {
         let db = Firestore.firestore()
         let personRef = db.collection("people").document(person.id)
+        
+        var badgeIDs: [String] = []
+        for badge in person.badges {
+            badgeIDs.append(badge.id)
+            try await self.addBadgeToDB(badge: badge)
+        }
+        
+        var progressIDs: [String] = []
+        for progress in person.allProgress {
+            progressIDs.append(progress.id)
+            try await self.addProgressToDB(progress: progress)
+        }
 
         let personData: [String: Any] = [
             "name": person.name,
             "email": person.email,
             "groupIDs": person.groups,
             "allProgress": [],
-            "badges": []
+            "badges": badgeIDs
         ]
         try await personRef.setData(personData)
     }
@@ -146,7 +300,7 @@ class FirebaseDataManager: DatabaseServiceProtocol {
 
         let frequencyData: [String: Any]
         let frequency = resolution.defaultFrequency
-        let count = frequency.count
+        let _count = frequency.count
         switch frequency.frequencyType {
         case .daily:
             frequencyData = ["type": "daily", "count": frequency.count]
@@ -158,7 +312,7 @@ class FirebaseDataManager: DatabaseServiceProtocol {
 
         let difficultyLevelData: [String: Any]
         let difficulty = resolution.diffLevel
-        let score = difficulty.score
+        let _score = difficulty.score
         switch difficulty.difficultyLevel {
         case .easy:
             difficultyLevelData = ["type": "easy", "score": difficulty.score]
@@ -178,13 +332,26 @@ class FirebaseDataManager: DatabaseServiceProtocol {
         try await resolutionRef.setData(resolutionData)
     }
     
+    func addBadgeToDB(badge: Badge) async throws {
+        let db = Firestore.firestore()
+        let badgeRef = db.collection("badges").document(badge.id)
+        
+        let badgeData: [String: Any] = [
+            "resolutionID": badge.resolution.id,
+            "groupID": badge.group.id,
+            "dateObtained": Timestamp(date: badge.dateObtained)
+        ]
+        
+        try await badgeRef.setData(badgeData)
+    }
+    
     func addProgressToDB(progress: Progress) async throws {
         let db = Firestore.firestore()
         let progressRef = db.collection("progress").document(progress.id)
         
         let frequencyData: [String: Any]
         let frequency = progress.frequencyGoal
-        let count = frequency.count
+        let _count = frequency.count
         switch frequency.frequencyType {
         case .daily:
             frequencyData = ["type": "daily", "count": frequency.count]
@@ -207,32 +374,19 @@ class FirebaseDataManager: DatabaseServiceProtocol {
     func addGroupToDB(group: Group) async throws {
         let db = Firestore.firestore()
         let groupRef = db.collection("groups").document(group.id)
+        
+        var resolutionIDs: [String] = []
+        for resolution in group.resolutions {
+            resolutionIDs.append(resolution.id)
+        }
 
         let groupData: [String: Any] = [
             "name": group.name,
             "groupGoal": group.groupGoal,
             "people": group.people,
-            "resolutions": group.resolutions,
+            "resolutions": resolutionIDs,
             "deadline": Timestamp(date: group.deadline)
         ]
         try await groupRef.setData(groupData)
-    }
-    
-    func fetchUserGroups(userID: String) async throws -> [Group] {
-        let db = Firestore.firestore()
-        let userDoc = try await db.collection("people").document(userID).getDocument()
-        
-        guard let data = userDoc.data(),
-              let groupIDs = data["groupIDs"] as? [String] else {
-            return []
-        }
-
-        var groups: [Group] = []
-        for groupID in groupIDs {
-            if let group = try await fetchGroupFromDB(groupID: groupID) {
-                groups.append(group)
-            }
-        }
-        return groups
     }
 }

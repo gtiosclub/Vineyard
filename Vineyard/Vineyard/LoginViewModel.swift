@@ -51,16 +51,42 @@ class LoginViewModel: ObservableObject {
 
     public func signIn(email: String, password: String) async {
         errorMessage = ""
+        isLoading = true
+        
         do {
             try await loginModel.signIn(email: email, password: password)
-            currentUser = try await db.collection("people").document(auth.currentUser!.uid).getDocument(as: Person.self)
+            guard let uid = auth.currentUser?.uid else {
+                errorMessage = "User ID not found."
+                isLoggedIn = false
+                return
+            }
+            
+            let userDoc = try await db.collection("people").document(uid).getDocument()
+            
+            guard let data = userDoc.data() else {
+                errorMessage = "User data not found in Firestore."
+                isLoggedIn = false
+                return
+            }
+            guard let name = data["name"] as? String,
+                  let email = data["email"] as? String,
+                  let groupIDs = data["groupIDs"] as? [String] else {
+                errorMessage = "User data is incomplete or incorrectly formatted."
+                isLoggedIn = false
+                return
+            }
+            
+            currentUser = Person(id: uid, name: name, groups: groupIDs, allProgress: [], email: email, badges: [])
             isLoggedIn = true
         } catch {
             isLoggedIn = false
             handleFirebaseError(error: error)
         }
+        
         isLoading = false
     }
+
+    
     public func checkLoggedIn() {
         if Auth.auth().currentUser != nil {
             isLoggedIn = true

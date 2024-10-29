@@ -8,20 +8,20 @@
 import SwiftUI
 
 struct GroupsListView: View {
-    @State private var viewModel = GroupsListViewModel()
+    @EnvironmentObject var loginViewModel: LoginViewModel
+    @StateObject private var viewModel = GroupsListViewModel()
     @State private var isPresentingAddGroup = false
     
     var body: some View {
         NavigationStack {
             List {
-//                ForEach($viewModel.user.groups) { $group in
-//                    // TODO: Use a NavigationLink to select a list.
-//                    Section {
-//                        NavigationLink(destination: GroupView(group: group)) {
-//                            GroupCardView(group: group)
-//                        }
-//                    }
-//                }
+                ForEach(viewModel.groups, id: \.id) { group in
+                    Section {
+                        NavigationLink(destination: GroupView(group: group)) {
+                            GroupCardView(group: group)
+                        }
+                    }
+                }
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -31,13 +31,12 @@ struct GroupsListView: View {
                 }
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button(action: {
-                        //put menu stuff here
                         print("Menu Clicked")
+                        viewModel.createSampleGroup()
                     }) {
                         Image(systemName: "line.horizontal.3")
                     }
                     Button(action: {
-                        //search stuff here
                         print("Search tapped")
                     }) {
                         Image(systemName: "magnifyingglass")
@@ -48,13 +47,15 @@ struct GroupsListView: View {
                         Image(systemName: "plus")
                     }
                 }
-            }.sheet(isPresented: $isPresentingAddGroup) {
+            }
+            .sheet(isPresented: $isPresentingAddGroup) {
                 AddGroupView(isPresented: $isPresentingAddGroup, viewModel: viewModel)
             }
-            
-            
+            .onAppear {
+                viewModel.setUser(user: loginViewModel.currentUser)
+                viewModel.loadGroups()
+            }
         }
-        
     }
 }
 
@@ -116,6 +117,8 @@ struct AddGroupView: View {
         }
     }
 }
+
+
 #Preview {
     GroupsListView()
 }

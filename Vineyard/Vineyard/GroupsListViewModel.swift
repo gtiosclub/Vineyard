@@ -10,46 +10,122 @@ import SwiftUI
 @Observable
 class GroupsListViewModel: ObservableObject {
     let databaseManager: FirebaseDataManager = FirebaseDataManager()
-    var user: Person = Person.samples[0]
+    private(set) var user: Person?
     var groups: [Group] = []
-    
     
     init() {}
     
-    func createGroup(withGroupName name: String, withGroupGoal groupGoal: String, withDeadline deadline: Date) {
-        let newGroup = Group(name: name, groupGoal: groupGoal, people: [user.id], deadline: deadline)
-        self.user.addGroup(newGroup)
-        self.addGroup(group: newGroup)
+    func setUser(user: Person?) {
+        guard self.user == nil, let user = user else { return }
+        self.user = user
     }
+    
+    func createSampleGroup() {
+        Task {
+            guard var user = user else {
+                print("User is not set.")
+                return
+            }
+            var person = Person(name: "SamplePerson", email: "sample@test.com")
+            var resolution = Resolution(
+                title: "Test Resolution",
+                description: "This resolution is for testing purposes",
+                frequency: Frequency(frequencyType: .daily, count: 1),
+                diffLevel: Difficulty(difficultyLevel: .easy, score: 10)
+            )
+            var progress = Progress(
+                resolution: resolution,
+                quantityGoal: 0,
+                frequencyGoal: Frequency(frequencyType: .daily, count: 2),
+                person: person
+            )
+            var sampleGroup = Group(
+                name: "Sample Group",
+                groupGoal: "N/A",
+                people: [user.id, person.id],
+                resolutions: [resolution],
+                deadline: Date(timeIntervalSinceNow: (7 * 24 * 60 * 60) * 7)
+            )
+            var badge = Badge(
+                resolution: resolution,
+                group: sampleGroup,
+                dateObtained: Date()
+            )
+            
+            person.groups.append(sampleGroup.id)
+            user.groups.append(sampleGroup.id)
+        
+            try await databaseManager.addPersonToDB(person: person)
+            try await databaseManager.addResolutionToDB(resolution: resolution)
+            try await databaseManager.addProgressToDB(progress: progress)
+            try await databaseManager.addBadgeToDB(badge: badge)
+            try await databaseManager.addGroupToDB(group: sampleGroup)
+
+            try await databaseManager.addPersonToDB(person: user)
+            
+            groups.append(sampleGroup)
+        }
+    }
+    
+    func createGroup(withGroupName name: String, withGroupGoal groupGoal: String, withDeadline deadline: Date) {
+        guard let user = user else {
+            print("User is not set.")
+            return
+        }
+        
+        let newGroup = Group(name: name, groupGoal: groupGoal, people: [user.id], deadline: deadline)
+        Task {
+            do {
+                try await databaseManager.addGroupToDB(group: newGroup)
+                DispatchQueue.main.async {
+                    self.groups.append(newGroup)
+                }
+            } catch {
+                print("Failed to add group to database: \(error)")
+            }
+        }
+
+        Task {
+            var updatedUser = user
+            updatedUser.groups.append(newGroup.id)
+            
+            do {
+                try await databaseManager.addPersonToDB(person: updatedUser)
+                DispatchQueue.main.async {
+                    self.user = updatedUser
+                }
+            } catch {
+                print("Failed to add user to database: \(error)")
+            }
+        }
+    }
+
     
     func addResolution(_ resolution: Resolution, toGroup group: Group) {
         group.addResolution(resolution)
     }
     
     func joinGroup(toGroup group: Group) {
-        self.user.addGroup(group)
+        user?.addGroup(group)
     }
     
-    func addGroup(group: Group) {
-        Task{
-            try await databaseManager.addGroupToDB(group: group)
+    func loadGroups() {
+        guard let user = user else {
+            print("User is not set.")
+            return
         }
-    }
-    
-    func getGroups() -> [Group] {
-        let groupIDs: [String] = user.groups
-        var groups: [Group] = []
-        for id in groupIDs {
-            Task{
-                let group = try await databaseManager.fetchGroupFromDB(groupID: id)
+        
+//        print(self.user)
+        
+        Task {
+            let groupIDs = user.groups
+            var fetchedGroups: [Group] = []
+            for id in groupIDs {
+                if let group = try await databaseManager.fetchGroupFromDB(groupID: id) {
+                    fetchedGroups.append(group)
+                }
             }
+            self.groups = fetchedGroups
         }
-        return groups
     }
-    
-//    func toggleResolutionAsCompleted(_ resolution: Resolution, inGroup group: Group) {
-//        group.toggleResolutionAsCompleted(resolution)
-//    }
-    
 }
-
