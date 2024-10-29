@@ -42,13 +42,13 @@ struct GroupsListView: View {
                         Image(systemName: "magnifyingglass")
                     }
                     Button(action: {
-                        isPresentingAddGroup = true
+                        viewModel.isPresentingCreateGroupView = true
                     }) {
                         Image(systemName: "plus")
                     }
                 }
-            }.fullScreenCover(isPresented: $isPresentingAddGroup) {
-                GroupCreationFlowView(viewModel: viewModel)
+            }.fullScreenCover(isPresented: $viewModel.isPresentingCreateGroupView) {
+                CreateGroupView().environment(viewModel)
             }
             .onAppear {
                 viewModel.setUser(user: loginViewModel.currentUser)

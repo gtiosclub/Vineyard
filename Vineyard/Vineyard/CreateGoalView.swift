@@ -18,6 +18,9 @@ struct CreateGoalView: View {
     @State private var quantity: String = ""
     @State private var selectedDifficulty: DifficultyLevel = .medium(score: 20)
     @State private var selectedFrequency: Frequency = .daily(count: 1)
+    @State private var selectedFrequencyText: String = "Daily"
+    @State private var freqQuantity: Int = 0
+    @Environment(\.dismiss) var dismiss
     
     
 //    
@@ -58,69 +61,17 @@ struct CreateGoalView: View {
                     Text("Hard").tag(DifficultyLevel.hard(score: 30)).foregroundColor(.gray)
                 }
                 
-                Picker("Frequency", selection: Binding(
-                    get: {
-                        // Map the selected frequency case without count
-                        switch selectedFrequency {
-                        case .daily: return "Daily"
-                        case .weekly: return "Weekly"
-                        case .monthly: return "Monthly"
-                        }
-                    },
-                    set: { newValue in
-                        // Update the selected frequency based on picker selection
-                        switch newValue {
-                        case "Daily": selectedFrequency = .daily(count: selectedFrequency.count)
-                        case "Weekly": selectedFrequency = .weekly(count: selectedFrequency.count)
-                        case "Monthly": selectedFrequency = .monthly(count: selectedFrequency.count)
-                        default: break
-                        }
-                    }
-                )) {
-                    Text("Daily").tag("Daily").foregroundColor(.gray)
-                    Text("Weekly").tag("Weekly").foregroundColor(.gray)
-                    Text("Monthly").tag("Monthly").foregroundColor(.gray)
+                Picker ("Frequency", selection: $selectedFrequency) {
+                    Text("Daily").tag(Frequency.daily(count: 1))
+                    Text("Weekly").tag(Frequency.weekly(count: 1))
+                    Text("Monthly").tag(Frequency.monthly(count: 1))
                 }
-                .pickerStyle(SegmentedPickerStyle())
                 
-                // Show a stepper or other input based on the selected frequency
-                switch selectedFrequency {
-                case .daily:
-                    Stepper("Daily Count: \(selectedFrequency.count)", value: Binding(
-                        get: {
-                            if case let .daily(count) = selectedFrequency {
-                                return count
-                            }
-                            return 1
-                        },
-                        set: { newCount in
-                            selectedFrequency = .daily(count: newCount)
-                        }
-                    ), in: 1...100)
-                case .weekly:
-                    Stepper("Weekly Count: \(selectedFrequency.count)", value: Binding(
-                        get: {
-                            if case let .weekly(count) = selectedFrequency {
-                                return count
-                            }
-                            return 1
-                        },
-                        set: { newCount in
-                            selectedFrequency = .weekly(count: newCount)
-                        }
-                    ), in: 1...100)
-                case .monthly:
-                    Stepper("Monthly Count: \(selectedFrequency.count)", value: Binding(
-                        get: {
-                            if case let .monthly(count) = selectedFrequency {
-                                return count
-                            }
-                            return 1
-                        },
-                        set: { newCount in
-                            selectedFrequency = .monthly(count: newCount)
-                        }
-                    ), in: 1...100)
+                HStack {
+                    Stepper(value: $freqQuantity) {
+                        Text("\(selectedFrequency.displayName) count")
+                    }
+                    Text("\(freqQuantity)")
                 }
                 
             }
@@ -141,13 +92,8 @@ struct CreateGoalView: View {
                 quantity = ""
                 selectedDifficulty = .medium(score: 20)
                 selectedFrequency = .daily(count: 1)
-                
-                
-                // pass the added goal to the GoalsListView
-                
-//                viewModel.addResolution(resolution, toGroup: group)
-//                showAddItemPrompt = false
-//                print("\(group.resolutions.count)")
+                dismiss()
+
             } label: {
                 Text("Create")
                     .frame(maxWidth: .infinity)
