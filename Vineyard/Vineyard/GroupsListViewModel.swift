@@ -52,6 +52,8 @@ class GroupsListViewModel: ObservableObject {
                 dateObtained: Date()
             )
             
+            person.badges.append(badge)
+            person.allProgress.append(progress)
             person.groups.append(sampleGroup.id)
             user.groups.append(sampleGroup.id)
         
