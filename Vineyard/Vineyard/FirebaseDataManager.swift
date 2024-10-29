@@ -8,8 +8,11 @@ import FirebaseFirestore
 
 class FirebaseDataManager: DatabaseServiceProtocol {
     
+    static var shared = FirebaseDataManager()
+    
+    private let db = Firestore.firestore()
+    
     func fetchGroupFromDB(groupID: String) async throws -> Group? {
-        let db = Firestore.firestore()
         let groupRef = db.collection("groups").document(groupID)
         let document = try await groupRef.getDocument()
 
@@ -35,7 +38,6 @@ class FirebaseDataManager: DatabaseServiceProtocol {
     }
     
     func fetchPersonFromDB(userID: String) async throws -> Person? {
-        let db = Firestore.firestore()
         let personRef = db.collection("people").document(userID)
         let document = try await personRef.getDocument()
         
@@ -71,7 +73,6 @@ class FirebaseDataManager: DatabaseServiceProtocol {
     }
     
     func fetchBadgesFromDB(badgeIDs: [String]) async throws -> [Badge] {
-        let db = Firestore.firestore()
         var badges: [Badge] = []
         
         for badgeID in badgeIDs {
@@ -99,7 +100,6 @@ class FirebaseDataManager: DatabaseServiceProtocol {
     }
     
     func fetchProgressFromDB(progressIDs: [String]) async throws -> [Progress] {
-        let db = Firestore.firestore()
         var progressList: [Progress] = []
 
         for progressID in progressIDs {
@@ -152,7 +152,6 @@ class FirebaseDataManager: DatabaseServiceProtocol {
     }
     
     private func fetchResolutionFromDB(resolutionID: String) async throws -> Resolution? {
-        let db = Firestore.firestore()
         let resolutionRef = db.collection("resolutions").document(resolutionID)
         let document = try await resolutionRef.getDocument()
         
@@ -206,7 +205,6 @@ class FirebaseDataManager: DatabaseServiceProtocol {
     }
     
     func fetchResolutionsFromDB(resolutionIDs: [String]) async throws -> [Resolution] {
-        let db = Firestore.firestore()
         var resolutions: [Resolution] = []
 
         for resolutionID in resolutionIDs {
@@ -269,7 +267,6 @@ class FirebaseDataManager: DatabaseServiceProtocol {
     }
     
     func addPersonToDB(person: Person) async throws {
-        let db = Firestore.firestore()
         let personRef = db.collection("people").document(person.id)
         
         var badgeIDs: [String] = []
@@ -288,14 +285,13 @@ class FirebaseDataManager: DatabaseServiceProtocol {
             "name": person.name,
             "email": person.email,
             "groupIDs": person.groups,
-            "allProgress": [],
+            "allProgress": progressIDs,
             "badges": badgeIDs
         ]
         try await personRef.setData(personData)
     }
     
     func addResolutionToDB(resolution: Resolution) async throws {
-        let db = Firestore.firestore()
         let resolutionRef = db.collection("resolutions").document(resolution.id)
 
         let frequencyData: [String: Any]
@@ -333,7 +329,6 @@ class FirebaseDataManager: DatabaseServiceProtocol {
     }
     
     func addBadgeToDB(badge: Badge) async throws {
-        let db = Firestore.firestore()
         let badgeRef = db.collection("badges").document(badge.id)
         
         let badgeData: [String: Any] = [
@@ -346,7 +341,6 @@ class FirebaseDataManager: DatabaseServiceProtocol {
     }
     
     func addProgressToDB(progress: Progress) async throws {
-        let db = Firestore.firestore()
         let progressRef = db.collection("progress").document(progress.id)
         
         let frequencyData: [String: Any]
@@ -372,7 +366,6 @@ class FirebaseDataManager: DatabaseServiceProtocol {
     }
     
     func addGroupToDB(group: Group) async throws {
-        let db = Firestore.firestore()
         let groupRef = db.collection("groups").document(group.id)
         
         var resolutionIDs: [String] = []

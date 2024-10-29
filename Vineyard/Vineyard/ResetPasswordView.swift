@@ -52,6 +52,7 @@ struct ResetPasswordView: View {
                     .padding()
 
                 TextField("Email", text: $email)
+                    .textInputAutocapitalization(.never)
                     .padding()
                     .frame(width: 300, height: 50)
                     .background(Color.black.opacity(0.05))

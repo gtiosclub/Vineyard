@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GroupsListView: View {
     @EnvironmentObject var loginViewModel: LoginViewModel
-    @StateObject private var viewModel = GroupsListViewModel()
+    @StateObject var viewModel: GroupsListViewModel
     @State private var isPresentingAddGroup = false
     
     var body: some View {
@@ -32,7 +32,7 @@ struct GroupsListView: View {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button(action: {
                         print("Menu Clicked")
-                        viewModel.createSampleGroup()
+//                        viewModel.createSampleGroup()
                     }) {
                         Image(systemName: "line.horizontal.3")
                     }
@@ -120,5 +120,5 @@ struct AddGroupView: View {
 
 
 #Preview {
-    GroupsListView()
+    GroupsListView(viewModel: GroupsListViewModel())
 }
