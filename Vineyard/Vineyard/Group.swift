@@ -45,7 +45,7 @@ class Group: Identifiable, Codable {
         self.resolutions.move(fromOffsets: indexSet, toOffset: index)
     }
     
-    static var samples: [Group] {
+    static let samples: [Group] = {
         var andrew = Person(name: "Andrew", email: "a@gmail.com")
         var yash = Person(name: "Yash", email: "y@outlook.com")
         var sankaet = Person(name: "Sankaet", email: "s@yahoo.com")
@@ -63,8 +63,7 @@ class Group: Identifiable, Codable {
         sankaet.addGroup(group1)
         rahul.addGroup(group2)
         vishnesh.addGroup(group2)
-        
         return [group1, group2]
 
-    }
+    }()
 }

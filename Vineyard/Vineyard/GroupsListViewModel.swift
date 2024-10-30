@@ -15,7 +15,8 @@ class GroupsListViewModel: ObservableObject {
     init() {}
     
     func group(id: String) -> Group? {
-        return groups.first { $0.id == id }
+        print(id)
+        return groups.first {$0.id == id}
     }
     func createGroup(withGroupName name: String, withGroupGoal groupGoal: String, withDeadline deadline: Date, withScoreGoal: Int) {
         let newGroup = Group(name: name, groupGoal: groupGoal, people: [user.id], deadline: deadline, scoreGoal: withScoreGoal)
