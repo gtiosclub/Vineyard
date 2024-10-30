@@ -19,9 +19,9 @@ struct GroupListView: View {
                         VStack(alignment: .leading) {
                             Text("Your Groups")
                                 .font(.system(size: 30, weight: .bold))
-                                .foregroundColor(.black)
+                                .foregroundColor(.white)
                             Text("\(viewModel.user.groups.count) active group(s)")
-                                .foregroundColor(.black)
+                                .foregroundColor(.white)
                             
                         }
                         Spacer()
@@ -29,7 +29,7 @@ struct GroupListView: View {
                             print("changing mode")
                         }) {
                             Image(systemName: "list.bullet")
-                                .foregroundColor(.black)
+                                .foregroundColor(.white)
                                 .font(.system(size: 25))
                         }
                         Button(action: {
@@ -37,7 +37,7 @@ struct GroupListView: View {
                             isPresentingAddGroup = true
                         }) {
                             Image(systemName: "plus")
-                                .foregroundColor(.black)
+                                .foregroundColor(.white)
                                 .font(.system(size: 25))
                         }
                     }
