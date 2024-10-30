@@ -13,7 +13,7 @@ struct HomeView: View {
             DashboardView().tabItem {
                 Label("Dashboard", systemImage: "flame")
             }
-            GroupsListView().tabItem {
+            GroupListView().tabItem {
                 Label("Groups", systemImage: "figure.2.and.child.holdinghands")
             }
             ProfileView().tabItem {
