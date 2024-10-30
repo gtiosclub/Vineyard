@@ -7,29 +7,29 @@
 
 import Foundation
 
-struct Frequency {
+struct Frequency: Codable {
     var frequencyType: FrequencyType
     var count: Int
 }
 
-enum FrequencyType {
+enum FrequencyType: Codable {
     case daily
     case weekly
     case monthly
 }
-struct Difficulty {
+struct Difficulty: Codable {
     var difficultyLevel: DifficultyLevel
     var score: Int
 }
 
-enum DifficultyLevel {
+enum DifficultyLevel: Codable {
     case easy
     case medium
     case hard
 }
 
-class Resolution: Identifiable {
-    let id: UUID
+class Resolution: Identifiable, Codable {
+    let id: String
     var title: String
     var description: String
     var defaultQuantity: Int? = nil
@@ -37,7 +37,7 @@ class Resolution: Identifiable {
     var diffLevel: Difficulty
     
     init(title: String, description: String, quantity: Int? = nil, frequency: Frequency, diffLevel: Difficulty) {
-        self.id = UUID()
+        self.id = UUID().uuidString
         self.title = title
         self.description = description
         self.defaultQuantity = quantity

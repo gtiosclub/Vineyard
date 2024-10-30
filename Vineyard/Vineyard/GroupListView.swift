@@ -45,11 +45,15 @@ struct GroupListView: View {
                     
                     Spacer()
                     VStack(spacing: 20) {
-                        ForEach(viewModel.user.groups) { group in
-                            NavigationLink(destination: GroupView(group: group)) {
-                                GroupCardView(group: group).padding()
+                        ForEach(viewModel.user.groups, id: \.self) { groupId in
+                            if let group = viewModel.group(id: groupId) {
+                                NavigationLink(destination: GroupView(group: group)) {
+                                    GroupCardView(group: group).padding()
+                                }
+                                .buttonStyle(PlainButtonStyle())
+                            } else {
+                                Text("Group not found")
                             }
-                            .buttonStyle(PlainButtonStyle())
                         }.padding()
                     }
                 }

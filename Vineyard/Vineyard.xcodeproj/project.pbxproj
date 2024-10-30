@@ -27,6 +27,14 @@
 		BB40EE082C99258B006BA1E3 /* DatabaseServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EE072C99258B006BA1E3 /* DatabaseServiceProtocol.swift */; };
 		BB40EE0C2C992871006BA1E3 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EE0B2C992871006BA1E3 /* DashboardView.swift */; };
 		BB40EE0E2C99288A006BA1E3 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EE0D2C99288A006BA1E3 /* ProfileView.swift */; };
+		DAB3AC312CAF5AD700DD0DA8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DAB3AC302CAF5AD700DD0DA8 /* GoogleService-Info.plist */; };
+		EA4130E72CA3689400CCF8B2 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = EA4130E62CA3689400CCF8B2 /* FirebaseAuth */; };
+		EA4130E92CA368D500CCF8B2 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = EA4130E82CA368D500CCF8B2 /* FirebaseFirestore */; };
+		EAC380692CA36B3100EBEF4C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC380682CA36B3100EBEF4C /* LoginView.swift */; };
+		EAC3806B2CA36B5600EBEF4C /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC3806A2CA36B5600EBEF4C /* SignUpView.swift */; };
+		EAC3806D2CA36B7400EBEF4C /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC3806C2CA36B7400EBEF4C /* ResetPasswordView.swift */; };
+		EAC3806F2CA36B8800EBEF4C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC3806E2CA36B8800EBEF4C /* LoginViewModel.swift */; };
+		EAC380712CA36B9A00EBEF4C /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC380702CA36B9A00EBEF4C /* LoginModel.swift */; };
 		F04BEBD32CB43B46007EB113 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04BEBD22CB43B46007EB113 /* ProfileViewModel.swift */; };
 		F05361C62CAF0AA1009DE1E3 /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05361C52CAF0AA1009DE1E3 /* TodoView.swift */; };
 		F05361C82CAF1462009DE1E3 /* TodoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05361C72CAF1462009DE1E3 /* TodoViewModel.swift */; };
@@ -78,6 +86,12 @@
 		BB40EE072C99258B006BA1E3 /* DatabaseServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseServiceProtocol.swift; sourceTree = "<group>"; };
 		BB40EE0B2C992871006BA1E3 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		BB40EE0D2C99288A006BA1E3 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		DAB3AC302CAF5AD700DD0DA8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EAC380682CA36B3100EBEF4C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		EAC3806A2CA36B5600EBEF4C /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		EAC3806C2CA36B7400EBEF4C /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
+		EAC3806E2CA36B8800EBEF4C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		EAC380702CA36B9A00EBEF4C /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		F04BEBD22CB43B46007EB113 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		F05361C52CAF0AA1009DE1E3 /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TodoView.swift; path = Vineyard/TodoView.swift; sourceTree = SOURCE_ROOT; };
 		F05361C72CAF1462009DE1E3 /* TodoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TodoViewModel.swift; path = Vineyard/TodoViewModel.swift; sourceTree = SOURCE_ROOT; };
@@ -93,6 +107,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA4130E72CA3689400CCF8B2 /* FirebaseAuth in Frameworks */,
+				EA4130E92CA368D500CCF8B2 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,6 +132,7 @@
 		192EBFD32C90F62D00AF8528 = {
 			isa = PBXGroup;
 			children = (
+				DAB3AC302CAF5AD700DD0DA8 /* GoogleService-Info.plist */,
 				192EBFDE2C90F62E00AF8528 /* Vineyard */,
 				192EBFEF2C90F62F00AF8528 /* VineyardTests */,
 				192EBFF92C90F62F00AF8528 /* VineyardUITests */,
@@ -247,6 +264,7 @@
 				BB40EDF52C991C8A006BA1E3 /* Group.swift */,
 				BB40EDF72C991C93006BA1E3 /* Person.swift */,
 				BB40EDF92C991C9D006BA1E3 /* Resolution.swift */,
+				EAC380702CA36B9A00EBEF4C /* LoginModel.swift */,
 			);
 			name = "Core Models";
 			sourceTree = "<group>";
@@ -321,6 +339,7 @@
 		BB40EE022C991E0F006BA1E3 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				EAC3806E2CA36B8800EBEF4C /* LoginViewModel.swift */,
 				F04BEBD22CB43B46007EB113 /* ProfileViewModel.swift */,
 			);
 			name = ViewModels;
@@ -329,7 +348,10 @@
 		BB40EE032C991E14006BA1E3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EAC380682CA36B3100EBEF4C /* LoginView.swift */,
 				BB40EE0D2C99288A006BA1E3 /* ProfileView.swift */,
+				EAC3806A2CA36B5600EBEF4C /* SignUpView.swift */,
+				EAC3806C2CA36B7400EBEF4C /* ResetPasswordView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -350,6 +372,10 @@
 			dependencies = (
 			);
 			name = Vineyard;
+			packageProductDependencies = (
+				EA4130E62CA3689400CCF8B2 /* FirebaseAuth */,
+				EA4130E82CA368D500CCF8B2 /* FirebaseFirestore */,
+			);
 			productName = Vineyard;
 			productReference = 192EBFDC2C90F62E00AF8528 /* Vineyard.app */;
 			productType = "com.apple.product-type.application";
@@ -422,6 +448,9 @@
 				Base,
 			);
 			mainGroup = 192EBFD32C90F62D00AF8528;
+			packageReferences = (
+				EA4130E52CA3689400CCF8B2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 192EBFDD2C90F62E00AF8528 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -440,6 +469,7 @@
 			files = (
 				192EBFE72C90F62F00AF8528 /* Preview Assets.xcassets in Resources */,
 				192EBFE42C90F62F00AF8528 /* Assets.xcassets in Resources */,
+				DAB3AC312CAF5AD700DD0DA8 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -478,15 +508,20 @@
 				BB40EDF82C991C93006BA1E3 /* Person.swift in Sources */,
 				BB40EE0C2C992871006BA1E3 /* DashboardView.swift in Sources */,
 				95BE42E62CCEF4940031547F /* GroupCardView.swift in Sources */,
+				EAC380712CA36B9A00EBEF4C /* LoginModel.swift in Sources */,
+				EAC380692CA36B3100EBEF4C /* LoginView.swift in Sources */,
+				EAC3806F2CA36B8800EBEF4C /* LoginViewModel.swift in Sources */,
 				192EBFE02C90F62E00AF8528 /* VineyardApp.swift in Sources */,
 				F04BEBD32CB43B46007EB113 /* ProfileViewModel.swift in Sources */,
 				B40B894E2C936DE0006B1771 /* ResolutionView.swift in Sources */,
 				F10167662CA37B180004260E /* Progress.swift in Sources */,
 				951CF8F02CC5C0650016B06A /* GroupListView.swift in Sources */,
 				BB40EE082C99258B006BA1E3 /* DatabaseServiceProtocol.swift in Sources */,
+				EAC3806B2CA36B5600EBEF4C /* SignUpView.swift in Sources */,
 				F05361C62CAF0AA1009DE1E3 /* TodoView.swift in Sources */,
 				F10167642CA37B080004260E /* Badge.swift in Sources */,
 				BB40EDFA2C991C9D006BA1E3 /* Resolution.swift in Sources */,
+				EAC3806D2CA36B7400EBEF4C /* ResetPasswordView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -663,7 +698,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Vineyard;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iosclub.Vineyard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -692,7 +727,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Vineyard;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iosclub.Vineyard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -816,6 +851,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EA4130E52CA3689400CCF8B2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EA4130E62CA3689400CCF8B2 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EA4130E52CA3689400CCF8B2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		EA4130E82CA368D500CCF8B2 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EA4130E52CA3689400CCF8B2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 192EBFD42C90F62D00AF8528 /* Project object */;
 }

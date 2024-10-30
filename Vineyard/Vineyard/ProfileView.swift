@@ -10,17 +10,25 @@ import SwiftUI
 struct ProfileView: View {
     @State private var viewModel = ProfileViewModel()
     let columns = [GridItem(.flexible()), GridItem(.flexible())]
+    @EnvironmentObject var loginViewModel: LoginViewModel
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack() {
-                    HStack() {
+                VStack {
+                    Button(action:{
+                        Task {
+                            await loginViewModel.signOut()
+                        }
+                    }) {
+                        Text("Sign out")
+                    }
+                    HStack {
                         Image(systemName: "person.crop.circle.fill")
                             .resizable()
                             .frame(width: 75, height: 75)
                             .foregroundColor(.gray)
                         VStack(alignment: .leading, spacing: 2) {
-                            Text(viewModel.user.name)
+                            Text(loginViewModel.currentUser?.name ?? "no name")
                                 .font(.system(size: 20, weight: .bold))
                             HStack() {
                                 Text("x Friends")

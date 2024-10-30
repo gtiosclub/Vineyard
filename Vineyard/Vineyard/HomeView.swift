@@ -8,17 +8,25 @@
 import SwiftUI
 
 struct HomeView: View {
+    @EnvironmentObject private var loginViewModel: LoginViewModel
+
     var body: some View {
-        TabView {
-            DashboardView().tabItem {
-                Label("Dashboard", systemImage: "flame")
+        
+        if loginViewModel.isLoggedIn {
+            TabView {
+                DashboardView().tabItem {
+                    Label("Dashboard", systemImage: "flame")
+                }
+                GroupListView().tabItem {
+                    Label("Groups", systemImage: "figure.2.and.child.holdinghands")
+                }
+                ProfileView().tabItem {
+                    Label("Profile", systemImage: "brain.head.profile")
+                }
             }
-            GroupListView().tabItem {
-                Label("Groups", systemImage: "figure.2.and.child.holdinghands")
-            }
-            ProfileView().tabItem {
-                Label("Profile", systemImage: "brain.head.profile")
-            }
+        } else {
+            LoginView()
+                .environmentObject(loginViewModel)
         }
     }
 }
