@@ -29,7 +29,7 @@ struct GroupView: View {
                     .background(Color.gray.opacity(0.5))
                     .cornerRadius(10)
                     
-                    Text("Members (\(group.people.count))")
+                    Text("Members (\(group.peopleIDs.count))")
                         .font(.headline)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     

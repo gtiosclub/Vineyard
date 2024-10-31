@@ -75,7 +75,7 @@ class GroupsListViewModel: ObservableObject {
             return
         }
         
-        let newGroup = Group(name: name, groupGoal: groupGoal, people: [user.id], deadline: deadline)
+        let newGroup = Group(name: name, groupGoal: groupGoal, peopleIDs: [user.id], deadline: deadline)
         Task {
             do {
                 try await databaseManager.addGroupToDB(group: newGroup)
@@ -90,7 +90,7 @@ class GroupsListViewModel: ObservableObject {
 
         Task {
             var updatedUser = user
-            updatedUser.groups.append(newGroup.id)
+            updatedUser.groupIDs.append(newGroup.id)
             
             do {
                 try await databaseManager.addPersonToDB(person: updatedUser)
@@ -127,7 +127,7 @@ class GroupsListViewModel: ObservableObject {
 //        print(self.user)
         
         Task {
-            let groupIDs = user.groups
+            let groupIDs = user.groupIDs
             var fetchedGroups: [Group] = []
             for id in groupIDs {
                 if let group = try await databaseManager.fetchGroupFromDB(groupID: id) {
