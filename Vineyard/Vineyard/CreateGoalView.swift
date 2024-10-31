@@ -38,7 +38,7 @@ struct CreateGoalView: View {
             Text("Action")
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            TextField("Resolution Title:", text: $action)
+            TextField("Resolution Name:", text: $action)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
 
             
