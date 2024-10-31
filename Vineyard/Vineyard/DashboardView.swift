@@ -40,12 +40,12 @@ struct DashboardView: View {
                 .padding(.top, 10)
                 
                 // Grid for Widgets
-                VStack(alignment: .leading, spacing: 17) {
+                VStack(alignment: .leading, spacing: 20) {
                     let rows = processWidgetsIntoRows(widgets: widgets)
                     
                     ForEach(rows.indices, id: \.self) { rowIndex in
                         let row = rows[rowIndex]
-                        HStack(alignment: .top, spacing: 17) {
+                        HStack(alignment: .top, spacing: 20) {
                             ForEach(row.indices, id: \.self) { index in
                                 let widget = row[index]
                                 
@@ -54,7 +54,7 @@ struct DashboardView: View {
                                     widget.render()
                                         .frame(
                                             width: widget.span == 2 ? UIScreen.main.bounds.width - 35 : (UIScreen.main.bounds.width - 50) / 2,
-                                            height: 200
+                                            height: widget.span == 2 ? 190 : 180
                                         )
                                         .background(Color.purple.opacity(0.55)) // Adjust for dark mode
                                         .cornerRadius(14)
