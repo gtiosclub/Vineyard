@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProfileView: View {
     @State private var viewModel = ProfileViewModel()
-    let columns = [GridItem(.flexible()), GridItem(.flexible())]
+    let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     @EnvironmentObject var loginViewModel: LoginViewModel
     var body: some View {
         NavigationStack {
@@ -22,37 +22,27 @@ struct ProfileView: View {
                     }) {
                         Text("Sign out")
                     }
-                    HStack {
+                    HStack(spacing: 20) {
                         Image(systemName: "person.crop.circle.fill")
                             .resizable()
-                            .frame(width: 75, height: 75)
+                            .frame(width: 70, height: 70)
                             .foregroundColor(.gray)
                         VStack(alignment: .leading, spacing: 2) {
                             Text(loginViewModel.currentUser?.name ?? "no name")
                                 .font(.system(size: 20, weight: .bold))
                             HStack() {
-                                Text("x Friends")
-                                    .foregroundColor(.gray)
-                                Image(systemName: "circle.fill")
-                                    .resizable()
-                                    .frame(width: 3, height: 3)
-                                    .foregroundColor(.gray)
-                                if(viewModel.user.groups.count > 1) {
-                                    Text("\(viewModel.user.groups.count) groups")
-                                        .font(.system(size: 16))
-                                        .fontWeight(.regular)
-                                        .foregroundColor(.gray)
-                                } else {
-                                    Text("\(viewModel.user.groups.count) group")
-                                        .font(.system(size: 16))
-                                        .fontWeight(.regular)
-                                        .foregroundColor(.gray)
-                                }
+                                let count = viewModel.user.groups.count
+                                Text("\(count) \(count > 1 ? "groups" : "group")")
+                                     .font(.system(size: 16))
+                                     .fontWeight(.regular)
+                                     .foregroundColor(.gray)
                             }
                         }
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.top, 44)
+                    .padding()
+                    .background(Color(red: 0.937, green: 0.937, blue: 0.937))
+                    .cornerRadius(20)
                     
                     Text("Winery")
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -81,13 +71,14 @@ struct BadgeView: View {
 
     var body: some View {
         VStack {
-            Text("\(badge.dateObtained)")
-                .frame(maxWidth: .infinity)
+            Image("Vector")
+                .resizable()
+                .frame(width: 40, height: 140)
                 .padding()
-                .frame(height: 100)
-                .background(Color.gray.opacity(0.5))
-                .cornerRadius(10)
         }
+        .frame(width: 110, height: 200)
+        .background(Color(red: 0.937, green: 0.937, blue: 0.937))
+        .cornerRadius(20)
     }
 }
 
