@@ -56,7 +56,7 @@ struct ProfileView: View {
                     }
                 }
                 .padding(.horizontal, 20)
-            }.toolbar {
+            } .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Text("Profile")
                         .font(.system(size: 32, weight: .bold))
