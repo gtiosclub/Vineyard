@@ -17,7 +17,7 @@ struct CreateGoalView: View {
     @State private var description: String = "" // the name of the goal
     @State private var quantity: String = ""
     
-    @State private var selectedDifficulty: Difficulty = .medium
+    @State private var selectedDifficulty: DifficultyLevel = .medium
     @State private var selectedFrequency: FrequencyType = .daily
     @State private var selectedFrequencyText: String = "Daily"
     @State private var freqQuantity: Int = 0
@@ -57,9 +57,9 @@ struct CreateGoalView: View {
             
             List {
                 Picker ("Difficulty", selection: $selectedDifficulty) {
-                    Text("Easy").tag(Difficulty.easy).foregroundColor(.gray)
-                    Text("Medium").tag(Difficulty.medium).foregroundColor(.gray)
-                    Text("Hard").tag(Difficulty.hard).foregroundColor(.gray)
+                    Text("Easy").tag(DifficultyLevel.easy).foregroundColor(.gray)
+                    Text("Medium").tag(DifficultyLevel.easy).foregroundColor(.gray)
+                    Text("Hard").tag(DifficultyLevel.easy).foregroundColor(.gray)
                 }
                 
                 Picker ("Frequency", selection: $selectedFrequency) {
@@ -81,7 +81,7 @@ struct CreateGoalView: View {
             
             
             Button {
-                let resolution = Resolution(title: action, description: description, quantity: Int(quantity), frequency: Frequency(frequencyType: selectedFrequency, count: freqQuantity), diffLevel: selectedDifficulty)
+                let resolution = Resolution(title: action, description: description, quantity: Int(quantity), frequency: Frequency(frequencyType: selectedFrequency, count: freqQuantity), diffLevel: Difficulty(difficultyLevel: selectedDifficulty, score: 10))
                 
                 goals.append(resolution)
                 

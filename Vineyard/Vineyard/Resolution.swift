@@ -18,10 +18,15 @@ enum FrequencyType: String, Codable {
     case monthly = "Monthly"
 }
 
-enum Difficulty: Int, Codable {
-    case easy = 100
-    case medium = 200
-    case hard = 300
+struct Difficulty: Codable {
+    var difficultyLevel: DifficultyLevel
+    var score: Int
+}
+
+enum DifficultyLevel: Codable {
+    case easy
+    case medium
+    case hard
 }
 
 class Resolution: Identifiable, Codable {
@@ -42,8 +47,8 @@ class Resolution: Identifiable, Codable {
     }
     
     static var samples: [Resolution] {
-        let resolution1 = Resolution(title: "Run miles", description: "Run a certain number of miles", quantity: 5, frequency: Frequency(frequencyType: .weekly, count: 1), diffLevel: .medium)
-        let resolution2 = Resolution(title: "Drink 7 cups of water", description: "Drink more water", frequency: Frequency(frequencyType: .weekly, count: 1), diffLevel: .easy)
+        let resolution1 = Resolution(title: "Run miles", description: "Run a certain number of miles", quantity: 5, frequency: Frequency(frequencyType: .weekly, count: 1), diffLevel: Difficulty(difficultyLevel: .medium, score: 10))
+        let resolution2 = Resolution(title: "Drink 7 cups of water", description: "Drink more water", frequency: Frequency(frequencyType: .weekly, count: 1), diffLevel: Difficulty(difficultyLevel: .medium, score: 10))
         
         return [resolution1, resolution2]
     }
