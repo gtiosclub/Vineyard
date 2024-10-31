@@ -81,6 +81,7 @@ class GroupsListViewModel: ObservableObject {
                 try await databaseManager.addGroupToDB(group: newGroup)
                 DispatchQueue.main.async {
                     self.groups.append(newGroup)
+                    self.listenToGroupChanges(groupID: newGroup.id)
                 }
             } catch {
                 print("Failed to add group to database: \(error)")
@@ -101,10 +102,16 @@ class GroupsListViewModel: ObservableObject {
             }
         }
     }
-
     
-    func addResolution(_ resolution: Resolution, toGroup group: Group) {
-        group.addResolution(resolution)
+    func listenToGroupChanges(groupID: String) {
+        databaseManager.listenToGroup(groupID: groupID) { [weak self] updatedGroup in
+            guard let updatedGroup = updatedGroup else { return }
+            if let index = self?.groups.firstIndex(where: { $0.id == groupID }) {
+                DispatchQueue.main.async {
+                    self?.groups[index] = updatedGroup
+                }
+            }
+        }
     }
     
     func joinGroup(toGroup group: Group) {

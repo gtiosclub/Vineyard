@@ -382,4 +382,36 @@ class FirebaseDataManager: DatabaseServiceProtocol {
         ]
         try await groupRef.setData(groupData)
     }
+    
+    func listenToGroup(groupID: String, completion: @escaping (Group?) -> Void) {
+        let groupRef = db.collection("groups").document(groupID)
+        
+        groupRef.addSnapshotListener { documentSnapshot, error in
+            guard let document = documentSnapshot, let data = document.data() else {
+                print("Error fetching group document: \(error?.localizedDescription ?? "Unknown error")")
+                completion(nil)
+                return
+            }
+            
+            let name = data["name"] as? String ?? ""
+            let groupGoal = data["groupGoal"] as? String ?? ""
+            let peopleIDs = data["people"] as? [String] ?? []
+            let resolutionIDs = data["resolutions"] as? [String] ?? []
+            let deadline = (data["deadline"] as? Timestamp)?.dateValue() ?? Date()
+            
+            // Fetch resolutions asynchronously if needed
+            Task {
+                let resolutions = try? await self.fetchResolutionsFromDB(resolutionIDs: resolutionIDs)
+                let updatedGroup = Group(
+                    name: name,
+                    groupGoal: groupGoal,
+                    people: peopleIDs,
+                    resolutions: resolutions ?? [],
+                    deadline: deadline
+                )
+                completion(updatedGroup)
+            }
+        }
+    }
+
 }
