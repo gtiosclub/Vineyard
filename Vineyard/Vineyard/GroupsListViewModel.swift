@@ -12,8 +12,11 @@ class GroupsListViewModel: ObservableObject {
     let databaseManager: FirebaseDataManager = FirebaseDataManager.shared
     private(set) var user: Person?
     var groups: [Group] = []
+    var isPresentingCreateGroupView = false
+    var isPresentingCreateGoalView = false
     
     init() {}
+
     
     func setUser(user: Person?) {
         guard self.user == nil, let user = user else { return }
