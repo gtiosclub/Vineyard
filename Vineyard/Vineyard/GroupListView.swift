@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct GroupListView: View {
-    @StateObject var viewModel = GroupsListViewModel()
+    @EnvironmentObject var loginViewModel: LoginViewModel
+    @StateObject var viewModel: GroupsListViewModel
     @State private var isPresentingAddGroup = false
     var body: some View {
         NavigationView {
@@ -20,7 +21,7 @@ struct GroupListView: View {
                             Text("Your Groups")
                                 .font(.system(size: 30, weight: .bold))
                                 .foregroundColor(.white)
-                            Text("\(viewModel.user.groups.count) active group(s)")
+                            Text("\(viewModel.user?.groups.count ?? 0) active group(s)")
                                 .foregroundColor(.white)
                             
                         }
@@ -44,16 +45,12 @@ struct GroupListView: View {
                     .padding(40)
                     
                     Spacer()
-                    VStack(spacing: 20) {
-                        ForEach(viewModel.user.groups, id: \.self) { groupId in
-                            if let group = viewModel.group(id: groupId) {
-                                NavigationLink(destination: GroupView(group: group)) {
-                                    GroupCardView(group: group).padding()
-                                }
-                                .buttonStyle(PlainButtonStyle())
-                            } else {
-                                Text("Group not found")
+                    VStack(spacing: 5) {
+                        ForEach(viewModel.groups, id: \.id) { group in
+                            NavigationLink(destination: GroupView(group: group)) {
+                                GroupCardView(group: group)
                             }
+                            .buttonStyle(PlainButtonStyle())
                         }.padding()
                     }
                 }
@@ -66,9 +63,13 @@ struct GroupListView: View {
         .sheet(isPresented: $isPresentingAddGroup) {
             AddGroupView(isPresented: $isPresentingAddGroup, viewModel: viewModel)
         }
+        .onAppear {
+            viewModel.setUser(user: loginViewModel.currentUser)
+            viewModel.loadGroups()
+        }
     }
 }
 
 #Preview {
-    GroupListView()
+    GroupListView(viewModel: GroupsListViewModel())
 }

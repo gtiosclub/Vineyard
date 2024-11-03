@@ -15,7 +15,6 @@
 		192EBFFB2C90F62F00AF8528 /* VineyardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192EBFFA2C90F62F00AF8528 /* VineyardUITests.swift */; };
 		192EBFFD2C90F62F00AF8528 /* VineyardUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192EBFFC2C90F62F00AF8528 /* VineyardUITestsLaunchTests.swift */; };
 		951CF8F02CC5C0650016B06A /* GroupListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951CF8EF2CC5C0650016B06A /* GroupListView.swift */; };
-		951CF8F22CC5C0F90016B06A /* GroupListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951CF8F12CC5C0F90016B06A /* GroupListViewModel.swift */; };
 		95BD053D2CCF467600BEA15A /* AddGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BD053C2CCF467600BEA15A /* AddGroupView.swift */; };
 		95BE42E62CCEF4940031547F /* GroupCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BE42E52CCEF4940031547F /* GroupCardView.swift */; };
 		B40B894C2C9364F4006B1771 /* GroupsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40B894B2C9364F4006B1771 /* GroupsListViewModel.swift */; };
@@ -76,7 +75,6 @@
 		192EBFFA2C90F62F00AF8528 /* VineyardUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VineyardUITests.swift; sourceTree = "<group>"; };
 		192EBFFC2C90F62F00AF8528 /* VineyardUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VineyardUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		951CF8EF2CC5C0650016B06A /* GroupListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListView.swift; sourceTree = "<group>"; };
-		951CF8F12CC5C0F90016B06A /* GroupListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListViewModel.swift; sourceTree = "<group>"; };
 		95BD053C2CCF467600BEA15A /* AddGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroupView.swift; sourceTree = "<group>"; };
 		95BE42E52CCEF4940031547F /* GroupCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCardView.swift; sourceTree = "<group>"; };
 		B40B894B2C9364F4006B1771 /* GroupsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsListViewModel.swift; sourceTree = "<group>"; };
@@ -307,7 +305,6 @@
 				95BD053C2CCF467600BEA15A /* AddGroupView.swift */,
 				B43CD6BC2CB5F23A0079CCBF /* CreateGroupView.swift */,
 				B43CD6C42CB608200079CCBF /* CreateGoalView.swift */,
-
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -323,7 +320,6 @@
 			isa = PBXGroup;
 			children = (
 				F1E19F882CAB5B9500463111 /* DashboardViewModel.swift */,
-				951CF8F12CC5C0F90016B06A /* GroupListViewModel.swift */,
 			);
 			name = ViewModels;
 			sourceTree = "<group>";
@@ -503,7 +499,6 @@
 			files = (
 				F05361C82CAF1462009DE1E3 /* TodoViewModel.swift in Sources */,
 				192EBFE22C90F62E00AF8528 /* HomeView.swift in Sources */,
-				951CF8F22CC5C0F90016B06A /* GroupListViewModel.swift in Sources */,
 				B43CD6C52CB608200079CCBF /* CreateGoalView.swift in Sources */,
 				B40B894C2C9364F4006B1771 /* GroupsListViewModel.swift in Sources */,
 				F0D913622CACB8A100E7CD81 /* GroupView.swift in Sources */,

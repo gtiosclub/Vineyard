@@ -32,7 +32,8 @@ class FirebaseDataManager: DatabaseServiceProtocol {
             groupGoal: groupGoal,
             people: peopleIDs,
             resolutions: resolutions,
-            deadline: deadline
+            deadline: deadline,
+            scoreGoal: 3
         )
 
     }

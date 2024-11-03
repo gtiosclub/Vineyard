@@ -32,7 +32,7 @@ struct GroupCardView: View {
             HStack {
                 Spacer()
                 ProgressView(value: Double(group.currScore), total:Double(group.scoreGoal))
-                    .progressViewStyle(LinearProgressViewStyle())
+                    .progressViewStyle(.linear)
                     .frame(width: 150)
                     .scaleEffect(x: 1, y: 2.5)
                     .tint(.purple)

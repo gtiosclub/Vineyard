@@ -119,7 +119,7 @@ struct GoalsListView: View {
             
             
             Button {
-                viewModel.createGroup(withGroupName: groupName, withGroupGoal: resolution, withDeadline: deadline)
+                viewModel.createGroup(withGroupName: groupName, withGroupGoal: resolution, withDeadline: deadline, withScoreGoal: 4)
                 viewModel.isPresentingCreateGroupView = false
             } label: {
                 Text("Create Group")
