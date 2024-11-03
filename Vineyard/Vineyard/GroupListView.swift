@@ -35,7 +35,7 @@ struct GroupListView: View {
                         }
                         Button(action: {
                             print("add")
-                            isPresentingAddGroup = true
+                            viewModel.isPresentingCreateGroupView = true
                         }) {
                             Image(systemName: "plus")
                                 .foregroundColor(.white)
@@ -60,8 +60,8 @@ struct GroupListView: View {
                 }
             }.ignoresSafeArea()
         }
-        .sheet(isPresented: $isPresentingAddGroup) {
-            AddGroupView(isPresented: $isPresentingAddGroup, viewModel: viewModel)
+        .fullScreenCover(isPresented: $viewModel.isPresentingCreateGroupView) {
+            CreateGroupView().environment(viewModel)
         }
         .onAppear {
             viewModel.setUser(user: loginViewModel.currentUser)

@@ -15,7 +15,6 @@
 		192EBFFB2C90F62F00AF8528 /* VineyardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192EBFFA2C90F62F00AF8528 /* VineyardUITests.swift */; };
 		192EBFFD2C90F62F00AF8528 /* VineyardUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192EBFFC2C90F62F00AF8528 /* VineyardUITestsLaunchTests.swift */; };
 		951CF8F02CC5C0650016B06A /* GroupListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951CF8EF2CC5C0650016B06A /* GroupListView.swift */; };
-		95BD053D2CCF467600BEA15A /* AddGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BD053C2CCF467600BEA15A /* AddGroupView.swift */; };
 		95BE42E62CCEF4940031547F /* GroupCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BE42E52CCEF4940031547F /* GroupCardView.swift */; };
 		B40B894C2C9364F4006B1771 /* GroupsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40B894B2C9364F4006B1771 /* GroupsListViewModel.swift */; };
 		B40B894E2C936DE0006B1771 /* ResolutionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40B894D2C936DE0006B1771 /* ResolutionView.swift */; };
@@ -75,7 +74,6 @@
 		192EBFFA2C90F62F00AF8528 /* VineyardUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VineyardUITests.swift; sourceTree = "<group>"; };
 		192EBFFC2C90F62F00AF8528 /* VineyardUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VineyardUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		951CF8EF2CC5C0650016B06A /* GroupListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListView.swift; sourceTree = "<group>"; };
-		95BD053C2CCF467600BEA15A /* AddGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroupView.swift; sourceTree = "<group>"; };
 		95BE42E52CCEF4940031547F /* GroupCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCardView.swift; sourceTree = "<group>"; };
 		B40B894B2C9364F4006B1771 /* GroupsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsListViewModel.swift; sourceTree = "<group>"; };
 		B40B894D2C936DE0006B1771 /* ResolutionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolutionView.swift; sourceTree = "<group>"; };
@@ -302,7 +300,6 @@
 				951CF8EF2CC5C0650016B06A /* GroupListView.swift */,
 				F0D913612CACB8A100E7CD81 /* GroupView.swift */,
 				95BE42E52CCEF4940031547F /* GroupCardView.swift */,
-				95BD053C2CCF467600BEA15A /* AddGroupView.swift */,
 				B43CD6BC2CB5F23A0079CCBF /* CreateGroupView.swift */,
 				B43CD6C42CB608200079CCBF /* CreateGoalView.swift */,
 			);
@@ -503,7 +500,6 @@
 				B40B894C2C9364F4006B1771 /* GroupsListViewModel.swift in Sources */,
 				F0D913622CACB8A100E7CD81 /* GroupView.swift in Sources */,
 				F1E19F872CAB58DC00463111 /* Widget.swift in Sources */,
-				95BD053D2CCF467600BEA15A /* AddGroupView.swift in Sources */,
 				BB40EE062C992566006BA1E3 /* FirebaseDataManager.swift in Sources */,
 				BB40EE0E2C99288A006BA1E3 /* ProfileView.swift in Sources */,
 				BB40EDF62C991C8A006BA1E3 /* Group.swift in Sources */,
