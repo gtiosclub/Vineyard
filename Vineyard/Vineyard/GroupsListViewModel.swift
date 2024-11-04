@@ -72,13 +72,13 @@ class GroupsListViewModel: ObservableObject {
 //        }
 //    }
     
-    func createGroup(withGroupName name: String, withGroupGoal groupGoal: String, withDeadline deadline: Date) {
+    func createGroup(withGroupName name: String, withGroupGoal groupGoal: String, withDeadline deadline: Date, withScoreGoal scoreGoal: Int) {
         guard let user = user else {
             print("User is not set.")
             return
         }
         
-        let newGroup = Group(name: name, groupGoal: groupGoal, people: [user.id], deadline: deadline)
+        let newGroup = Group(name: name, groupGoal: groupGoal, people: [user.id], deadline: deadline, scoreGoal: scoreGoal)
         Task {
             do {
                 try await databaseManager.addGroupToDB(group: newGroup)
