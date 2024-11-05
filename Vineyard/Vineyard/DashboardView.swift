@@ -9,7 +9,8 @@ import SwiftUI
 
 struct DashboardView: View {
     private var widgets: [Widget] = [TodaysTasksWidget(), RecentActivitiesWidget()]
-
+    @EnvironmentObject var inviteViewModel: InviteViewModel
+   
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing:10) {
@@ -43,6 +44,18 @@ struct DashboardView: View {
                 .padding()
             }
         }
+        .popup(isPresented: $inviteViewModel.invitedToGroup) {
+            InvitePopupView()
+        } customize: {
+            $0
+            .type(.floater())
+            .appearFrom(.bottomSlide)
+            
+        }
+        .alert(isPresented: $inviteViewModel.inviteErrorStatus) {
+            Alert(title: Text(inviteViewModel.inviteError ?? ""))
+        }
+        
     }
 }
 

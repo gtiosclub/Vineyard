@@ -61,9 +61,17 @@ class LoginViewModel: ObservableObject {
         }
         isLoading = false
     }
-    public func checkLoggedIn() {
-        if Auth.auth().currentUser != nil {
+    public func checkLoggedIn() async {
+        if auth.currentUser != nil {
             isLoggedIn = true
+            do {
+                let user = try await db.collection("people").document(auth.currentUser!.uid).getDocument(as: Person.self)
+                await MainActor.run {
+                    self.currentUser = user
+                }
+            } catch {
+                print(error)
+            }
         } else {
             isLoggedIn = false
             print("asdf")

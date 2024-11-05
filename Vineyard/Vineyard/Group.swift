@@ -12,10 +12,10 @@ class Group: Identifiable, Codable {
     var name: String
     var groupGoal: String
     var people: [String]
-    var resolutions: [Resolution] = []
+    var resolutions: [String] = []
     var deadline: Date
     
-    init(name: String, groupGoal: String, people: [String], resolutions: [Resolution] = [], deadline: Date) {
+    init(name: String, groupGoal: String, people: [String], resolutions: [String] = [], deadline: Date) {
         self.id = UUID().uuidString
         self.name = name
         self.groupGoal = groupGoal
@@ -24,7 +24,7 @@ class Group: Identifiable, Codable {
         self.deadline = deadline
     }
     
-    func addResolution(_ resolution: Resolution) {
+    func addResolution(_ resolution: String) {
         self.resolutions.append(resolution)
     }
     
@@ -50,7 +50,7 @@ class Group: Identifiable, Codable {
         let resolution1 = Resolution.samples[0]
         let resolution2 = Resolution.samples[1]
         
-        let group1 = Group(name: "Group1", groupGoal: "Yearly Resolution 1", people:[andrew.id, yash.id, sankaet.id], resolutions: [resolution1, resolution2], deadline: Date(timeIntervalSinceNow: (7 * 24 * 60 * 60) * 7))
+        let group1 = Group(name: "Group1", groupGoal: "Yearly Resolution 1", people:[andrew.id, yash.id, sankaet.id], resolutions: [resolution1.id, resolution2.id], deadline: Date(timeIntervalSinceNow: (7 * 24 * 60 * 60) * 7))
         let group2 = Group(name: "Group2", groupGoal: "Yearly Resolution 2", people:[rahul.id, vishnesh.id], deadline: Date(timeIntervalSinceNow: (7 * 24 * 60 * 60) * 31))
         
         andrew.addGroup(group1)

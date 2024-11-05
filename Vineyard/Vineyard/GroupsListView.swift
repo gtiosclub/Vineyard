@@ -10,7 +10,7 @@ import SwiftUI
 struct GroupsListView: View {
     @State private var viewModel = GroupsListViewModel()
     @State private var isPresentingAddGroup = false
-    
+    @EnvironmentObject var inviteViewModel: InviteViewModel
     var body: some View {
         NavigationStack {
             List {
@@ -50,6 +50,17 @@ struct GroupsListView: View {
                 }
             }.sheet(isPresented: $isPresentingAddGroup) {
                 AddGroupView(isPresented: $isPresentingAddGroup, viewModel: viewModel)
+            }
+            .popup(isPresented: $inviteViewModel.invitedToGroup) {
+                InvitePopupView()
+            } customize: {
+                $0
+                .type(.floater())
+                .appearFrom(.bottomSlide)
+                
+            }
+            .alert(isPresented: $inviteViewModel.inviteErrorStatus) {
+                Alert(title: Text(inviteViewModel.inviteError ?? ""))
             }
             
             

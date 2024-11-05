@@ -18,8 +18,11 @@ struct VineyardApp: App {
             HomeView().environment(viewModel)
                 .environmentObject(loginViewModel)
                 .onAppear() {
-                    loginViewModel.checkLoggedIn()
+                    Task {
+                        await loginViewModel.checkLoggedIn()
+                    }
                 }
+            
         }
     }
     class AppDelegate: NSObject, UIApplicationDelegate {

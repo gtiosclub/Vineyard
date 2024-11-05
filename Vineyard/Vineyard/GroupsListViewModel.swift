@@ -18,7 +18,7 @@ class GroupsListViewModel: ObservableObject {
         self.user.addGroup(newGroup)
     }
     
-    func addResolution(_ resolution: Resolution, toGroup group: Group) {
+    func addResolution(_ resolution: String, toGroup group: Group) {
         group.addResolution(resolution)
     }
     

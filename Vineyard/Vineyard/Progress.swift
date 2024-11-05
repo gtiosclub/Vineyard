@@ -11,7 +11,7 @@ struct Progress: Identifiable, Codable {
     var id: String = UUID().uuidString
     var resolution: Resolution
     var completionArray: [Date] = []
-    var quantityGoal: Float
+    var quantityGoal: Float?
     var frequencyGoal: Frequency
     var person: Person
     

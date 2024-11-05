@@ -11,6 +11,7 @@ struct ProfileView: View {
     @State private var viewModel = ProfileViewModel()
     let columns = [GridItem(.flexible()), GridItem(.flexible())]
     @EnvironmentObject var loginViewModel: LoginViewModel
+    @EnvironmentObject var inviteViewModel: InviteViewModel
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -72,6 +73,17 @@ struct ProfileView: View {
                         .font(.system(size: 32, weight: .bold))
                 }
             }
+        }
+        .popup(isPresented: $inviteViewModel.invitedToGroup) {
+            InvitePopupView()
+        } customize: {
+            $0
+            .type(.floater())
+            .appearFrom(.bottomSlide)
+            
+        }
+        .alert(isPresented: $inviteViewModel.inviteErrorStatus) {
+            Alert(title: Text(inviteViewModel.inviteError ?? ""))
         }
     }
 }
