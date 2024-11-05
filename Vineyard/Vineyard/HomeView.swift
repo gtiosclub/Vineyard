@@ -23,6 +23,9 @@ struct HomeView: View {
                 ProfileView().tabItem {
                     Label("Profile", systemImage: "brain.head.profile")
                 }
+                TodoView().tabItem {
+                    Label("To-do", systemImage: "list.bullet")
+                }
             }
         } else {
             LoginView()
