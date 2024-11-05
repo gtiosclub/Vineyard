@@ -8,20 +8,20 @@
 import SwiftUI
 
 struct GroupsListView: View {
-    @State private var viewModel = GroupsListViewModel()
+    @EnvironmentObject var loginViewModel: LoginViewModel
+    @StateObject var viewModel: GroupsListViewModel
     @State private var isPresentingAddGroup = false
     
     var body: some View {
         NavigationStack {
             List {
-//                ForEach($viewModel.user.groups) { $group in
-//                    // TODO: Use a NavigationLink to select a list.
-//                    Section {
-//                        NavigationLink(destination: GroupView(group: group)) {
-//                            GroupCardView(group: group)
-//                        }
-//                    }
-//                }
+                ForEach(viewModel.groups, id: \.id) { group in
+                    Section {
+                        NavigationLink(destination: GroupView(group: group)) {
+                            GroupCardView(group: group)
+                        }
+                    }
+                }
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -31,30 +31,30 @@ struct GroupsListView: View {
                 }
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button(action: {
-                        //put menu stuff here
                         print("Menu Clicked")
+//                        viewModel.createSampleGroup()
                     }) {
                         Image(systemName: "line.horizontal.3")
                     }
                     Button(action: {
-                        //search stuff here
                         print("Search tapped")
                     }) {
                         Image(systemName: "magnifyingglass")
                     }
                     Button(action: {
-                        isPresentingAddGroup = true
+                        viewModel.isPresentingCreateGroupView = true
                     }) {
                         Image(systemName: "plus")
                     }
                 }
-            }.sheet(isPresented: $isPresentingAddGroup) {
-                AddGroupView(isPresented: $isPresentingAddGroup, viewModel: viewModel)
+            }.fullScreenCover(isPresented: $viewModel.isPresentingCreateGroupView) {
+                CreateGroupView().environment(viewModel)
             }
-            
-            
+            .onAppear {
+                viewModel.setUser(user: loginViewModel.currentUser)
+                viewModel.loadGroups()
+            }
         }
-        
     }
 }
 
@@ -82,40 +82,6 @@ struct GroupCardView: View {
     }
 }
 
-struct AddGroupView: View {
-    @Binding var isPresented: Bool
-    @ObservedObject var viewModel: GroupsListViewModel
-    
-    @State private var groupName: String = ""
-    @State private var groupDescription: String = ""
-    @State private var groupDeadline: Date = Date()
-    
-    var body: some View {
-        NavigationStack {
-            Form {
-                Section(header: Text("Group Details")) {
-                    TextField("Group Name", text: $groupName)
-                    TextField("Group Description", text: $groupDescription)
-                    DatePicker("Deadline", selection: $groupDeadline, displayedComponents: .date)
-                }
-                
-                Button("Create Group") {
-                    viewModel.createGroup(withGroupName: groupName, withGroupGoal: groupDescription, withDeadline: groupDeadline)
-                    isPresented = false
-                }
-                .disabled(groupName.isEmpty || groupDescription.isEmpty)
-            }
-            .navigationTitle("Add New Group")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
-                        isPresented = false
-                    }
-                }
-            }
-        }
-    }
-}
 #Preview {
-    GroupsListView()
+    GroupsListView(viewModel: GroupsListViewModel())
 }

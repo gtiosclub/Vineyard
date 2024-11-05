@@ -45,11 +45,11 @@ struct Progress: Identifiable, Codable {
     
     static var samples: [Progress] {
 
-        var andrew = Person(name: "Andrew", email: "a@gmail.com")
-        var yash = Person(name: "Yash", email: "y@outlook.com")
-        var sankaet = Person(name: "Sankaet", email: "s@yahoo.com")
-        var rahul = Person(name: "Rahul", email: "r@apple.com")
-        var vishnesh = Person(name: "Vishnesh", email: "v@aol.com")
+        let andrew = Person(name: "Andrew", email: "a@gmail.com")
+        let yash = Person(name: "Yash", email: "y@outlook.com")
+        let sankaet = Person(name: "Sankaet", email: "s@yahoo.com")
+        let rahul = Person(name: "Rahul", email: "r@apple.com")
+        let vishnesh = Person(name: "Vishnesh", email: "v@aol.com")
         
         let resolution1 = Resolution.samples[0]
         let progress1 = Progress(resolution: resolution1, quantityGoal: 0, frequencyGoal: Frequency(frequencyType: FrequencyType.weekly, count: 3), person: andrew)
