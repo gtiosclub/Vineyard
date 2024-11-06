@@ -75,13 +75,13 @@ class GroupsListViewModel: ObservableObject {
             return
         }
         
-        let newGroup = Group(name: name, groupGoal: groupGoal, peopleIDs: [user.id], deadline: deadline, score: 0)
+        let newGroup = Group(name: name, groupGoal: groupGoal, peopleIDs: [user.id ?? UUID().uuidString], deadline: deadline, score: 0)
         Task {
             do {
                 try await databaseManager.addGroupToDB(group: newGroup)
                 DispatchQueue.main.async {
                     self.groups.append(newGroup)
-                    self.listenToGroupChanges(groupID: newGroup.id)
+                    self.listenToGroupChanges(groupID: newGroup.id ?? UUID().uuidString)
                 }
             } catch {
                 print("Failed to add group to database: \(error)")
@@ -90,7 +90,7 @@ class GroupsListViewModel: ObservableObject {
 
         Task {
             var updatedUser = user
-            updatedUser.groupIDs.append(newGroup.id)
+            updatedUser.groupIDs.append(newGroup.id ?? UUID().uuidString)
             
             do {
                 try await databaseManager.addPersonToDB(person: updatedUser)

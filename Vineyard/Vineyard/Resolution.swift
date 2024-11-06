@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
 struct Frequency: Codable {
     var frequencyType: FrequencyType
@@ -28,26 +29,38 @@ enum DifficultyLevel: Codable {
     case hard
 }
 
-class Resolution: Identifiable, Codable {
-    let id: String
+struct Resolution: Identifiable, Codable {
+    @DocumentID var id: String? = UUID().uuidString
     var title: String
     var description: String
-    var defaultQuantity: Int? = nil
+    var defaultQuantity: Int? = 0
     var defaultFrequency: Frequency
     var diffLevel: Difficulty
     
-    init(title: String, description: String, quantity: Int? = nil, frequency: Frequency, diffLevel: Difficulty) {
-        self.id = UUID().uuidString
-        self.title = title
-        self.description = description
-        self.defaultQuantity = quantity
-        self.defaultFrequency = frequency
-        self.diffLevel = diffLevel
+    enum CodingKeys: String, CodingKey {
+        case id
+        case title
+        case description
+        case defaultQuantity
+        case defaultFrequency
+        case diffLevel
     }
     
     static var samples: [Resolution] {
-        let resolution1 = Resolution(title: "Run miles", description: "Run a certain number of miles", quantity: 5, frequency: Frequency(frequencyType: FrequencyType.weekly, count: 1), diffLevel: Difficulty(difficultyLevel: DifficultyLevel.medium, score: 5))
-        let resolution2 = Resolution(title: "Drink 7 cups of water", description: "Drink more water", frequency: Frequency(frequencyType: FrequencyType.weekly, count: 1), diffLevel: Difficulty(difficultyLevel: DifficultyLevel.easy, score: 2))
+        let resolution1 = Resolution(
+            title: "Run miles",
+            description: "Run a certain number of miles",
+            defaultQuantity: 5,
+            defaultFrequency: Frequency(frequencyType: FrequencyType.weekly, count: 1),
+            diffLevel: Difficulty(difficultyLevel: DifficultyLevel.medium, score: 5)
+        )
+        
+        let resolution2 = Resolution(
+            title: "Drink 7 cups of water",
+            description: "Drink more water",
+            defaultFrequency: Frequency(frequencyType: FrequencyType.weekly, count: 1),
+            diffLevel: Difficulty(difficultyLevel: DifficultyLevel.easy, score: 2)
+        )
         
         return [resolution1, resolution2]
     }

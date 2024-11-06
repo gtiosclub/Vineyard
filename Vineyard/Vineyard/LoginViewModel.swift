@@ -76,7 +76,7 @@ class LoginViewModel: ObservableObject {
                 return
             }
             
-            currentUser = Person(id: uid, name: name, groupIDs: groupIDs, allProgress: [], email: email, badgeIDs: [])
+            currentUser = Person(id: uid, name: name, email: email, groupIDs: groupIDs, badgeIDs: [], allProgress: [])
             isLoggedIn = true
         } catch {
             isLoggedIn = false
