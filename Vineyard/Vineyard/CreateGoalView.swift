@@ -21,8 +21,7 @@ struct CreateGoalView: View {
     @State private var selectedFrequency: FrequencyType = .daily
     @State private var selectedFrequencyText: String = "Daily"
     @State private var freqQuantity: Int = 0
-    @State var isValid: Bool = false
-    @State var errorMessage: AlertMessage? = nil
+    @State var errorMessage: GroupsListViewModel.AlertMessage? = nil
     @Environment(\.dismiss) var dismiss
     
     
@@ -84,7 +83,7 @@ struct CreateGoalView: View {
             
             Button {
                 do {
-                    isValid = try validateForm(action: action)
+                    try viewModel.validateGoalCreationForm(action: action)
                     let resolution = Resolution(title: action, description: description, quantity: Int(quantity), frequency: Frequency(frequencyType: selectedFrequency, count: freqQuantity), diffLevel: Difficulty(difficultyLevel: selectedDifficulty, score: 10))
                     
                     goals.append(resolution)
@@ -97,10 +96,10 @@ struct CreateGoalView: View {
                     selectedDifficulty = .medium
                     selectedFrequency = .daily
                     dismiss()
-               } catch let error as ValidationError {
-                   errorMessage = AlertMessage(message: error.localizedDescription)
+                } catch let error as GroupsListViewModel.ValidationError {
+                   errorMessage = GroupsListViewModel.AlertMessage(message: error.localizedDescription)
                } catch {
-                   errorMessage = AlertMessage(message: "An unexpected error occurred.")
+                   errorMessage = GroupsListViewModel.AlertMessage(message: "An unexpected error occurred.")
                }
 
             } label: {
@@ -130,12 +129,7 @@ struct CreateGoalView: View {
 
 }
 
-func validateForm(action: String) throws -> Bool {
-    if action.isEmpty {
-        throw ValidationError("Action can not be empty")
-    }
-    return true
-}
+
 
 
 

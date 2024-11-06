@@ -17,11 +17,44 @@ class GroupsListViewModel: ObservableObject {
     var isPresentingGoalsListView = false
     
     init() {}
+    
+    struct AlertMessage: Identifiable {
+        let id = UUID()
+        let message: String
+    }
+
+    struct ValidationError: LocalizedError {
+        var errorDescription: String?
+        init(_ description: String) {
+            self.errorDescription = description
+        }
+    }
 
     
     func setUser(user: Person?) {
         guard self.user == nil, let user = user else { return }
         self.user = user
+    }
+    
+    func validateGroupCreationForm(groupName: String, resolution: String, deadline: Date) throws -> Bool {
+        if groupName.isEmpty && resolution.isEmpty {
+            throw ValidationError("Group Name and resolution can not be empty")
+        } else if groupName.isEmpty {
+            throw ValidationError("Group Name can not be empty")
+        } else if resolution.isEmpty {
+            throw ValidationError("Resolution can not be empty")
+        } else if deadline < Date.now {
+            throw ValidationError("Deadline can not be in the past")
+        }
+        
+        return true
+    }
+    
+    func validateGoalCreationForm(action: String) throws {
+        if action.isEmpty {
+            throw ValidationError("Action can not be empty")
+        }
+        return
     }
     
 //    func createSampleGroup() {
