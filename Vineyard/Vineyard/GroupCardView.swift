@@ -17,11 +17,11 @@ struct GroupCardView: View {
                     .font(.headline)
                     .foregroundColor(.black)
                 Spacer()
-                Text("\(group.people.count) People")
+                Text("\(group.peopleIDs.count) People")
                     .foregroundColor(.black)
                     .padding(.trailing, 40)
                 ZStack(alignment: .trailing) {
-                    ForEach(0..<min(group.people.count, 3), id: \.self) { i in
+                    ForEach(0..<min(group.peopleIDs.count, 3), id: \.self) { i in
                         Circle()
                             .fill(Color.gray.opacity(0.5))
                             .frame(width: 30, height: 30)

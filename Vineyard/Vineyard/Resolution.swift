@@ -34,16 +34,16 @@ struct Resolution: Identifiable, Codable {
     @DocumentID var id: String? = UUID().uuidString
     var title: String
     var description: String
-    var defaultQuantity: Int? = 0
-    var defaultFrequency: Frequency
+    var quantity: Int? = 0
+    var frequency: Frequency
     var diffLevel: Difficulty
     
     enum CodingKeys: String, CodingKey {
         case id
         case title
         case description
-        case defaultQuantity
-        case defaultFrequency
+        case quantity
+        case frequency
         case diffLevel
     }
     
@@ -51,15 +51,15 @@ struct Resolution: Identifiable, Codable {
         let resolution1 = Resolution(
             title: "Run miles",
             description: "Run a certain number of miles",
-            defaultQuantity: 5,
-            defaultFrequency: Frequency(frequencyType: FrequencyType.weekly, count: 1),
+            quantity: 5,
+            frequency: Frequency(frequencyType: FrequencyType.weekly, count: 1),
             diffLevel: Difficulty(difficultyLevel: DifficultyLevel.medium, score: 5)
         )
         
         let resolution2 = Resolution(
             title: "Drink 7 cups of water",
             description: "Drink more water",
-            defaultFrequency: Frequency(frequencyType: FrequencyType.weekly, count: 1),
+            frequency: Frequency(frequencyType: FrequencyType.weekly, count: 1),
             diffLevel: Difficulty(difficultyLevel: DifficultyLevel.easy, score: 2)
         )
         

@@ -21,7 +21,7 @@ struct GroupListView: View {
                             Text("Your Groups")
                                 .font(.system(size: 30, weight: .bold))
                                 .foregroundColor(.white)
-                            Text("\(viewModel.user?.groups.count ?? 0) active group(s)")
+                            Text("\(viewModel.user?.groupIDs.count ?? 0) active group(s)")
                                 .foregroundColor(.white)
                             
                         }

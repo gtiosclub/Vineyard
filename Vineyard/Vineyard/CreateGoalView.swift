@@ -81,7 +81,10 @@ struct CreateGoalView: View {
             
             
             Button {
-                let resolution = Resolution(title: action, description: description, quantity: Int(quantity), frequency: Frequency(frequencyType: selectedFrequency, count: freqQuantity), diffLevel: Difficulty(difficultyLevel: selectedDifficulty, score: 10))
+                let resolution = Resolution(title: action,
+                                            description: description,
+                                            quantity: Int(quantity),
+                                            frequency: Frequency(frequencyType: selectedFrequency, count: freqQuantity), diffLevel: Difficulty(difficultyLevel: selectedDifficulty, score: 10))
                 
                 goals.append(resolution)
                 

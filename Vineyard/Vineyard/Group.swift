@@ -32,20 +32,23 @@ struct Group: Identifiable, Codable {
         case currScore
     }
     
-    func addResolution(_ resolution: Resolution) {
-        self.resolutions.append(resolution)
+    mutating func addResolution(_ resolution: Resolution) {
+        self.resolutions?.append(resolution)
+        self.resolutionIDs.append(resolution.id ?? UUID().uuidString)
     }
     
-    func changeGroupName(toGroupName groupName: String) {
+    mutating func changeGroupName(toGroupName groupName: String) {
         self.name = groupName
     }
     
-    func removeResolution(atOffsets indexSet: IndexSet) {
-        self.resolutions.remove(atOffsets: indexSet)
+    mutating func removeResolution(atOffsets indexSet: IndexSet) {
+        self.resolutions?.remove(atOffsets: indexSet)
+        self.resolutionIDs.remove(atOffsets: indexSet)
     }
     
-    func moveResolution(fromOffsets indexSet: IndexSet, toOffset index: Int) {
-        self.resolutions.move(fromOffsets: indexSet, toOffset: index)
+    mutating func moveResolution(fromOffsets indexSet: IndexSet, toOffset index: Int) {
+        self.resolutions?.move(fromOffsets: indexSet, toOffset: index)
+        self.resolutionIDs.move(fromOffsets: indexSet, toOffset: index)
     }
     
     static let samples: [Group] = {
