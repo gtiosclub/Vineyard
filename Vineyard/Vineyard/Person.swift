@@ -46,4 +46,16 @@ struct Person: Identifiable, Codable {
         
         return [andrew, yash, sankaet, rahul, vishnesh, jay]
     }
+    
+    enum CodingKeys: CodingKey {
+        case id
+        case name
+        case groups
+        case groupIDs
+        case allProgress
+        case allProgressIDs
+        case email
+        case badges
+        case badgeIDs
+    }
 }

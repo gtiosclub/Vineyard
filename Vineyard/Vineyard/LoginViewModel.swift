@@ -102,6 +102,7 @@ class LoginViewModel: ObservableObject {
         do {
             try await loginModel.createUser(email: email, password: password)
             let newUser = Person(id: auth.currentUser!.uid, name: name, email: email)
+            print(newUser)
             try db.collection("people").document(auth.currentUser!.uid).setData(from: newUser)
             currentUser = newUser
             

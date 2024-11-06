@@ -287,7 +287,7 @@ class FirebaseDataManager: DatabaseServiceProtocol {
         let personData: [String: Any] = [
             "name": person.name,
             "email": person.email,
-            "groupIDs": person.groups,
+            "groupIDs": person.groupIDs,
             "allProgress": progressIDs,
             "badges": badgeIDs
         ]
