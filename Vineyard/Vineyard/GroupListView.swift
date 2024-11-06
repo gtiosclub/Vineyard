@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GroupListView: View {
     @EnvironmentObject var loginViewModel: LoginViewModel
-    @State var viewModel: GroupsListViewModel
+    @State var viewModel: GroupsListViewModel = .init()
     @State private var isPresentingAddGroup = false
     var body: some View {
         NavigationView {
@@ -71,5 +71,5 @@ struct GroupListView: View {
 }
 
 #Preview {
-    GroupListView(viewModel: GroupsListViewModel())
+    GroupListView()
 }

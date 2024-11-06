@@ -21,7 +21,6 @@ struct CreateGoalView: View {
     @State private var selectedFrequency: FrequencyType = .daily
     @State private var selectedFrequencyText: String = "Daily"
     @State private var freqQuantity: Int = 0
-//    @State var errorMessage: GroupsListViewModel.AlertMessage? = nil
     @Environment(\.dismiss) var dismiss
     
     
@@ -118,7 +117,6 @@ struct CreateGoalView: View {
                     dismissButton: .default(Text("OK"))
                 )
             }
-            
         }
         .padding()
         .toolbar(content: {

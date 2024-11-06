@@ -86,14 +86,8 @@ struct CreateGroupView: View {
                 GoalsListView(groupName: $groupName, resolution: $resolution, deadline: $deadline)
             }
         }
-
     }
 }
-
-
-
-
-
 
 struct TextFieldTitleView: View {
     var text: String
