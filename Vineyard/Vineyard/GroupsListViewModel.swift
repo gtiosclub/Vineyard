@@ -8,13 +8,16 @@
 import SwiftUI
 
 @Observable
-class GroupsListViewModel: ObservableObject {
+class GroupsListViewModel {
     let databaseManager: FirebaseDataManager = FirebaseDataManager.shared
     private(set) var user: Person?
     var groups: [Group] = []
     var isPresentingCreateGroupView = false
     var isPresentingCreateGoalView = false
     var isPresentingGoalsListView = false
+    var isValid = false
+    var groupCreationErrorMessage: AlertMessage?
+    var goalCreationErrorMessage: AlertMessage?
     
     init() {}
     
@@ -34,6 +37,17 @@ class GroupsListViewModel: ObservableObject {
     func setUser(user: Person?) {
         guard self.user == nil, let user = user else { return }
         self.user = user
+    }
+    
+    func submitGroupCreationForm(groupName: String, resolution: String, deadline: Date) {
+        do {
+            isValid = try validateGroupCreationForm(groupName: groupName, resolution: resolution, deadline: deadline)
+            
+        } catch let error as ValidationError {
+            groupCreationErrorMessage = AlertMessage(message: error.localizedDescription)
+       } catch {
+           groupCreationErrorMessage = AlertMessage(message: "An unexpected error occurred.")
+       }
     }
     
     func validateGroupCreationForm(groupName: String, resolution: String, deadline: Date) throws -> Bool {

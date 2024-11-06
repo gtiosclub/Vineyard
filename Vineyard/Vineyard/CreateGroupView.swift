@@ -17,10 +17,13 @@ struct CreateGroupView: View {
     @State var groupName: String = ""
     @State var resolution: String = ""
     @State var deadline: Date = Date.now
-    @State var isValid: Bool = false
-    @State var errorMessage: GroupsListViewModel.AlertMessage? = nil
+    
+    
+//    @State var isValid: Bool = false
+//    @State var errorMessage: GroupsListViewModel.AlertMessage? = nil
     
     var body: some View {
+        @Bindable var viewModel = viewModel
         NavigationStack {
             VStack {
                 Text("Let's create your Group")
@@ -54,14 +57,7 @@ struct CreateGroupView: View {
                 
                 Spacer()
                 Button {
-                    do {
-                        isValid = try viewModel.validateGroupCreationForm(groupName: groupName, resolution: resolution, deadline: deadline)
-                        
-                    } catch let error as GroupsListViewModel.ValidationError {
-                       errorMessage = GroupsListViewModel.AlertMessage(message: error.localizedDescription)
-                   } catch {
-                       errorMessage = GroupsListViewModel.AlertMessage(message: "An unexpected error occurred.")
-                   }
+                    viewModel.submitGroupCreationForm(groupName: groupName, resolution: resolution, deadline: deadline)
                 } label: {
                     Text("Next")
                         .frame(maxWidth: .infinity)
@@ -70,7 +66,7 @@ struct CreateGroupView: View {
                         .foregroundColor(.black)
                         .cornerRadius(8)
                         .padding([.leading, .trailing])
-                }.alert(item: $errorMessage) { message in
+                }.alert(item: $viewModel.groupCreationErrorMessage) { message in
                     Alert(
                         title: Text("Form Error"),
                         message: Text(message.message),
@@ -86,7 +82,7 @@ struct CreateGroupView: View {
                         Image(systemName: "xmark.circle.fill")
                     }
                 }
-            }.navigationDestination(isPresented: $isValid) {
+            }.navigationDestination(isPresented: $viewModel.isValid) {
                 GoalsListView(groupName: $groupName, resolution: $resolution, deadline: $deadline)
             }
         }

@@ -21,7 +21,7 @@ struct CreateGoalView: View {
     @State private var selectedFrequency: FrequencyType = .daily
     @State private var selectedFrequencyText: String = "Daily"
     @State private var freqQuantity: Int = 0
-    @State var errorMessage: GroupsListViewModel.AlertMessage? = nil
+//    @State var errorMessage: GroupsListViewModel.AlertMessage? = nil
     @Environment(\.dismiss) var dismiss
     
     
@@ -32,6 +32,7 @@ struct CreateGoalView: View {
 //    @State private var difficultyScore: String = "1"
     
     var body: some View {
+        @Bindable var viewModel = viewModel
         VStack {
             
             Text("Create Goal").font(.largeTitle).bold()
@@ -97,9 +98,9 @@ struct CreateGoalView: View {
                     selectedFrequency = .daily
                     dismiss()
                 } catch let error as GroupsListViewModel.ValidationError {
-                   errorMessage = GroupsListViewModel.AlertMessage(message: error.localizedDescription)
+                    viewModel.goalCreationErrorMessage = GroupsListViewModel.AlertMessage(message: error.localizedDescription)
                } catch {
-                   errorMessage = GroupsListViewModel.AlertMessage(message: "An unexpected error occurred.")
+                   viewModel.goalCreationErrorMessage = GroupsListViewModel.AlertMessage(message: "An unexpected error occurred.")
                }
 
             } label: {
@@ -110,7 +111,7 @@ struct CreateGoalView: View {
                     .foregroundColor(.black)
                     .cornerRadius(8)
                     .padding([.leading, .trailing])
-            }.alert(item: $errorMessage) { message in
+            }.alert(item: $viewModel.goalCreationErrorMessage) { message in
                 Alert(
                     title: Text("Form Error"),
                     message: Text(message.message),
