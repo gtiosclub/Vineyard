@@ -14,7 +14,6 @@ class GroupsListViewModel {
     var groups: [Group] = []
     var isPresentingCreateGroupView = false
     var isPresentingCreateGoalView = false
-    var isPresentingGoalsListView = false
     var isValid = false
     var groupCreationErrorMessage: AlertMessage?
     var goalCreationErrorMessage: AlertMessage?
