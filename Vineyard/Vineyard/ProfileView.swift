@@ -37,13 +37,13 @@ struct ProfileView: View {
                                     .resizable()
                                     .frame(width: 3, height: 3)
                                     .foregroundColor(.gray)
-                                if(viewModel.user.groups.count > 1) {
-                                    Text("\(viewModel.user.groups.count) groups")
+                                if(viewModel.user.groups?.count ?? 0 > 1) {
+                                    Text("\(viewModel.user.groups?.count) groups")
                                         .font(.system(size: 16))
                                         .fontWeight(.regular)
                                         .foregroundColor(.gray)
                                 } else {
-                                    Text("\(viewModel.user.groups.count) group")
+                                    Text("\(viewModel.user.groups?.count) group")
                                         .font(.system(size: 16))
                                         .fontWeight(.regular)
                                         .foregroundColor(.gray)
@@ -60,7 +60,7 @@ struct ProfileView: View {
                         .padding(.top, 44)
                     
                     LazyVGrid(columns: columns, spacing: 10) {
-                        ForEach(viewModel.user.badges) { badge in
+                        ForEach(viewModel.user.badges ?? []) { badge in
                             BadgeView(badge: badge)
                         }
                     }

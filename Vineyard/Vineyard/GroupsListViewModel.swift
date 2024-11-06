@@ -75,7 +75,7 @@ class GroupsListViewModel: ObservableObject {
             return
         }
         
-        let newGroup = Group(name: name, groupGoal: groupGoal, peopleIDs: [user.id], deadline: deadline)
+        let newGroup = Group(name: name, groupGoal: groupGoal, peopleIDs: [user.id], deadline: deadline, score: 0)
         Task {
             do {
                 try await databaseManager.addGroupToDB(group: newGroup)

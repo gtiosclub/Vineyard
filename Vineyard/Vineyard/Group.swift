@@ -16,14 +16,27 @@ class Group: Identifiable, Codable {
     var resolutions: [Resolution]?
     var resolutionIDs: [String]
     var deadline: Date
+    var score: Int
     
-    init(name: String, groupGoal: String, peopleIDs: [String], resolutionIDs: [String] = [], deadline: Date) {
+//    init(name: String, groupGoal: String, peopleIDs: [String], resolutionIDs: [String] = [], deadline: Date) {
+//        self.id = UUID().uuidString
+//        self.name = name
+//        self.groupGoal = groupGoal
+//        self.peopleIDs = peopleIDs
+//        self.resolutionIDs = resolutionIDs
+//        self.deadline = deadline
+//    }
+
+    init(name: String, groupGoal: String, people: [Person] = [], peopleIDs: [String], resolutions: [Resolution] = [], resolutionIDs: [String] = [], deadline: Date, score: Int) {
         self.id = UUID().uuidString
         self.name = name
         self.groupGoal = groupGoal
+        self.people = people
         self.peopleIDs = peopleIDs
+        self.resolutions = resolutions
         self.resolutionIDs = resolutionIDs
         self.deadline = deadline
+        self.score = score
     }
     
     func changeGroupName(toGroupName groupName: String) {
@@ -40,8 +53,8 @@ class Group: Identifiable, Codable {
         let resolution1 = Resolution.samples[0]
         let resolution2 = Resolution.samples[1]
         
-        let group1 = Group(name: "Group1", groupGoal: "Yearly Resolution 1", peopleIDs:[andrew.id, yash.id, sankaet.id], resolutionIDs: [resolution1.id, resolution2.id], deadline: Date(timeIntervalSinceNow: (7 * 24 * 60 * 60) * 7))
-        let group2 = Group(name: "Group2", groupGoal: "Yearly Resolution 2", peopleIDs :[rahul.id, vishnesh.id], deadline: Date(timeIntervalSinceNow: (7 * 24 * 60 * 60) * 31))
+        let group1 = Group(name: "Group1", groupGoal: "Yearly Resolution 1", peopleIDs:[andrew.id, yash.id, sankaet.id], resolutionIDs: [resolution1.id, resolution2.id], deadline: Date(timeIntervalSinceNow: (7 * 24 * 60 * 60) * 7), score: 0)
+        let group2 = Group(name: "Group2", groupGoal: "Yearly Resolution 2", peopleIDs :[rahul.id, vishnesh.id], deadline: Date(timeIntervalSinceNow: (7 * 24 * 60 * 60) * 31), score: 0)
         
         andrew.addGroup(group1)
         yash.addGroup(group1)

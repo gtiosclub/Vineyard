@@ -30,11 +30,12 @@ class FirebaseDataManager: DatabaseServiceProtocol {
         return Group(
             name: name,
             groupGoal: groupGoal,
-            people: peopleIDs,
+            peopleIDs: peopleIDs,
             resolutions: resolutions,
-            deadline: deadline
+            resolutionIDs: resolutionIDs,
+            deadline: deadline,
+            score: 0
         )
-
     }
     
     func fetchPersonFromDB(userID: String) async throws -> Person? {
@@ -51,7 +52,7 @@ class FirebaseDataManager: DatabaseServiceProtocol {
         return Person(
             id: userID,
             name: name,
-            groups: groupIDs,
+            groupIDs: groupIDs,
             allProgress: [],
             email: email,
             badges: []
@@ -91,7 +92,7 @@ class FirebaseDataManager: DatabaseServiceProtocol {
             if let resolution = try await fetchResolutionFromDB(resolutionID: resolutionID),
                let group = try await fetchGroupFromDB(groupID: groupID) {
                 
-                let badge = Badge(resolution: resolution, group: group, dateObtained: dateObtained)
+                let badge = Badge(resolution: resolution, resolutionID: resolutionID, group: group, groupID: groupID,  dateObtained: dateObtained)
                 badges.append(badge)
             }
         }
@@ -140,10 +141,12 @@ class FirebaseDataManager: DatabaseServiceProtocol {
             let progress = Progress(
                 id: progressID,
                 resolution: resolution,
+                resolutionID: resolutionID,
                 completionArray: completionDates,
                 quantityGoal: quantityGoal,
                 frequencyGoal: frequency,
-                person: person
+                person: person,
+                personID: personID
             )
             progressList.append(progress)
         }
@@ -270,13 +273,13 @@ class FirebaseDataManager: DatabaseServiceProtocol {
         let personRef = db.collection("people").document(person.id)
         
         var badgeIDs: [String] = []
-        for badge in person.badges {
+        for badge in person.badges ?? [] {
             badgeIDs.append(badge.id)
             try await self.addBadgeToDB(badge: badge)
         }
         
         var progressIDs: [String] = []
-        for progress in person.allProgress {
+        for progress in person.allProgress ?? [] {
             progressIDs.append(progress.id)
             try await self.addProgressToDB(progress: progress)
         }
@@ -332,8 +335,8 @@ class FirebaseDataManager: DatabaseServiceProtocol {
         let badgeRef = db.collection("badges").document(badge.id)
         
         let badgeData: [String: Any] = [
-            "resolutionID": badge.resolution.id,
-            "groupID": badge.group.id,
+            "resolutionID": badge.resolutionID,
+            "groupID": badge.groupID,
             "dateObtained": Timestamp(date: badge.dateObtained)
         ]
         
@@ -356,8 +359,8 @@ class FirebaseDataManager: DatabaseServiceProtocol {
         }
         
         let progressData: [String: Any] = [
-            "person": progress.person.id,
-            "resolution": progress.resolution.id,
+            "person": progress.personID,
+            "resolution": progress.resolutionID,
             "completion": [],
             "frequencyGoal": frequencyData,
             "quantityGoal": progress.quantityGoal
@@ -369,7 +372,7 @@ class FirebaseDataManager: DatabaseServiceProtocol {
         let groupRef = db.collection("groups").document(group.id)
         
         var resolutionIDs: [String] = []
-        for resolution in group.resolutions {
+        for resolution in group.resolutions ?? [] {
             resolutionIDs.append(resolution.id)
         }
 
@@ -405,9 +408,11 @@ class FirebaseDataManager: DatabaseServiceProtocol {
                 let updatedGroup = Group(
                     name: name,
                     groupGoal: groupGoal,
-                    people: peopleIDs,
+                    peopleIDs: peopleIDs,
                     resolutions: resolutions ?? [],
-                    deadline: deadline
+                    resolutionIDs: resolutionIDs,
+                    deadline: deadline,
+                    score: 0
                 )
                 completion(updatedGroup)
             }
