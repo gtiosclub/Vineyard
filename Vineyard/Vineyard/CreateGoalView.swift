@@ -21,6 +21,8 @@ struct CreateGoalView: View {
     @State private var selectedFrequency: FrequencyType = .daily
     @State private var selectedFrequencyText: String = "Daily"
     @State private var freqQuantity: Int = 0
+    @State var isValid: Bool = false
+    @State var errorMessage: AlertMessage? = nil
     @Environment(\.dismiss) var dismiss
     
     
@@ -58,8 +60,8 @@ struct CreateGoalView: View {
             List {
                 Picker ("Difficulty", selection: $selectedDifficulty) {
                     Text("Easy").tag(DifficultyLevel.easy).foregroundColor(.gray)
-                    Text("Medium").tag(DifficultyLevel.easy).foregroundColor(.gray)
-                    Text("Hard").tag(DifficultyLevel.easy).foregroundColor(.gray)
+                    Text("Medium").tag(DifficultyLevel.medium).foregroundColor(.gray)
+                    Text("Hard").tag(DifficultyLevel.hard).foregroundColor(.gray)
                 }
                 
                 Picker ("Frequency", selection: $selectedFrequency) {
@@ -81,18 +83,25 @@ struct CreateGoalView: View {
             
             
             Button {
-                let resolution = Resolution(title: action, description: description, quantity: Int(quantity), frequency: Frequency(frequencyType: selectedFrequency, count: freqQuantity), diffLevel: Difficulty(difficultyLevel: selectedDifficulty, score: 10))
-                
-                goals.append(resolution)
-                
-                print(goals)
-                
-                action = "" // the name of the goal
-                description = "" // the name of the goal
-                quantity = ""
-                selectedDifficulty = .medium
-                selectedFrequency = .daily
-                dismiss()
+                do {
+                    isValid = try validateForm(action: action)
+                    let resolution = Resolution(title: action, description: description, quantity: Int(quantity), frequency: Frequency(frequencyType: selectedFrequency, count: freqQuantity), diffLevel: Difficulty(difficultyLevel: selectedDifficulty, score: 10))
+                    
+                    goals.append(resolution)
+                    
+//                    print(resolution.title, resolution.description, resolution.defaultFrequency.frequencyType, resolution.defaultFrequency.count, resolution.diffLevel.difficultyLevel, resolution.diffLevel.score)
+                    
+                    action = "" // the name of the goal
+                    description = "" // the name of the goal
+                    quantity = ""
+                    selectedDifficulty = .medium
+                    selectedFrequency = .daily
+                    dismiss()
+               } catch let error as ValidationError {
+                   errorMessage = AlertMessage(message: error.localizedDescription)
+               } catch {
+                   errorMessage = AlertMessage(message: "An unexpected error occurred.")
+               }
 
             } label: {
                 Text("Create")
@@ -102,6 +111,12 @@ struct CreateGoalView: View {
                     .foregroundColor(.black)
                     .cornerRadius(8)
                     .padding([.leading, .trailing])
+            }.alert(item: $errorMessage) { message in
+                Alert(
+                    title: Text("Form Error"),
+                    message: Text(message.message),
+                    dismissButton: .default(Text("OK"))
+                )
             }
             
         }
@@ -115,7 +130,16 @@ struct CreateGoalView: View {
 
 }
 
-//
+func validateForm(action: String) throws -> Bool {
+    if action.isEmpty {
+        throw ValidationError("Action can not be empty")
+    }
+    return true
+}
+
+
+
+//#imageLiteral(resourceName: "simulator_screenshot_26595B77-5231-4870-9E2D-292AA5A640FA.png")
 //#Preview {
 //    CreateGoalView()
 //}

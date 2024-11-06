@@ -14,6 +14,7 @@ class GroupsListViewModel: ObservableObject {
     var groups: [Group] = []
     var isPresentingCreateGroupView = false
     var isPresentingCreateGoalView = false
+    var isPresentingGoalsListView = false
     
     init() {}
 

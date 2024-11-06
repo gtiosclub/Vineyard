@@ -17,6 +17,8 @@ struct CreateGroupView: View {
     @State var groupName: String = ""
     @State var resolution: String = ""
     @State var deadline: Date = Date.now
+    @State var isValid: Bool = false
+    @State var errorMessage: AlertMessage? = nil
     
     var body: some View {
         NavigationStack {
@@ -51,8 +53,16 @@ struct CreateGroupView: View {
                 .padding([.leading, .trailing], 10)
                 
                 Spacer()
-                NavigationLink {
-                    GoalsListView(groupName: $groupName, resolution: $resolution, deadline: $deadline)
+                Button {
+                    
+                    do {
+                        isValid = try validateForm(groupName: groupName, resolution: resolution, deadline: deadline)
+                        
+                   } catch let error as ValidationError {
+                       errorMessage = AlertMessage(message: error.localizedDescription)
+                   } catch {
+                       errorMessage = AlertMessage(message: "An unexpected error occurred.")
+                   }
                 } label: {
                     Text("Next")
                         .frame(maxWidth: .infinity)
@@ -61,7 +71,25 @@ struct CreateGroupView: View {
                         .foregroundColor(.black)
                         .cornerRadius(8)
                         .padding([.leading, .trailing])
+                }.alert(item: $errorMessage) { message in
+                    Alert(
+                        title: Text("Form Error"),
+                        message: Text(message.message),
+                        dismissButton: .default(Text("OK"))
+                    )
                 }
+                
+//                NavigationLink {
+//                    GoalsListView(groupName: $groupName, resolution: $resolution, deadline: $deadline)
+//                } label: {
+//                    Text("Next")
+//                        .frame(maxWidth: .infinity)
+//                        .padding()
+//                        .background(Color(UIColor.lightGray))
+//                        .foregroundColor(.black)
+//                        .cornerRadius(8)
+//                        .padding([.leading, .trailing])
+//                }
             }.toolbar{
                 ToolbarItem(placement: .cancellationAction) {
                     Button {
@@ -70,9 +98,38 @@ struct CreateGroupView: View {
                         Image(systemName: "xmark.circle.fill")
                     }
                 }
+            }.navigationDestination(isPresented: $isValid) {
+                GoalsListView(groupName: $groupName, resolution: $resolution, deadline: $deadline)
             }
         }
 
+    }
+}
+
+
+func validateForm(groupName: String, resolution: String, deadline: Date) throws -> Bool {
+    if groupName.isEmpty && resolution.isEmpty {
+        throw ValidationError("Group Name and resolution can not be empty")
+    } else if groupName.isEmpty {
+        throw ValidationError("Group Name can not be empty")
+    } else if resolution.isEmpty {
+        throw ValidationError("Resolution can not be empty")
+    } else if deadline < Date.now {
+        throw ValidationError("Deadline can not be in the past")
+    }
+    
+    return true
+}
+
+struct AlertMessage: Identifiable {
+    let id = UUID()
+    let message: String
+}
+
+struct ValidationError: LocalizedError {
+    var errorDescription: String?
+    init(_ description: String) {
+        self.errorDescription = description
     }
 }
 
