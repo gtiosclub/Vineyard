@@ -12,8 +12,11 @@ class GroupsListViewModel: ObservableObject {
     let databaseManager: FirebaseDataManager = FirebaseDataManager.shared
     private(set) var user: Person?
     var groups: [Group] = []
+    var isPresentingCreateGroupView = false
+    var isPresentingCreateGoalView = false
     
     init() {}
+
     
     func setUser(user: Person?) {
         guard self.user == nil, let user = user else { return }
@@ -69,13 +72,13 @@ class GroupsListViewModel: ObservableObject {
 //        }
 //    }
     
-    func createGroup(withGroupName name: String, withGroupGoal groupGoal: String, withDeadline deadline: Date) {
+    func createGroup(withGroupName name: String, withGroupGoal groupGoal: String, withDeadline deadline: Date, withScoreGoal scoreGoal: Int) {
         guard let user = user else {
             print("User is not set.")
             return
         }
         
-        let newGroup = Group(name: name, groupGoal: groupGoal, peopleIDs: [user.id ?? UUID().uuidString], deadline: deadline, score: 0)
+        let newGroup = Group(name: name, groupGoal: groupGoal, peopleIDs: [user.id ?? UUID().uuidString], deadline: deadline, scoreGoal: scoreGoal)
         Task {
             do {
                 try await databaseManager.addGroupToDB(group: newGroup)

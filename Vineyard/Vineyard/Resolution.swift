@@ -13,11 +13,12 @@ struct Frequency: Codable {
     var count: Int
 }
 
-enum FrequencyType: Codable {
-    case daily
-    case weekly
-    case monthly
+enum FrequencyType: String, Codable {
+    case daily = "Daily"
+    case weekly = "Weekly"
+    case monthly = "Monthly"
 }
+
 struct Difficulty: Codable {
     var difficultyLevel: DifficultyLevel
     var score: Int

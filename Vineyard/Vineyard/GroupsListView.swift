@@ -42,14 +42,13 @@ struct GroupsListView: View {
                         Image(systemName: "magnifyingglass")
                     }
                     Button(action: {
-                        isPresentingAddGroup = true
+                        viewModel.isPresentingCreateGroupView = true
                     }) {
                         Image(systemName: "plus")
                     }
                 }
-            }
-            .sheet(isPresented: $isPresentingAddGroup) {
-                AddGroupView(isPresented: $isPresentingAddGroup, viewModel: viewModel)
+            }.fullScreenCover(isPresented: $viewModel.isPresentingCreateGroupView) {
+                CreateGroupView().environment(viewModel)
             }
             .onAppear {
                 viewModel.setUser(user: loginViewModel.currentUser)
@@ -82,42 +81,6 @@ struct GroupCardView: View {
         .cornerRadius(10)
     }
 }
-
-struct AddGroupView: View {
-    @Binding var isPresented: Bool
-    @ObservedObject var viewModel: GroupsListViewModel
-    
-    @State private var groupName: String = ""
-    @State private var groupDescription: String = ""
-    @State private var groupDeadline: Date = Date()
-    
-    var body: some View {
-        NavigationStack {
-            Form {
-                Section(header: Text("Group Details")) {
-                    TextField("Group Name", text: $groupName)
-                    TextField("Group Description", text: $groupDescription)
-                    DatePicker("Deadline", selection: $groupDeadline, displayedComponents: .date)
-                }
-                
-                Button("Create Group") {
-                    viewModel.createGroup(withGroupName: groupName, withGroupGoal: groupDescription, withDeadline: groupDeadline)
-                    isPresented = false
-                }
-                .disabled(groupName.isEmpty || groupDescription.isEmpty)
-            }
-            .navigationTitle("Add New Group")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
-                        isPresented = false
-                    }
-                }
-            }
-        }
-    }
-}
-
 
 #Preview {
     GroupsListView(viewModel: GroupsListViewModel())

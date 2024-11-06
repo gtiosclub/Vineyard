@@ -18,7 +18,7 @@ struct HomeView: View {
                 DashboardView().tabItem {
                     Label("Dashboard", systemImage: "flame")
                 }
-                GroupsListView(viewModel: viewModel).tabItem {
+                GroupListView(viewModel: viewModel).tabItem {
                     Label("Groups", systemImage: "figure.2.and.child.holdinghands")
                 }
                 ProfileView().tabItem {

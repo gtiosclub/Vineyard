@@ -15,8 +15,9 @@ struct Group: Identifiable, Codable {
     var peopleIDs: [String] = []
     var resolutionIDs: [String] = []
     var deadline: Date
-    var score: Int
-    
+    var scoreGoal: Int = 1
+    var currScore: Int = 0
+
     var people: [Person]? = []
     var resolutions: [Resolution]? = []
 
@@ -27,10 +28,27 @@ struct Group: Identifiable, Codable {
         case peopleIDs
         case resolutionIDs
         case deadline
-        case score
+        case scoreGoal
+        case currScore
     }
     
-    static var samples: [Group] {
+    func addResolution(_ resolution: Resolution) {
+        self.resolutions.append(resolution)
+    }
+    
+    func changeGroupName(toGroupName groupName: String) {
+        self.name = groupName
+    }
+    
+    func removeResolution(atOffsets indexSet: IndexSet) {
+        self.resolutions.remove(atOffsets: indexSet)
+    }
+    
+    func moveResolution(fromOffsets indexSet: IndexSet, toOffset index: Int) {
+        self.resolutions.move(fromOffsets: indexSet, toOffset: index)
+    }
+    
+    static let samples: [Group] = {
         var andrew = Person(name: "Andrew", email: "a@gmail.com")
         var yash = Person(name: "Yash", email: "y@outlook.com")
         var sankaet = Person(name: "Sankaet", email: "s@yahoo.com")
@@ -45,7 +63,7 @@ struct Group: Identifiable, Codable {
                            peopleIDs: [andrew.id ?? UUID().uuidString, yash.id ?? UUID().uuidString, sankaet.id ?? UUID().uuidString],
                            resolutionIDs: [resolution1.id ?? UUID().uuidString, resolution2.id ?? UUID().uuidString],
                            deadline: Date(timeIntervalSinceNow: (7 * 24 * 60 * 60) * 7),
-                           score: 0,
+                           scoreGoal: 5,
                            people: [andrew, yash, sankaet],
                            resolutions: [resolution1, resolution2]
         )
@@ -53,7 +71,7 @@ struct Group: Identifiable, Codable {
                            groupGoal: "Yearly Resolution 2",
                            peopleIDs: [rahul.id ?? UUID().uuidString, vishnesh.id ?? UUID().uuidString],
                            deadline: Date(timeIntervalSinceNow: (7 * 24 * 60 * 60) * 31),
-                           score: 0,
+                           scoreGoal: 5,
                            people: [rahul, vishnesh]
         )
         
@@ -62,8 +80,7 @@ struct Group: Identifiable, Codable {
         sankaet.addGroup(group1)
         rahul.addGroup(group2)
         vishnesh.addGroup(group2)
-        
         return [group1, group2]
 
-    }
+    }()
 }
