@@ -82,7 +82,7 @@ struct RecentActivitiesWidgetFull: Widget {
             }
             .padding()
             .frame(height: 200)
-            .background(Color.white.opacity(0.4))
+            .background(Color.gray.opacity(0.4))
             .cornerRadius(10)
             .shadow(radius: 5)
         )
@@ -113,6 +113,7 @@ struct RecentActivitiesWidgetHalf: Widget {
                         .truncationMode(.tail)
                     
                 }
+                .padding(.bottom, 7)
                 Divider()
                     .background(Color.black.opacity(0.6))
                     .frame(maxWidth: .infinity)
@@ -144,7 +145,7 @@ struct RecentActivitiesWidgetHalf: Widget {
             }
             .padding()
             .frame(height: 200)
-            .background(Color.purple.opacity(0.35))
+            .background(Color.purple.opacity(0.6))
             .cornerRadius(10)
             .shadow(radius: 5)
         )
