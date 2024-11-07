@@ -14,14 +14,17 @@
 		192EBFF12C90F62F00AF8528 /* VineyardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192EBFF02C90F62F00AF8528 /* VineyardTests.swift */; };
 		192EBFFB2C90F62F00AF8528 /* VineyardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192EBFFA2C90F62F00AF8528 /* VineyardUITests.swift */; };
 		192EBFFD2C90F62F00AF8528 /* VineyardUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192EBFFC2C90F62F00AF8528 /* VineyardUITestsLaunchTests.swift */; };
+		951CF8F02CC5C0650016B06A /* GroupListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951CF8EF2CC5C0650016B06A /* GroupListView.swift */; };
+		95BE42E62CCEF4940031547F /* GroupCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BE42E52CCEF4940031547F /* GroupCardView.swift */; };
 		B40B894C2C9364F4006B1771 /* GroupsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40B894B2C9364F4006B1771 /* GroupsListViewModel.swift */; };
 		B40B894E2C936DE0006B1771 /* ResolutionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40B894D2C936DE0006B1771 /* ResolutionView.swift */; };
+		B43CD6BD2CB5F23A0079CCBF /* CreateGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43CD6BC2CB5F23A0079CCBF /* CreateGroupView.swift */; };
+		B43CD6C52CB608200079CCBF /* CreateGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43CD6C42CB608200079CCBF /* CreateGoalView.swift */; };
 		BB40EDF62C991C8A006BA1E3 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EDF52C991C8A006BA1E3 /* Group.swift */; };
 		BB40EDF82C991C93006BA1E3 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EDF72C991C93006BA1E3 /* Person.swift */; };
 		BB40EDFA2C991C9D006BA1E3 /* Resolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EDF92C991C9D006BA1E3 /* Resolution.swift */; };
 		BB40EE062C992566006BA1E3 /* FirebaseDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EE052C992566006BA1E3 /* FirebaseDataManager.swift */; };
 		BB40EE082C99258B006BA1E3 /* DatabaseServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EE072C99258B006BA1E3 /* DatabaseServiceProtocol.swift */; };
-		BB40EE0A2C9926A6006BA1E3 /* GroupsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EE092C9926A6006BA1E3 /* GroupsListView.swift */; };
 		BB40EE0C2C992871006BA1E3 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EE0B2C992871006BA1E3 /* DashboardView.swift */; };
 		BB40EE0E2C99288A006BA1E3 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EE0D2C99288A006BA1E3 /* ProfileView.swift */; };
 		DAB3AC312CAF5AD700DD0DA8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DAB3AC302CAF5AD700DD0DA8 /* GoogleService-Info.plist */; };
@@ -39,6 +42,8 @@
 		F0D913622CACB8A100E7CD81 /* GroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D913612CACB8A100E7CD81 /* GroupView.swift */; };
 		F10167642CA37B080004260E /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10167632CA37B060004260E /* Badge.swift */; };
 		F10167662CA37B180004260E /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10167652CA37B150004260E /* Progress.swift */; };
+		F13306EA2CD3E3C1002BA300 /* TodaysTasksWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13306E92CD3E3B1002BA300 /* TodaysTasksWidget.swift */; };
+		F13306EC2CD3E678002BA300 /* RecentActivitiesWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13306EB2CD3E674002BA300 /* RecentActivitiesWidget.swift */; };
 		F1E19F872CAB58DC00463111 /* Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E19F862CAB58D800463111 /* Widget.swift */; };
 		F1E19F892CAB5B9F00463111 /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E19F882CAB5B9500463111 /* DashboardViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -71,14 +76,17 @@
 		192EBFF62C90F62F00AF8528 /* VineyardUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VineyardUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		192EBFFA2C90F62F00AF8528 /* VineyardUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VineyardUITests.swift; sourceTree = "<group>"; };
 		192EBFFC2C90F62F00AF8528 /* VineyardUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VineyardUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		951CF8EF2CC5C0650016B06A /* GroupListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListView.swift; sourceTree = "<group>"; };
+		95BE42E52CCEF4940031547F /* GroupCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCardView.swift; sourceTree = "<group>"; };
 		B40B894B2C9364F4006B1771 /* GroupsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsListViewModel.swift; sourceTree = "<group>"; };
 		B40B894D2C936DE0006B1771 /* ResolutionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolutionView.swift; sourceTree = "<group>"; };
+		B43CD6BC2CB5F23A0079CCBF /* CreateGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupView.swift; sourceTree = "<group>"; };
+		B43CD6C42CB608200079CCBF /* CreateGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGoalView.swift; sourceTree = "<group>"; };
 		BB40EDF52C991C8A006BA1E3 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		BB40EDF72C991C93006BA1E3 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		BB40EDF92C991C9D006BA1E3 /* Resolution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resolution.swift; sourceTree = "<group>"; };
 		BB40EE052C992566006BA1E3 /* FirebaseDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDataManager.swift; sourceTree = "<group>"; };
 		BB40EE072C99258B006BA1E3 /* DatabaseServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseServiceProtocol.swift; sourceTree = "<group>"; };
-		BB40EE092C9926A6006BA1E3 /* GroupsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsListView.swift; sourceTree = "<group>"; };
 		BB40EE0B2C992871006BA1E3 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		BB40EE0D2C99288A006BA1E3 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		DAB3AC302CAF5AD700DD0DA8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -94,6 +102,8 @@
 		F0D913612CACB8A100E7CD81 /* GroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupView.swift; sourceTree = "<group>"; };
 		F10167632CA37B060004260E /* Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
 		F10167652CA37B150004260E /* Progress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Progress.swift; sourceTree = "<group>"; };
+		F13306E92CD3E3B1002BA300 /* TodaysTasksWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaysTasksWidget.swift; sourceTree = "<group>"; };
+		F13306EB2CD3E674002BA300 /* RecentActivitiesWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivitiesWidget.swift; sourceTree = "<group>"; };
 		F1E19F862CAB58D800463111 /* Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Widget.swift; sourceTree = "<group>"; };
 		F1E19F882CAB5B9500463111 /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -294,8 +304,11 @@
 			isa = PBXGroup;
 			children = (
 				B40B894D2C936DE0006B1771 /* ResolutionView.swift */,
-				BB40EE092C9926A6006BA1E3 /* GroupsListView.swift */,
+				951CF8EF2CC5C0650016B06A /* GroupListView.swift */,
 				F0D913612CACB8A100E7CD81 /* GroupView.swift */,
+				95BE42E52CCEF4940031547F /* GroupCardView.swift */,
+				B43CD6BC2CB5F23A0079CCBF /* CreateGroupView.swift */,
+				B43CD6C42CB608200079CCBF /* CreateGoalView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -303,6 +316,8 @@
 		BB40EDFE2C991DFC006BA1E3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				F13306EB2CD3E674002BA300 /* RecentActivitiesWidget.swift */,
+				F13306E92CD3E3B1002BA300 /* TodaysTasksWidget.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -498,10 +513,10 @@
 			files = (
 				F05361C82CAF1462009DE1E3 /* TodoViewModel.swift in Sources */,
 				192EBFE22C90F62E00AF8528 /* HomeView.swift in Sources */,
+				B43CD6C52CB608200079CCBF /* CreateGoalView.swift in Sources */,
 				B40B894C2C9364F4006B1771 /* GroupsListViewModel.swift in Sources */,
 				F0D913622CACB8A100E7CD81 /* GroupView.swift in Sources */,
 				F1E19F872CAB58DC00463111 /* Widget.swift in Sources */,
-				BB40EE0A2C9926A6006BA1E3 /* GroupsListView.swift in Sources */,
 				BB40EE062C992566006BA1E3 /* FirebaseDataManager.swift in Sources */,
 				F04057812CDC72E2001DDD8B /* Color+Extensions.swift in Sources */,
 				BB40EE0E2C99288A006BA1E3 /* ProfileView.swift in Sources */,
@@ -509,16 +524,21 @@
 				F1E19F892CAB5B9F00463111 /* DashboardViewModel.swift in Sources */,
 				BB40EDF82C991C93006BA1E3 /* Person.swift in Sources */,
 				BB40EE0C2C992871006BA1E3 /* DashboardView.swift in Sources */,
+				95BE42E62CCEF4940031547F /* GroupCardView.swift in Sources */,
 				EAC380712CA36B9A00EBEF4C /* LoginModel.swift in Sources */,
 				EAC380692CA36B3100EBEF4C /* LoginView.swift in Sources */,
 				EAC3806F2CA36B8800EBEF4C /* LoginViewModel.swift in Sources */,
 				192EBFE02C90F62E00AF8528 /* VineyardApp.swift in Sources */,
+				F13306EC2CD3E678002BA300 /* RecentActivitiesWidget.swift in Sources */,
 				F04BEBD32CB43B46007EB113 /* ProfileViewModel.swift in Sources */,
 				B40B894E2C936DE0006B1771 /* ResolutionView.swift in Sources */,
 				F10167662CA37B180004260E /* Progress.swift in Sources */,
+				951CF8F02CC5C0650016B06A /* GroupListView.swift in Sources */,
 				BB40EE082C99258B006BA1E3 /* DatabaseServiceProtocol.swift in Sources */,
+				F13306EA2CD3E3C1002BA300 /* TodaysTasksWidget.swift in Sources */,
 				EAC3806B2CA36B5600EBEF4C /* SignUpView.swift in Sources */,
 				F05361C62CAF0AA1009DE1E3 /* TodoView.swift in Sources */,
+				B43CD6BD2CB5F23A0079CCBF /* CreateGroupView.swift in Sources */,
 				F10167642CA37B080004260E /* Badge.swift in Sources */,
 				BB40EDFA2C991C9D006BA1E3 /* Resolution.swift in Sources */,
 				EAC3806D2CA36B7400EBEF4C /* ResetPasswordView.swift in Sources */,
@@ -685,7 +705,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Vineyard/Preview Content\"";
-				DEVELOPMENT_TEAM = D46454C83G;
+				DEVELOPMENT_TEAM = NUB3URKAXL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -714,7 +734,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Vineyard/Preview Content\"";
-				DEVELOPMENT_TEAM = D46454C83G;
+				DEVELOPMENT_TEAM = NUB3URKAXL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
