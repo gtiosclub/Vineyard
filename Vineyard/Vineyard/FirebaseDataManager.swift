@@ -139,12 +139,12 @@ class FirebaseDataManager: DatabaseServiceProtocol {
             }
 
             let progress = Progress(
-                id: progressID,
                 resolution: resolution,
-                completionArray: completionDates,
                 quantityGoal: quantityGoal,
                 frequencyGoal: frequency,
-                person: person
+                person: person,
+                completionArray: completionDates,
+                id: progressID
             )
             progressList.append(progress)
         }
