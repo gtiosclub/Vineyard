@@ -18,8 +18,6 @@ class GroupsListViewModel {
     var groupCreationErrorMessage: AlertMessage?
     var goalCreationErrorMessage: AlertMessage?
     
-    init() {}
-    
     struct AlertMessage: Identifiable {
         let id = UUID()
         let message: String
@@ -32,6 +30,11 @@ class GroupsListViewModel {
         }
     }
 
+    
+    
+    init() {}
+    
+    
     
     func setUser(user: Person?) {
         guard self.user == nil, let user = user else { return }
