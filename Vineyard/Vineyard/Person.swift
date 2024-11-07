@@ -30,9 +30,7 @@ struct Person: Identifiable, Codable {
     }
     
     mutating func addGroup(_ group: Group) {
-        guard let id = group.id else { fatalError(/* ... */) }
-        
-        self.groupIDs.append(id)
+        self.groupIDs.append(group.id ?? UUID().uuidString)
     }
     
     static var samples: [Person] {
