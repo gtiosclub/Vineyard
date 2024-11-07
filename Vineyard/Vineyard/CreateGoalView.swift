@@ -80,28 +80,8 @@ struct CreateGoalView: View {
             .background(.orange)
             .listStyle(InsetListStyle())
             
-            
             Button {
-                do {
-                    try viewModel.validateGoalCreationForm(action: action)
-                    let resolution = Resolution(title: action, description: description, quantity: Int(quantity), frequency: Frequency(frequencyType: selectedFrequency, count: freqQuantity), diffLevel: Difficulty(difficultyLevel: selectedDifficulty, score: 10))
-                    
-                    goals.append(resolution)
-                    
-//                    print(resolution.title, resolution.description, resolution.defaultFrequency.frequencyType, resolution.defaultFrequency.count, resolution.diffLevel.difficultyLevel, resolution.diffLevel.score)
-                    
-                    action = "" // the name of the goal
-                    description = "" // the name of the goal
-                    quantity = ""
-                    selectedDifficulty = .medium
-                    selectedFrequency = .daily
-                    dismiss()
-                } catch let error as GroupsListViewModel.ValidationError {
-                    viewModel.goalCreationErrorMessage = GroupsListViewModel.AlertMessage(message: error.localizedDescription)
-               } catch {
-                   viewModel.goalCreationErrorMessage = GroupsListViewModel.AlertMessage(message: "An unexpected error occurred.")
-               }
-
+                validateGoalCreationForm()
             } label: {
                 Text("Create")
                     .frame(maxWidth: .infinity)
@@ -124,6 +104,28 @@ struct CreateGoalView: View {
                 
             }
         })
+    }
+    
+    func validateGoalCreationForm() {
+        do {
+            try viewModel.validateGoalCreationForm(action: action)
+            let resolution = Resolution(title: action, description: description, quantity: Int(quantity), frequency: Frequency(frequencyType: selectedFrequency, count: freqQuantity), diffLevel: Difficulty(difficultyLevel: selectedDifficulty, score: 10))
+            
+            goals.append(resolution)
+            
+//                    print(resolution.title, resolution.description, resolution.defaultFrequency.frequencyType, resolution.defaultFrequency.count, resolution.diffLevel.difficultyLevel, resolution.diffLevel.score)
+            
+            action = "" // the name of the goal
+            description = "" // the name of the goal
+            quantity = ""
+            selectedDifficulty = .medium
+            selectedFrequency = .daily
+            dismiss()
+        } catch let error as GroupsListViewModel.ValidationError {
+            viewModel.goalCreationErrorMessage = GroupsListViewModel.AlertMessage(message: error.localizedDescription)
+       } catch {
+           viewModel.goalCreationErrorMessage = GroupsListViewModel.AlertMessage(message: "An unexpected error occurred.")
+       }
     }
 
 }

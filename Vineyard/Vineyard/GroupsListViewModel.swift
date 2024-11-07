@@ -41,6 +41,10 @@ class GroupsListViewModel {
         self.user = user
     }
     
+    func submitGoalCreationForm(action: String, description: String, quantity: Int, selectedFrequency: FrequencyType, freqQuantity: Int, selectedDifficulty: DifficultyLevel) {
+
+    }
+    
     func submitGroupCreationForm(groupName: String, resolution: String, deadline: Date) {
         do {
             isValid = try validateGroupCreationForm(groupName: groupName, resolution: resolution, deadline: deadline)
