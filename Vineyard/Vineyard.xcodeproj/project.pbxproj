@@ -35,6 +35,7 @@
 		EAC3806D2CA36B7400EBEF4C /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC3806C2CA36B7400EBEF4C /* ResetPasswordView.swift */; };
 		EAC3806F2CA36B8800EBEF4C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC3806E2CA36B8800EBEF4C /* LoginViewModel.swift */; };
 		EAC380712CA36B9A00EBEF4C /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC380702CA36B9A00EBEF4C /* LoginModel.swift */; };
+		F04057812CDC72E2001DDD8B /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04057802CDC72E2001DDD8B /* Color+Extensions.swift */; };
 		F04BEBD32CB43B46007EB113 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04BEBD22CB43B46007EB113 /* ProfileViewModel.swift */; };
 		F05361C62CAF0AA1009DE1E3 /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05361C52CAF0AA1009DE1E3 /* TodoView.swift */; };
 		F05361C82CAF1462009DE1E3 /* TodoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05361C72CAF1462009DE1E3 /* TodoViewModel.swift */; };
@@ -94,6 +95,7 @@
 		EAC3806C2CA36B7400EBEF4C /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		EAC3806E2CA36B8800EBEF4C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		EAC380702CA36B9A00EBEF4C /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		F04057802CDC72E2001DDD8B /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		F04BEBD22CB43B46007EB113 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		F05361C52CAF0AA1009DE1E3 /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TodoView.swift; path = Vineyard/TodoView.swift; sourceTree = SOURCE_ROOT; };
 		F05361C72CAF1462009DE1E3 /* TodoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TodoViewModel.swift; path = Vineyard/TodoViewModel.swift; sourceTree = SOURCE_ROOT; };
@@ -157,6 +159,7 @@
 		192EBFDE2C90F62E00AF8528 /* Vineyard */ = {
 			isa = PBXGroup;
 			children = (
+				F040577F2CDC72BE001DDD8B /* Extensions */,
 				192EBFDF2C90F62E00AF8528 /* VineyardApp.swift */,
 				192EBFE12C90F62E00AF8528 /* HomeView.swift */,
 				BB40EDF42C991C69006BA1E3 /* Database */,
@@ -362,6 +365,14 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		F040577F2CDC72BE001DDD8B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F04057802CDC72E2001DDD8B /* Color+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -507,6 +518,7 @@
 				F0D913622CACB8A100E7CD81 /* GroupView.swift in Sources */,
 				F1E19F872CAB58DC00463111 /* Widget.swift in Sources */,
 				BB40EE062C992566006BA1E3 /* FirebaseDataManager.swift in Sources */,
+				F04057812CDC72E2001DDD8B /* Color+Extensions.swift in Sources */,
 				BB40EE0E2C99288A006BA1E3 /* ProfileView.swift in Sources */,
 				BB40EDF62C991C8A006BA1E3 /* Group.swift in Sources */,
 				F1E19F892CAB5B9F00463111 /* DashboardViewModel.swift in Sources */,
