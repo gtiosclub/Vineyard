@@ -12,53 +12,56 @@ struct GroupListView: View {
     @State var viewModel: GroupsListViewModel = .init()
     @State private var isPresentingAddGroup = false
     var body: some View {
-        NavigationView {
-            ScrollView {
-                VStack(alignment: .center, spacing: 30) {
-                    Spacer()
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text("Your Groups")
-                                .font(.system(size: 30, weight: .bold))
-                                .foregroundColor(.white)
-                            Text("\(viewModel.user?.groups.count ?? 0) active group(s)")
-                                .foregroundColor(.white)
-                            
-                        }
+        ZStack {
+            Image("topBackground")
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                .ignoresSafeArea()
+
+                ScrollView {
+                    VStack(alignment: .center, spacing: 30) {
                         Spacer()
-                        Button(action: {
-                            print("changing mode")
-                        }) {
-                            Image(systemName: "list.bullet")
-                                .foregroundColor(.white)
-                                .font(.system(size: 25))
-                        }
-                        Button(action: {
-                            print("add")
-                            viewModel.isPresentingCreateGroupView = true
-                        }) {
-                            Image(systemName: "plus")
-                                .foregroundColor(.white)
-                                .font(.system(size: 25))
-                        }
-                    }
-                    .padding(40)
-                    
-                    Spacer()
-                    VStack(spacing: 5) {
-                        ForEach(viewModel.groups, id: \.id) { group in
-                            NavigationLink(destination: GroupView(group: group)) {
-                                GroupCardView(group: group)
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text("Your Groups")
+                                    .font(.system(size: 30, weight: .bold))
+                                    .foregroundColor(.white)
+                                Text("\(viewModel.user?.groups.count ?? 0) active group(s)")
+                                    .foregroundColor(.white)
+                                
                             }
-                            .buttonStyle(PlainButtonStyle())
-                        }.padding()
+                            Spacer()
+                            Button(action: {
+                                print("changing mode")
+                            }) {
+                                Image(systemName: "list.bullet")
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 25))
+                            }
+                            Button(action: {
+                                print("add")
+                                viewModel.isPresentingCreateGroupView = true
+                            }) {
+                                Image(systemName: "plus")
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 25))
+                            }
+                        }
+                        .padding(40)
+                        
+                        Spacer()
+                        VStack(spacing: 5) {
+                            ForEach(viewModel.groups, id: \.id) { group in
+                                NavigationLink(destination: GroupView(group: group)) {
+                                    GroupCardView(group: group)
+                                }
+                                .buttonStyle(PlainButtonStyle())
+                            }.padding()
+                        }
                     }
-                }
-                .navigationBarHidden(true)
-                .background(alignment: .top) {
-                    Image("topBackground")
-                }
-            }.ignoresSafeArea()
+                    .navigationBarHidden(true)
+
+                }.ignoresSafeArea()
+            
         }
         .fullScreenCover(isPresented: $viewModel.isPresentingCreateGroupView) {
             CreateGroupView().environment(viewModel)
