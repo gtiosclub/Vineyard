@@ -12,11 +12,12 @@ struct Frequency: Codable {
     var count: Int
 }
 
-enum FrequencyType: Codable {
-    case daily
-    case weekly
-    case monthly
+enum FrequencyType: String, Codable {
+    case daily = "Daily"
+    case weekly = "Weekly"
+    case monthly = "Monthly"
 }
+
 struct Difficulty: Codable {
     var difficultyLevel: DifficultyLevel
     var score: Int
@@ -46,8 +47,8 @@ class Resolution: Identifiable, Codable {
     }
     
     static var samples: [Resolution] {
-        let resolution1 = Resolution(title: "Run miles", description: "Run a certain number of miles", quantity: 5, frequency: Frequency(frequencyType: FrequencyType.weekly, count: 1), diffLevel: Difficulty(difficultyLevel: DifficultyLevel.medium, score: 5))
-        let resolution2 = Resolution(title: "Drink 7 cups of water", description: "Drink more water", frequency: Frequency(frequencyType: FrequencyType.weekly, count: 1), diffLevel: Difficulty(difficultyLevel: DifficultyLevel.easy, score: 2))
+        let resolution1 = Resolution(title: "Run miles", description: "Run a certain number of miles", quantity: 5, frequency: Frequency(frequencyType: .weekly, count: 1), diffLevel: Difficulty(difficultyLevel: .medium, score: 10))
+        let resolution2 = Resolution(title: "Drink 7 cups of water", description: "Drink more water", frequency: Frequency(frequencyType: .weekly, count: 1), diffLevel: Difficulty(difficultyLevel: .medium, score: 10))
         
         return [resolution1, resolution2]
     }
