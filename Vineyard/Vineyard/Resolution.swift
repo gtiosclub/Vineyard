@@ -31,7 +31,7 @@ enum DifficultyLevel: Codable {
 }
 
 struct Resolution: Identifiable, Codable {
-    @DocumentID var id: String? = UUID().uuidString
+    @DocumentID var id: String?
     var title: String
     var description: String
     var quantity: Int? = 0

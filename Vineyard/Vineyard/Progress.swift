@@ -9,7 +9,7 @@ import Foundation
 import FirebaseFirestore
 
 struct Progress: Identifiable, Codable {
-    @DocumentID var id: String? = UUID().uuidString
+    @DocumentID var id: String?
     var resolutionID: String
     var personID: String
     var completionArray: [Date] = []

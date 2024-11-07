@@ -9,7 +9,7 @@ import Foundation
 import FirebaseFirestore
 
 struct Group: Identifiable, Codable {
-    @DocumentID var id: String? = UUID().uuidString
+    @DocumentID var id: String?
     var name: String
     var groupGoal: String
     var peopleIDs: [String] = []

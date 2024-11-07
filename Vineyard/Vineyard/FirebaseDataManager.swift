@@ -133,32 +133,5 @@ class FirebaseDataManager: DatabaseServiceProtocol {
             try await addResolutionToDB(resolution: resolution)
         }
     }
-    
-    func listenToGroup(groupID: String, completion: @escaping (Group?) -> Void) {
-        let groupRef = db.collection("groups").document(groupID)
-        
-        groupRef.addSnapshotListener { documentSnapshot, error in
-            guard let document = documentSnapshot, let data = document.data() else {
-                print("Error fetching group document: \(error?.localizedDescription ?? "Unknown error")")
-                completion(nil)
-                return
-            }
-            
-            do {
-                var group = try document.data(as: Group.self)
-                
-                // Fetch the related object as well - might not do this here? \\
-                Task {
-                    if let resolutions = try? await self.fetchResolutionsFromDB(resolutionIDs: group.resolutionIDs) {
-                        group.resolutions = resolutions
-                    }
-                    completion(group)
-                }
-            } catch {
-                print("Error decoding group: \(error)")
-                completion(nil)
-            }
-        }
-    }
 
 }

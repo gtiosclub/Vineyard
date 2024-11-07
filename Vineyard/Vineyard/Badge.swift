@@ -9,7 +9,7 @@ import Foundation
 import FirebaseFirestore
 
 struct Badge: Identifiable, Codable {
-    @DocumentID var id: String? = UUID().uuidString
+    @DocumentID var id: String?
     var resolutionID: String
     var groupID: String
     var dateObtained: Date

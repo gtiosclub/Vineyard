@@ -9,7 +9,7 @@ import Foundation
 import FirebaseFirestore
 
 struct Person: Identifiable, Codable {
-    @DocumentID var id: String? = UUID().uuidString
+    @DocumentID var id: String?
     var name: String
     var email: String
     var groupIDs: [String] = []
@@ -30,7 +30,9 @@ struct Person: Identifiable, Codable {
     }
     
     mutating func addGroup(_ group: Group) {
-        self.groupIDs.append(group.id ?? UUID().uuidString)
+        guard let id = group.id else { fatalError(/* ... */) }
+        
+        self.groupIDs.append(id)
     }
     
     static var samples: [Person] {
