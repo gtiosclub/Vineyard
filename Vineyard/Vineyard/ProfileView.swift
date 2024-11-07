@@ -29,7 +29,7 @@ struct ProfileView: View {
                                 .font(.system(size: 32, weight: .bold))
                                 .foregroundColor(Color.profileViewInfo)
                             HStack() {
-                                let count = viewModel.user.groups.count
+                                let count = viewModel.user.groupIDs.count
                                 Text("\(count) \(count > 1 ? "groups" : "group")")
                                      .font(.system(size: 16))
                                      .fontWeight(.regular)

@@ -28,7 +28,7 @@ enum DifficultyLevel: Codable {
     case easy
     case medium
     case hard
-}
+}   
 
 struct Resolution: Identifiable, Codable {
     @DocumentID var id: String?
