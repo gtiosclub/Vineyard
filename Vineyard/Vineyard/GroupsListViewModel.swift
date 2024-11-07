@@ -67,9 +67,13 @@ class GroupsListViewModel {
         return true
     }
     
-    func validateGoalCreationForm(action: String) throws {
+    func validateGoalCreationForm(action: String, quantity: String, isQuantityTask: Bool, isInserted: Bool) throws {
         if action.isEmpty {
             throw ValidationError("Action can not be empty")
+        } else if isQuantityTask && quantity == "" {
+            throw ValidationError("Need to specify quantity for quantity task")
+        } else if isQuantityTask && !isInserted {
+            throw ValidationError("Need to insert quantity for quantity task")
         }
         return
     }

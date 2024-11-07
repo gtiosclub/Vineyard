@@ -22,6 +22,16 @@ struct CreateGoalView: View {
     @State private var selectedFrequencyText: String = "Daily"
     @State private var freqQuantity: Int = 0
     @Environment(\.dismiss) var dismiss
+    @State private var words: [String] = []
+    @State private var wordPositions: [CGFloat] = []
+    @State private var dragPosition: CGPoint = .zero
+    @State private var initialDragPosition: CGPoint = .zero
+    @State private var isInserted = false
+    
+    
+    @State private var snapIndex: Int?
+    @State private var indexInserted: Int?
+    @State var isQuantityTask: Bool = false
     
     
 //    
@@ -36,11 +46,141 @@ struct CreateGoalView: View {
             
             Text("Create Goal").font(.largeTitle).bold()
             
-            Text("Action")
+            Text("Resolution")
                 .frame(maxWidth: .infinity, alignment: .leading)
             
             TextField("Resolution Name:", text: $action)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
+                .onChange(of: action) {
+                    words = action.split(separator: " ").map { String($0) }
+                    wordPositions = [CGFloat](repeating: 0, count: words.count)
+                    
+                    
+                }
+            
+                
+                // Fixed word list
+                HStack(spacing:4) {
+                    ForEach(Array(words.enumerated()), id: \.element) { index, word in
+                        
+                                Text(word)
+                                .fontWeight(.semibold)
+                                    .background(
+                                        GeometryReader { geometry in
+                                            Color.clear
+                                                .onChange(of: action) {
+                                                    if index < words.count {
+                                                        wordPositions[index] = geometry.frame(in: .global).midX
+                                                    }
+                                                    
+                                            }
+                                                .onChange(of: snapIndex) {
+                                                    if index < words.count {
+                                                        wordPositions[index] = geometry.frame(in: .global).midX
+                                                    }
+                                                    
+                                                }
+                                                
+                                        })
+                                    
+                                snapIndex == index + 1 ? Rectangle()
+                                    .fill(Color.purple.opacity(0.3))
+                                    .frame(width: 4, height: 10) : nil
+                            if isInserted && indexInserted == index+1 {
+                                Text("Quantity")
+                                    .bold()
+                                    .padding(8)
+                                    .overlay {
+                                        LinearGradient(
+                                            colors: [.red, .blue, .green, .yellow],
+                                            startPoint: .leading,
+                                            endPoint: .trailing
+                                        )
+                                        .mask(
+                                            Text("Quantity")
+                                                .bold()
+                                        )
+                                    }
+                                    .background {
+                                        RoundedRectangle(cornerRadius: 20)
+                                            .foregroundStyle(.thinMaterial)
+                                    }
+                                    .onTapGesture {
+                                        isInserted = false
+                                        snapIndex = nil
+                                        indexInserted = nil
+                                        dragPosition = initialDragPosition
+                                    }
+
+                                
+                                    
+                                
+                            }
+                            
+                        
+                    }
+                }
+                .frame(height: 40)
+                
+            Spacer()
+                .frame(height: 30)
+                // Draggable word
+            Text("Drag me: ")
+                .opacity(isQuantityTask && !isInserted ? 1 : 0)
+                .background {
+                    GeometryReader { geometry in
+                        Color.clear.onAppear {
+                            initialDragPosition = .init(x: geometry.frame(in: .local).maxX + 50, y: geometry.frame(in: .local).midY - 32)
+                            print(initialDragPosition)
+                            dragPosition = initialDragPosition
+                        }
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                    Text("Quantity")
+                        .bold()
+                        .padding(8)
+                        .overlay {
+                            LinearGradient(
+                                colors: [.red, .blue, .green, .yellow],
+                                startPoint: .leading,
+                                endPoint: .trailing
+                            )
+                            .mask(
+                                Text("Quantity")
+                                    .bold()
+                            )
+                        }
+                        .background {
+                            RoundedRectangle(cornerRadius: 20)
+                                .foregroundStyle(.thinMaterial)
+                        }
+                        .position(x: dragPosition.x, y: dragPosition.y)
+                        .gesture(
+                            DragGesture()
+                                .onChanged { value in
+                                    dragPosition = value.location
+                                    if let (index, _) = wordPositions.enumerated()
+                                        .min(by: { abs($0.1 - value.location.x) < abs($1.1 - value.location.x) }) {
+                                        snapIndex = index + 1
+                                    }
+                                }
+                                .onEnded { value in
+                                    
+                                    if let snapIndex = snapIndex {
+                                        isInserted = true
+                                        indexInserted = snapIndex
+                                        self.snapIndex = nil
+                                    }
+                                }
+                        )
+                        
+                        .opacity(isQuantityTask && !isInserted ? 1 : 0)
+                        .frame(maxHeight: 40)
+                
+            
+
+            
 
             
             Text("Description (Optional)")
@@ -48,12 +188,22 @@ struct CreateGoalView: View {
 
             TextField("Description:", text: $description)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-            
-            Text("Quantity (Optional)")
-                .frame(maxWidth: .infinity, alignment: .leading)
-            
-            TextField("2", text: $quantity).keyboardType(.numberPad)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
+            Toggle("Quantity task", isOn: $isQuantityTask)
+                .onChange(of: isQuantityTask) {
+                    isInserted = false
+                    snapIndex = nil
+                    indexInserted = nil
+                    dragPosition = initialDragPosition
+                    quantity = ""
+                }
+                .padding()
+            if isQuantityTask {
+                Text("Quantity")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+                TextField("2", text: $quantity).keyboardType(.numberPad)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+            }
             
             
             List {
@@ -108,7 +258,9 @@ struct CreateGoalView: View {
     
     func validateGoalCreationForm() {
         do {
-            try viewModel.validateGoalCreationForm(action: action)
+            try viewModel.validateGoalCreationForm(action: action, quantity: quantity, isQuantityTask: isQuantityTask, isInserted: isInserted)
+            words.insert("qtt_position", at: indexInserted ?? 0)
+            action = words.joined(separator: " ")
             let resolution = Resolution(title: action, description: description, quantity: Int(quantity), frequency: Frequency(frequencyType: selectedFrequency, count: freqQuantity), diffLevel: Difficulty(difficultyLevel: selectedDifficulty, score: 10))
             
             goals.append(resolution)
@@ -118,6 +270,11 @@ struct CreateGoalView: View {
             action = "" // the name of the goal
             description = "" // the name of the goal
             quantity = ""
+            isQuantityTask = false
+            isInserted = false
+            snapIndex = nil
+            indexInserted = nil
+            dragPosition = initialDragPosition
             selectedDifficulty = .medium
             selectedFrequency = .daily
             dismiss()
