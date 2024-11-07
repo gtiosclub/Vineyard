@@ -61,22 +61,9 @@ class LoginViewModel: ObservableObject {
                 return
             }
             
-            let userDoc = try await db.collection("people").document(uid).getDocument()
-            
-            guard let data = userDoc.data() else {
-                errorMessage = "User data not found in Firestore."
-                isLoggedIn = false
-                return
-            }
-            guard let name = data["name"] as? String,
-                  let email = data["email"] as? String,
-                  let groupIDs = data["groupIDs"] as? [String] else {
-                errorMessage = "User data is incomplete or incorrectly formatted."
-                isLoggedIn = false
-                return
-            }
-            
-            currentUser = Person(id: uid, name: name, email: email, groupIDs: groupIDs, badgeIDs: [], allProgress: [])
+            let user = try await db.collection("people").document(uid).getDocument(as: Person.self)
+
+            currentUser = user
             isLoggedIn = true
         } catch {
             isLoggedIn = false
@@ -87,9 +74,16 @@ class LoginViewModel: ObservableObject {
     }
 
     
-    public func checkLoggedIn() {
-        if Auth.auth().currentUser != nil {
+    public func checkLoggedIn() async {
+        if auth.currentUser != nil {
             isLoggedIn = true
+            do {
+                let user = try await db.collection("people").document(auth.currentUser!.uid).getDocument(as: Person.self)
+
+                currentUser = user
+            } catch {
+                print(error)
+            }
         } else {
             isLoggedIn = false
             print("asdf")
