@@ -35,12 +35,15 @@
 		EAC3806D2CA36B7400EBEF4C /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC3806C2CA36B7400EBEF4C /* ResetPasswordView.swift */; };
 		EAC3806F2CA36B8800EBEF4C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC3806E2CA36B8800EBEF4C /* LoginViewModel.swift */; };
 		EAC380712CA36B9A00EBEF4C /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC380702CA36B9A00EBEF4C /* LoginModel.swift */; };
+		F04057812CDC72E2001DDD8B /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04057802CDC72E2001DDD8B /* Color+Extensions.swift */; };
 		F04BEBD32CB43B46007EB113 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04BEBD22CB43B46007EB113 /* ProfileViewModel.swift */; };
 		F05361C62CAF0AA1009DE1E3 /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05361C52CAF0AA1009DE1E3 /* TodoView.swift */; };
 		F05361C82CAF1462009DE1E3 /* TodoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05361C72CAF1462009DE1E3 /* TodoViewModel.swift */; };
 		F0D913622CACB8A100E7CD81 /* GroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D913612CACB8A100E7CD81 /* GroupView.swift */; };
 		F10167642CA37B080004260E /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10167632CA37B060004260E /* Badge.swift */; };
 		F10167662CA37B180004260E /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10167652CA37B150004260E /* Progress.swift */; };
+		F13306EA2CD3E3C1002BA300 /* TodaysTasksWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13306E92CD3E3B1002BA300 /* TodaysTasksWidget.swift */; };
+		F13306EC2CD3E678002BA300 /* RecentActivitiesWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13306EB2CD3E674002BA300 /* RecentActivitiesWidget.swift */; };
 		F1E19F872CAB58DC00463111 /* Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E19F862CAB58D800463111 /* Widget.swift */; };
 		F1E19F892CAB5B9F00463111 /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E19F882CAB5B9500463111 /* DashboardViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -92,12 +95,15 @@
 		EAC3806C2CA36B7400EBEF4C /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		EAC3806E2CA36B8800EBEF4C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		EAC380702CA36B9A00EBEF4C /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		F04057802CDC72E2001DDD8B /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		F04BEBD22CB43B46007EB113 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		F05361C52CAF0AA1009DE1E3 /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TodoView.swift; path = Vineyard/TodoView.swift; sourceTree = SOURCE_ROOT; };
 		F05361C72CAF1462009DE1E3 /* TodoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TodoViewModel.swift; path = Vineyard/TodoViewModel.swift; sourceTree = SOURCE_ROOT; };
 		F0D913612CACB8A100E7CD81 /* GroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupView.swift; sourceTree = "<group>"; };
 		F10167632CA37B060004260E /* Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
 		F10167652CA37B150004260E /* Progress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Progress.swift; sourceTree = "<group>"; };
+		F13306E92CD3E3B1002BA300 /* TodaysTasksWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaysTasksWidget.swift; sourceTree = "<group>"; };
+		F13306EB2CD3E674002BA300 /* RecentActivitiesWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivitiesWidget.swift; sourceTree = "<group>"; };
 		F1E19F862CAB58D800463111 /* Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Widget.swift; sourceTree = "<group>"; };
 		F1E19F882CAB5B9500463111 /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -153,6 +159,7 @@
 		192EBFDE2C90F62E00AF8528 /* Vineyard */ = {
 			isa = PBXGroup;
 			children = (
+				F040577F2CDC72BE001DDD8B /* Extensions */,
 				192EBFDF2C90F62E00AF8528 /* VineyardApp.swift */,
 				192EBFE12C90F62E00AF8528 /* HomeView.swift */,
 				BB40EDF42C991C69006BA1E3 /* Database */,
@@ -309,6 +316,8 @@
 		BB40EDFE2C991DFC006BA1E3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				F13306EB2CD3E674002BA300 /* RecentActivitiesWidget.swift */,
+				F13306E92CD3E3B1002BA300 /* TodaysTasksWidget.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -354,6 +363,14 @@
 				EAC3806C2CA36B7400EBEF4C /* ResetPasswordView.swift */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		F040577F2CDC72BE001DDD8B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F04057802CDC72E2001DDD8B /* Color+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -501,6 +518,7 @@
 				F0D913622CACB8A100E7CD81 /* GroupView.swift in Sources */,
 				F1E19F872CAB58DC00463111 /* Widget.swift in Sources */,
 				BB40EE062C992566006BA1E3 /* FirebaseDataManager.swift in Sources */,
+				F04057812CDC72E2001DDD8B /* Color+Extensions.swift in Sources */,
 				BB40EE0E2C99288A006BA1E3 /* ProfileView.swift in Sources */,
 				BB40EDF62C991C8A006BA1E3 /* Group.swift in Sources */,
 				F1E19F892CAB5B9F00463111 /* DashboardViewModel.swift in Sources */,
@@ -511,11 +529,13 @@
 				EAC380692CA36B3100EBEF4C /* LoginView.swift in Sources */,
 				EAC3806F2CA36B8800EBEF4C /* LoginViewModel.swift in Sources */,
 				192EBFE02C90F62E00AF8528 /* VineyardApp.swift in Sources */,
+				F13306EC2CD3E678002BA300 /* RecentActivitiesWidget.swift in Sources */,
 				F04BEBD32CB43B46007EB113 /* ProfileViewModel.swift in Sources */,
 				B40B894E2C936DE0006B1771 /* ResolutionView.swift in Sources */,
 				F10167662CA37B180004260E /* Progress.swift in Sources */,
 				951CF8F02CC5C0650016B06A /* GroupListView.swift in Sources */,
 				BB40EE082C99258B006BA1E3 /* DatabaseServiceProtocol.swift in Sources */,
+				F13306EA2CD3E3C1002BA300 /* TodaysTasksWidget.swift in Sources */,
 				EAC3806B2CA36B5600EBEF4C /* SignUpView.swift in Sources */,
 				F05361C62CAF0AA1009DE1E3 /* TodoView.swift in Sources */,
 				B43CD6BD2CB5F23A0079CCBF /* CreateGroupView.swift in Sources */,
@@ -685,7 +705,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Vineyard/Preview Content\"";
-				DEVELOPMENT_TEAM = D46454C83G;
+				DEVELOPMENT_TEAM = NUB3URKAXL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -714,7 +734,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Vineyard/Preview Content\"";
-				DEVELOPMENT_TEAM = D46454C83G;
+				DEVELOPMENT_TEAM = NUB3URKAXL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

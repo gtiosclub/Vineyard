@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject private var loginViewModel: LoginViewModel
-    @StateObject private var viewModel = GroupsListViewModel()
+    @State private var viewModel = GroupsListViewModel()
 
     var body: some View {
         
