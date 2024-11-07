@@ -84,7 +84,6 @@ class GroupsListViewModel: ObservableObject {
                 try await databaseManager.addGroupToDB(group: newGroup)
                 DispatchQueue.main.async {
                     self.groups.append(newGroup)
-                    self.listenToGroupChanges(groupID: newGroup.id ?? UUID().uuidString)
                 }
             } catch {
                 print("Failed to add group to database: \(error)")
@@ -102,17 +101,6 @@ class GroupsListViewModel: ObservableObject {
                 }
             } catch {
                 print("Failed to add user to database: \(error)")
-            }
-        }
-    }
-    
-    func listenToGroupChanges(groupID: String) {
-        databaseManager.listenToGroup(groupID: groupID) { [weak self] updatedGroup in
-            guard let updatedGroup = updatedGroup else { return }
-            if let index = self?.groups.firstIndex(where: { $0.id == groupID }) {
-                DispatchQueue.main.async {
-                    self?.groups[index] = updatedGroup
-                }
             }
         }
     }
