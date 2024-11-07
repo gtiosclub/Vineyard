@@ -17,28 +17,25 @@ struct ProfileView: View {
                 VStack {
                     Button(action:{
                         Task {
-//                            await loginViewModel.signOut()
+                            await loginViewModel.signOut()
                         }
                     }) {
                         Text("Sign out")
                     }
-//                    HStack(spacing: 20) {
-                        VStack(alignment: .leading, spacing: 2) {
-//                            Text(loginViewModel.currentUser?.name ?? "no name")
-                            Text("HI")
-                                .font(.system(size: 32, weight: .bold))
-                                .foregroundColor(Color.profileViewInfo)
-                            HStack() {
-                                let count = viewModel.user.groups.count
-                                Text("\(count) \(count > 1 ? "groups" : "group")")
-                                     .font(.system(size: 16))
-                                     .fontWeight(.regular)
-                                     .foregroundColor(Color.profileViewInfo)
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(loginViewModel.currentUser?.name ?? "no name")
+                            .font(.system(size: 32, weight: .bold))
+                            .foregroundColor(Color.profileViewInfo)
+                        HStack() {
+                            let count = viewModel.user.groups.count
+                            Text("\(count) \(count > 1 ? "groups" : "group")")
+                                 .font(.system(size: 16))
+                                 .fontWeight(.regular)
+                                 .foregroundColor(Color.profileViewInfo)
                             }
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                     }
-                    
                     LazyVGrid(columns: columns, spacing: 10) {
                         ForEach(viewModel.user.badges) { badge in
                             BadgeView(badge: badge)
@@ -66,11 +63,14 @@ struct BadgeView: View {
         VStack {
             Image("Vector")
                 .resizable()
-                .frame(width: 40, height: 140)
+                .frame(width: 34, height: 132)
                 .padding()
-            Text("\(badge.dateObtained)")
+//            Text("\(badge.dateObtained)")
+            Text("Date") //insert date here
+                .foregroundColor(Color.black)
+                .padding(.bottom, 10)
         }
-        .frame(width: 110, height: 200)
+        .frame(width: 115, height: 210)
         .background(Color.white)
         .cornerRadius(20)
     }
