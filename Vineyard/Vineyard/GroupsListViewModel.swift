@@ -8,19 +8,70 @@
 import SwiftUI
 
 @Observable
-class GroupsListViewModel: ObservableObject {
+class GroupsListViewModel {
     let databaseManager: FirebaseDataManager = FirebaseDataManager.shared
     private(set) var user: Person?
     var groups: [Group] = []
     var isPresentingCreateGroupView = false
     var isPresentingCreateGoalView = false
+    var isValid = false
+    var groupCreationErrorMessage: AlertMessage?
+    var goalCreationErrorMessage: AlertMessage?
+    
+    struct AlertMessage: Identifiable {
+        let id = UUID()
+        let message: String
+    }
+
+    struct ValidationError: LocalizedError {
+        var errorDescription: String?
+        init(_ description: String) {
+            self.errorDescription = description
+        }
+    }
+
+    
     
     init() {}
-
+    
+    
     
     func setUser(user: Person?) {
         guard self.user == nil, let user = user else { return }
         self.user = user
+    }
+    
+    
+    func submitGroupCreationForm(groupName: String, resolution: String, deadline: Date) {
+        do {
+            isValid = try validateGroupCreationForm(groupName: groupName, resolution: resolution, deadline: deadline)
+            
+        } catch let error as ValidationError {
+            groupCreationErrorMessage = AlertMessage(message: error.localizedDescription)
+       } catch {
+           groupCreationErrorMessage = AlertMessage(message: "An unexpected error occurred.")
+       }
+    }
+    
+    func validateGroupCreationForm(groupName: String, resolution: String, deadline: Date) throws -> Bool {
+        if groupName.isEmpty && resolution.isEmpty {
+            throw ValidationError("Group Name and resolution can not be empty")
+        } else if groupName.isEmpty {
+            throw ValidationError("Group Name can not be empty")
+        } else if resolution.isEmpty {
+            throw ValidationError("Resolution can not be empty")
+        } else if deadline < Date.now {
+            throw ValidationError("Deadline can not be in the past")
+        }
+        
+        return true
+    }
+    
+    func validateGoalCreationForm(action: String) throws {
+        if action.isEmpty {
+            throw ValidationError("Action can not be empty")
+        }
+        return
     }
     
 //    func createSampleGroup() {

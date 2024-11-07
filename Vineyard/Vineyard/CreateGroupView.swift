@@ -18,7 +18,12 @@ struct CreateGroupView: View {
     @State var resolution: String = ""
     @State var deadline: Date = Date.now
     
+    
+//    @State var isValid: Bool = false
+//    @State var errorMessage: GroupsListViewModel.AlertMessage? = nil
+    
     var body: some View {
+        @Bindable var viewModel = viewModel
         NavigationStack {
             VStack {
                 Text("Let's create your Group")
@@ -51,8 +56,8 @@ struct CreateGroupView: View {
                 .padding([.leading, .trailing], 10)
                 
                 Spacer()
-                NavigationLink {
-                    GoalsListView(groupName: $groupName, resolution: $resolution, deadline: $deadline)
+                Button {
+                    viewModel.submitGroupCreationForm(groupName: groupName, resolution: resolution, deadline: deadline)
                 } label: {
                     Text("Next")
                         .frame(maxWidth: .infinity)
@@ -61,7 +66,14 @@ struct CreateGroupView: View {
                         .foregroundColor(.black)
                         .cornerRadius(8)
                         .padding([.leading, .trailing])
+                }.alert(item: $viewModel.groupCreationErrorMessage) { message in
+                    Alert(
+                        title: Text("Form Error"),
+                        message: Text(message.message),
+                        dismissButton: .default(Text("OK"))
+                    )
                 }
+                
             }.toolbar{
                 ToolbarItem(placement: .cancellationAction) {
                     Button {
@@ -70,9 +82,10 @@ struct CreateGroupView: View {
                         Image(systemName: "xmark.circle.fill")
                     }
                 }
+            }.navigationDestination(isPresented: $viewModel.isValid) {
+                GoalsListView(groupName: $groupName, resolution: $resolution, deadline: $deadline)
             }
         }
-
     }
 }
 
