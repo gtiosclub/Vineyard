@@ -31,9 +31,7 @@ class GroupsListViewModel {
     }
 
     
-    
     init() {}
-    
     
     
     func setUser(user: Person?) {

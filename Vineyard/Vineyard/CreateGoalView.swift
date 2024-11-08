@@ -8,44 +8,44 @@
 import SwiftUI
 
 struct CreateGoalView: View {
-//    @Binding var goals: [String] // Binding to update the goals list
     @Environment(GroupsListViewModel.self) private var viewModel
     
-    @Binding var goals: [Resolution]
-       
-    @State private var action: String = "" // the name of the goal
-    @State private var description: String = "" // the name of the goal
-    @State private var quantity: String = ""
     
-    @State private var selectedDifficulty: DifficultyLevel = .medium
-    @State private var selectedFrequency: FrequencyType = .daily
-    @State private var selectedFrequencyText: String = "Daily"
-    @State private var freqQuantity: Int = 0
+    @Binding var indexOfGoal: Int
+    @Binding var goals: [Resolution]
+    @Binding var editMode: Bool
+    
+    @State var goalName: String = "" // the name of the goal
+    @State var description: String = "" // the description of the goal
+    @State var quantity: String = "0"
+    
+    @State var selectedDifficulty: DifficultyLevel = .easy
+    @State var selectedFrequency: FrequencyType = .daily
+    @State var selectedFrequencyText: String = ""
+    @State var freqQuantity: Int = 0
+    
+    
+    
     @Environment(\.dismiss) var dismiss
     
-    
-//    
-//    @State private var frequencyCase: Int = 0
-//    @State private var frequencyCount: String = "1"
-//    @State private var difficultyCase: Int = 0
-//    @State private var difficultyScore: String = "1"
-    
     var body: some View {
+        
+        
         @Bindable var viewModel = viewModel
         VStack {
             
-            Text("Create Goal").font(.largeTitle).bold()
+            Text(editMode ? "Edit Goal" : "Create Goal").font(.largeTitle).bold()
             
-            Text("Action")
+            Text("GoalName")
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            TextField("Resolution Name:", text: $action)
+            TextField("Resolution Name:", text: $goalName)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-
+            
             
             Text("Description (Optional)")
                 .frame(maxWidth: .infinity, alignment: .leading)
-
+            
             TextField("Description:", text: $description)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
             
@@ -70,7 +70,7 @@ struct CreateGoalView: View {
                 }
                 
                 HStack {
-                    Stepper(value: $freqQuantity) {
+                    Stepper(value: $freqQuantity, in: 0...1000) {
                         Text("\(selectedFrequency.rawValue) count")
                     }
                     Text("\(freqQuantity)")
@@ -81,9 +81,9 @@ struct CreateGoalView: View {
             .listStyle(InsetListStyle())
             
             Button {
-                validateGoalCreationForm()
+                submitGoalCreationForm()
             } label: {
-                Text("Create")
+                Text(editMode ? "Update" : "Create")
                     .frame(maxWidth: .infinity)
                     .padding()
                     .background(Color(UIColor.lightGray))
@@ -98,6 +98,11 @@ struct CreateGoalView: View {
                 )
             }
         }
+        .onAppear {
+            if editMode {
+                populateFormFields()
+            }
+        }
         .padding()
         .toolbar(content: {
             ToolbarItem(placement: .principal) {
@@ -106,26 +111,40 @@ struct CreateGoalView: View {
         })
     }
     
-    func validateGoalCreationForm() {
+    func populateFormFields() {
+        goalName = goals[indexOfGoal].title // the name of the goal
+        description = goals[indexOfGoal].description // the name of the goal
+        quantity = String(goals[indexOfGoal].quantity!)
+        
+        selectedDifficulty = goals[indexOfGoal].diffLevel.difficultyLevel
+        selectedFrequency = goals[indexOfGoal].frequency.frequencyType
+        selectedFrequencyText = goals[indexOfGoal].frequency.frequencyType.rawValue
+        freqQuantity = 0
+    }
+    
+    func submitGoalCreationForm() {
         do {
-            try viewModel.validateGoalCreationForm(action: action)
-            let resolution = Resolution(title: action, description: description, quantity: Int(quantity), frequency: Frequency(frequencyType: selectedFrequency, count: freqQuantity), diffLevel: Difficulty(difficultyLevel: selectedDifficulty, score: 10))
+            try viewModel.validateGoalCreationForm(action: goalName)
+            if editMode {
+                goals[indexOfGoal] = Resolution(id: UUID().uuidString, title: goalName, description: description, quantity: Int(quantity), frequency: Frequency(frequencyType: selectedFrequency, count: freqQuantity), diffLevel: Difficulty(difficultyLevel: selectedDifficulty, score: 10))
+            } else {
+                goals.append(Resolution(id: UUID().uuidString, title: goalName, description: description, quantity: Int(quantity), frequency: Frequency(frequencyType: selectedFrequency, count: freqQuantity), diffLevel: Difficulty(difficultyLevel: selectedDifficulty, score: 10)))
+            }
             
-            goals.append(resolution)
             
 //                    print(resolution.title, resolution.description, resolution.defaultFrequency.frequencyType, resolution.defaultFrequency.count, resolution.diffLevel.difficultyLevel, resolution.diffLevel.score)
-            
-            action = "" // the name of the goal
-            description = "" // the name of the goal
+            goalName = "" // the name of the goal
+            description = "" // the description of the goal
             quantity = ""
             selectedDifficulty = .medium
             selectedFrequency = .daily
+            editMode = false
             dismiss()
         } catch let error as GroupsListViewModel.ValidationError {
             viewModel.goalCreationErrorMessage = GroupsListViewModel.AlertMessage(message: error.localizedDescription)
-       } catch {
+        } catch {
            viewModel.goalCreationErrorMessage = GroupsListViewModel.AlertMessage(message: "An unexpected error occurred.")
-       }
+        }
     }
 
 }
