@@ -13,11 +13,11 @@ struct CreateGroupView: View {
 //    var onNext: () -> Void
     @Environment(GroupsListViewModel.self) var viewModel
     @Environment(\.dismiss) var dismiss
+    
         
     @State var groupName: String = ""
     @State var resolution: String = ""
     @State var deadline: Date = Date.now
-    
     
 //    @State var isValid: Bool = false
 //    @State var errorMessage: GroupsListViewModel.AlertMessage? = nil
@@ -103,15 +103,20 @@ struct TextFieldTitleView: View {
 
 struct GoalsListView: View {
     @Environment(GroupsListViewModel.self) var viewModel
-    @State private var goals : [Resolution] = []
+    @State var goals : [Resolution] = []
+    @State var indexOfGoal: Int = -1
+//    @State var goal: Resolution
+    @State private var isPresentingCreateGoalView = false
     @Binding var groupName: String
     @Binding var resolution: String
     @Binding var deadline: Date
-    @FocusState private var isFocused: Bool
+    
+    @State var editMode = false
+    
         
     var body: some View {
+        @Bindable var viewModel = viewModel
         VStack {
-
             Text("Write down your Goals")
                 .font(.title)
                 .bold()
@@ -120,44 +125,38 @@ struct GoalsListView: View {
                 .foregroundColor(.gray)
             HStack {
                 Text("Goal List")
-                NavigationLink(destination: CreateGoalView(goals: $goals)) {
+                Button {
+                    viewModel.isPresentingCreateGoalView = true
+                } label: {
                     Image(systemName: "plus")
-                }.frame(maxWidth: .infinity, alignment: .trailing)
-                
+                }
             }.padding()
             List {
-                ForEach(goals) { goal in
-                    Text(goal.title)
-    //                GoalRow(goal: goal.title)
-                }
-                .contextMenu {
-                    RenameButton()
-                    Button {
-                    // Add this item to a list of favorites.
-                    } label: {
-                        Label("Add to Favorites", systemImage: "heart")
+                ForEach(goals) { subGoal in
+                    Text(subGoal.title).contextMenu {
+                        Button {
+                            // open the create goal view and populate the fields with current goal details
+                            if let index = goals.firstIndex(where: { $0.id == subGoal.id }) {
+                                indexOfGoal = index
+                            }
+                            editMode = true
+                            viewModel.isPresentingCreateGoalView = true
+                            
+                        } label: {
+                            Label("Edit Goal", systemImage: "pencil")
+                        }
                     }
-                    Button {
-                        // Open Maps and center it on this item.
-                    } label: {
-                        Label("Show in Maps", systemImage: "mappin")
-                    }
-
-                    // ... your own custom actions
                 }
-                .toolbar{ EditButton() }
-//                .onMove { indexSet, offset in
-//                    goals.move(fromOffsets: indexSet, toOffset: offset)
-//                }
-//                .onDelete { indexSet in
-//                    goals.remove(atOffsets: indexSet)
-//                }
+                .onMove { indexSet, offset in
+                    goals.move(fromOffsets: indexSet, toOffset: offset)
+                }
+                .onDelete { indexSet in
+                    goals.remove(atOffsets: indexSet)
+                }
             }
-            .toolbar { RenameButton() }
-            
+            .toolbar{ EditButton() }
            
             Spacer()
-            
             
             Button {
                 viewModel.createGroup(withGroupName: groupName, withGroupGoal: resolution, withDeadline: deadline, withScoreGoal: 4)
@@ -172,6 +171,9 @@ struct GoalsListView: View {
                     .padding([.leading, .trailing])
             }
 
+        }
+        .fullScreenCover(isPresented: $viewModel.isPresentingCreateGoalView) {
+            CreateGoalView(indexOfGoal: $indexOfGoal, goals: $goals, editMode: $editMode)
         }
         .padding()
     }
