@@ -6,17 +6,31 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
 struct Person: Identifiable, Codable {
-    var id: String = UUID().uuidString
+    @DocumentID var id: String?
     var name: String
-    var groups: [String] = []
-    var allProgress: [Progress] = []
     var email: String
-    var badges: [Badge] = []
+    var groupIDs: [String] = []
+    var allProgressIDs: [String] = []
+    var badgeIDs: [String] = []
+    
+    var groups: [Group]? = []
+    var allProgress: [Progress]? = []
+    var badges: [Badge]? = []
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case email
+        case groupIDs
+        case allProgressIDs
+        case badgeIDs
+    }
     
     mutating func addGroup(_ group: Group) {
-        self.groups.append(group.id)
+        self.groupIDs.append(group.id ?? UUID().uuidString)
     }
     
     static var samples: [Person] {
@@ -29,18 +43,63 @@ struct Person: Identifiable, Codable {
         let progress4 = Progress.samples[3]
         let progress5 = Progress.samples[4]
         let progress6 = Progress.samples[5]
-
         
         let badge1 = Badge.samples[0]
         let badge2 = Badge.samples[1]
         
-        let andrew = Person(name: "Andrew", groups: [group1.id], allProgress: [progress1, progress4], email: "a@gmail.com", badges: [])
-        let yash = Person(name: "Yash", groups: [group1.id], allProgress: [progress2, progress5], email: "y@outlook.com", badges: [badge1])
-        let sankaet = Person(name: "Sankaet", groups: [group1.id], allProgress: [progress3, progress6], email: "s@yahoo.com", badges: [badge2])
-        let rahul = Person(name: "Rahul", groups: [group2.id], allProgress: [], email: "r@apple.com")
-        let vishnesh = Person(name: "Vishnesh", groups: [group2.id], allProgress: [], email: "v@aol.com")
-        let jay = Person(name: "Jason", allProgress: [], email: "j@ibm.com", badges: [])
+        let andrew = Person(
+            name: "Andrew",
+            email: "a@gmail.com",
+            groupIDs: [group1.id ?? UUID().uuidString],
+            allProgressIDs: [progress1.id ?? UUID().uuidString, progress4.id ?? UUID().uuidString],
+            badgeIDs: [],
+            groups: [group1],
+            allProgress: [progress1, progress4],
+            badges: []
+        )
+        
+        let yash = Person(
+            name: "Yash",
+            email: "y@outlook.com",
+            groupIDs: [group1.id ?? UUID().uuidString],
+            allProgressIDs: [progress2.id ?? UUID().uuidString, progress5.id ?? UUID().uuidString],
+            badgeIDs: [badge1.id ?? UUID().uuidString],
+            groups: [group1],
+            allProgress: [progress2, progress5],
+            badges: [badge1]
+        )
+        
+        let sankaet = Person(
+            name: "Sankaet",
+            email: "s@yahoo.com",
+            groupIDs: [group1.id ?? UUID().uuidString],
+            allProgressIDs: [progress3.id ?? UUID().uuidString, progress6.id ?? UUID().uuidString],
+            badgeIDs: [badge2.id ?? UUID().uuidString],
+            groups: [group1],
+            allProgress: [progress3, progress6],
+            badges: [badge2]
+        )
+        
+        let rahul = Person(
+            name: "Rahul",
+            email: "r@apple.com",
+            groupIDs: [group2.id ?? UUID().uuidString],
+            groups: [group2]
+        )
+        
+        let vishnesh = Person(
+            name: "Vishnesh",
+            email: "v@aol.com",
+            groupIDs: [group2.id ?? UUID().uuidString],
+            groups: [group2]
+        )
+        
+        let jay = Person(
+            name: "Jason",
+            email: "j@ibm.com"
+        )
         
         return [andrew, yash, sankaet, rahul, vishnesh, jay]
     }
+    
 }
