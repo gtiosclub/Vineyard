@@ -133,7 +133,7 @@ class GroupsListViewModel {
             return
         }
         
-        let newGroup = Group(name: name, groupGoal: groupGoal, people: [user.id], deadline: deadline, scoreGoal: scoreGoal)
+        let newGroup = Group(name: name, groupGoal: groupGoal, peopleIDs: [user.id ?? UUID().uuidString], deadline: deadline, scoreGoal: scoreGoal)
         Task {
             do {
                 try await databaseManager.addGroupToDB(group: newGroup)
@@ -147,7 +147,7 @@ class GroupsListViewModel {
 
         Task {
             var updatedUser = user
-            updatedUser.groups.append(newGroup.id)
+            updatedUser.groupIDs.append(newGroup.id ?? UUID().uuidString)
             
             do {
                 try await databaseManager.addPersonToDB(person: updatedUser)
@@ -158,11 +158,6 @@ class GroupsListViewModel {
                 print("Failed to add user to database: \(error)")
             }
         }
-    }
-
-    
-    func addResolution(_ resolution: Resolution, toGroup group: Group) {
-        group.addResolution(resolution)
     }
     
     func joinGroup(toGroup group: Group) {
@@ -178,7 +173,7 @@ class GroupsListViewModel {
 //        print(self.user)
         
         Task {
-            let groupIDs = user.groups
+            let groupIDs = user.groupIDs
             var fetchedGroups: [Group] = []
             for id in groupIDs {
                 if let group = try await databaseManager.fetchGroupFromDB(groupID: id) {
