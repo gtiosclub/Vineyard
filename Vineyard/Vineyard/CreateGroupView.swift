@@ -107,6 +107,7 @@ struct GoalsListView: View {
     @Binding var groupName: String
     @Binding var resolution: String
     @Binding var deadline: Date
+    @FocusState private var isFocused: Bool
         
     var body: some View {
         VStack {
@@ -124,9 +125,36 @@ struct GoalsListView: View {
                 }.frame(maxWidth: .infinity, alignment: .trailing)
                 
             }.padding()
-            ForEach(goals) { goal in
-                GoalRow(goal: goal.title)
+            List {
+                ForEach(goals) { goal in
+                    Text(goal.title)
+    //                GoalRow(goal: goal.title)
+                }
+                .contextMenu {
+                    RenameButton()
+                    Button {
+                    // Add this item to a list of favorites.
+                    } label: {
+                        Label("Add to Favorites", systemImage: "heart")
+                    }
+                    Button {
+                        // Open Maps and center it on this item.
+                    } label: {
+                        Label("Show in Maps", systemImage: "mappin")
+                    }
+
+                    // ... your own custom actions
+                }
+                .toolbar{ EditButton() }
+//                .onMove { indexSet, offset in
+//                    goals.move(fromOffsets: indexSet, toOffset: offset)
+//                }
+//                .onDelete { indexSet in
+//                    goals.remove(atOffsets: indexSet)
+//                }
             }
+            .toolbar { RenameButton() }
+            
            
             Spacer()
             
