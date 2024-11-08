@@ -67,7 +67,7 @@ struct GroupCardView: View {
                 .font(.headline)
             HStack {
                 Spacer()
-                Text("\(group.people.count) People")
+                Text("\(group.peopleIDs.count) People")
                     .font(.subheadline)
                     .padding(.top, 8)
                 Image(systemName: "person.3.fill")
