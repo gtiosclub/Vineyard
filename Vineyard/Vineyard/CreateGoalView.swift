@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct CreateGoalView: View {
-    //    @Binding var goals: [String] // Binding to update the goals list
     @Environment(GroupsListViewModel.self) private var viewModel
     
     
@@ -16,8 +15,8 @@ struct CreateGoalView: View {
     @Binding var goals: [Resolution]
     @Binding var editMode: Bool
     
-    @State var action: String = "" // the name of the goal
-    @State var description: String = "" // the name of the goal
+    @State var goalName: String = "" // the name of the goal
+    @State var description: String = "" // the description of the goal
     @State var quantity: String = "0"
     
     @State var selectedDifficulty: DifficultyLevel = .easy
@@ -37,10 +36,10 @@ struct CreateGoalView: View {
             
             Text(editMode ? "Edit Goal" : "Create Goal").font(.largeTitle).bold()
             
-            Text("Action")
+            Text("GoalName")
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            TextField("Resolution Name:", text: $action)
+            TextField("Resolution Name:", text: $goalName)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
             
             
@@ -113,7 +112,7 @@ struct CreateGoalView: View {
     }
     
     func populateFormFields() {
-        action = goals[indexOfGoal].title // the name of the goal
+        goalName = goals[indexOfGoal].title // the name of the goal
         description = goals[indexOfGoal].description // the name of the goal
         quantity = String(goals[indexOfGoal].quantity!)
         
@@ -125,17 +124,17 @@ struct CreateGoalView: View {
     
     func submitGoalCreationForm() {
         do {
-            try viewModel.validateGoalCreationForm(action: action)
+            try viewModel.validateGoalCreationForm(action: goalName)
             if editMode {
-                goals[indexOfGoal] = Resolution(id: UUID().uuidString, title: action, description: description, quantity: Int(quantity), frequency: Frequency(frequencyType: selectedFrequency, count: freqQuantity), diffLevel: Difficulty(difficultyLevel: selectedDifficulty, score: 10))
+                goals[indexOfGoal] = Resolution(id: UUID().uuidString, title: goalName, description: description, quantity: Int(quantity), frequency: Frequency(frequencyType: selectedFrequency, count: freqQuantity), diffLevel: Difficulty(difficultyLevel: selectedDifficulty, score: 10))
             } else {
-                goals.append(Resolution(id: UUID().uuidString, title: action, description: description, quantity: Int(quantity), frequency: Frequency(frequencyType: selectedFrequency, count: freqQuantity), diffLevel: Difficulty(difficultyLevel: selectedDifficulty, score: 10)))
+                goals.append(Resolution(id: UUID().uuidString, title: goalName, description: description, quantity: Int(quantity), frequency: Frequency(frequencyType: selectedFrequency, count: freqQuantity), diffLevel: Difficulty(difficultyLevel: selectedDifficulty, score: 10)))
             }
             
             
 //                    print(resolution.title, resolution.description, resolution.defaultFrequency.frequencyType, resolution.defaultFrequency.count, resolution.diffLevel.difficultyLevel, resolution.diffLevel.score)
-            action = "" // the name of the goal
-            description = "" // the name of the goal
+            goalName = "" // the name of the goal
+            description = "" // the description of the goal
             quantity = ""
             selectedDifficulty = .medium
             selectedFrequency = .daily

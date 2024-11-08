@@ -10,7 +10,6 @@ import SwiftUI
 
 
 struct CreateGroupView: View {
-//    var onNext: () -> Void
     @Environment(GroupsListViewModel.self) var viewModel
     @Environment(\.dismiss) var dismiss
     
@@ -18,9 +17,6 @@ struct CreateGroupView: View {
     @State var groupName: String = ""
     @State var resolution: String = ""
     @State var deadline: Date = Date.now
-    
-//    @State var isValid: Bool = false
-//    @State var errorMessage: GroupsListViewModel.AlertMessage? = nil
     
     var body: some View {
         @Bindable var viewModel = viewModel
@@ -30,7 +26,6 @@ struct CreateGroupView: View {
                     .font(.title)
                     .bold()
                     .padding()
-    //                Spacer()
                 TextFieldTitleView(text: "Group Name")
                 
                 TextField("Your Group Name", text: $groupName)
@@ -93,7 +88,6 @@ struct TextFieldTitleView: View {
     var text: String
     var body: some View {
         Text(text)
-//            .font(.subheadline)
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding([.top, .bottom], 0)
             .padding([.leading, .trailing], 10)
@@ -105,13 +99,12 @@ struct GoalsListView: View {
     @Environment(GroupsListViewModel.self) var viewModel
     @State var goals : [Resolution] = []
     @State var indexOfGoal: Int = -1
-//    @State var goal: Resolution
+    @State var editMode = false
     @State private var isPresentingCreateGoalView = false
     @Binding var groupName: String
     @Binding var resolution: String
     @Binding var deadline: Date
     
-    @State var editMode = false
     
         
     var body: some View {
