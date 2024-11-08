@@ -22,10 +22,8 @@ struct ProfileView: View {
                     }) {
                         Text("Sign out")
                     }
-//                    HStack(spacing: 20) {
                         VStack(alignment: .leading, spacing: 2) {
-//                            Text(loginViewModel.currentUser?.name ?? "no name")
-                            Text("HI")
+                            Text(titleText)
                                 .font(.system(size: 32, weight: .bold))
                                 .foregroundColor(Color.profileViewInfo)
                             HStack() {
@@ -56,7 +54,11 @@ struct ProfileView: View {
                 }
             }
         }
+
+    private var titleText: String {
+        "Hi, " + (loginViewModel.currentUser?.name ?? "no name")
     }
+}
 
 
 struct BadgeView: View {
