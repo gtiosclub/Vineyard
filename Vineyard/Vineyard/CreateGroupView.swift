@@ -16,7 +16,8 @@ struct CreateGroupView: View {
         
     @State var groupName: String = ""
     @State var resolution: String = ""
-    @State var deadline: Date = Date.now
+    
+    @State var deadline: Date = Calendar.current.date(byAdding: .day, value: 1, to: Date.now)!
     
     var body: some View {
         @Bindable var viewModel = viewModel
