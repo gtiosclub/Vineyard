@@ -31,9 +31,7 @@ class GroupsListViewModel {
     }
 
     
-    
     init() {}
-    
     
     
     func setUser(user: Person?) {
@@ -133,7 +131,7 @@ class GroupsListViewModel {
             return
         }
         
-        let newGroup = Group(name: name, groupGoal: groupGoal, peopleIDs: [user.id ?? UUID().uuidString], deadline: deadline, scoreGoal: scoreGoal)
+        let newGroup = Group(id: UUID().uuidString, name: name, groupGoal: groupGoal, peopleIDs: [user.id ?? UUID().uuidString], deadline: deadline, scoreGoal: scoreGoal)
         Task {
             do {
                 try await databaseManager.addGroupToDB(group: newGroup)
@@ -176,7 +174,7 @@ class GroupsListViewModel {
             let groupIDs = user.groupIDs
             var fetchedGroups: [Group] = []
             for id in groupIDs {
-                if let group = try await databaseManager.fetchGroupFromDB(groupID: id) {
+                if let group = try? await databaseManager.fetchGroupFromDB(groupID: id) {
                     fetchedGroups.append(group)
                 }
             }
