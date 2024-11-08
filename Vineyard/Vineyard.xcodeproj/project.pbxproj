@@ -36,7 +36,6 @@
 		EAC3806F2CA36B8800EBEF4C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC3806E2CA36B8800EBEF4C /* LoginViewModel.swift */; };
 		EAC380712CA36B9A00EBEF4C /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC380702CA36B9A00EBEF4C /* LoginModel.swift */; };
 		F04057812CDC72E2001DDD8B /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04057802CDC72E2001DDD8B /* Color+Extensions.swift */; };
-		F04BEBD32CB43B46007EB113 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04BEBD22CB43B46007EB113 /* ProfileViewModel.swift */; };
 		F05361C62CAF0AA1009DE1E3 /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05361C52CAF0AA1009DE1E3 /* TodoView.swift */; };
 		F05361C82CAF1462009DE1E3 /* TodoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05361C72CAF1462009DE1E3 /* TodoViewModel.swift */; };
 		F0D913622CACB8A100E7CD81 /* GroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D913612CACB8A100E7CD81 /* GroupView.swift */; };
@@ -96,7 +95,6 @@
 		EAC3806E2CA36B8800EBEF4C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		EAC380702CA36B9A00EBEF4C /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		F04057802CDC72E2001DDD8B /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
-		F04BEBD22CB43B46007EB113 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		F05361C52CAF0AA1009DE1E3 /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TodoView.swift; path = Vineyard/TodoView.swift; sourceTree = SOURCE_ROOT; };
 		F05361C72CAF1462009DE1E3 /* TodoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TodoViewModel.swift; path = Vineyard/TodoViewModel.swift; sourceTree = SOURCE_ROOT; };
 		F0D913612CACB8A100E7CD81 /* GroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupView.swift; sourceTree = "<group>"; };
@@ -349,7 +347,6 @@
 			isa = PBXGroup;
 			children = (
 				EAC3806E2CA36B8800EBEF4C /* LoginViewModel.swift */,
-				F04BEBD22CB43B46007EB113 /* ProfileViewModel.swift */,
 			);
 			name = ViewModels;
 			sourceTree = "<group>";
@@ -530,7 +527,6 @@
 				EAC3806F2CA36B8800EBEF4C /* LoginViewModel.swift in Sources */,
 				192EBFE02C90F62E00AF8528 /* VineyardApp.swift in Sources */,
 				F13306EC2CD3E678002BA300 /* RecentActivitiesWidget.swift in Sources */,
-				F04BEBD32CB43B46007EB113 /* ProfileViewModel.swift in Sources */,
 				B40B894E2C936DE0006B1771 /* ResolutionView.swift in Sources */,
 				F10167662CA37B180004260E /* Progress.swift in Sources */,
 				951CF8F02CC5C0650016B06A /* GroupListView.swift in Sources */,

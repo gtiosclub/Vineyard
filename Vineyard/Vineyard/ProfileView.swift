@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ProfileView: View {
-    @State private var viewModel = ProfileViewModel()
     let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     @EnvironmentObject var loginViewModel: LoginViewModel
     var body: some View {
@@ -17,19 +16,17 @@ struct ProfileView: View {
                 VStack {
                     Button(action:{
                         Task {
-//                            await loginViewModel.signOut()
+                            await loginViewModel.signOut()
                         }
                     }) {
                         Text("Sign out")
                     }
-//                    HStack(spacing: 20) {
                         VStack(alignment: .leading, spacing: 2) {
-//                            Text(loginViewModel.currentUser?.name ?? "no name")
-                            Text("HI")
+                            Text(titleText)
                                 .font(.system(size: 32, weight: .bold))
                                 .foregroundColor(Color.profileViewInfo)
                             HStack() {
-                                let count = viewModel.user.groupIDs.count
+                                let count = loginViewModel.currentUser?.groups?.count ?? 0
                                 Text("\(count) \(count > 1 ? "groups" : "group")")
                                      .font(.system(size: 16))
                                      .fontWeight(.regular)
@@ -40,7 +37,7 @@ struct ProfileView: View {
                     }
                     
                     LazyVGrid(columns: columns, spacing: 10) {
-                        ForEach(viewModel.user.badges ?? []) { badge in
+                        ForEach(loginViewModel.currentUser?.badges ?? []) { badge in
                             BadgeView(badge: badge)
                         }
                     }
@@ -56,7 +53,11 @@ struct ProfileView: View {
                 }
             }
         }
+
+    private var titleText: String {
+        "Hi, " + (loginViewModel.currentUser?.name ?? "no name")
     }
+}
 
 
 struct BadgeView: View {
