@@ -61,7 +61,9 @@ class LoginViewModel: ObservableObject {
                 return
             }
             
-            let user = try await db.collection("people").document(uid).getDocument(as: Person.self)
+            let user = try await FirebaseDataManager.shared.fetchPersonFromDB(
+                userID: auth.currentUser!.uid
+            )
 
             currentUser = user
             isLoggedIn = true
@@ -78,7 +80,9 @@ class LoginViewModel: ObservableObject {
         if auth.currentUser != nil {
             isLoggedIn = true
             do {
-                let user = try await db.collection("people").document(auth.currentUser!.uid).getDocument(as: Person.self)
+                let user = try await FirebaseDataManager.shared.fetchPersonFromDB(
+                    userID: auth.currentUser!.uid
+                )
 
                 currentUser = user
             } catch {
