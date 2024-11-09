@@ -63,13 +63,17 @@ struct HomeView: View {
             print("Inviter ID not found")
             return
         }
-        inviteViewModel.groupID = groupID
-        inviteViewModel.inviterID = inviterID
-        print(groupID)
-        print(inviterID)
-        Task {
-            await inviteViewModel.processInvite()
+        if loginViewModel.currentUser == nil {
+            return
         }
+        if !(loginViewModel.currentUser!.groupIDs).contains(groupID) {
+            inviteViewModel.groupID = groupID
+            inviteViewModel.inviterID = inviterID
+            Task {
+                await inviteViewModel.processInvite()
+            }
+        }
+        
         
         
 
