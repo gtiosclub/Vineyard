@@ -58,8 +58,8 @@ struct CreateGoalView: View {
             
             TextField("Resolution Name:", text: $goalName)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-                .onChange(of: action) {
-                    words = action.split(separator: " ").map { String($0) }
+                .onChange(of: goalName) {
+                    words = goalName.split(separator: " ").map { String($0) }
                     wordPositions = [CGFloat](repeating: 0, count: words.count)
                     
                     
@@ -75,7 +75,7 @@ struct CreateGoalView: View {
                                     .background(
                                         GeometryReader { geometry in
                                             Color.clear
-                                                .onChange(of: action) {
+                                                .onChange(of: goalName) {
                                                     if index < words.count {
                                                         wordPositions[index] = geometry.frame(in: .global).midX
                                                     }
@@ -281,11 +281,9 @@ struct CreateGoalView: View {
     
     func submitGoalCreationForm() {
         do {
-            try viewModel.validateGoalCreationForm(action: action, quantity: quantity, isQuantityTask: isQuantityTask, isInserted: isInserted)
+            try viewModel.validateGoalCreationForm(action: goalName, quantity: quantity, isQuantityTask: isQuantityTask, isInserted: isInserted)
             words.insert("qtt_position", at: indexInserted ?? 0)
-            action = words.joined(separator: " ")
-            let resolution = Resolution(title: action, description: description, quantity: Int(quantity), frequency: Frequency(frequencyType: selectedFrequency, count: freqQuantity), diffLevel: Difficulty(difficultyLevel: selectedDifficulty, score: 10))
-            try viewModel.validateGoalCreationForm(action: goalName)
+            goalName = words.joined(separator: " ")
             if editMode {
                 goals[indexOfGoal] = Resolution(id: UUID().uuidString, title: goalName, description: description, quantity: Int(quantity), frequency: Frequency(frequencyType: selectedFrequency, count: freqQuantity), diffLevel: Difficulty(difficultyLevel: selectedDifficulty, score: 10))
             } else {
@@ -301,6 +299,8 @@ struct CreateGoalView: View {
             isInserted = false
             snapIndex = nil
             indexInserted = nil
+            words = []
+            wordPositions = []
             dragPosition = initialDragPosition
             selectedDifficulty = .medium
             selectedFrequency = .daily

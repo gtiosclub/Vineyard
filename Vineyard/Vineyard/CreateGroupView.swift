@@ -153,7 +153,7 @@ struct GoalsListView: View {
             Spacer()
             
             Button {
-                viewModel.createGroup(withGroupName: groupName, withGroupGoal: resolution, withDeadline: deadline, withScoreGoal: 4)
+                viewModel.createGroup(withGroupName: groupName, withGroupGoal: resolution, withDeadline: deadline, withScoreGoal: 4, resolutions: goals)
                 viewModel.isPresentingCreateGroupView = false
             } label: {
                 Text("Create Group")
