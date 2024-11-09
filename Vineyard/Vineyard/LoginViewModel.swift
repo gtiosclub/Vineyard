@@ -51,24 +51,40 @@ class LoginViewModel: ObservableObject {
 
     public func signIn(email: String, password: String) async {
         errorMessage = ""
+        isLoading = true
+        
         do {
             try await loginModel.signIn(email: email, password: password)
-            currentUser = try await db.collection("people").document(auth.currentUser!.uid).getDocument(as: Person.self)
+            guard let uid = auth.currentUser?.uid else {
+                errorMessage = "User ID not found."
+                isLoggedIn = false
+                return
+            }
+            
+            let user = try await FirebaseDataManager.shared.fetchPersonFromDB(
+                userID: auth.currentUser!.uid
+            )
+
+            currentUser = user
             isLoggedIn = true
         } catch {
             isLoggedIn = false
             handleFirebaseError(error: error)
         }
+        
         isLoading = false
     }
+
+    
     public func checkLoggedIn() async {
         if auth.currentUser != nil {
             isLoggedIn = true
             do {
-                let user = try await db.collection("people").document(auth.currentUser!.uid).getDocument(as: Person.self)
-                await MainActor.run {
-                    self.currentUser = user
-                }
+                let user = try await FirebaseDataManager.shared.fetchPersonFromDB(
+                    userID: auth.currentUser!.uid
+                )
+
+                currentUser = user
             } catch {
                 print(error)
             }
@@ -84,6 +100,7 @@ class LoginViewModel: ObservableObject {
         do {
             try await loginModel.createUser(email: email, password: password)
             let newUser = Person(id: auth.currentUser!.uid, name: name, email: email)
+            print(newUser)
             try db.collection("people").document(auth.currentUser!.uid).setData(from: newUser)
             currentUser = newUser
             

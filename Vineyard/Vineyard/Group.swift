@@ -6,41 +6,52 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
-class Group: Identifiable, Codable {
-    let id: String
+struct Group: Identifiable, Codable {
+    @DocumentID var id: String?
     var name: String
     var groupGoal: String
-    var people: [String]
-    var resolutions: [String] = []
+    var peopleIDs: [String] = []
+    var resolutionIDs: [String] = []
     var deadline: Date
-    
-    init(name: String, groupGoal: String, people: [String], resolutions: [String] = [], deadline: Date) {
-        self.id = UUID().uuidString
-        self.name = name
-        self.groupGoal = groupGoal
-        self.people = people
-        self.resolutions = resolutions
-        self.deadline = deadline
+    var scoreGoal: Int = 1
+    var currScore: Int = 0
+
+    var people: [Person]? = []
+    var resolutions: [Resolution]? = []
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case groupGoal
+        case peopleIDs
+        case resolutionIDs
+        case deadline
+        case scoreGoal
+        case currScore
     }
     
-    func addResolution(_ resolution: String) {
-        self.resolutions.append(resolution)
+    mutating func addResolution(_ resolution: Resolution) {
+        self.resolutions?.append(resolution)
+        self.resolutionIDs.append(resolution.id ?? UUID().uuidString)
     }
     
-    func changeGroupName(toGroupName groupName: String) {
+    mutating func changeGroupName(toGroupName groupName: String) {
         self.name = groupName
     }
     
-    func removeResolution(atOffsets indexSet: IndexSet) {
-        self.resolutions.remove(atOffsets: indexSet)
+    mutating func removeResolution(atOffsets indexSet: IndexSet) {
+        self.resolutions?.remove(atOffsets: indexSet)
+        self.resolutionIDs.remove(atOffsets: indexSet)
     }
     
-    func moveResolution(fromOffsets indexSet: IndexSet, toOffset index: Int) {
-        self.resolutions.move(fromOffsets: indexSet, toOffset: index)
+    mutating func moveResolution(fromOffsets indexSet: IndexSet, toOffset index: Int) {
+        self.resolutions?.move(fromOffsets: indexSet, toOffset: index)
+        self.resolutionIDs.move(fromOffsets: indexSet, toOffset: index)
     }
     
-    static var samples: [Group] {
+    static let samples: [Group] = {
         var andrew = Person(name: "Andrew", email: "a@gmail.com")
         var yash = Person(name: "Yash", email: "y@outlook.com")
         var sankaet = Person(name: "Sankaet", email: "s@yahoo.com")
@@ -50,16 +61,29 @@ class Group: Identifiable, Codable {
         let resolution1 = Resolution.samples[0]
         let resolution2 = Resolution.samples[1]
         
-        let group1 = Group(name: "Group1", groupGoal: "Yearly Resolution 1", people:[andrew.id, yash.id, sankaet.id], resolutions: [resolution1.id, resolution2.id], deadline: Date(timeIntervalSinceNow: (7 * 24 * 60 * 60) * 7))
-        let group2 = Group(name: "Group2", groupGoal: "Yearly Resolution 2", people:[rahul.id, vishnesh.id], deadline: Date(timeIntervalSinceNow: (7 * 24 * 60 * 60) * 31))
+        let group1 = Group(name: "Group1",
+                           groupGoal: "Yearly Resolution 1",
+                           peopleIDs: [andrew.id ?? UUID().uuidString, yash.id ?? UUID().uuidString, sankaet.id ?? UUID().uuidString],
+                           resolutionIDs: [resolution1.id ?? UUID().uuidString, resolution2.id ?? UUID().uuidString],
+                           deadline: Date(timeIntervalSinceNow: (7 * 24 * 60 * 60) * 7),
+                           scoreGoal: 5,
+                           people: [andrew, yash, sankaet],
+                           resolutions: [resolution1, resolution2]
+        )
+        let group2 = Group(name: "Group2",
+                           groupGoal: "Yearly Resolution 2",
+                           peopleIDs: [rahul.id ?? UUID().uuidString, vishnesh.id ?? UUID().uuidString],
+                           deadline: Date(timeIntervalSinceNow: (7 * 24 * 60 * 60) * 31),
+                           scoreGoal: 5,
+                           people: [rahul, vishnesh]
+        )
         
         andrew.addGroup(group1)
         yash.addGroup(group1)
         sankaet.addGroup(group1)
         rahul.addGroup(group2)
         vishnesh.addGroup(group2)
-        
         return [group1, group2]
 
-    }
+    }()
 }

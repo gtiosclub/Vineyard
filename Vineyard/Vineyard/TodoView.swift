@@ -14,9 +14,9 @@ struct TodoView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 10){
-                    ForEach($viewModel.user.allProgress) {$progress in
+                    ForEach(viewModel.user.allProgress ?? []) {progress in
                         VStack(alignment: .leading, spacing: 5) {
-                            Text("\(progress.resolution.title)")
+                            Text("\(progress.resolution?.title)")
                                 .frame(maxWidth: .infinity, alignment: .leading)
                         }
                         .padding()

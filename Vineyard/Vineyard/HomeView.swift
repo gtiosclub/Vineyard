@@ -11,23 +11,20 @@ struct HomeView: View {
     @EnvironmentObject private var loginViewModel: LoginViewModel
     @State private var invitedToGroup: Bool = false
     @State private var inviteViewModel = InviteViewModel()
+    @State private var viewModel = GroupsListViewModel()
+
     var body: some View {
-        VStack {
-            if loginViewModel.isLoggedIn {
-                TabView {
-                    
-                        DashboardView().tabItem {
-                            Label("Dashboard", systemImage: "flame")
-                            
-                        }
-                        GroupsListView().tabItem {
-                            Label("Groups", systemImage: "figure.2.and.child.holdinghands")
-                        }
-                        ProfileView().tabItem {
-                            Label("Profile", systemImage: "brain.head.profile")
-                        }
-                    
-                    
+        
+        if loginViewModel.isLoggedIn {
+            TabView {
+                DashboardView().tabItem {
+                    Label("Dashboard", systemImage: "flame")
+                }
+                GroupListView(viewModel: viewModel).tabItem {
+                    Label("Groups", systemImage: "figure.2.and.child.holdinghands")
+                }
+                ProfileView().tabItem {
+                    Label("Profile", systemImage: "brain.head.profile")
                 }
                 
                 

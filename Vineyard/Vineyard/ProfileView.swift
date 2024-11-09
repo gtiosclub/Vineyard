@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct ProfileView: View {
-    @State private var viewModel = ProfileViewModel()
-    let columns = [GridItem(.flexible()), GridItem(.flexible())]
+    let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     @EnvironmentObject var loginViewModel: LoginViewModel
     @EnvironmentObject var inviteViewModel: InviteViewModel
     var body: some View {
@@ -23,51 +22,32 @@ struct ProfileView: View {
                     }) {
                         Text("Sign out")
                     }
-                    HStack {
-                        Image(systemName: "person.crop.circle.fill")
-                            .resizable()
-                            .frame(width: 75, height: 75)
-                            .foregroundColor(.gray)
                         VStack(alignment: .leading, spacing: 2) {
-                            Text(loginViewModel.currentUser?.name ?? "no name")
-                                .font(.system(size: 20, weight: .bold))
+                            Text(titleText)
+                                .font(.system(size: 32, weight: .bold))
+                                .foregroundColor(Color.profileViewInfo)
                             HStack() {
-                                Text("x Friends")
-                                    .foregroundColor(.gray)
-                                Image(systemName: "circle.fill")
-                                    .resizable()
-                                    .frame(width: 3, height: 3)
-                                    .foregroundColor(.gray)
-                                if(viewModel.user.groups.count > 1) {
-                                    Text("\(viewModel.user.groups.count) groups")
-                                        .font(.system(size: 16))
-                                        .fontWeight(.regular)
-                                        .foregroundColor(.gray)
-                                } else {
-                                    Text("\(viewModel.user.groups.count) group")
-                                        .font(.system(size: 16))
-                                        .fontWeight(.regular)
-                                        .foregroundColor(.gray)
-                                }
+                                let count = loginViewModel.currentUser?.groups?.count ?? 0
+                                Text("\(count) \(count > 1 ? "groups" : "group")")
+                                     .font(.system(size: 16))
+                                     .fontWeight(.regular)
+                                     .foregroundColor(Color.profileViewInfo)
                             }
                         }
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.top, 44)
-                    
-                    Text("Winery")
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .font(.system(size: 20, weight: .bold))
-                        .padding(.top, 44)
+                    }
                     
                     LazyVGrid(columns: columns, spacing: 10) {
-                        ForEach(viewModel.user.badges) { badge in
+                        ForEach(loginViewModel.currentUser?.badges ?? []) { badge in
                             BadgeView(badge: badge)
                         }
                     }
+                    .padding(.top, 17)
                 }
                 .padding(.horizontal, 20)
-            }.toolbar {
+                .background(Color.profileViewCellBackground)
+            }
+            .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Text("Profile")
                         .font(.system(size: 32, weight: .bold))
@@ -86,20 +66,26 @@ struct ProfileView: View {
             Alert(title: Text(inviteViewModel.inviteError ?? ""))
         }
     }
+    private var titleText: String {
+        "Hi, " + (loginViewModel.currentUser?.name ?? "no name")
+    }
 }
+
 
 struct BadgeView: View {
     let badge: Badge
 
     var body: some View {
         VStack {
-            Text("\(badge.dateObtained)")
-                .frame(maxWidth: .infinity)
+            Image("Vector")
+                .resizable()
+                .frame(width: 40, height: 140)
                 .padding()
-                .frame(height: 100)
-                .background(Color.gray.opacity(0.5))
-                .cornerRadius(10)
+            Text("\(badge.dateObtained)")
         }
+        .frame(width: 110, height: 200)
+        .background(Color.white)
+        .cornerRadius(20)
     }
 }
 
