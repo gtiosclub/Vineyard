@@ -9,6 +9,7 @@ import SwiftUI
 
 struct GroupListView: View {
     @EnvironmentObject var loginViewModel: LoginViewModel
+    @EnvironmentObject var inviteViewModel: InviteViewModel
     @State var viewModel: GroupsListViewModel = .init()
     @State private var isPresentingAddGroup = false
     var body: some View {
@@ -66,6 +67,17 @@ struct GroupListView: View {
         .onAppear {
             viewModel.setUser(user: loginViewModel.currentUser)
             viewModel.loadGroups()
+        }
+        .popup(isPresented: $inviteViewModel.invitedToGroup) {
+            InvitePopupView()
+        } customize: {
+            $0
+            .type(.floater())
+            .appearFrom(.bottomSlide)
+            
+        }
+        .alert(isPresented: $inviteViewModel.inviteErrorStatus) {
+            Alert(title: Text(inviteViewModel.inviteError ?? ""))
         }
     }
 }

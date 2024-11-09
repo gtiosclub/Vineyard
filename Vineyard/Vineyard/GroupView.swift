@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct GroupView: View {
+    @EnvironmentObject var loginViewModel: LoginViewModel
     let group: Group
     var body: some View {
         NavigationStack {
@@ -116,11 +117,22 @@ struct GroupView: View {
                         .font(.system(size: 24, weight: .bold))
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Image(systemName: "ellipsis")
-                        .rotationEffect(.degrees(90))
+                    ShareLink(item: generateInviteLink())
                 }
             }
         }
+    }
+    private func generateInviteLink() -> URL {
+        var components = URLComponents()
+            components.scheme = "vineyard"
+            components.host = "join-group"
+            components.queryItems = [
+                URLQueryItem(name: "group", value: group.id!),
+                URLQueryItem(name: "inviter", value: loginViewModel.currentUser!.id!)
+            ]
+            let url = components.url
+        return url!
+        
     }
 }
 
