@@ -25,25 +25,25 @@ struct InvitePopupView: View {
                     .font(.title3)
                 HStack {
                     HStack(spacing: -20 * 0.5) {
-                        ForEach(0..<inviteViewModel.group!.people.count) { index in
+                        ForEach(0..<inviteViewModel.group!.peopleIDs.count) { index in
                             ZStack {
                                 Circle()
                                     .foregroundStyle(Color.black.opacity(0.3))
                                     .frame(width: 21, height: 21)
-                                    .zIndex(Double(inviteViewModel.group!.people.count - index))
+                                    .zIndex(Double(inviteViewModel.group!.peopleIDs.count - index))
                                 Circle()
                                     .foregroundStyle(.ultraThinMaterial)
                                     .frame(width: 20, height: 20)
-                                    .zIndex(Double(inviteViewModel.group!.people.count - index))
+                                    .zIndex(Double(inviteViewModel.group!.peopleIDs.count - index))
                                 
                             }
                             
                         }
                     }
-                    Text("\(inviteViewModel.group!.people.count) \(inviteViewModel.group!.people.count == 1 ? "person" : "people")")
+                    Text("\(inviteViewModel.group!.peopleIDs.count) \(inviteViewModel.group!.peopleIDs.count == 1 ? "person" : "people")")
                         .bold()
                     Spacer()
-                    Text("\(inviteViewModel.group!.resolutions.count) Resolutions")
+                    Text("\(inviteViewModel.group!.resolutionIDs.count) \(inviteViewModel.group!.resolutionIDs.count == 1 ? "Resolution" : "Resolutions")")
                     
                 }
                 //.frame(maxWidth: .infinity)

@@ -16,42 +16,33 @@ class InviteViewModel: ObservableObject {
     @Published var inviter: Person?
     @Published var inviteError: String?
     @Published var inviteErrorStatus: Bool = false
-    let db = Firestore.firestore()
+    let dbManager = FirebaseDataManager.shared
+    
     
     func joinGroup(currentUser: Person?) async {
         print(currentUser)
-        guard let group, let currentUser else {
+        guard var group, var currentUser else {
             return
         }
-        var groups = currentUser.groups
-        groups.append(group.id)
-        do {
-            try await db.collection("people").document(currentUser.id).updateData(["groups" : groups])
-            
-        } catch {
-            print(error)
-        }
-        var allProgress = currentUser.allProgress
         
-        for resolutionID in group.resolutions {
-            do {
-                let resolution = try await db.collection("resolutions").document(resolutionID).getDocument(as:Resolution.self)
-                let progress = Progress(resolution: resolution, quantityGoal: resolution.defaultQuantity, frequencyGoal: resolution.defaultFrequency, person: currentUser)
-                allProgress.append(progress)
-            } catch {
-                print(error)
+        
+        currentUser.groupIDs.append(group.id!)
+        group.peopleIDs.append(currentUser.id!)
+        do {
+            let resolutions = try await dbManager.fetchResolutionsFromDB(resolutionIDs: group.resolutionIDs)
+            var newProgress: [Progress] = []
+            for resolution in resolutions {
+                let progress = Progress(id: UUID().uuidString, resolutionID: resolution.id!, personID: currentUser.id!, quantityGoal: Float(resolution.quantity ?? 0), frequencyGoal: resolution.frequency)
+                newProgress.append(progress)
             }
-            
-        }
-        do {
-            try await db.collection("people").document(currentUser.id).updateData(["allProgress" : allProgress])
-        } catch {
-            print(error)
-        }
-        var people = group.people
-        people.append(currentUser.id)
-        do {
-            try await db.collection("groups").document(group.id).updateData(["people" : people])
+            if currentUser.allProgress != nil {
+                currentUser.allProgress!.append(contentsOf: newProgress)
+            } else {
+                currentUser.allProgress = newProgress
+            }
+            currentUser.allProgressIDs.append(contentsOf: newProgress.map{$0.id!})
+            try await dbManager.addPersonToDB(person: currentUser)
+            try await dbManager.addGroupToDB(group: group)
         } catch {
             print(error)
         }
@@ -60,15 +51,13 @@ class InviteViewModel: ObservableObject {
     }
     
     func fetchGroup() async {
-        print(groupID)
         guard let groupID else {
             inviteErrorStatus = true
             inviteError = "The group you tried to join does not exist"
             return
         }
         do {
-            let group = try await db.collection("groups").document(groupID).getDocument(as: Group.self)
-            //try await db.collection("groups").document("06E0018A-7C80-4BAA-9C14-9B6190ADA3C4").updateData(["name" : "updated"])
+            let group = try await dbManager.fetchGroupFromDB(groupID: groupID)
             await MainActor.run {
                 self.group = group
             }
@@ -82,14 +71,13 @@ class InviteViewModel: ObservableObject {
     }
     
     func fetchInviter() async {
-        print(inviterID)
         guard let inviterID else {
             inviteErrorStatus = true
             inviteError = "This invite is invalid since the person who invited you does not exist"
             return
         }
         do {
-            let inviter = try await db.collection("people").document(inviterID).getDocument(as: Person.self)
+            let inviter = try await dbManager.fetchPersonFromDB(userID: inviterID)
             await MainActor.run {
                 self.inviter = inviter
             }

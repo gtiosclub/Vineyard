@@ -27,7 +27,7 @@ struct ProfileView: View {
                                 .font(.system(size: 32, weight: .bold))
                                 .foregroundColor(Color.profileViewInfo)
                             HStack() {
-                                let count = loginViewModel.currentUser?.groups?.count ?? 0
+                                let count = loginViewModel.currentUser?.groupIDs.count ?? 0
                                 Text("\(count) \(count > 1 ? "groups" : "group")")
                                      .font(.system(size: 16))
                                      .fontWeight(.regular)
@@ -53,7 +53,7 @@ struct ProfileView: View {
                         .font(.system(size: 32, weight: .bold))
                 }
             }
-        }
+        
         .popup(isPresented: $inviteViewModel.invitedToGroup) {
             InvitePopupView()
         } customize: {

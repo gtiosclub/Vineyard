@@ -20,8 +20,8 @@ struct InviteTestView: View {
             components.scheme = "vineyard"
             components.host = "join-group"
             components.queryItems = [
-                URLQueryItem(name: "group", value: "10E765E6-7D77-47A9-A8A2-2D6AD05F3CA4"),
-                URLQueryItem(name: "inviter", value: "nYHL6RNMleQWhs3liYxlqzfCDl32")
+                URLQueryItem(name: "group", value: "6011868E-42DB-4F50-A02D-2CBE50AF4736"),
+                URLQueryItem(name: "inviter", value: "q7tdzEjiZpSfB578wiHRjelsDxU2")
             ]
 
             // Getting a URL from our components is as simple as

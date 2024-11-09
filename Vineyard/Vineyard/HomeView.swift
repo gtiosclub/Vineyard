@@ -27,17 +27,18 @@ struct HomeView: View {
                     Label("Profile", systemImage: "brain.head.profile")
                 }
                 
-                
+            }
+            .environmentObject(inviteViewModel)
+            .onOpenURL { incomingURL in
+                        print("App was opened via URL: \(incomingURL)")
+                        handleIncomingURL(incomingURL)
+            }
             } else {
                 LoginView()
                     .environmentObject(loginViewModel)
             }
-        }
-        .environmentObject(inviteViewModel)
-        .onOpenURL { incomingURL in
-                    print("App was opened via URL: \(incomingURL)")
-                    handleIncomingURL(incomingURL)
-        }
+        
+        
     }
     private func handleIncomingURL(_ url: URL) {
         guard url.scheme == "vineyard" else {
