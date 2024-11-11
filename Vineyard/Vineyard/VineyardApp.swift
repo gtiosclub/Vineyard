@@ -19,6 +19,7 @@ struct VineyardApp: App {
                 .task {
                     await loginViewModel.checkLoggedIn()
                 }
+            
         }
     }
     class AppDelegate: NSObject, UIApplicationDelegate {

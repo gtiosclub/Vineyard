@@ -10,6 +10,7 @@ import SwiftUI
 struct ProfileView: View {
     let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     @EnvironmentObject var loginViewModel: LoginViewModel
+    @EnvironmentObject var inviteViewModel: InviteViewModel
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -26,7 +27,7 @@ struct ProfileView: View {
                                 .font(.system(size: 32, weight: .bold))
                                 .foregroundColor(Color.profileViewInfo)
                             HStack() {
-                                let count = loginViewModel.currentUser?.groups?.count ?? 0
+                                let count = loginViewModel.currentUser?.groupIDs.count ?? 0
                                 Text("\(count) \(count > 1 ? "groups" : "group")")
                                      .font(.system(size: 16))
                                      .fontWeight(.regular)
@@ -52,8 +53,19 @@ struct ProfileView: View {
                         .font(.system(size: 32, weight: .bold))
                 }
             }
+        
+        .popup(isPresented: $inviteViewModel.invitedToGroup) {
+            InvitePopupView()
+        } customize: {
+            $0
+            .type(.floater())
+            .appearFrom(.bottomSlide)
+            
         }
-
+        .alert(isPresented: $inviteViewModel.inviteErrorStatus) {
+            Alert(title: Text(inviteViewModel.inviteError ?? ""))
+        }
+    }
     private var titleText: String {
         "Hi, " + (loginViewModel.currentUser?.name ?? "no name")
     }

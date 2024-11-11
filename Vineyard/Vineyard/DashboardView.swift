@@ -17,7 +17,8 @@ struct DashboardView: View {
     ]
 
     private let profileImage = "profile_image"
-
+    @EnvironmentObject var inviteViewModel: InviteViewModel
+   
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 10) {
@@ -125,8 +126,19 @@ struct DashboardView: View {
             )
             .edgesIgnoringSafeArea(.all)
         )
+        .popup(isPresented: $inviteViewModel.invitedToGroup) {
+            InvitePopupView()
+        } customize: {
+            $0
+            .type(.floater())
+            .appearFrom(.bottomSlide)
+            
+        }
+        .alert(isPresented: $inviteViewModel.inviteErrorStatus) {
+            Alert(title: Text(inviteViewModel.inviteError ?? ""))
+        }
+        
     }
-
     private func getTaskCount(for widget: Widget) -> Int {
         if let recentActivitiesFull = widget as? RecentActivitiesWidgetFull {
             return recentActivitiesFull.recentActivities.count
