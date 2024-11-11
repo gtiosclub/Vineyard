@@ -33,10 +33,33 @@ class GroupsListViewModel {
     
     init() {}
     
+    deinit {
+        removeAllGroupListeners()
+    }
     
     func setUser(user: Person?) {
         guard self.user == nil, let user = user else { return }
         self.user = user
+        loadGroups()
+    }
+    
+    private func setupGroupListener(for group: Group) {
+        guard let groupID = group.id else { return }
+        
+        databaseManager.addGroupListener(groupID: groupID) { [weak self] updatedGroup in
+            guard let self = self else { return }
+            if let index = self.groups.firstIndex(where: { $0.id == updatedGroup.id }) {
+                self.groups[index] = updatedGroup
+            }
+        }
+    }
+    
+    private func removeAllGroupListeners() {
+        groups.forEach { group in
+            if let groupID = group.id {
+                databaseManager.removeGroupListener(groupID: groupID)
+            }
+        }
     }
     
     
@@ -76,55 +99,6 @@ class GroupsListViewModel {
         return
     }
     
-//    func createSampleGroup() {
-//        Task {
-//            guard var user = user else {
-//                print("User is not set.")
-//                return
-//            }
-//            var person = Person(name: "SamplePerson", email: "sample@test.com")
-//            var resolution = Resolution(
-//                title: "Test Resolution",
-//                description: "This resolution is for testing purposes",
-//                frequency: Frequency(frequencyType: .daily, count: 1),
-//                diffLevel: Difficulty(difficultyLevel: .easy, score: 10)
-//            )
-//            var progress = Progress(
-//                resolution: resolution,
-//                quantityGoal: 0,
-//                frequencyGoal: Frequency(frequencyType: .daily, count: 2),
-//                person: person
-//            )
-//            var sampleGroup = Group(
-//                name: "Sample Group",
-//                groupGoal: "N/A",
-//                people: [user.id, person.id],
-//                resolutions: [resolution],
-//                deadline: Date(timeIntervalSinceNow: (7 * 24 * 60 * 60) * 7)
-//            )
-//            var badge = Badge(
-//                resolution: resolution,
-//                group: sampleGroup,
-//                dateObtained: Date()
-//            )
-//            
-//            person.badges.append(badge)
-//            person.allProgress.append(progress)
-//            person.groups.append(sampleGroup.id)
-//            user.groups.append(sampleGroup.id)
-//        
-//            try await databaseManager.addPersonToDB(person: person)
-//            try await databaseManager.addResolutionToDB(resolution: resolution)
-//            try await databaseManager.addProgressToDB(progress: progress)
-//            try await databaseManager.addBadgeToDB(badge: badge)
-//            try await databaseManager.addGroupToDB(group: sampleGroup)
-//
-//            try await databaseManager.addPersonToDB(person: user)
-//            
-//            groups.append(sampleGroup)
-//        }
-//    }
-    
     func createGroup(withGroupName name: String, withGroupGoal groupGoal: String, withDeadline deadline: Date, withScoreGoal scoreGoal: Int, resolutions: [Resolution]) {
         guard let user = user else {
             print("User is not set.")
@@ -154,6 +128,7 @@ class GroupsListViewModel {
                 DispatchQueue.main.async {
                     self.user = updatedUser
                     self.groups.append(newGroup)
+                    self.setupGroupListener(for: newGroup)
                 }
             } catch {
                 print("Failed to add group to database: \(error)")
@@ -165,6 +140,7 @@ class GroupsListViewModel {
     
     func joinGroup(toGroup group: Group) {
         user?.addGroup(group)
+        setupGroupListener(for: group)
     }
     
     func loadGroups() {
@@ -181,6 +157,7 @@ class GroupsListViewModel {
             for id in groupIDs {
                 if let group = try? await databaseManager.fetchGroupFromDB(groupID: id) {
                     fetchedGroups.append(group)
+                    setupGroupListener(for: group)
                 }
             }
             self.groups = fetchedGroups
