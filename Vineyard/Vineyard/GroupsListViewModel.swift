@@ -65,9 +65,13 @@ class GroupsListViewModel {
         return true
     }
     
-    func validateGoalCreationForm(action: String) throws {
+    func validateGoalCreationForm(action: String, quantity: String, isQuantityTask: Bool, isInserted: Bool) throws {
         if action.isEmpty {
             throw ValidationError("Action can not be empty")
+        } else if isQuantityTask && quantity == "" {
+            throw ValidationError("Need to specify quantity for quantity task")
+        } else if isQuantityTask && !isInserted {
+            throw ValidationError("Need to insert quantity for quantity task")
         }
         return
     }
@@ -121,17 +125,34 @@ class GroupsListViewModel {
 //        }
 //    }
     
-    func createGroup(withGroupName name: String, withGroupGoal groupGoal: String, withDeadline deadline: Date, withScoreGoal scoreGoal: Int) {
+    func createGroup(withGroupName name: String, withGroupGoal groupGoal: String, withDeadline deadline: Date, withScoreGoal scoreGoal: Int, resolutions: [Resolution]) {
         guard let user = user else {
             print("User is not set.")
             return
         }
         
-        let newGroup = Group(id: UUID().uuidString, name: name, groupGoal: groupGoal, peopleIDs: [user.id ?? UUID().uuidString], deadline: deadline, scoreGoal: scoreGoal)
+        let newGroup = Group(id: UUID().uuidString, name: name, groupGoal: groupGoal, peopleIDs: [user.id ?? UUID().uuidString], resolutionIDs: resolutions.map{$0.id ?? UUID().uuidString}, deadline: deadline, scoreGoal: scoreGoal)
         Task {
+            var updatedUser = user
+            updatedUser.groupIDs.append(newGroup.id ?? UUID().uuidString)
             do {
                 try await databaseManager.addGroupToDB(group: newGroup)
+                var newProgress: [Progress] = []
+                for resolution in resolutions {
+                    let progress = Progress(id: UUID().uuidString, resolutionID: resolution.id ?? UUID().uuidString, personID: user.id ?? UUID().uuidString, quantityGoal: Float(resolution.quantity ?? 0), frequencyGoal: resolution.frequency)
+                    newProgress.append(progress)
+                    try await databaseManager.addResolutionToDB(resolution: resolution)
+                }
+                if updatedUser.allProgress != nil {
+                    updatedUser.allProgress!.append(contentsOf: newProgress)
+                } else {
+                    updatedUser.allProgress = newProgress
+                }
+                
+                updatedUser.allProgressIDs.append(contentsOf: newProgress.map{$0.id!})
+                try await databaseManager.addPersonToDB(person: updatedUser)
                 DispatchQueue.main.async {
+                    self.user = updatedUser
                     self.groups.append(newGroup)
                 }
             } catch {
@@ -139,19 +160,7 @@ class GroupsListViewModel {
             }
         }
 
-        Task {
-            var updatedUser = user
-            updatedUser.groupIDs.append(newGroup.id ?? UUID().uuidString)
-            
-            do {
-                try await databaseManager.addPersonToDB(person: updatedUser)
-                DispatchQueue.main.async {
-                    self.user = updatedUser
-                }
-            } catch {
-                print("Failed to add user to database: \(error)")
-            }
-        }
+        
     }
     
     func joinGroup(toGroup group: Group) {
