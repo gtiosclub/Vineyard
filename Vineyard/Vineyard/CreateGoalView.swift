@@ -271,7 +271,7 @@ struct CreateGoalView: View {
     func populateFormFields() {
         goalName = goals[indexOfGoal].title // the name of the goal
         description = goals[indexOfGoal].description // the name of the goal
-        quantity = String(goals[indexOfGoal].quantity!)
+        quantity = String(goals[indexOfGoal].quantity ?? 0)
         
         selectedDifficulty = goals[indexOfGoal].diffLevel.difficultyLevel
         selectedFrequency = goals[indexOfGoal].frequency.frequencyType
@@ -282,7 +282,9 @@ struct CreateGoalView: View {
     func submitGoalCreationForm() {
         do {
             try viewModel.validateGoalCreationForm(action: goalName, quantity: quantity, isQuantityTask: isQuantityTask, isInserted: isInserted)
-            words.insert("qtt_position", at: indexInserted ?? 0)
+            if let index = indexInserted {
+                words.insert("qtt_position", at: index)
+            }
             goalName = words.joined(separator: " ")
             if editMode {
                 goals[indexOfGoal] = Resolution(id: UUID().uuidString, title: goalName, description: description, quantity: Int(quantity), frequency: Frequency(frequencyType: selectedFrequency, count: freqQuantity), diffLevel: Difficulty(difficultyLevel: selectedDifficulty, score: 10))
