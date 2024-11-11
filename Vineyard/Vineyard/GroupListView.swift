@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PopupView
 
 struct GroupListView: View {
     @EnvironmentObject var loginViewModel: LoginViewModel

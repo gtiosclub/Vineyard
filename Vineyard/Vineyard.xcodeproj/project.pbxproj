@@ -28,7 +28,6 @@
 		BB40EE0C2C992871006BA1E3 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EE0B2C992871006BA1E3 /* DashboardView.swift */; };
 		BB40EE0E2C99288A006BA1E3 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EE0D2C99288A006BA1E3 /* ProfileView.swift */; };
 		DA17B8F02CD1E561007D5EB1 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = DA17B8EF2CD1E561007D5EB1 /* PopupView */; };
-		DA17B8F22CD1E598007D5EB1 /* InviteTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA17B8F12CD1E598007D5EB1 /* InviteTestView.swift */; };
 		DA17B8F52CD3AC59007D5EB1 /* InviteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA17B8F42CD3AC59007D5EB1 /* InviteViewModel.swift */; };
 		DA17B8F72CD3B044007D5EB1 /* InvitePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA17B8F62CD3B044007D5EB1 /* InvitePopupView.swift */; };
 		DAB3AC312CAF5AD700DD0DA8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DAB3AC302CAF5AD700DD0DA8 /* GoogleService-Info.plist */; };
@@ -92,7 +91,6 @@
 		BB40EE072C99258B006BA1E3 /* DatabaseServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseServiceProtocol.swift; sourceTree = "<group>"; };
 		BB40EE0B2C992871006BA1E3 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		BB40EE0D2C99288A006BA1E3 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		DA17B8F12CD1E598007D5EB1 /* InviteTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteTestView.swift; sourceTree = "<group>"; };
 		DA17B8F32CD3AACA007D5EB1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DA17B8F42CD3AC59007D5EB1 /* InviteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteViewModel.swift; sourceTree = "<group>"; };
 		DA17B8F62CD3B044007D5EB1 /* InvitePopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitePopupView.swift; sourceTree = "<group>"; };
@@ -172,7 +170,6 @@
 				192EBFE12C90F62E00AF8528 /* HomeView.swift */,
 				DA17B8F62CD3B044007D5EB1 /* InvitePopupView.swift */,
 				DA17B8F42CD3AC59007D5EB1 /* InviteViewModel.swift */,
-				DA17B8F12CD1E598007D5EB1 /* InviteTestView.swift */,
 				BB40EDF42C991C69006BA1E3 /* Database */,
 				BB40EDF32C991C59006BA1E3 /* Core Models */,
 				BB40EDF22C991C42006BA1E3 /* Profile */,
@@ -545,7 +542,6 @@
 				F13306EC2CD3E678002BA300 /* RecentActivitiesWidget.swift in Sources */,
 				B40B894E2C936DE0006B1771 /* ResolutionView.swift in Sources */,
 				F10167662CA37B180004260E /* Progress.swift in Sources */,
-				DA17B8F22CD1E598007D5EB1 /* InviteTestView.swift in Sources */,
 				DA17B8F52CD3AC59007D5EB1 /* InviteViewModel.swift in Sources */,
 				951CF8F02CC5C0650016B06A /* GroupListView.swift in Sources */,
 				BB40EE082C99258B006BA1E3 /* DatabaseServiceProtocol.swift in Sources */,

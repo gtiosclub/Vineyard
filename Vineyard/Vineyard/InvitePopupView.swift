@@ -10,11 +10,6 @@ import SwiftUI
 struct InvitePopupView: View {
     @EnvironmentObject var inviteViewModel: InviteViewModel
     @EnvironmentObject var loginViewModel: LoginViewModel
-//    private let dateFormatter: DateFormatter = {
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "MM/dd/YYYY"
-//        return formatter
-//    }()
     @Environment(\.dismiss) var dismiss
     var body: some View {
         ZStack {
@@ -46,7 +41,6 @@ struct InvitePopupView: View {
                     Text("\(inviteViewModel.group!.resolutionIDs.count) \(inviteViewModel.group!.resolutionIDs.count == 1 ? "Resolution" : "Resolutions")")
                     
                 }
-                //.frame(maxWidth: .infinity)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(8)
                 .padding(.horizontal, 24)
