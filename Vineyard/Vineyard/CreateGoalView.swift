@@ -94,20 +94,27 @@ struct CreateGoalView: View {
                                     .fill(Color.purple.opacity(0.3))
                                     .frame(width: 4, height: 10) : nil
                             if isInserted && indexInserted == index+1 {
-                                Text("Quantity")
-                                    .bold()
-                                    .padding(8)
-                                    .overlay {
-                                        LinearGradient(
-                                            colors: [.red, .blue, .green, .yellow],
-                                            startPoint: .leading,
-                                            endPoint: .trailing
-                                        )
-                                        .mask(
-                                            Text("Quantity")
-                                                .bold()
-                                        )
-                                    }
+                                HStack {
+                                    Text("Quantity")
+                                        .bold()
+                                        .overlay {
+                                            LinearGradient(
+                                                colors: [.red, .blue, .green, .yellow],
+                                                startPoint: .leading,
+                                                endPoint: .trailing
+                                            )
+                                            .mask(
+                                                Text("Quantity")
+                                                    .bold()
+                                            )
+                                        }
+                                        .padding(.vertical, 8)
+                                        .padding(.leading, 8)
+                                    Image(systemName: "xmark")
+                                        .bold()
+                                        .font(.system(size: 10))
+                                        .padding(.trailing, 8)
+                                }
                                     .background {
                                         RoundedRectangle(cornerRadius: 20)
                                             .foregroundStyle(.thinMaterial)
