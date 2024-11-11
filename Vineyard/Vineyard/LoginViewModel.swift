@@ -133,6 +133,17 @@ class LoginViewModel: ObservableObject {
         }
         return true
     }
+    
+    func getCurrentUserBadges() async {
+        guard let badgeIDs = currentUser?.badgeIDs else { return }
+
+        do {
+            let badges = try await FirebaseDataManager.shared.fetchBadgesFromDB(badgeIDs: badgeIDs)
+            self.currentUser?.badges = badges
+        } catch {
+            print("Error fetching badges: \(error.localizedDescription)")
+        }
+    }
 
     private func handleFirebaseError(error: Error) {
         

@@ -10,32 +10,32 @@ import SwiftUI
 struct ProfileView: View {
     let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     @EnvironmentObject var loginViewModel: LoginViewModel
+
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack {
-                    Button(action:{
+                    Button(action: {
                         Task {
                             await loginViewModel.signOut()
                         }
                     }) {
                         Text("Sign out")
                     }
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text(titleText)
-                                .font(.system(size: 32, weight: .bold))
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(titleText)
+                            .font(.system(size: 32, weight: .bold))
+                            .foregroundColor(Color.profileViewInfo)
+                        HStack {
+                            let count = loginViewModel.currentUser?.groups?.count ?? 0
+                            Text("\(count) \(count > 1 ? "groups" : "group")")
+                                .font(.system(size: 16))
+                                .fontWeight(.regular)
                                 .foregroundColor(Color.profileViewInfo)
-                            HStack() {
-                                let count = loginViewModel.currentUser?.groups?.count ?? 0
-                                Text("\(count) \(count > 1 ? "groups" : "group")")
-                                     .font(.system(size: 16))
-                                     .fontWeight(.regular)
-                                     .foregroundColor(Color.profileViewInfo)
-                            }
                         }
-                        .frame(maxWidth: .infinity, alignment: .leading)
                     }
-                    
+                    .frame(maxWidth: .infinity, alignment: .leading)
+
                     LazyVGrid(columns: columns, spacing: 10) {
                         ForEach(loginViewModel.currentUser?.badges ?? []) { badge in
                             BadgeView(badge: badge)
@@ -46,6 +46,11 @@ struct ProfileView: View {
                 .padding(.horizontal, 20)
                 .background(Color.profileViewCellBackground)
             }
+            .onAppear {
+                Task {
+                    await loginViewModel.getCurrentUserBadges()
+                }
+            }
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Text("Profile")
@@ -53,11 +58,13 @@ struct ProfileView: View {
                 }
             }
         }
+    }
 
     private var titleText: String {
         "Hi, " + (loginViewModel.currentUser?.name ?? "no name")
     }
 }
+
 
 
 struct BadgeView: View {
