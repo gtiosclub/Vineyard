@@ -38,13 +38,6 @@ struct CreateGoalView: View {
     @State private var indexInserted: Int?
     @State var isQuantityTask: Bool = false
     
-    
-//    
-//    @State private var frequencyCase: Int = 0
-//    @State private var frequencyCount: String = "1"
-//    @State private var difficultyCase: Int = 0
-//    @State private var difficultyScore: String = "1"
-    
     var body: some View {
         
         
@@ -66,7 +59,7 @@ struct CreateGoalView: View {
                 }
             
                 
-                // Fixed word list
+        
                 HStack(spacing:4) {
                     ForEach(Array(words.enumerated()), id: \.element) { index, word in
                         
@@ -298,7 +291,7 @@ struct CreateGoalView: View {
             }
             
             
-//                    print(resolution.title, resolution.description, resolution.defaultFrequency.frequencyType, resolution.defaultFrequency.count, resolution.diffLevel.difficultyLevel, resolution.diffLevel.score)
+                  
             goalName = "" // the name of the goal
             description = "" // the description of the goal
             quantity = ""
