@@ -9,12 +9,15 @@ import SwiftUI
 
 struct GroupView: View {
     @EnvironmentObject var loginViewModel: LoginViewModel
-    let group: Group
+    let dm = FirebaseDataManager.shared
+    @Namespace private var animation
+    @State var membersExpanded: Bool = false
+    @State var group: Group
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
-                    Text("Goal:\(group.groupGoal)")
+                    Text("Goal: \(group.groupGoal)")
                         .font(.headline)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
@@ -27,13 +30,81 @@ struct GroupView: View {
                     }
                     .padding()
                     .frame(height: 160)
-                    .background(Color.gray.opacity(0.5))
-                    .cornerRadius(10)
-                    
-                    Text("Members (\(group.peopleIDs.count))")
-                        .font(.headline)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    
+                    .background {
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundStyle(.ultraThinMaterial)
+                    }
+                    if !membersExpanded {
+                        HStack {
+                            HStack(spacing: -20 * 0.5) {
+                                ForEach(0..<group.peopleIDs.count) { index in
+                                    ZStack {
+                                        Circle()
+                                            .foregroundStyle(Color.black.opacity(0.3))
+                                            .frame(width: 21, height: 21)
+                                            .zIndex(Double(group.peopleIDs.count - index))
+                                        Circle()
+                                            .foregroundStyle(.ultraThinMaterial)
+                                            .frame(width: 20, height: 20)
+                                            .zIndex(Double(group.peopleIDs.count - index))
+                                        
+                                    }
+                                    .matchedGeometryEffect(id: "memberCircle\(index)", in: animation)
+                                    
+                                    
+                                }
+                            }
+                            Text("Members (\(group.peopleIDs.count))")
+                                .font(.headline)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                        .padding(8)
+                        .background {
+                            RoundedRectangle(cornerRadius: 20)
+                                .foregroundStyle(.ultraThinMaterial)
+                        }
+                        .onTapGesture {
+                            withAnimation {
+                                membersExpanded.toggle()
+                            }
+                        }
+                    } else {
+                        
+                            VStack (alignment: .leading){
+                                ForEach(0..<group.peopleIDs.count) { index in
+                                    HStack {
+                                        ZStack {
+                                            Circle()
+                                                .foregroundStyle(Color.black.opacity(0.3))
+                                                .frame(width: 21, height: 21)
+                                            
+                                            Circle()
+                                                .foregroundStyle(.ultraThinMaterial)
+                                                .frame(width: 20, height: 20)
+                                            
+                                            
+                                        }
+                                        .matchedGeometryEffect(id: "memberCircle\(index)", in: animation)
+                                        Text((group.people ?? [])[index].name)
+                                    }
+                                    
+                                }
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        
+                        .padding(8)
+                        .background {
+                            RoundedRectangle(cornerRadius: 20)
+                                .foregroundStyle(.ultraThinMaterial)
+                        }
+                        .onTapGesture {
+                            withAnimation {
+                                membersExpanded.toggle()
+                            }
+                        }
+                    }
+
 //                    ForEach(group.people) {people in
 //                        
 //                        VStack(alignment: .leading, spacing: 10) {
@@ -60,29 +131,29 @@ struct GroupView: View {
                         .font(.headline)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
-                    HStack {
-                        VStack(alignment: .leading, spacing: 10) {
-                            Text("lorem ipsum")
-                                .frame(maxWidth: .infinity)
-                        }
-                        .padding()
-                        .frame(height: 100)
-                        .background(Color.gray.opacity(0.5))
-                        .cornerRadius(10)
+                    VStack(alignment: .leading) {
+                       
+                            
+                            ForEach(group.resolutions ?? []) { resolution in
+                                HStack {
+                                    Circle()
+                                        .foregroundStyle(resolution.diffLevel.difficultyLevel == DifficultyLevel.easy ? .green : (resolution.diffLevel.difficultyLevel == DifficultyLevel.medium ? .yellow : .red))
+                                        .frame(width: 10, height: 10)
+                                    Text(resolution.title.replacingOccurrences(of: "qtt_position", with: "___"))
+                                }
+                            }
                         
-                        VStack(alignment: .leading, spacing: 10) {
-                            Text("lorem ipsum")
-                                .frame(maxWidth: .infinity)
-                        }
-                        .padding()
-                        .frame(height: 100)
-                        .background(Color.gray.opacity(0.5))
-                        .cornerRadius(10)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(8)
+                    .background {
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundStyle(.ultraThinMaterial)
                     }
                     
-                    Text("Recent Activities")
-                        .font(.headline)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+//                    Text("Recent Activities")
+//                        .font(.headline)
+//                        .frame(maxWidth: .infinity, alignment: .leading)
                     
 //                    ForEach(group.people) {people in
 //                        VStack(alignment: .leading, spacing: 10) {
@@ -118,6 +189,20 @@ struct GroupView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     ShareLink(item: generateInviteLink())
+                }
+            }
+        }
+        .onAppear {
+            Task {
+                if group.people == nil || group.people!.isEmpty {
+                    group.people = try await dm.fetchPeopleFromDB(peopleIDs: group.peopleIDs)
+                } else {
+                    print(group.people)
+                }
+                if group.resolutions == nil || group.resolutions!.isEmpty {
+                    group.resolutions = try await dm.fetchResolutionsFromDB(resolutionIDs: group.resolutionIDs)
+                } else {
+                    print(group.resolutions)
                 }
             }
         }

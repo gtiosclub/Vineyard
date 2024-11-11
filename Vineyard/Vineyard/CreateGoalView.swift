@@ -282,7 +282,9 @@ struct CreateGoalView: View {
     func submitGoalCreationForm() {
         do {
             try viewModel.validateGoalCreationForm(action: goalName, quantity: quantity, isQuantityTask: isQuantityTask, isInserted: isInserted)
-            words.insert("qtt_position", at: indexInserted ?? 0)
+            if indexInserted != nil {
+                words.insert("qtt_position", at: indexInserted!)
+            }
             goalName = words.joined(separator: " ")
             if editMode {
                 goals[indexOfGoal] = Resolution(id: UUID().uuidString, title: goalName, description: description, quantity: Int(quantity), frequency: Frequency(frequencyType: selectedFrequency, count: freqQuantity), diffLevel: Difficulty(difficultyLevel: selectedDifficulty, score: 10))
