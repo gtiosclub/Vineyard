@@ -18,6 +18,8 @@ class GroupsListViewModel {
     var groupCreationErrorMessage: AlertMessage?
     var goalCreationErrorMessage: AlertMessage?
     
+    private var activeListenerGroupIDs: Set<String> = []
+    
     struct AlertMessage: Identifiable {
         let id = UUID()
         let message: String
@@ -46,6 +48,10 @@ class GroupsListViewModel {
     private func setupGroupListener(for group: Group) {
         guard let groupID = group.id else { return }
         
+        guard !activeListenerGroupIDs.contains(groupID) else { return }
+        
+        activeListenerGroupIDs.insert(groupID)
+        
         databaseManager.addGroupListener(groupID: groupID) { [weak self] updatedGroup in
             guard let self = self else { return }
             if let index = self.groups.firstIndex(where: { $0.id == updatedGroup.id }) {
@@ -58,6 +64,7 @@ class GroupsListViewModel {
         groups.forEach { group in
             if let groupID = group.id {
                 databaseManager.removeGroupListener(groupID: groupID)
+                activeListenerGroupIDs.remove(groupID)
             }
         }
     }
@@ -139,8 +146,26 @@ class GroupsListViewModel {
     }
     
     func joinGroup(toGroup group: Group) {
-        user?.addGroup(group)
-        setupGroupListener(for: group)
+        Task { [weak self] in
+            guard let self = self, let user = self.user else { return }
+            
+            var updatedUser = user
+            updatedUser.addGroup(group)
+            
+            do {
+                try await databaseManager.addPersonToDB(person: updatedUser)
+                
+                DispatchQueue.main.async {
+                    self.user = updatedUser
+                    if !self.groups.contains(where: { $0.id == group.id }) {
+                        self.groups.append(group)
+                        self.setupGroupListener(for: group)
+                    }
+                }
+            } catch {
+                print("Failed to join group: \(error)")
+            }
+        }
     }
     
     func loadGroups() {
@@ -151,16 +176,23 @@ class GroupsListViewModel {
         
 //        print(self.user)
         
-        Task {
+        removeAllGroupListeners()
+        
+        Task { [weak self] in
+            guard let self = self else { return }
             let groupIDs = user.groupIDs
             var fetchedGroups: [Group] = []
+            
             for id in groupIDs {
                 if let group = try? await databaseManager.fetchGroupFromDB(groupID: id) {
                     fetchedGroups.append(group)
-                    setupGroupListener(for: group)
                 }
             }
-            self.groups = fetchedGroups
+            
+            DispatchQueue.main.async {
+                self.groups = fetchedGroups
+                fetchedGroups.forEach { self.setupGroupListener(for: $0) }
+            }
         }
     }
 }
