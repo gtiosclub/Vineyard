@@ -11,37 +11,42 @@ struct GroupView: View {
     @EnvironmentObject var loginViewModel: LoginViewModel
     let group: Group
     var body: some View {
-        NavigationStack {
-            ScrollView {
-                VStack(spacing: 20) {
-                    Text("Goal:\(group.groupGoal)")
-                        .font(.headline)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    
-                    VStack(alignment: .leading, spacing: 10) {
-                        Spacer()
-                        ProgressView(value: 0.20)
-                            .accentColor(.white)
-                            .background(Color.gray.opacity(0.5))
-                            .frame(height: 10)
-                    }
-                    .padding()
-                    .frame(height: 160)
-                    .background(Color.gray.opacity(0.5))
-                    .cornerRadius(10)
-                    
-                    Text("Members (\(group.peopleIDs.count))")
-                        .font(.headline)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    
+        ScrollView {
+            NavigationLink(destination: VineBranchView()) {
+                            VineBranchView(isStaticPreview: true)
+                                .padding()
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        .padding()
+            VStack(spacing: 20) {
+                Text("Goal:\(group.groupGoal)")
+                    .font(.headline)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+                VStack(alignment: .leading, spacing: 10) {
+                    Spacer()
+                    ProgressView(value: 0.20)
+                        .accentColor(.white)
+                        .background(Color.gray.opacity(0.5))
+                        .frame(height: 10)
+                }
+                .padding()
+                .frame(height: 160)
+                .background(Color.gray.opacity(0.5))
+                .cornerRadius(10)
+                
+                Text("Members (\(group.peopleIDs.count))")
+                    .font(.headline)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
 //                    ForEach(group.people) {people in
-//                        
+//
 //                        VStack(alignment: .leading, spacing: 10) {
 //                            HStack {
 //                                Image(systemName: "person.crop.circle")
 //                                    .resizable()
 //                                    .frame(width: 30, height: 30)
-//                                
+//
 //                                Text("\(people.name)")
 //                                Spacer()
 //                                ProgressView(value: 0.20)
@@ -55,35 +60,35 @@ struct GroupView: View {
 //                        .background(Color.gray.opacity(0.5))
 //                        .cornerRadius(10)
 //                    }
-                    
-                    Text("Todo")
-                        .font(.headline)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    
-                    HStack {
-                        VStack(alignment: .leading, spacing: 10) {
-                            Text("lorem ipsum")
-                                .frame(maxWidth: .infinity)
-                        }
-                        .padding()
-                        .frame(height: 100)
-                        .background(Color.gray.opacity(0.5))
-                        .cornerRadius(10)
-                        
-                        VStack(alignment: .leading, spacing: 10) {
-                            Text("lorem ipsum")
-                                .frame(maxWidth: .infinity)
-                        }
-                        .padding()
-                        .frame(height: 100)
-                        .background(Color.gray.opacity(0.5))
-                        .cornerRadius(10)
+                
+                Text("Todo")
+                    .font(.headline)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+                HStack {
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("lorem ipsum")
+                            .frame(maxWidth: .infinity)
                     }
+                    .padding()
+                    .frame(height: 100)
+                    .background(Color.gray.opacity(0.5))
+                    .cornerRadius(10)
                     
-                    Text("Recent Activities")
-                        .font(.headline)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("lorem ipsum")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .padding()
+                    .frame(height: 100)
+                    .background(Color.gray.opacity(0.5))
+                    .cornerRadius(10)
+                }
+                
+                Text("Recent Activities")
+                    .font(.headline)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
 //                    ForEach(group.people) {people in
 //                        VStack(alignment: .leading, spacing: 10) {
 //                            HStack {
@@ -92,7 +97,7 @@ struct GroupView: View {
 //                                    .frame(width: 30, height: 30)
 //                                Text("\(people.name)")
 //                                Spacer()
-//                                
+//
 //                                VStack {
 //                                    Text("Lorem Ipsum")
 //                                        .font(.subheadline)
@@ -107,18 +112,17 @@ struct GroupView: View {
 //                        .background(Color.gray.opacity(0.5))
 //                        .cornerRadius(10)
 //                    }
-                    
-                }
-                .padding(.horizontal, 20)
+                
             }
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text("\(group.name)")
-                        .font(.system(size: 24, weight: .bold))
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    ShareLink(item: generateInviteLink())
-                }
+            .padding(.horizontal, 20)
+        }
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text("\(group.name)")
+                    .font(.system(size: 24, weight: .bold))
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                ShareLink(item: generateInviteLink())
             }
         }
     }
@@ -135,6 +139,12 @@ struct GroupView: View {
         
     }
 }
+
+
+//#Preview {
+//    GroupView(group: .constant(Group.samples[0])).environment(GroupsListViewModel())
+//}
+
 
 
 //#Preview {
