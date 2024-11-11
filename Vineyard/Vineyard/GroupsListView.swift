@@ -11,7 +11,7 @@ struct GroupsListView: View {
     @EnvironmentObject var loginViewModel: LoginViewModel
     @StateObject var viewModel: GroupsListViewModel
     @State private var isPresentingAddGroup = false
-    
+    @EnvironmentObject var inviteViewModel: InviteViewModel
     var body: some View {
         NavigationStack {
             List {
@@ -54,6 +54,19 @@ struct GroupsListView: View {
                 viewModel.setUser(user: loginViewModel.currentUser)
                 viewModel.loadGroups()
             }
+            .popup(isPresented: $inviteViewModel.invitedToGroup) {
+                InvitePopupView()
+            } customize: {
+                $0
+                .type(.floater())
+                .appearFrom(.bottomSlide)
+                
+            }
+            .alert(isPresented: $inviteViewModel.inviteErrorStatus) {
+                Alert(title: Text(inviteViewModel.inviteError ?? ""))
+            }
+            
+            
         }
     }
 }
@@ -67,7 +80,7 @@ struct GroupCardView: View {
                 .font(.headline)
             HStack {
                 Spacer()
-                Text("\(group.people.count) People")
+                Text("\(group.peopleIDs.count) People")
                     .font(.subheadline)
                     .padding(.top, 8)
                 Image(systemName: "person.3.fill")

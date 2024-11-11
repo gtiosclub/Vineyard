@@ -13,50 +13,13 @@ class FirebaseDataManager: DatabaseServiceProtocol {
     private let db = Firestore.firestore()
     
     func fetchGroupFromDB(groupID: String) async throws -> Group? {
-        let groupRef = db.collection("groups").document(groupID)
-        let document = try await groupRef.getDocument()
-
-        guard let data = document.data(),
-              let name = data["name"] as? String,
-              let groupGoal = data["groupGoal"] as? String,
-              let deadlineTimestamp = data["deadline"] as? Timestamp else {
-            return nil
-        }
-        let deadline = deadlineTimestamp.dateValue()
-        let peopleIDs = data["people"] as? [String] ?? []
-        let resolutionIDs = data["resolutions"] as? [String] ?? []
-        let resolutions = try await fetchResolutionsFromDB(resolutionIDs: resolutionIDs)
-
-        return Group(
-            name: name,
-            groupGoal: groupGoal,
-            people: peopleIDs,
-            resolutions: resolutions,
-            deadline: deadline,
-            scoreGoal: 3
-        )
-
+        let documentSnapshot = try await db.collection("groups").document(groupID).getDocument()
+        return try documentSnapshot.data(as: Group.self)
     }
     
     func fetchPersonFromDB(userID: String) async throws -> Person? {
-        let personRef = db.collection("people").document(userID)
-        let document = try await personRef.getDocument()
-        
-        guard let data = document.data(),
-              let name = data["name"] as? String,
-              let email = data["email"] as? String,
-              let groupIDs = data["groupIDs"] as? [String] else {
-            return nil
-        }
-        
-        return Person(
-            id: userID,
-            name: name,
-            groups: groupIDs,
-            allProgress: [],
-            email: email,
-            badges: []
-        )
+        let documentSnapshot = try await db.collection("people").document(userID).getDocument()
+        return try documentSnapshot.data(as: Person.self)
     }
     
     func fetchPeopleFromDB(peopleIDs: [String]) async throws -> [Person] {
@@ -77,310 +40,98 @@ class FirebaseDataManager: DatabaseServiceProtocol {
         var badges: [Badge] = []
         
         for badgeID in badgeIDs {
-            let badgeRef = db.collection("badges").document(badgeID)
-            let document = try await badgeRef.getDocument()
+            let documentSnapshot = try await db.collection("badges").document(badgeID).getDocument()
             
-            guard let data = document.data(),
-                  let resolutionID = data["resolutionID"] as? String,
-                  let groupID = data["groupID"] as? String,
-                  let dateObtainedTimestamp = data["dateObtained"] as? Timestamp else {
-                continue
-            }
-            
-            let dateObtained = dateObtainedTimestamp.dateValue()
-            
-            if let resolution = try await fetchResolutionFromDB(resolutionID: resolutionID),
-               let group = try await fetchGroupFromDB(groupID: groupID) {
-                
-                let badge = Badge(resolution: resolution, group: group, dateObtained: dateObtained)
-                badges.append(badge)
+            if let badge = try? documentSnapshot.data(as: Badge.self) {
+                // May not do this here \\
+                if let resolution = try? await fetchResolutionFromDB(resolutionID: badge.resolutionID) {
+                    var updatedBadge = badge
+                    updatedBadge.resolution = resolution
+                    badges.append(updatedBadge)
+                } else {
+                    badges.append(badge)
+                }
             }
         }
-        
         return badges
     }
     
     func fetchProgressFromDB(progressIDs: [String]) async throws -> [Progress] {
         var progressList: [Progress] = []
-
         for progressID in progressIDs {
-            let progressRef = db.collection("progress").document(progressID)
-            let document = try await progressRef.getDocument()
-
-            guard let data = document.data(),
-                  let personID = data["person"] as? String,
-                  let resolutionID = data["resolution"] as? String,
-                  let completion = data["completion"] as? [Timestamp],
-                  let frequencyData = data["frequencyGoal"] as? [String: Any],
-                  let quantityGoal = data["quantityGoal"] as? Float else {
-                continue
-            }
-            let completionDates = completion.map { $0.dateValue() }
-            
-            let frequency: Frequency
-            if let type = frequencyData["type"] as? String, let count = frequencyData["count"] as? Int {
-                switch type {
-                case "daily":
-                    frequency = Frequency(frequencyType: FrequencyType.daily, count: count)
-                case "weekly":
-                    frequency = Frequency(frequencyType: FrequencyType.weekly, count: count)
-                case "monthly":
-                    frequency = Frequency(frequencyType: FrequencyType.monthly, count: count)
-                default:
-                    throw NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Unknown frequency type"])
+            let documentSnapshot = try await db.collection("progress").document(progressID).getDocument()
+            if let progress = try? documentSnapshot.data(as: Progress.self) {
+                var updatedProgress = progress
+                // May not do this here \\
+                if let resolution = try? await fetchResolutionFromDB(resolutionID: progress.resolutionID) {
+                    updatedProgress.resolution = resolution
                 }
-            } else {
-                throw NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid frequency data"])
+                // May not do this here \\
+                if let person = try? await fetchPersonFromDB(userID: progress.personID) {
+                    updatedProgress.person = person
+                }
+                progressList.append(updatedProgress)
             }
-
-            guard let person = try await fetchPersonFromDB(userID: personID),
-                  let resolution = try await fetchResolutionFromDB(resolutionID: resolutionID) else {
-                continue
-            }
-
-            let progress = Progress(
-                id: progressID,
-                resolution: resolution,
-                completionArray: completionDates,
-                quantityGoal: quantityGoal,
-                frequencyGoal: frequency,
-                person: person
-            )
-            progressList.append(progress)
         }
-        
         return progressList
     }
     
     private func fetchResolutionFromDB(resolutionID: String) async throws -> Resolution? {
-        let resolutionRef = db.collection("resolutions").document(resolutionID)
-        let document = try await resolutionRef.getDocument()
-        
-        guard let data = document.data(),
-              let title = data["title"] as? String,
-              let description = data["description"] as? String,
-              let frequencyData = data["frequency"] as? [String: Any],
-              let diffLevelData = data["difficultyLevel"] as? [String: Any] else { return nil }
-        
-        let frequency: Frequency
-        if let type = frequencyData["type"] as? String, let count = frequencyData["count"] as? Int {
-            switch type {
-            case "daily":
-                frequency = Frequency(frequencyType: FrequencyType.daily, count: count)
-            case "weekly":
-                frequency = Frequency(frequencyType: FrequencyType.weekly, count: count)
-            case "monthly":
-                frequency = Frequency(frequencyType: FrequencyType.monthly, count: count)
-            default:
-                throw NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Unknown frequency type"])
-            }
-        } else {
-            throw NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid frequency data"])
-        }
-
-        let difficulty: Difficulty
-        let _difficultyLevel: DifficultyLevel
-        if let type = diffLevelData["type"] as? String, let score = diffLevelData["score"] as? Int {
-            switch type {
-            case "easy":
-                difficulty = Difficulty(difficultyLevel: DifficultyLevel.easy, score: score)
-            case "medium":
-                difficulty = Difficulty(difficultyLevel: DifficultyLevel.medium, score: score)
-            case "hard":
-                difficulty = Difficulty(difficultyLevel: DifficultyLevel.hard, score: score)
-            default:
-                throw NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Unknown difficulty level type"])
-            }
-        } else {
-            throw NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid difficulty level data"])
-        }
-
-        
-        return Resolution(
-            title: title,
-            description: description,
-            quantity: data["quantity"] as? Int,
-            frequency: frequency,
-            diffLevel: difficulty
-        )
+        let documentSnapshot = try await db.collection("resolutions").document(resolutionID).getDocument()
+        return try documentSnapshot.data(as: Resolution.self)
     }
     
     func fetchResolutionsFromDB(resolutionIDs: [String]) async throws -> [Resolution] {
         var resolutions: [Resolution] = []
-
         for resolutionID in resolutionIDs {
-            let resolutionRef = db.collection("resolutions").document(resolutionID)
-            let document = try await resolutionRef.getDocument()
-
-            guard let data = document.data(),
-                  let title = data["title"] as? String,
-                  let description = data["description"] as? String,
-                  let frequencyData = data["frequency"] as? [String: Any],
-                  let diffLevelData = data["difficultyLevel"] as? [String: Any] else { continue }
-
-            let frequency: Frequency
-            if let type = frequencyData["type"] as? String, let count = frequencyData["count"] as? Int {
-                switch type {
-                case "daily":
-                    frequency = Frequency(frequencyType: FrequencyType.daily, count: count)
-                case "weekly":
-                    frequency = Frequency(frequencyType: FrequencyType.weekly, count: count)
-                case "monthly":
-                    frequency = Frequency(frequencyType: FrequencyType.monthly, count: count)
-                default:
-                    throw NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Unknown frequency type"])
-                }
-            } else {
-                throw NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid frequency data"])
+            if let resolution = try await fetchResolutionFromDB(resolutionID: resolutionID) {
+                resolutions.append(resolution)
             }
-
-            let difficulty: Difficulty
-            let _difficultyLevel: DifficultyLevel
-            if let type = diffLevelData["type"] as? String, let score = diffLevelData["score"] as? Int {
-                switch type {
-                case "easy":
-                    difficulty = Difficulty(difficultyLevel: DifficultyLevel.easy, score: score)
-                case "medium":
-                    difficulty = Difficulty(difficultyLevel: DifficultyLevel.medium, score: score)
-                case "hard":
-                    difficulty = Difficulty(difficultyLevel: DifficultyLevel.hard, score: score)
-                default:
-                    throw NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Unknown difficulty level type"])
-                }
-            } else {
-                throw NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid difficulty level data"])
-            }
-
-            let quantity = data["quantity"] as? Int
-
-            let resolution = Resolution(
-                title: title,
-                description: description,
-                quantity: quantity,
-                frequency: frequency,
-                diffLevel: difficulty
-            )
-
-            resolutions.append(resolution)
         }
-
         return resolutions
     }
     
     func addPersonToDB(person: Person) async throws {
-        let personRef = db.collection("people").document(person.id)
+        guard let id = person.id else { throw NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Missing person ID"]) }
+        let personRef = db.collection("people").document(id)
+        try personRef.setData(from: person)
         
-        var badgeIDs: [String] = []
-        for badge in person.badges {
-            badgeIDs.append(badge.id)
-            try await self.addBadgeToDB(badge: badge)
+        // Store the related objects as well - might not do this here? \\
+        for badge in person.badges ?? [] {
+            try await addBadgeToDB(badge: badge)
         }
-        
-        var progressIDs: [String] = []
-        for progress in person.allProgress {
-            progressIDs.append(progress.id)
-            try await self.addProgressToDB(progress: progress)
+        for progress in person.allProgress ?? [] {
+            try await addProgressToDB(progress: progress)
         }
-
-        let personData: [String: Any] = [
-            "name": person.name,
-            "email": person.email,
-            "groupIDs": person.groups,
-            "allProgress": progressIDs,
-            "badges": badgeIDs
-        ]
-        try await personRef.setData(personData)
     }
     
     func addResolutionToDB(resolution: Resolution) async throws {
-        let resolutionRef = db.collection("resolutions").document(resolution.id)
-
-        let frequencyData: [String: Any]
-        let frequency = resolution.defaultFrequency
-        let _count = frequency.count
-        switch frequency.frequencyType {
-        case .daily:
-            frequencyData = ["type": "daily", "count": frequency.count]
-        case .weekly:
-            frequencyData = ["type": "weekly", "count": frequency.count]
-        case .monthly:
-            frequencyData = ["type": "monthly", "count": frequency.count]
-        }
-
-        let difficultyLevelData: [String: Any]
-        let difficulty = resolution.diffLevel
-        let _score = difficulty.score
-        switch difficulty.difficultyLevel {
-        case .easy:
-            difficultyLevelData = ["type": "easy", "score": difficulty.score]
-        case .medium:
-            difficultyLevelData = ["type": "easy", "score": difficulty.score]
-        case .hard:
-            difficultyLevelData = ["type": "easy", "score": difficulty.score]
-        }
-
-        let resolutionData: [String: Any] = [
-            "title": resolution.title,
-            "description": resolution.description,
-            "quantity": resolution.defaultQuantity as Any,
-            "frequency": frequencyData,
-            "difficultyLevel": difficultyLevelData
-        ]
-        try await resolutionRef.setData(resolutionData)
+        guard let id = resolution.id else { throw NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Missing resolution ID"]) }
+        let resolutionRef = db.collection("resolutions").document(id)
+        try resolutionRef.setData(from: resolution)
     }
     
     func addBadgeToDB(badge: Badge) async throws {
-        let badgeRef = db.collection("badges").document(badge.id)
-        
-        let badgeData: [String: Any] = [
-            "resolutionID": badge.resolution.id,
-            "groupID": badge.group.id,
-            "dateObtained": Timestamp(date: badge.dateObtained)
-        ]
-        
-        try await badgeRef.setData(badgeData)
+        guard let id = badge.id else { throw NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Missing badge ID"]) }
+        let badgeRef = db.collection("badges").document(id)
+        try badgeRef.setData(from: badge)
     }
     
     func addProgressToDB(progress: Progress) async throws {
-        let progressRef = db.collection("progress").document(progress.id)
-        
-        let frequencyData: [String: Any]
-        let frequency = progress.frequencyGoal
-        let _count = frequency.count
-        switch frequency.frequencyType {
-        case .daily:
-            frequencyData = ["type": "daily", "count": frequency.count]
-        case .weekly:
-            frequencyData = ["type": "weekly", "count": frequency.count]
-        case .monthly:
-            frequencyData = ["type": "monthly", "count": frequency.count]
-        }
-        
-        let progressData: [String: Any] = [
-            "person": progress.person.id,
-            "resolution": progress.resolution.id,
-            "completion": [],
-            "frequencyGoal": frequencyData,
-            "quantityGoal": progress.quantityGoal
-        ]
-        try await progressRef.setData(progressData)
+        guard let id = progress.id else { throw NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Missing progress ID"]) }
+        let progressRef = db.collection("progress").document(id)
+        try progressRef.setData(from: progress)
     }
     
     func addGroupToDB(group: Group) async throws {
-        let groupRef = db.collection("groups").document(group.id)
+        guard let id = group.id else { throw NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Missing group ID"]) }
+        let groupRef = db.collection("groups").document(id)
+        try groupRef.setData(from: group)
         
-        var resolutionIDs: [String] = []
-        for resolution in group.resolutions {
-            resolutionIDs.append(resolution.id)
+        // Store the related object as well - might not do this here? \\
+        for resolution in group.resolutions ?? [] {
+            try await addResolutionToDB(resolution: resolution)
         }
-
-        let groupData: [String: Any] = [
-            "name": group.name,
-            "groupGoal": group.groupGoal,
-            "people": group.people,
-            "resolutions": resolutionIDs,
-            "deadline": Timestamp(date: group.deadline)
-        ]
-        try await groupRef.setData(groupData)
     }
+
 }

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct GroupView: View {
+    @EnvironmentObject var loginViewModel: LoginViewModel
     let group: Group
     var body: some View {
         ScrollView {
@@ -53,9 +54,54 @@ struct GroupView: View {
                     .background(Color.gray.opacity(0.5))
                     .cornerRadius(10)
                     
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text("lorem ipsum")
-                            .frame(maxWidth: .infinity)
+                    Text("Members (\(group.peopleIDs.count))")
+                        .font(.headline)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+//                    ForEach(group.people) {people in
+//                        
+//                        VStack(alignment: .leading, spacing: 10) {
+//                            HStack {
+//                                Image(systemName: "person.crop.circle")
+//                                    .resizable()
+//                                    .frame(width: 30, height: 30)
+//                                
+//                                Text("\(people.name)")
+//                                Spacer()
+//                                ProgressView(value: 0.20)
+//                                    .accentColor(.white)
+//                                    .frame(width: 200, height: 10)
+//                                    .background(Color.gray.opacity(0.5))
+//                            }
+//                        }
+//                        .padding()
+//                        .frame(height: 60)
+//                        .background(Color.gray.opacity(0.5))
+//                        .cornerRadius(10)
+//                    }
+                    
+                    Text("Todo")
+                        .font(.headline)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    HStack {
+                        VStack(alignment: .leading, spacing: 10) {
+                            Text("lorem ipsum")
+                                .frame(maxWidth: .infinity)
+                        }
+                        .padding()
+                        .frame(height: 100)
+                        .background(Color.gray.opacity(0.5))
+                        .cornerRadius(10)
+                        
+                        VStack(alignment: .leading, spacing: 10) {
+                            Text("lorem ipsum")
+                                .frame(maxWidth: .infinity)
+                        }
+                        .padding()
+                        .frame(height: 100)
+                        .background(Color.gray.opacity(0.5))
+                        .cornerRadius(10)
                     }
                     .padding()
                     .frame(height: 100)
@@ -92,18 +138,28 @@ struct GroupView: View {
 //                    }
                 
             }
-            .padding(.horizontal, 20)
-        }
-        .toolbar {
-            ToolbarItem(placement: .principal) {
-                Text("\(group.name)")
-                    .font(.system(size: 24, weight: .bold))
-            }
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Image(systemName: "ellipsis")
-                    .rotationEffect(.degrees(90))
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("\(group.name)")
+                        .font(.system(size: 24, weight: .bold))
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    ShareLink(item: generateInviteLink())
+                }
             }
         }
+    }
+    private func generateInviteLink() -> URL {
+        var components = URLComponents()
+            components.scheme = "vineyard"
+            components.host = "join-group"
+            components.queryItems = [
+                URLQueryItem(name: "group", value: group.id!),
+                URLQueryItem(name: "inviter", value: loginViewModel.currentUser!.id!)
+            ]
+            let url = components.url
+        return url!
+        
     }
 }
 

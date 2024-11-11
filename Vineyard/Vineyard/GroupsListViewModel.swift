@@ -8,19 +8,72 @@
 import SwiftUI
 
 @Observable
-class GroupsListViewModel: ObservableObject {
+class GroupsListViewModel {
     let databaseManager: FirebaseDataManager = FirebaseDataManager.shared
     private(set) var user: Person?
     var groups: [Group] = []
     var isPresentingCreateGroupView = false
     var isPresentingCreateGoalView = false
+    var isValid = false
+    var groupCreationErrorMessage: AlertMessage?
+    var goalCreationErrorMessage: AlertMessage?
+    
+    struct AlertMessage: Identifiable {
+        let id = UUID()
+        let message: String
+    }
+
+    struct ValidationError: LocalizedError {
+        var errorDescription: String?
+        init(_ description: String) {
+            self.errorDescription = description
+        }
+    }
+
     
     init() {}
-
+    
     
     func setUser(user: Person?) {
         guard self.user == nil, let user = user else { return }
         self.user = user
+    }
+    
+    
+    func submitGroupCreationForm(groupName: String, resolution: String, deadline: Date) {
+        do {
+            isValid = try validateGroupCreationForm(groupName: groupName, resolution: resolution, deadline: deadline)
+            
+        } catch let error as ValidationError {
+            groupCreationErrorMessage = AlertMessage(message: error.localizedDescription)
+       } catch {
+           groupCreationErrorMessage = AlertMessage(message: "An unexpected error occurred.")
+       }
+    }
+    
+    func validateGroupCreationForm(groupName: String, resolution: String, deadline: Date) throws -> Bool {
+        if groupName.isEmpty && resolution.isEmpty {
+            throw ValidationError("Group Name and resolution can not be empty")
+        } else if groupName.isEmpty {
+            throw ValidationError("Group Name can not be empty")
+        } else if resolution.isEmpty {
+            throw ValidationError("Resolution can not be empty")
+        } else if deadline < Date.now {
+            throw ValidationError("Deadline can not be in the past")
+        }
+        
+        return true
+    }
+    
+    func validateGoalCreationForm(action: String, quantity: String, isQuantityTask: Bool, isInserted: Bool) throws {
+        if action.isEmpty {
+            throw ValidationError("Action can not be empty")
+        } else if isQuantityTask && quantity == "" {
+            throw ValidationError("Need to specify quantity for quantity task")
+        } else if isQuantityTask && !isInserted {
+            throw ValidationError("Need to insert quantity for quantity task")
+        }
+        return
     }
     
 //    func createSampleGroup() {
@@ -72,17 +125,34 @@ class GroupsListViewModel: ObservableObject {
 //        }
 //    }
     
-    func createGroup(withGroupName name: String, withGroupGoal groupGoal: String, withDeadline deadline: Date, withScoreGoal scoreGoal: Int) {
+    func createGroup(withGroupName name: String, withGroupGoal groupGoal: String, withDeadline deadline: Date, withScoreGoal scoreGoal: Int, resolutions: [Resolution]) {
         guard let user = user else {
             print("User is not set.")
             return
         }
         
-        let newGroup = Group(name: name, groupGoal: groupGoal, people: [user.id], deadline: deadline, scoreGoal: scoreGoal)
+        let newGroup = Group(id: UUID().uuidString, name: name, groupGoal: groupGoal, peopleIDs: [user.id ?? UUID().uuidString], resolutionIDs: resolutions.map{$0.id ?? UUID().uuidString}, deadline: deadline, scoreGoal: scoreGoal)
         Task {
+            var updatedUser = user
+            updatedUser.groupIDs.append(newGroup.id ?? UUID().uuidString)
             do {
                 try await databaseManager.addGroupToDB(group: newGroup)
+                var newProgress: [Progress] = []
+                for resolution in resolutions {
+                    let progress = Progress(id: UUID().uuidString, resolutionID: resolution.id ?? UUID().uuidString, personID: user.id ?? UUID().uuidString, quantityGoal: Float(resolution.quantity ?? 0), frequencyGoal: resolution.frequency)
+                    newProgress.append(progress)
+                    try await databaseManager.addResolutionToDB(resolution: resolution)
+                }
+                if updatedUser.allProgress != nil {
+                    updatedUser.allProgress!.append(contentsOf: newProgress)
+                } else {
+                    updatedUser.allProgress = newProgress
+                }
+                
+                updatedUser.allProgressIDs.append(contentsOf: newProgress.map{$0.id!})
+                try await databaseManager.addPersonToDB(person: updatedUser)
                 DispatchQueue.main.async {
+                    self.user = updatedUser
                     self.groups.append(newGroup)
                 }
             } catch {
@@ -90,24 +160,7 @@ class GroupsListViewModel: ObservableObject {
             }
         }
 
-        Task {
-            var updatedUser = user
-            updatedUser.groups.append(newGroup.id)
-            
-            do {
-                try await databaseManager.addPersonToDB(person: updatedUser)
-                DispatchQueue.main.async {
-                    self.user = updatedUser
-                }
-            } catch {
-                print("Failed to add user to database: \(error)")
-            }
-        }
-    }
-
-    
-    func addResolution(_ resolution: Resolution, toGroup group: Group) {
-        group.addResolution(resolution)
+        
     }
     
     func joinGroup(toGroup group: Group) {
@@ -123,10 +176,10 @@ class GroupsListViewModel: ObservableObject {
 //        print(self.user)
         
         Task {
-            let groupIDs = user.groups
+            let groupIDs = user.groupIDs
             var fetchedGroups: [Group] = []
             for id in groupIDs {
-                if let group = try await databaseManager.fetchGroupFromDB(groupID: id) {
+                if let group = try? await databaseManager.fetchGroupFromDB(groupID: id) {
                     fetchedGroups.append(group)
                 }
             }

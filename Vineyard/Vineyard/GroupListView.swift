@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import PopupView
 
 struct GroupListView: View {
     @EnvironmentObject var loginViewModel: LoginViewModel
-    @StateObject var viewModel: GroupsListViewModel
+    @EnvironmentObject var inviteViewModel: InviteViewModel
+    @State var viewModel: GroupsListViewModel = .init()
     @State private var isPresentingAddGroup = false
     var body: some View {
         NavigationView {
@@ -21,7 +23,7 @@ struct GroupListView: View {
                             Text("Your Groups")
                                 .font(.system(size: 30, weight: .bold))
                                 .foregroundColor(.white)
-                            Text("\(viewModel.user?.groups.count ?? 0) active group(s)")
+                            Text("\(viewModel.user?.groupIDs.count ?? 0) active group(s)")
                                 .foregroundColor(.white)
                             
                         }
@@ -67,9 +69,20 @@ struct GroupListView: View {
             viewModel.setUser(user: loginViewModel.currentUser)
             viewModel.loadGroups()
         }
+        .popup(isPresented: $inviteViewModel.invitedToGroup) {
+            InvitePopupView()
+        } customize: {
+            $0
+            .type(.floater())
+            .appearFrom(.bottomSlide)
+            
+        }
+        .alert(isPresented: $inviteViewModel.inviteErrorStatus) {
+            Alert(title: Text(inviteViewModel.inviteError ?? ""))
+        }
     }
 }
 
 #Preview {
-    GroupListView(viewModel: GroupsListViewModel())
+    GroupListView()
 }
