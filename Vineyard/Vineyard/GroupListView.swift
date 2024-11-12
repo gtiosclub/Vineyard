@@ -53,7 +53,15 @@ struct GroupListView: View {
                                 GroupCardView(group: group)
                             }
                             .buttonStyle(PlainButtonStyle())
-                        }.padding()
+                            .contextMenu {
+                                Button(role: .destructive) {
+                                    viewModel.leaveGroup(group)
+                                } label: {
+                                    Label("Leave Group", systemImage: "person.fill.xmark")
+                                }
+                            }
+                            .padding()
+                        }
                     }
                 }
             }
