@@ -309,6 +309,7 @@ struct CreateGoalView: View {
             selectedDifficulty = .medium
             selectedFrequency = .daily
             editMode = false
+            viewModel.isPresentingCreateGoalView = false
             dismiss()
         } catch let error as GroupsListViewModel.ValidationError {
             viewModel.goalCreationErrorMessage = GroupsListViewModel.AlertMessage(message: error.localizedDescription)

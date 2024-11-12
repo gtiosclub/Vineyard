@@ -155,6 +155,7 @@ struct GoalsListView: View {
             Button {
                 viewModel.createGroup(withGroupName: groupName, withGroupGoal: resolution, withDeadline: deadline, withScoreGoal: 4, resolutions: goals)
                 viewModel.isPresentingCreateGroupView = false
+                viewModel.isPresentingCreateGoalView = false
             } label: {
                 Text("Create Group")
                     .frame(maxWidth: .infinity)

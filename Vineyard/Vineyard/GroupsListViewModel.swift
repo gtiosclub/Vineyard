@@ -1,3 +1,4 @@
+
 //
 //  GroupsListViewModel.swift
 //  Vineyard
@@ -136,6 +137,7 @@ class GroupsListViewModel {
                     self.user = updatedUser
                     self.groups.append(newGroup)
                     self.setupGroupListener(for: newGroup)
+                    self.resetViewStates()
                 }
             } catch {
                 print("Failed to add group to database: \(error)")
@@ -143,6 +145,14 @@ class GroupsListViewModel {
         }
 
         
+    }
+    
+    func resetViewStates() {
+        isPresentingCreateGroupView = false
+        isPresentingCreateGoalView = false
+        isValid = false
+        groupCreationErrorMessage = nil
+        goalCreationErrorMessage = nil
     }
     
     func joinGroup(toGroup group: Group) {
