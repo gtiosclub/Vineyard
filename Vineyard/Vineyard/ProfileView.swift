@@ -14,14 +14,7 @@ struct ProfileView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack {
-                    Button(action: {
-                        Task {
-                            await loginViewModel.signOut()
-                        }
-                    }) {
-                        Text("Sign out")
-                    }
+                HStack {
                     VStack(alignment: .leading, spacing: 2) {
                         Text(titleText)
                             .font(.system(size: 32, weight: .bold))
@@ -42,21 +35,27 @@ struct ProfileView: View {
                         }
                     }
                     .padding(.top, 17)
+                
                 }
                 .padding(.horizontal, 20)
                 .background(Color.profileViewCellBackground)
+                
+                
             }
             .onAppear {
                 Task {
                     await loginViewModel.getCurrentUserBadges()
                 }
             }
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Text("Profile")
-                        .font(.system(size: 32, weight: .bold))
+            Spacer()
+            Button(action: {
+                Task {
+                    await loginViewModel.signOut()
                 }
+            }) {
+                Text("Sign out")
             }
+            Spacer()
         }
     }
 
