@@ -16,6 +16,12 @@ struct GroupView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
+                NavigationLink(destination: VineBranchView()) {
+                                            VineBranchView(isStaticPreview: true)
+                                                .padding()
+                                        }
+                                        .buttonStyle(PlainButtonStyle())
+                                        .padding()
                 VStack(spacing: 20) {
                     Text("Goal: \(group.groupGoal)")
                         .font(.headline)
