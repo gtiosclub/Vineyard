@@ -111,7 +111,8 @@ struct DashboardView: View {
                     }
                 }
                 .padding()
-            }.scrollIndicators(.hidden)
+            }
+            .scrollIndicators(.hidden)
         }
         .background(
             LinearGradient(
