@@ -282,8 +282,10 @@ struct CreateGoalView: View {
     func submitGoalCreationForm() {
         do {
             try viewModel.validateGoalCreationForm(action: goalName, quantity: quantity, isQuantityTask: isQuantityTask, isInserted: isInserted)
+
             if let index = indexInserted {
                 words.insert("qtt_position", at: index)
+
             }
             goalName = words.joined(separator: " ")
             if editMode {
