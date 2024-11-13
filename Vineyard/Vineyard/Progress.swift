@@ -13,7 +13,7 @@ struct Progress: Identifiable, Codable {
     var resolutionID: String
     var personID: String
     var completionArray: [Date] = []
-    var quantityGoal: Float
+    var quantityGoal: Float?
     var frequencyGoal: Frequency
     
     var resolution: Resolution? = nil

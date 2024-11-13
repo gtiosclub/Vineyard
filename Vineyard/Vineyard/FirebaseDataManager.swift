@@ -12,6 +12,43 @@ class FirebaseDataManager: DatabaseServiceProtocol {
     
     private let db = Firestore.firestore()
     
+    private var listeners: [String: ListenerRegistration] = [:]
+    
+    typealias GroupUpdateHandler = (Group) -> Void
+    
+    func addGroupListener(groupID: String, onUpdate: @escaping GroupUpdateHandler) {
+        
+        // Avoiding duplicate listeners
+        guard listeners[groupID] == nil else { return }
+        
+        let listener = db.collection("groups").document(groupID)
+            .addSnapshotListener { documentSnapshot, error in
+                if let error = error {
+                    print("Error listening to group changes: \(error)")
+                    return
+                }
+                
+                guard let document = documentSnapshot,
+                      let updatedGroup = try? document.data(as: Group.self) else {
+                    return
+                }
+                
+                onUpdate(updatedGroup)
+            }
+        
+        listeners[groupID] = listener
+    }
+    
+    func removeGroupListener(groupID: String) {
+        listeners[groupID]?.remove()
+        listeners.removeValue(forKey: groupID)
+    }
+    
+    func removeAllListeners() {
+        listeners.forEach { _, listener in listener.remove() }
+        listeners.removeAll()
+    }
+    
     func fetchGroupFromDB(groupID: String) async throws -> Group? {
         let documentSnapshot = try await db.collection("groups").document(groupID).getDocument()
         return try documentSnapshot.data(as: Group.self)

@@ -127,7 +127,7 @@ struct GoalsListView: View {
             }.padding()
             List {
                 ForEach(goals) { subGoal in
-                    Text(subGoal.title).contextMenu {
+                    Text(subGoal.title.replacingOccurrences(of: "qtt_position", with: "___")).contextMenu {
                         Button {
                             // open the create goal view and populate the fields with current goal details
                             if let index = goals.firstIndex(where: { $0.id == subGoal.id }) {
@@ -153,8 +153,9 @@ struct GoalsListView: View {
             Spacer()
             
             Button {
-                viewModel.createGroup(withGroupName: groupName, withGroupGoal: resolution, withDeadline: deadline, withScoreGoal: 4)
+                viewModel.createGroup(withGroupName: groupName, withGroupGoal: resolution, withDeadline: deadline, withScoreGoal: 4, resolutions: goals)
                 viewModel.isPresentingCreateGroupView = false
+                viewModel.isPresentingCreateGoalView = false
             } label: {
                 Text("Create Group")
                     .frame(maxWidth: .infinity)
