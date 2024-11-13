@@ -11,7 +11,7 @@ struct ToDoCardView: View {
     @State var toDoItemProgress: Progress
     let toDoItemResolution: Resolution
     @Binding var toDoItemCompletionCount: [String:Int]
-    @Binding var todaysProgress: (Float, Float)
+    @Binding var progress: (Float, Float)
     @State var isChecked: Bool = false
     let dataManager = FirebaseDataManager.shared
     var body: some View {
@@ -19,9 +19,9 @@ struct ToDoCardView: View {
             Button(action: {
                 withAnimation(.easeIn) {
                     isChecked.toggle()
-                    if toDoItemResolution.frequency.frequencyType == .daily {
-                        todaysProgress.0 += 1
-                    }
+                    
+                    progress.0 += 1
+                    
                     
                     toDoItemProgress.completionArray.append(Date())
                     toDoItemCompletionCount[toDoItemProgress.id!]! += 1
@@ -95,9 +95,9 @@ struct ToDoCardView: View {
                     if index < toDoItemCompletionCount[toDoItemProgress.id!]! {
                         withAnimation(.easeIn) {
                             isChecked = false
-                            if toDoItemResolution.frequency.frequencyType == .daily {
-                                todaysProgress.0 -= 1
-                            }
+                            
+                            progress.0 -= 1
+                            
                         }
                         var completionDates = toDoItemProgress.completionArray.sorted {$0 < $1}
                         completionDates.removeLast()
@@ -128,12 +128,12 @@ struct ToDoCardView: View {
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)
         .background {
-            RoundedRectangle(cornerRadius: 20)
+            RoundedRectangle(cornerRadius: 150)
                 .foregroundStyle(.ultraThinMaterial)
         }
         .overlay {
             if toDoItemCompletionCount[toDoItemProgress.id!] == toDoItemProgress.frequencyGoal.count {
-                RoundedRectangle(cornerRadius: 20)
+                RoundedRectangle(cornerRadius: 15)
                     .foregroundStyle(.ultraThinMaterial)
                     .opacity(0.5)
             }
