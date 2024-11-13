@@ -19,7 +19,10 @@ struct ToDoCardView: View {
             Button(action: {
                 withAnimation(.easeIn) {
                     isChecked.toggle()
-                    todaysProgress.0 += 1
+                    if toDoItemResolution.frequency.frequencyType == .daily {
+                        todaysProgress.0 += 1
+                    }
+                    
                     toDoItemProgress.completionArray.append(Date())
                     toDoItemCompletionCount[toDoItemProgress.id!]! += 1
                 }
@@ -92,7 +95,9 @@ struct ToDoCardView: View {
                     if index < toDoItemCompletionCount[toDoItemProgress.id!]! {
                         withAnimation(.easeIn) {
                             isChecked = false
-                            todaysProgress.0 -= 1
+                            if toDoItemResolution.frequency.frequencyType == .daily {
+                                todaysProgress.0 -= 1
+                            }
                         }
                         var completionDates = toDoItemProgress.completionArray.sorted {$0 < $1}
                         completionDates.removeLast()
