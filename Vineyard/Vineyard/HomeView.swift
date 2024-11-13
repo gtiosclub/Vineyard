@@ -23,7 +23,7 @@ struct HomeView: View {
                 GroupListView(viewModel: viewModel).tabItem {
                     Label("Groups", systemImage: "figure.2.and.child.holdinghands")
                 }
-                ProfileView().tabItem {
+                ToDoListView().tabItem {
                     Label("Profile", systemImage: "brain.head.profile")
                 }
                 
