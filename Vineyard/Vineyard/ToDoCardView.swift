@@ -128,7 +128,7 @@ struct ToDoCardView: View {
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)
         .background {
-            RoundedRectangle(cornerRadius: 150)
+            RoundedRectangle(cornerRadius: 15)
                 .foregroundStyle(.ultraThinMaterial)
         }
         .overlay {

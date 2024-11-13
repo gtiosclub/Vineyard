@@ -24,6 +24,9 @@ struct HomeView: View {
                     Label("Groups", systemImage: "figure.2.and.child.holdinghands")
                 }
                 ToDoListView().tabItem {
+                    Label("To-Do", systemImage: "list.bullet")
+                }
+                ProfileView().tabItem {
                     Label("Profile", systemImage: "brain.head.profile")
                 }
                 
