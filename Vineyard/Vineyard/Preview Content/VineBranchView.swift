@@ -11,45 +11,34 @@ import SwiftUI
 struct VineBranchView: View {
     @State private var hasScrolledToEnd: Bool = false
     @State private var hasScrolledToStart: Bool = true
-    var isStaticPreview: Bool = false
     var body: some View {
         ZStack {
-            if isStaticPreview {
-                staticImagePreview()
-            } else {
-                EndDetectionScrollView(.horizontal, showIndicators: false, hasScrolledToEnd: $hasScrolledToEnd, hasScrolledToStart: $hasScrolledToStart) {
-                    LazyHStack {
-                        ForEach(1..<11, id: \.self) { index in
-                            Image("panorama\(index)")
-                                .aspectRatio(contentMode: .fit)
-                                .containerRelativeFrame(.horizontal, count:2, spacing: 10.0)
-                            
-                        }
+            EndDetectionScrollView(.horizontal, showIndicators: false, hasScrolledToEnd: $hasScrolledToEnd, hasScrolledToStart: $hasScrolledToStart) {
+//                LazyHStack {
+//                    ForEach(1..<11, id: \.self) { index in
+//                        Image("panorama\(index)")
+//                            .aspectRatio(contentMode: .fit)
+//                            .containerRelativeFrame(.horizontal, count:2, spacing: 10.0)
+//                        
+//                    }
+//                }
+                HStack(spacing: 0) {
+                    ForEach(1..<11, id:\.self) {index in
+                        Image("panorama\(index)")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 200)
                     }
                 }
-                .frame(height: 300)
-                .ignoresSafeArea()
             }
-
-            if hasScrolledToEnd && !isStaticPreview {
+            .frame(height: 300)
+            .ignoresSafeArea()
+            if hasScrolledToEnd {
                 arrowView(direction: .left)
             }
 
-            if hasScrolledToStart && !isStaticPreview {
+            if hasScrolledToStart {
                 arrowView(direction: .right)
-            }
-        }
-    }
-
-    private func staticImagePreview() -> some View {
-        HStack(spacing: 0) {
-            //chose 1..<3 to check if images look connected
-            //change to last two images
-            ForEach(1..<3, id:\.self) {index in
-                Image("panorama\(index)")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 200)
             }
         }
     }
@@ -66,7 +55,7 @@ struct VineBranchView: View {
                 .font(.title)
                 .opacity(0.4)
         }
-        .position(x: direction == .left ? 30 : UIScreen.main.bounds.width - 30, y: 350)
+        .position(x: direction == .left ? 30 : UIScreen.main.bounds.width - 60, y: 150)
         .transition(.opacity)
         .animation(.easeInOut, value: direction)
     }
