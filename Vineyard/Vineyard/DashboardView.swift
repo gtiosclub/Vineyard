@@ -20,6 +20,7 @@ struct DashboardView: View {
     @EnvironmentObject var inviteViewModel: InviteViewModel
    
     var body: some View {
+        
         VStack(alignment: .leading, spacing: 10) {
             // Heading
             HStack {
@@ -56,7 +57,7 @@ struct DashboardView: View {
                     columns: [
                         GridItem(.adaptive(minimum: UIScreen.main.bounds.width / 2 - 30))
                     ],
-                    spacing: 40
+                    spacing: 35
                 ) {
                     ForEach(Array(widgets.enumerated()), id: \.offset) { index, widget in
                         if widget.span == 2 {
@@ -114,18 +115,11 @@ struct DashboardView: View {
             }
             .scrollIndicators(.hidden)
         }
-        .background(
-            LinearGradient(
-                gradient: Gradient(colors: [
-                    Color(red: 163 / 255, green: 123 / 255, blue: 198 / 255),
-                    Color(red: 163 / 255, green: 123 / 255, blue: 198 / 255).opacity(0.7),
-                    Color.gray.opacity(0.1)
-                ]),
-                startPoint: .top,
-                endPoint: .center
-            )
-            .edgesIgnoringSafeArea(.all)
-        )
+        .navigationBarHidden(true)
+        .background(alignment: .top) {
+            Image("topBackground")
+                .ignoresSafeArea(.container, edges: .top)
+        }
         .popup(isPresented: $inviteViewModel.invitedToGroup) {
             InvitePopupView()
         } customize: {
@@ -151,4 +145,5 @@ struct DashboardView: View {
 
 #Preview {
     DashboardView()
+        .environmentObject(InviteViewModel())
 }

@@ -82,7 +82,7 @@ struct TodaysTasksWidgetFull: Widget {
             }
             .padding()
             .frame(height: 200)
-            .background(Color.gray.opacity(0.4)) //try 0.35
+            .background(Color(red: 170 / 255, green: 170 / 255, blue: 170 / 255).opacity(0.4))
             .cornerRadius(10)
             .shadow(radius: 5)
         )

@@ -15,18 +15,21 @@ struct GroupListView: View {
     @State private var isPresentingAddGroup = false
     var body: some View {
         NavigationView {
-            VStack(alignment: .center, spacing: 30) {
-                Spacer()
+            
+            VStack(alignment: .leading, spacing: 10) {
                 HStack {
                     VStack(alignment: .leading) {
                         Text("Your Groups")
-                            .font(.system(size: 30, weight: .bold))
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
                             .foregroundColor(.white)
                         Text("\(viewModel.user?.groupIDs.count ?? 0) active group(s)")
                             .foregroundColor(.white)
+                            .font(.subheadline)
                         
                     }
                     Spacer()
+                    
                     Button(action: {
                         print("changing mode")
                     }) {
@@ -43,11 +46,12 @@ struct GroupListView: View {
                             .font(.system(size: 25))
                     }
                 }
-                .padding(40)
+                .padding([.horizontal, .top])
+                .padding(.top, 10)
+                .padding(.bottom, 30)
                 
-                Spacer()
                 ScrollView {
-                    VStack(spacing: 5) {
+                    VStack(spacing: 15) {
                         ForEach(viewModel.groups, id: \.id) { group in
                             NavigationLink(destination: GroupView(group: group)) {
                                 GroupCardView(group: group)
@@ -60,15 +64,16 @@ struct GroupListView: View {
                                     Label("Leave Group", systemImage: "person.fill.xmark")
                                 }
                             }
-                            .padding()
                         }
                     }
+                    .padding(.horizontal)
                 }
             }
             .navigationBarHidden(true)
             .background(alignment: .top) {
                 Image("topBackground")
-            }.ignoresSafeArea(.container, edges: .top)
+                    .ignoresSafeArea(.container, edges: .top)
+            }
         }
         .fullScreenCover(isPresented: $viewModel.isPresentingCreateGroupView) {
             CreateGroupView().environment(viewModel)
@@ -93,4 +98,6 @@ struct GroupListView: View {
 
 #Preview {
     GroupListView()
+        .environmentObject(InviteViewModel())
+        .environmentObject(LoginViewModel())
 }
