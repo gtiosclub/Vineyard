@@ -66,7 +66,7 @@ struct ProfileView: View {
                                         Rectangle()
                                             .fill(Color(red: 165 / 255, green: 127 / 255, blue: 87 / 255))
                                             .frame(height: 10)
-                                            .frame(width: 120)
+                                            .frame(width: 125)
                                             .padding(.top, 140)
                                         Spacer()
                                     }
@@ -77,7 +77,7 @@ struct ProfileView: View {
                     .padding(.top, 17)
                     .padding(.bottom, 50)
                 }
-                .padding(.horizontal, 20)
+                .padding(.horizontal, 8)
 
 
 
@@ -130,9 +130,7 @@ struct BadgeView: View {
     var body: some View {
         ZStack {
             Button(action: {
-                withAnimation {
-                    showBubble.toggle()
-                }
+                showBubble.toggle()
             }) {
                 VStack {
                     Image("Vector")
@@ -146,7 +144,7 @@ struct BadgeView: View {
             }
 
             if showBubble {
-                VStack(spacing: 8) {
+                VStack {
                     Text("Completed on: \(formattedDate)")
                         .font(.system(size: 14))
                         .foregroundColor(.white)
@@ -154,17 +152,10 @@ struct BadgeView: View {
                         .padding(.vertical, 4)
                         .background(Color.blue.opacity(0.8))
                         .cornerRadius(8)
-
-                    WaterSproutShape()
-                        .fill(Color.blue.opacity(0.8))
-                        .frame(width: 100, height: 140)
-                        .shadow(radius: 4)
                 }
-                .offset(y: -150)
+                .offset(y: -100)
                 .onTapGesture {
-                    withAnimation {
-                        showBubble = false
-                    }
+                    showBubble = false
                 }
             }
         }
@@ -177,60 +168,6 @@ struct BadgeView: View {
         return formatter.string(from: badge.dateObtained)
     }
 }
-
-struct WaterSproutShape: Shape {
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-        let width = rect.width
-        let height = rect.height
-
-        // Starting at the bottom center
-        path.move(to: CGPoint(x: width * 0.5, y: height))
-
-        // Left side curve up
-        path.addCurve(
-            to: CGPoint(x: width * 0.4, y: height * 0.7), // Narrower left curve
-            control1: CGPoint(x: width * 0.45, y: height * 0.9), // Bottom left control
-            control2: CGPoint(x: width * 0.35, y: height * 0.8)  // Top left control
-        )
-
-        // Adding splash on the left
-        path.addCurve(
-            to: CGPoint(x: width * 0.35, y: height * 0.55), // Left splash endpoint
-            control1: CGPoint(x: width * 0.38, y: height * 0.65), // Left splash control 1
-            control2: CGPoint(x: width * 0.33, y: height * 0.6)   // Left splash control 2
-        )
-
-        path.addQuadCurve(
-            to: CGPoint(x: width * 0.5, y: height * 0.5), // Center splash endpoint
-            control: CGPoint(x: width * 0.4, y: height * 0.45) // Control point
-        )
-
-        // Adding splash to the right
-        path.addQuadCurve(
-            to: CGPoint(x: width * 0.65, y: height * 0.55), // Right splash endpoint
-            control: CGPoint(x: width * 0.6, y: height * 0.45) // Right splash control
-        )
-
-        path.addCurve(
-            to: CGPoint(x: width * 0.6, y: height * 0.7), // Right curve down
-            control1: CGPoint(x: width * 0.67, y: height * 0.6), // Bottom control 1
-            control2: CGPoint(x: width * 0.63, y: height * 0.65)  // Bottom control 2
-        )
-
-        // Right side curve down
-        path.addCurve(
-            to: CGPoint(x: width * 0.5, y: height), // Close at the bottom
-            control1: CGPoint(x: width * 0.65, y: height * 0.85), // Bottom right control 1
-            control2: CGPoint(x: width * 0.55, y: height * 0.9)   // Bottom right control 2
-        )
-
-        path.closeSubpath()
-
-        return path
-    }
-}
-
 
 #Preview {
     ProfileView()
