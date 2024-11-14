@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseFirestore
 
-struct Progress: Identifiable, Codable {
+struct Progress: Identifiable, Codable, Hashable, Equatable {
     @DocumentID var id: String?
     var resolutionID: String
     var personID: String
