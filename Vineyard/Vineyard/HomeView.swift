@@ -11,19 +11,19 @@ struct HomeView: View {
     @EnvironmentObject private var loginViewModel: LoginViewModel
     @State private var invitedToGroup: Bool = false
     @State private var inviteViewModel = InviteViewModel()
-    @State private var viewModel = GroupsListViewModel()
+    @State private var groupViewModel = GroupsListViewModel()
+    @State private var todoViewModel = ToDoListViewModel()
 
     var body: some View {
-        
         if loginViewModel.isLoggedIn {
             TabView {
                 DashboardView().tabItem {
                     Label("Dashboard", systemImage: "flame")
                 }
-                GroupListView(viewModel: viewModel).tabItem {
+                GroupListView(viewModel: groupViewModel).tabItem {
                     Label("Groups", systemImage: "figure.2.and.child.holdinghands")
                 }
-                ToDoListView().tabItem {
+                ToDoListView(viewModel: todoViewModel).tabItem {
                     Label("To-Do", systemImage: "list.bullet")
                 }
                 ProfileView().tabItem {
@@ -36,13 +36,12 @@ struct HomeView: View {
                         print("App was opened via URL: \(incomingURL)")
                         handleIncomingURL(incomingURL)
             }
-            } else {
-                LoginView()
-                    .environmentObject(loginViewModel)
-            }
-        
-        
+        } else {
+            LoginView()
+                .environmentObject(loginViewModel)
+        }
     }
+    
     private func handleIncomingURL(_ url: URL) {
         guard url.scheme == "vineyard" else {
             return
@@ -66,9 +65,11 @@ struct HomeView: View {
             print("Inviter ID not found")
             return
         }
+        
         if loginViewModel.currentUser == nil {
             return
         }
+        
         if !(loginViewModel.currentUser!.groupIDs).contains(groupID) {
             inviteViewModel.groupID = groupID
             inviteViewModel.inviterID = inviterID
@@ -76,11 +77,6 @@ struct HomeView: View {
                 await inviteViewModel.processInvite()
             }
         }
-        
-        
-        
-
-        
     }
 
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		190E033D2CE6A70D0054D5E5 /* ToDoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190E033C2CE6A7070054D5E5 /* ToDoListViewModel.swift */; };
 		192EBFE02C90F62E00AF8528 /* VineyardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192EBFDF2C90F62E00AF8528 /* VineyardApp.swift */; };
 		192EBFE22C90F62E00AF8528 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192EBFE12C90F62E00AF8528 /* HomeView.swift */; };
 		192EBFE42C90F62F00AF8528 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 192EBFE32C90F62F00AF8528 /* Assets.xcassets */; };
@@ -71,6 +72,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		190E033C2CE6A7070054D5E5 /* ToDoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewModel.swift; sourceTree = "<group>"; };
 		192EBFDC2C90F62E00AF8528 /* Vineyard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vineyard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		192EBFDF2C90F62E00AF8528 /* VineyardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VineyardApp.swift; sourceTree = "<group>"; };
 		192EBFE12C90F62E00AF8528 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -322,6 +324,7 @@
 				951CF8EF2CC5C0650016B06A /* GroupListView.swift */,
 				F0D913612CACB8A100E7CD81 /* GroupView.swift */,
 				DAB5CAED2CE4243E004BC8BD /* ToDoListView.swift */,
+				190E033C2CE6A7070054D5E5 /* ToDoListViewModel.swift */,
 				DAB5CAEF2CE444B7004BC8BD /* ToDoCardView.swift */,
 				95BE42E52CCEF4940031547F /* GroupCardView.swift */,
 				B43CD6BC2CB5F23A0079CCBF /* CreateGroupView.swift */,
@@ -529,6 +532,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				190E033D2CE6A70D0054D5E5 /* ToDoListViewModel.swift in Sources */,
 				DAB5CAEE2CE4243E004BC8BD /* ToDoListView.swift in Sources */,
 				F05361C82CAF1462009DE1E3 /* TodoViewModel.swift in Sources */,
 				192EBFE22C90F62E00AF8528 /* HomeView.swift in Sources */,

@@ -19,10 +19,7 @@ struct ToDoCardView: View {
             Button(action: {
                 withAnimation(.easeIn) {
                     isChecked.toggle()
-                    
                     progress.0 += 1
-                    
-                    
                     toDoItemProgress.completionArray.append(Date())
                     toDoItemCompletionCount[toDoItemProgress.id!]! += 1
                 }

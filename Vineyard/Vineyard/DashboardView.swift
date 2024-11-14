@@ -21,7 +21,6 @@ struct DashboardView: View {
    
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            // Heading
             HStack {
                 VStack(alignment: .leading) {
                     Text("Dashboard")
