@@ -22,7 +22,7 @@ struct CreateGoalView: View {
     @State var selectedDifficulty: DifficultyLevel = .easy
     @State var selectedFrequency: FrequencyType = .daily
     @State var selectedFrequencyText: String = ""
-    @State var freqQuantity: Int = 0
+    @State var freqQuantity: Int = 1
     
     
     
@@ -227,7 +227,7 @@ struct CreateGoalView: View {
                 }
                 
                 HStack {
-                    Stepper(value: $freqQuantity, in: 0...1000) {
+                    Stepper(value: $freqQuantity, in: 1...6) {
                         Text("\(selectedFrequency.rawValue) count")
                     }
                     Text("\(freqQuantity)")
