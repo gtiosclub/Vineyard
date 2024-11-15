@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseFirestore
 
-struct Badge: Identifiable, Codable {
+struct Badge: Identifiable, Codable, Hashable, Equatable {
     @DocumentID var id: String?
     var resolutionID: String
     var groupID: String

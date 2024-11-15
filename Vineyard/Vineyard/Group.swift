@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseFirestore
 
-struct Group: Identifiable, Codable {
+struct Group: Identifiable, Codable, Hashable, Equatable {
     @DocumentID var id: String?
     var name: String
     var groupGoal: String

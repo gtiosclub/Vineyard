@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseFirestore
 
-struct Frequency: Codable {
+struct Frequency: Codable, Hashable, Equatable {
     var frequencyType: FrequencyType
     var count: Int
 }
@@ -19,7 +19,7 @@ enum FrequencyType: String, Codable, CaseIterable {
     case monthly = "month"
 }
 
-struct Difficulty: Codable {
+struct Difficulty: Codable, Hashable, Equatable {
     var difficultyLevel: DifficultyLevel
     var score: Int
 }
@@ -30,7 +30,7 @@ enum DifficultyLevel: String, Codable, CaseIterable {
     case hard = "Hard"
 }
 
-struct Resolution: Identifiable, Codable {
+struct Resolution: Identifiable, Codable, Hashable, Equatable {
     @DocumentID var id: String?
     var title: String
     var description: String

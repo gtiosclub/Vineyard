@@ -78,13 +78,13 @@ class LoginViewModel: ObservableObject {
     
     public func checkLoggedIn() async {
         if auth.currentUser != nil {
-            isLoggedIn = true
             do {
                 let user = try await FirebaseDataManager.shared.fetchPersonFromDB(
                     userID: auth.currentUser!.uid
                 )
 
                 currentUser = user
+                isLoggedIn = true
             } catch {
                 print(error)
             }

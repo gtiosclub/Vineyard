@@ -25,14 +25,14 @@ class GroupsListViewModel {
         let id = UUID()
         let message: String
     }
-
+    
     struct ValidationError: LocalizedError {
         var errorDescription: String?
         init(_ description: String) {
             self.errorDescription = description
         }
     }
-
+    
     
     init() {}
     
@@ -77,9 +77,9 @@ class GroupsListViewModel {
             
         } catch let error as ValidationError {
             groupCreationErrorMessage = AlertMessage(message: error.localizedDescription)
-       } catch {
-           groupCreationErrorMessage = AlertMessage(message: "An unexpected error occurred.")
-       }
+        } catch {
+            groupCreationErrorMessage = AlertMessage(message: "An unexpected error occurred.")
+        }
     }
     
     func validateGroupCreationForm(groupName: String, resolution: String, deadline: Date) throws -> Bool {
@@ -141,7 +141,7 @@ class GroupsListViewModel {
                 print("Failed to add group to database: \(error)")
             }
         }
-
+        
         
     }
     
@@ -182,7 +182,7 @@ class GroupsListViewModel {
             return
         }
         
-//        print(self.user)
+        //        print(self.user)
         
         removeAllGroupListeners()
         
@@ -200,6 +200,44 @@ class GroupsListViewModel {
             DispatchQueue.main.async {
                 self.groups = fetchedGroups
                 fetchedGroups.forEach { self.setupGroupListener(for: $0) }
+            }
+        }
+    }
+    
+    func leaveGroup(_ group: Group) {
+        guard var user = user else {
+            print("User is not set.")
+            return
+        }
+        
+        Task {
+            do {
+                // Remove group from user's groupIDs
+                user.groupIDs.removeAll { $0 == group.id }
+                
+                // Create updated group with user removed
+                var updatedGroup = group
+                updatedGroup.peopleIDs.removeAll { $0 == user.id }
+                
+                // Remove all progress entries related to this group's resolutions
+                if var allProgress = user.allProgress {
+                    user.allProgress = allProgress.filter { progress in
+                        !group.resolutionIDs.contains(progress.resolutionID)
+                    }
+                    user.allProgressIDs = user.allProgress?.map { $0.id ?? "" } ?? []
+                }
+                
+                // Update Firebase
+                try await databaseManager.addPersonToDB(person: user)
+                try await databaseManager.addGroupToDB(group: updatedGroup)
+                
+                // Update local state
+                DispatchQueue.main.async {
+                    self.user = user
+                    self.groups.removeAll { $0.id == group.id }
+                }
+            } catch {
+                print("Failed to leave group: \(error)")
             }
         }
     }
