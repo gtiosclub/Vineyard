@@ -21,7 +21,17 @@ enum FrequencyType: String, Codable, CaseIterable {
 
 struct Difficulty: Codable, Hashable, Equatable {
     var difficultyLevel: DifficultyLevel
-    var score: Int
+
+    var score: Int {
+        switch difficultyLevel {
+        case .easy:
+            100
+        case .medium:
+            200
+        case .hard:
+            300
+        }
+    }
 }
 
 enum DifficultyLevel: String, Codable, CaseIterable {
@@ -53,14 +63,14 @@ struct Resolution: Identifiable, Codable, Hashable, Equatable {
             description: "Run a certain number of miles",
             quantity: 5,
             frequency: Frequency(frequencyType: FrequencyType.weekly, count: 1),
-            diffLevel: Difficulty(difficultyLevel: DifficultyLevel.medium, score: 5)
+            diffLevel: Difficulty(difficultyLevel: DifficultyLevel.medium)
         )
         
         let resolution2 = Resolution(
             title: "Drink 7 cups of water",
             description: "Drink more water",
             frequency: Frequency(frequencyType: FrequencyType.weekly, count: 1),
-            diffLevel: Difficulty(difficultyLevel: DifficultyLevel.easy, score: 2)
+            diffLevel: Difficulty(difficultyLevel: DifficultyLevel.easy)
         )
         
         return [resolution1, resolution2]
