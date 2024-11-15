@@ -13,10 +13,10 @@ struct Frequency: Codable, Hashable, Equatable {
     var count: Int
 }
 
-enum FrequencyType: String, Codable {
-    case daily = "Daily"
-    case weekly = "Weekly"
-    case monthly = "Monthly"
+enum FrequencyType: String, Codable, CaseIterable {
+    case daily = "day"
+    case weekly = "week"
+    case monthly = "month"
 }
 
 struct Difficulty: Codable, Hashable, Equatable {
@@ -24,11 +24,11 @@ struct Difficulty: Codable, Hashable, Equatable {
     var score: Int
 }
 
-enum DifficultyLevel: Codable {
-    case easy
-    case medium
-    case hard
-}   
+enum DifficultyLevel: String, Codable, CaseIterable {
+    case easy = "Easy"
+    case medium = "Medium"
+    case hard = "Hard"
+}
 
 struct Resolution: Identifiable, Codable, Hashable, Equatable {
     @DocumentID var id: String?
@@ -64,5 +64,17 @@ struct Resolution: Identifiable, Codable, Hashable, Equatable {
         )
         
         return [resolution1, resolution2]
+    }
+
+    func finalTitle() -> String {
+        let resolutionResult = ResolutionEditorResult(
+            resolutionTitle: title,
+            frequencyType: frequency.frequencyType,
+            frequencyQuantity: frequency.count,
+            extractedQuantity: quantity,
+            difficulty: diffLevel.difficultyLevel
+        )
+
+        return resolutionResult.finalResolutionTitle
     }
 }
