@@ -26,9 +26,9 @@ struct HomeView: View {
                 ToDoListView(viewModel: todoViewModel).tabItem {
                     Label("To-Do", systemImage: "list.bullet")
                 }
-                ProfileView().tabItem {
-                    Label("Profile", systemImage: "brain.head.profile")
-                }
+//                ProfileView().tabItem {
+//                    Label("Profile", systemImage: "brain.head.profile")
+//                }
                 
             }
             .environmentObject(inviteViewModel)

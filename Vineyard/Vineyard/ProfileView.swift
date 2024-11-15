@@ -12,47 +12,39 @@ struct ProfileView: View {
     @EnvironmentObject var loginViewModel: LoginViewModel
     @EnvironmentObject var inviteViewModel: InviteViewModel
     var body: some View {
-        NavigationStack {
-            ScrollView {
-                VStack {
-                    Button(action:{
-                        Task {
-                            await loginViewModel.signOut()
-                        }
-                    }) {
-                        Text("Sign out")
+        ScrollView {
+            VStack {
+                Button(action:{
+                    Task {
+                        await loginViewModel.signOut()
                     }
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text(titleText)
-                                .font(.system(size: 32, weight: .bold))
-                                .foregroundColor(Color.profileViewInfo)
-                            HStack() {
-                                let count = loginViewModel.currentUser?.groupIDs.count ?? 0
-                                Text("\(count) \(count > 1 ? "groups" : "group")")
-                                     .font(.system(size: 16))
-                                     .fontWeight(.regular)
-                                     .foregroundColor(Color.profileViewInfo)
-                            }
-                        }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    }
-                    
-                    LazyVGrid(columns: columns, spacing: 10) {
-                        ForEach(loginViewModel.currentUser?.badges ?? []) { badge in
-                            BadgeView(badge: badge)
-                        }
-                    }
-                    .padding(.top, 17)
+                }) {
+                    Text("Sign out")
                 }
-                .padding(.horizontal, 20)
-                .background(Color.profileViewCellBackground)
-            }
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Text("Profile")
-                        .font(.system(size: 32, weight: .bold))
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(titleText)
+                            .font(.system(size: 32, weight: .bold))
+                            .foregroundColor(Color.profileViewInfo)
+                        HStack() {
+                            let count = loginViewModel.currentUser?.groupIDs.count ?? 0
+                            Text("\(count) \(count > 1 ? "groups" : "group")")
+                                 .font(.system(size: 16))
+                                 .fontWeight(.regular)
+                                 .foregroundColor(Color.profileViewInfo)
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
+                
+                LazyVGrid(columns: columns, spacing: 10) {
+                    ForEach(loginViewModel.currentUser?.badges ?? []) { badge in
+                        BadgeView(badge: badge)
+                    }
+                }
+                .padding(.top, 17)
             }
+            .padding(.horizontal, 20)
+            .background(Color.profileViewCellBackground)
         
         .popup(isPresented: $inviteViewModel.invitedToGroup) {
             InvitePopupView()
