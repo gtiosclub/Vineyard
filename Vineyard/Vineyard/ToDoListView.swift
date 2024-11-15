@@ -12,6 +12,9 @@ struct ToDoListView: View {
     @EnvironmentObject var loginViewModel: LoginViewModel
     let progressTypes: [String] = ["Daily", "Weekly", "Monthly"]
     @State var viewModel : ToDoListViewModel
+    var textColor = Color(UIColor {traitCollection in
+        return traitCollection.userInterfaceStyle == .dark ? UIColor.white: UIColor.black
+    })
     
     var body: some View {
         VStack {
@@ -49,7 +52,7 @@ struct ToDoListView: View {
                                 
                         }
                         .font(.system(size: 16))
-                        .foregroundStyle(.black)
+                        .foregroundStyle(textColor)
                         .padding(.trailing, 8)
                     }
                 }

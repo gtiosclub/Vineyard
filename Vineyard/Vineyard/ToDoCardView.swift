@@ -62,7 +62,7 @@ struct ToDoCardView: View {
                 .padding(.horizontal, 8)
                 
             VStack(alignment: .leading, spacing: 0) {
-                Text(toDoItemResolution.title.replacingOccurrences(of: "qtt_position", with: String(Int(toDoItemProgress.quantityGoal ?? 0))))
+                Text(toDoItemResolution.finalTitle())
                     .font(.system(size: 16, weight: .semibold))
                     
                     
