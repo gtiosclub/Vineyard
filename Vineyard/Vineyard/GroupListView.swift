@@ -43,9 +43,11 @@ struct GroupListView: View {
                             .font(.system(size: 25))
                     }
                 }
-                .padding(40)
+                .padding(.horizontal, 40)
+                .padding(.top, 40)
+                .padding(.bottom, 32)
                 
-                Spacer()
+                
                 ScrollView {
                     VStack(spacing: 5) {
                         ForEach(viewModel.groups, id: \.id) { group in
