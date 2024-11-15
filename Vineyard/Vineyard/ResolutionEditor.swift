@@ -30,7 +30,7 @@ struct ResolutionEditorResult: Equatable {
 
     var attributedText: AttributedString {
         try! .init(
-            markdown: "I want to [\(resolutionTitle)](\(EditField.resolutionTitle.rawValue)) \(frequencyText) a [\(frequencyType.rawValue)](\(EditField.frequencyType.rawValue))."
+            markdown: "I want to [\(resolutionTitle)](\(EditField.resolutionTitle.rawValue)) \(frequencyText) a [\(frequencyType.rawValue)](\(EditField.frequencyType.rawValue))"
             )
     }
 
@@ -54,7 +54,7 @@ struct ResolutionEditor: View {
     var body: some View {
         VStack {
             TextViewWrapper(
-                text: result.attributedText,
+                text: result.attributedText + ".",
                 hasQuantity: hasQuantity,
                 quantityRange: quantityRange
             ) { url in
@@ -131,6 +131,7 @@ struct ResolutionEditor: View {
                     // Input Section
                     VStack(spacing: 16) {
                         TextField("Resolution Title", text: $result.resolutionTitle)
+                            .textInputAutocapitalization(.never)
                             .padding(12)
                             .background(Color(.systemGray6))
                             .cornerRadius(12)
@@ -149,6 +150,7 @@ struct ResolutionEditor: View {
 
                             Toggle("", isOn: $hasQuantity)
                                  .toggleStyle(SwitchToggleStyle(tint: .blue))
+                                 .disabled(quantityRange == nil)
                         }
 
                         Button("Done") { changeResolutionTitle.toggle() }
@@ -189,9 +191,7 @@ struct ResolutionEditor: View {
             if !new { currentlyEditingField = nil }
         }
         .onChange(of: result.resolutionTitle) { oldValue, newValue in
-            if hasQuantity {
-                getQuantity()
-            }
+            getQuantity()
         }
         .onChange(of: hasQuantity) { oldValue, newValue in
             if newValue {
@@ -211,11 +211,16 @@ struct ResolutionEditor: View {
             if let match = regex.firstMatch(in: string, range: range) {
                 let matchRange = match.range
                 if let number = Int(string[Range(matchRange, in: string)!]) {
-                    result.extractedQuantity = number
+                    if hasQuantity {
+                        result.extractedQuantity = number
+                    }
                     quantityRange = matchRange
                 }
             } else {
-                result.extractedQuantity = nil
+                if hasQuantity {
+                    result.extractedQuantity = nil
+                    hasQuantity = false
+                }
                 quantityRange = nil
             }
         }
