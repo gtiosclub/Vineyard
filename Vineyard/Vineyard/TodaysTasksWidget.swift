@@ -9,9 +9,10 @@ import Foundation
 import SwiftUI
 
 struct TodaysTasksWidgetFull: Widget {
+    let id = UUID()
     var span: Int { 2 }
     
-    @State var todaysTasks: [Tsk] = [
+    var todaysTasks: [Tsk] = [
         Tsk(userName: "Amy", taskText: "Go complete task A", group: "groupA", isCompleted: true),
         Tsk(userName: "Bob", taskText: "Go complete task B", group: "another group"),
         Tsk(userName: "Chris", taskText: "Go complete task that is long enough to test the truncation", group: "groupC")
@@ -90,9 +91,10 @@ struct TodaysTasksWidgetFull: Widget {
 }
 
 struct TodaysTasksWidgetHalf: Widget {
+    let id = UUID()
     var span: Int { 1 }
     
-    @State var todaysTasks: [Tsk] = [
+    var todaysTasks: [Tsk] = [
         Tsk(userName: "Amy", taskText: "Go complete task A", group: "groupA", isCompleted: true),
         Tsk(userName: "Bob", taskText: "Go complete task B and task C", group: "groupB"),
         Tsk(userName: "Chris", taskText: "Go complete task C, task D, and task E", group: "groupC")

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DashboardView: View {
-    private var widgets: [Widget] = [
+    @State private var widgets: [any Widget] = [
         TodaysTasksWidgetFull(),
         RecentActivitiesWidgetHalf(),
         TodaysTasksWidgetHalf(),
@@ -65,6 +65,10 @@ struct DashboardView: View {
                                     widget.render()
                                         .frame(width: UIScreen.main.bounds.width * 0.9, height: 180)
                                         .offset(x: 93)
+                                        .onDrag {
+                                            return NSItemProvider(object: "\(index)" as NSString)
+                                        }
+                                        .onDrop(of: [.text], delegate: WidgetDropDelegate(widgets: $widgets, draggedItem: index))
                                     
                                     if widget.title == "Recent Activities" {
                                         let taskCount = getTaskCount(for: widget)
@@ -88,7 +92,10 @@ struct DashboardView: View {
                             ZStack(alignment: .topTrailing) {
                                 widget.render()
                                     .frame(height: 180)
-                                
+                                    .onDrag {
+                                        return NSItemProvider(object: "\(index)" as NSString)
+                                    }
+                                    .onDrop(of: [.text], delegate: WidgetDropDelegate(widgets: $widgets, draggedItem: index))
                                 if widget.title == "Recent Activities" {
                                     let taskCount = getTaskCount(for: widget)
                                     if taskCount > 0 {
@@ -138,7 +145,7 @@ struct DashboardView: View {
         }
     
     }
-    private func getTaskCount(for widget: Widget) -> Int {
+    private func getTaskCount(for widget: any Widget) -> Int {
         if let recentActivitiesFull = widget as? RecentActivitiesWidgetFull {
             return recentActivitiesFull.recentActivities.count
         } else if let recentActivitiesHalf = widget as? RecentActivitiesWidgetHalf {

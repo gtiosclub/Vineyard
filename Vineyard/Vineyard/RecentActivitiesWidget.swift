@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 struct RecentActivitiesWidgetFull: Widget {
+    let id = UUID()
     var span: Int { 2 }
     
     var recentActivities: [Tsk] = [
@@ -91,6 +92,7 @@ struct RecentActivitiesWidgetFull: Widget {
 
 
 struct RecentActivitiesWidgetHalf: Widget {
+    let id = UUID()
     var span: Int { 1 }
     
     var recentActivities: [Tsk] = [
