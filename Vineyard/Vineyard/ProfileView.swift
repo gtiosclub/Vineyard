@@ -49,35 +49,36 @@ struct ProfileView: View {
                         Spacer(minLength: 50)
                     }
                 }
-
-                ScrollView {
-                    LazyVGrid(columns: columns, spacing: 40) {
-                        ForEach(loginViewModel.currentUser?.badges ?? []) { badge in
-                            VStack(spacing: 10) {
-                                ZStack {
-                                    Spacer().frame(height: 150)
-
-                                    BadgeView(badge: badge)
-                                        .frame(height: 250)
-                                        .padding(.bottom, 15)
-
-                                    VStack {
-                                        Spacer()
-                                        Rectangle()
-                                            .fill(Color(red: 165 / 255, green: 127 / 255, blue: 87 / 255))
-                                            .frame(height: 10)
-                                            .frame(width: 125)
-                                            .padding(.top, 140)
-                                        Spacer()
+                ZStack{
+                    ScrollView {
+                        LazyVGrid(columns: columns, spacing: 40) {
+                            ForEach(loginViewModel.currentUser?.badges ?? []) { badge in
+                                VStack(spacing: 10) {
+                                    ZStack {
+                                        Spacer().frame(height: 150)
+                                        
+                                        BadgeView(badge: badge)
+                                            .frame(height: 250)
+                                            .padding(.bottom, 15)
+                                        
+                                        VStack {
+                                            Spacer()
+                                            Rectangle()
+                                                .fill(Color(red: 165 / 255, green: 127 / 255, blue: 87 / 255))
+                                                .frame(height: 10)
+                                                .frame(width: 125)
+                                                .padding(.top, 140)
+                                            Spacer()
+                                        }
                                     }
                                 }
                             }
                         }
+                        .padding(.top, 1)
+                        .padding(.bottom, 50)
                     }
-                    .padding(.top, 17)
-                    .padding(.bottom, 50)
+                    .padding(.horizontal, 8)
                 }
-                .padding(.horizontal, 8)
 
 
 
@@ -126,6 +127,7 @@ struct ProfileView: View {
 struct BadgeView: View {
     let badge: Badge
     @State private var showBubble = false
+    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         ZStack {
@@ -133,30 +135,45 @@ struct BadgeView: View {
                 showBubble.toggle()
             }) {
                 VStack {
-                    Image("Vector")
-                        .resizable()
-                        .frame(width: 40, height: 140)
-                        .padding()
+                    ZStack {
+                        if colorScheme == .dark {
+                            Rectangle()
+                                .fill(Color.purple.opacity(0.4))
+                                .cornerRadius(25)
+                                .blur(radius: 10)
+                                .frame(width: 80, height: 160)
+                        }
+                        
+                        Image("Vector")
+                            .resizable()
+                            .frame(width: 40, height: 140)
+                            .padding()
+                    }
+                    .popover(
+                        isPresented: $showBubble,
+                        attachmentAnchor: .point(.top),
+                        arrowEdge: .bottom
+                    ) {
+                        ZStack {
+                            Color(red: 162/255.0, green: 116/255.0, blue: 218/255.0)
+                                .scaleEffect(1.5)
+                            
+                            Text("Completed on: \n\(formattedDate)")
+                                .font(.system(size: 14))
+                                .foregroundColor(.white)
+                                .padding(.horizontal, 4)
+                                .cornerRadius(8)
+                        }
+                        .presentationCompactAdaptation(.popover)
+
+                        .onTapGesture {
+                            showBubble = false
+                        }
+                    }
                 }
                 .frame(width: 110, height: 200)
-                .background(Color.white)
+                .background(Color(.systemBackground))
                 .cornerRadius(20)
-            }
-
-            if showBubble {
-                VStack {
-                    Text("Completed on: \(formattedDate)")
-                        .font(.system(size: 14))
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 4)
-                        .background(Color.blue.opacity(0.8))
-                        .cornerRadius(8)
-                }
-                .offset(y: -100)
-                .onTapGesture {
-                    showBubble = false
-                }
             }
         }
     }
@@ -168,6 +185,8 @@ struct BadgeView: View {
         return formatter.string(from: badge.dateObtained)
     }
 }
+
+
 
 #Preview {
     ProfileView()
