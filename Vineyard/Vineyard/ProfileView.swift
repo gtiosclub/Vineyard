@@ -11,6 +11,7 @@ struct ProfileView: View {
     let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     @EnvironmentObject var loginViewModel: LoginViewModel
     @EnvironmentObject var inviteViewModel: InviteViewModel
+    @StateObject var viewModel = ProfileViewModel()
     @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
@@ -62,7 +63,7 @@ struct ProfileView: View {
                 ZStack{
                     ScrollView {
                         LazyVGrid(columns: columns, spacing: 40) {
-                            ForEach(loginViewModel.currentUser?.badges ?? []) { badge in
+                            ForEach(viewModel.user?.badges ?? []) { badge in
                                 VStack(spacing: 10) {
                                     ZStack {
                                         Spacer().frame(height: 150)
@@ -74,7 +75,7 @@ struct ProfileView: View {
                                         VStack {
                                             Spacer()
                                             Rectangle()
-                                                .fill(Color(red: 165 / 255, green: 127 / 255, blue: 87 / 255))
+                                                .fill(Color.brown)
                                                 .frame(height: 10)
                                                 .frame(width: 125)
                                                 .padding(.top, 140)
@@ -112,8 +113,9 @@ struct ProfileView: View {
             }
             .padding(.horizontal, 20)
             .onAppear {
+                viewModel.setUser(user: loginViewModel.currentUser)
                 Task {
-                    await loginViewModel.getCurrentUserBadges()
+                    await viewModel.getCurrentUserBadges()
                 }
             }
             .popup(isPresented: $inviteViewModel.invitedToGroup) {

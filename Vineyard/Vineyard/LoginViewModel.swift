@@ -125,17 +125,6 @@ class LoginViewModel: ObservableObject {
         }
     }
     
-    func getCurrentUserBadges() async {
-        guard let badgeIDs = currentUser?.badgeIDs else { return }
-
-        do {
-            let badges = try await FirebaseDataManager.shared.fetchBadgesFromDB(badgeIDs: badgeIDs)
-            self.currentUser?.badges = badges
-        } catch {
-            print("Error fetching badges: \(error.localizedDescription)")
-        }
-    }
-    
     public func resetPassWithEmail(email: String) async -> Bool {
         do {
             try await Auth.auth().sendPasswordReset(withEmail: email)
