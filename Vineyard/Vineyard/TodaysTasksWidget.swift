@@ -26,7 +26,7 @@ struct TodaysTasksWidgetFull: Widget {
                     Text(title)
                         .font(.title3)
                         .fontWeight(.bold)
-                        .foregroundColor(.white)
+                        .foregroundColor(.black)
                     
                     Spacer()
 
@@ -66,7 +66,7 @@ struct TodaysTasksWidgetFull: Widget {
                             VStack(alignment: .leading, spacing: 2) {
                                 Text(task.taskText)
                                     .font(.system(size: 15))
-                                    .foregroundColor(.white)
+                                    .foregroundColor(.black)
                                     .fontWeight(.medium)
                                     .lineLimit(1)
                                     .truncationMode(.tail)
@@ -82,7 +82,7 @@ struct TodaysTasksWidgetFull: Widget {
             }
             .padding()
             .frame(height: 200)
-            .background(Color(red: 170 / 255, green: 170 / 255, blue: 170 / 255).opacity(0.4))
+            .background(Color(red: 240/255, green: 240/255, blue: 240/255).opacity(0.8))
             .cornerRadius(10)
             .shadow(radius: 5)
         )
@@ -154,7 +154,7 @@ struct TodaysTasksWidgetHalf: Widget {
             }
             .padding()
             .frame(height: 200)
-            .background(Color.purple.opacity(0.6))
+            .background(Color.purple.opacity(0.8))
             .cornerRadius(10)
             .shadow(radius: 5)
         )
