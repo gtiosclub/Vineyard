@@ -14,6 +14,7 @@ struct ToDoCardView: View {
     @Binding var progress: (Float, Float)
     @State var isChecked: Bool = false
     let dataManager = FirebaseDataManager.shared
+    @EnvironmentObject var loginViewModel: LoginViewModel
     var body: some View {
         HStack {
             Button(action: {
@@ -23,6 +24,9 @@ struct ToDoCardView: View {
                     toDoItemProgress.completionArray.append(Date())
                     toDoItemCompletionCount[toDoItemProgress.id!]! += 1
                 }
+                //
+                let addScore = toDoItemResolution.diffLevel.score
+                //
                 if toDoItemCompletionCount[toDoItemProgress.id!]! < toDoItemProgress.frequencyGoal.count {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
                         withAnimation(.easeIn) {
@@ -33,6 +37,27 @@ struct ToDoCardView: View {
                 Task {
                     do {
                         try await dataManager.addProgressToDB(progress: toDoItemProgress)
+                        //
+                        if let userGroups = loginViewModel.currentUser?.groupIDs {
+                            for groupID in userGroups {
+                                if let groupObject = try await dataManager.fetchGroupFromDB(groupID: groupID) {
+                                    for resolutionID in groupObject.resolutionIDs {
+                                        if resolutionID == toDoItemResolution.id {
+                                            var updatedGroup = groupObject
+                                            print("before: \(updatedGroup.currScore) ")
+                                            updatedGroup.currScore += addScore
+                                            if updatedGroup.currScore < 0 {
+                                                updatedGroup.currScore = 0
+                                            }
+                                            print("after: \(updatedGroup.currScore) ")
+                                            try await dataManager.addGroupToDB(group: updatedGroup)
+                                            break
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        //
                     } catch {
                         print(error)
                     }
@@ -100,9 +125,36 @@ struct ToDoCardView: View {
                         completionDates.removeLast()
                         toDoItemProgress.completionArray = completionDates
                         toDoItemCompletionCount[toDoItemProgress.id!]! -= 1
+                        
+                        //
+                        let undoScore = toDoItemResolution.diffLevel.score
+                        //
+                        
                         Task {
                             do {
                                 try await dataManager.addProgressToDB(progress: toDoItemProgress)
+                                //
+                                if let userGroups = loginViewModel.currentUser?.groupIDs {
+                                    for groupID in userGroups {
+                                        if let groupObject = try await dataManager.fetchGroupFromDB(groupID: groupID) {
+                                            for resolutionID in groupObject.resolutionIDs {
+                                                if resolutionID == toDoItemResolution.id {
+                                                    var updatedGroup = groupObject
+                                                    print("before: \(updatedGroup.currScore) ")
+                                                    updatedGroup.currScore -= undoScore
+                                                    
+                                                    if updatedGroup.currScore < 0 {
+                                                        updatedGroup.currScore = 0
+                                                    }
+                                                    print("after: \(updatedGroup.currScore) ")
+                                                    try await dataManager.addGroupToDB(group: updatedGroup)
+                                                    break
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                //
                             } catch {
                                 print(error)
                             }
