@@ -24,7 +24,7 @@ struct RecentActivitiesWidgetFull: Widget {
             VStack(alignment: .leading) {
                 HStack {
                     Text(title)
-                        .font(.title3)
+                        .font(.system(size: 19))
                         .fontWeight(.bold)
                         .foregroundColor(.black)
                     
@@ -43,7 +43,8 @@ struct RecentActivitiesWidgetFull: Widget {
                     .background(Color.black.opacity(0.6))
                     .frame(maxWidth: .infinity)
                 
-                .padding(.top, -5)
+                .padding(.top, -4)
+                .padding(.bottom, 4)
                 
                 ForEach(recentActivities) { activity in
                     HStack {
@@ -73,7 +74,7 @@ struct RecentActivitiesWidgetFull: Widget {
                             
                             Text(activity.group)
                                 .font(.system(size: 11))
-                                .foregroundColor(Color(red: 118/255, green: 81/255, blue: 140/255))
+                                .foregroundColor(.gray)
                         }
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -81,7 +82,7 @@ struct RecentActivitiesWidgetFull: Widget {
                 }
             }
             .padding()
-            .frame(height: 200)
+            .frame(height: 190)
             .background(Color(red: 240/255, green: 240/255, blue: 240/255).opacity(0.8))
             .cornerRadius(10)
             .shadow(radius: 5)
@@ -113,12 +114,12 @@ struct RecentActivitiesWidgetHalf: Widget {
                         .truncationMode(.tail)
                     
                 }
-                .padding(.bottom, 7)
                 Divider()
                     .background(Color.black.opacity(0.6))
                     .frame(maxWidth: .infinity)
                 
-                .padding(.top, -5)
+                .padding(.top, -4)
+                .padding(.bottom, 4)
                 
                 VStack(alignment: .leading, spacing: 13) {
                     ForEach(recentActivities) { activity in
@@ -144,7 +145,7 @@ struct RecentActivitiesWidgetHalf: Widget {
                 }
             }
             .padding()
-            .frame(height: 200)
+            .frame(height: 190)
             .background(Color.purple.opacity(0.8))
             .cornerRadius(10)
             .shadow(radius: 5)

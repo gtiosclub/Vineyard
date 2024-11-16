@@ -8,13 +8,70 @@
 import SwiftUI
 
 struct DashboardView: View {
-    private var widgets: [Widget] = [
-        TodaysTasksWidgetFull(),
-        RecentActivitiesWidgetHalf(),
-        TodaysTasksWidgetHalf(),
-        RecentActivitiesWidgetFull(),
-        TodaysTasksWidgetHalf()
-    ]
+    
+    private var sampleGroups = [
+            Group(
+                id: "group1",
+                name: "running club",
+                groupGoal: "run",
+                peopleIDs: [],
+                resolutionIDs: [],
+                deadline: Date(),
+                scoreGoal: 100,
+                currScore: 75
+            ),
+            Group(
+                id: "group2",
+                name: "Bookworms",
+                groupGoal: "Books",
+                peopleIDs: [],
+                resolutionIDs: [],
+                deadline: Date(),
+                scoreGoal: 50,
+                currScore: 20
+            ),
+            Group(
+                id: "group3",
+                name: "Fitness Enthusiasts",
+                groupGoal: "Fit",
+                peopleIDs: [],
+                resolutionIDs: [],
+                deadline: Date(),
+                scoreGoal: 80,
+                currScore: 40
+            ),
+            Group(
+                id: "group4",
+                name: "Study group - CS2110 students",
+                groupGoal: "Study",
+                peopleIDs: [],
+                resolutionIDs: [],
+                deadline: Date(),
+                scoreGoal: 60,
+                currScore: 60
+            ),
+            Group(
+                id: "group5",
+                name: "Drawing club",
+                groupGoal: "draw",
+                peopleIDs: [],
+                resolutionIDs: [],
+                deadline: Date(),
+                scoreGoal: 90,
+                currScore: 45
+            )
+        ]
+
+        private var widgets: [Widget] {
+            [
+                ProgressWidgetFull(group: sampleGroups.first!),
+                RecentActivitiesWidgetHalf(),
+                GroupsWidgetHalf(groups: sampleGroups),
+                TodaysTasksWidgetFull(),
+                GroupsWidgetFull(groups: sampleGroups),
+                RecentActivitiesWidgetFull()
+            ]
+        }
 
     private let profileImage = "profile_image"
     @EnvironmentObject var inviteViewModel: InviteViewModel
@@ -23,13 +80,13 @@ struct DashboardView: View {
         ZStack(alignment: .top) {
             ScrollView {
                 VStack {
-                    Spacer().frame(height: 135)
+                    Spacer().frame(height: 133)
                     // Grid for Widgets
                     LazyVGrid(
                         columns: [
                             GridItem(.adaptive(minimum: UIScreen.main.bounds.width * 0.4))
                         ],
-                        spacing: 37
+                        spacing: 25
                     ) {
                         ForEach(Array(widgets.enumerated()), id: \.offset) { index, widget in
                             if widget.span == 2 {
@@ -37,7 +94,7 @@ struct DashboardView: View {
                                 Section {
                                     ZStack(alignment: .topTrailing) {
                                         widget.render()
-                                            .frame(width: UIScreen.main.bounds.width * 0.91, height: 180)
+                                            .frame(width: UIScreen.main.bounds.width * 0.91, height: 190)
                                             .offset(x: 96)
 
                                         if widget.title == "Recent Activities" {
@@ -93,7 +150,7 @@ struct DashboardView: View {
                 .zIndex(1)
 
             VStack(alignment: .leading, spacing: 10) {
-                HStack {
+                HStack(spacing: 95) {
                     VStack(alignment: .leading) {
                         Text("Dashboard")
                             .font(.largeTitle)
@@ -104,7 +161,6 @@ struct DashboardView: View {
                             .font(.subheadline)
                             .foregroundColor(.white)
                     }
-                    Spacer().frame(width:145)
                     
 
                     Image(profileImage)
