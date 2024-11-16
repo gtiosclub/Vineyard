@@ -78,13 +78,13 @@ class LoginViewModel: ObservableObject {
     
     public func checkLoggedIn() async {
         if auth.currentUser != nil {
-            isLoggedIn = true
             do {
                 let user = try await FirebaseDataManager.shared.fetchPersonFromDB(
                     userID: auth.currentUser!.uid
                 )
 
                 currentUser = user
+                isLoggedIn = true
             } catch {
                 print(error)
             }
@@ -117,8 +117,9 @@ class LoginViewModel: ObservableObject {
     public func signOut() async {
         do {
             try await loginModel.signOut()
-            currentUser = nil
             isLoggedIn = false
+            currentUser = nil
+            
         } catch {
             //add signout error handleFirebaseError(error: )
             errorMessage = "Error signing out: \(error.localizedDescription)"

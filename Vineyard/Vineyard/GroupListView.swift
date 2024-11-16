@@ -15,21 +15,18 @@ struct GroupListView: View {
     @State private var isPresentingAddGroup = false
     var body: some View {
         NavigationView {
-            
-            VStack(alignment: .leading, spacing: 10) {
+            VStack(alignment: .center, spacing: 30) {
+                Spacer()
                 HStack {
                     VStack(alignment: .leading) {
                         Text("Your Groups")
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
+                            .font(.system(size: 30, weight: .bold))
                             .foregroundColor(.white)
                         Text("\(viewModel.user?.groupIDs.count ?? 0) active group(s)")
                             .foregroundColor(.white)
-                            .font(.subheadline)
                         
                     }
                     Spacer()
-                    
                     Button(action: {
                         print("changing mode")
                     }) {
@@ -46,12 +43,13 @@ struct GroupListView: View {
                             .font(.system(size: 25))
                     }
                 }
-                .padding([.horizontal, .top])
-                .padding(.top, 10)
-                .padding(.bottom, 30)
+                .padding(.horizontal, 40)
+                .padding(.top, 40)
+                .padding(.bottom, 32)
+                
                 
                 ScrollView {
-                    VStack(spacing: 15) {
+                    VStack(spacing: 5) {
                         ForEach(viewModel.groups, id: \.id) { group in
                             NavigationLink(destination: GroupView(group: group)) {
                                 GroupCardView(group: group)
@@ -64,21 +62,21 @@ struct GroupListView: View {
                                     Label("Leave Group", systemImage: "person.fill.xmark")
                                 }
                             }
+                            .padding()
                         }
                     }
-                    .padding(.horizontal)
                 }
             }
             .navigationBarHidden(true)
             .background(alignment: .top) {
                 Image("topBackground")
-                    .ignoresSafeArea(.container, edges: .top)
-            }
+            }.ignoresSafeArea(.container, edges: .top)
         }
         .fullScreenCover(isPresented: $viewModel.isPresentingCreateGroupView) {
             CreateGroupView().environment(viewModel)
         }
         .onAppear {
+            print("called appear group list")
             viewModel.setUser(user: loginViewModel.currentUser)
             viewModel.loadGroups()
         }
@@ -98,6 +96,4 @@ struct GroupListView: View {
 
 #Preview {
     GroupListView()
-        .environmentObject(InviteViewModel())
-        .environmentObject(LoginViewModel())
 }

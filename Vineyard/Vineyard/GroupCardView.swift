@@ -9,43 +9,99 @@ import SwiftUI
 
 struct GroupCardView: View {
     let group: Group
-
+    var progress: Double {
+        Double(group.currScore) / Double(group.scoreGoal)
+    }
+    
+    
     var body: some View {
-        VStack(alignment: .leading, spacing: 50) {
+        VStack(alignment: .leading) {
             HStack {
                 Text(group.name)
-                    .font(.headline)
-                    .foregroundColor(.black)
+                    .font(.system(size: 20, weight: .bold))
+                    .foregroundColor(.primary)
+                    
                 Spacer()
-                Text("\(group.peopleIDs.count) People")
-                    .foregroundColor(.black)
-                    .padding(.trailing, 40)
-                ZStack(alignment: .trailing) {
-                    ForEach(0..<min(group.peopleIDs.count, 3), id: \.self) { i in
-                        Circle()
-                            .fill(Color.gray.opacity(0.5))
-                            .frame(width: 30, height: 30)
-                            .offset(x: -CGFloat(i * 20))
+                    
+                ZStack {
+                    Text("\(Int(progress*100))%")
+                        .font(.system(size: 16, weight: .bold))
+                        .frame(alignment: .leading)
+                        .foregroundStyle(.primary.opacity(0.8))
+                    Text("\(Int(progress*100))%")
+                        .font(.system(size: 16, weight: .bold))
+                        .frame(alignment: .leading)
+                        .foregroundStyle(Color.purple.opacity(min(1, 0.2 + progress)))
+                    
+                        
+                }
+                GeometryReader { proxy in
+                    ZStack(alignment: .leading) {
+                        Capsule()
+                            .frame(width: proxy.size.width, height: 10)
+                            .foregroundStyle(Color(UIColor.systemBackground).opacity(0.5))
+                        Capsule()
+                        
+                            .frame(width: proxy.size.width*min(1, progress), height: 10)
+                            .foregroundStyle(.primary.opacity(0.2))
+                        Capsule()
+                        
+                            .frame(width: proxy.size.width*min(1, progress), height: 10)
+                            .foregroundStyle(Color.purple.opacity(min(1, 0.2 + progress)))
+                        
+                        
                     }
                 }
-            }
-            HStack {
-                Spacer()
-                ProgressView(value: Double(group.currScore), total:Double(group.scoreGoal))
-                    .progressViewStyle(.linear)
-                    .frame(width: 150)
-                    .scaleEffect(x: 1, y: 2.5)
-                    .tint(.purple)
+                .frame(width: 160, height: 10)
+                
                     
             }
+            .padding()
+            .background {
+                Color.purple.opacity(0.2)
+            }
+            
+            VStack (spacing: 4) {
+                Text("\(group.groupGoal)")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal)
+                    .padding(.top, 4)
+                HStack {
+                    HStack(spacing: -20 * 0.5) {
+                        ForEach(0..<group.peopleIDs.count) { index in
+                            ZStack {
+                                Circle()
+                                    .foregroundStyle(Color.black.opacity(0.3))
+                                    .frame(width: 21, height: 21)
+                                    .zIndex(Double(group.peopleIDs.count - index))
+                                Circle()
+                                    .foregroundStyle(.ultraThinMaterial)
+                                    .frame(width: 20, height: 20)
+                                    .zIndex(Double(group.peopleIDs.count - index))
+                                
+                            }
+                            
+                            
+                            
+                        }
+                    }
+                    
+                    
+                    Text("\(group.peopleIDs.count) Member\(group.peopleIDs.count == 1 ? "" : "s")")
+                        .font(.system(size: 16, weight: .medium))
+                        .foregroundStyle(.secondary)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .padding(.horizontal)
+                .padding(.bottom)
+            }
+            
         }
-        .padding()
-        .background {
-            RoundedRectangle(cornerRadius: 16.0)
-                .fill(Color.gray.opacity(0.15))
-        }
-        .cornerRadius(10)
-        .shadow(radius: 15)
+        .background(.ultraThinMaterial)
+        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .shadow(radius: 1, x: 1, y: 1)
+        
+        
         
     }
 }

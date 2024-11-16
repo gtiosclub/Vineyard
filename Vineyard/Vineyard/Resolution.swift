@@ -8,29 +8,39 @@
 import Foundation
 import FirebaseFirestore
 
-struct Frequency: Codable {
+struct Frequency: Codable, Hashable, Equatable {
     var frequencyType: FrequencyType
     var count: Int
 }
 
-enum FrequencyType: String, Codable {
-    case daily = "Daily"
-    case weekly = "Weekly"
-    case monthly = "Monthly"
+enum FrequencyType: String, Codable, CaseIterable {
+    case daily = "day"
+    case weekly = "week"
+    case monthly = "month"
 }
 
-struct Difficulty: Codable {
+struct Difficulty: Codable, Hashable, Equatable {
     var difficultyLevel: DifficultyLevel
-    var score: Int
+
+    var score: Int {
+        switch difficultyLevel {
+        case .easy:
+            100
+        case .medium:
+            200
+        case .hard:
+            300
+        }
+    }
 }
 
-enum DifficultyLevel: Codable {
-    case easy
-    case medium
-    case hard
-}   
+enum DifficultyLevel: String, Codable, CaseIterable {
+    case easy = "Easy"
+    case medium = "Medium"
+    case hard = "Hard"
+}
 
-struct Resolution: Identifiable, Codable {
+struct Resolution: Identifiable, Codable, Hashable, Equatable {
     @DocumentID var id: String?
     var title: String
     var description: String
@@ -53,16 +63,28 @@ struct Resolution: Identifiable, Codable {
             description: "Run a certain number of miles",
             quantity: 5,
             frequency: Frequency(frequencyType: FrequencyType.weekly, count: 1),
-            diffLevel: Difficulty(difficultyLevel: DifficultyLevel.medium, score: 5)
+            diffLevel: Difficulty(difficultyLevel: DifficultyLevel.medium)
         )
         
         let resolution2 = Resolution(
             title: "Drink 7 cups of water",
             description: "Drink more water",
             frequency: Frequency(frequencyType: FrequencyType.weekly, count: 1),
-            diffLevel: Difficulty(difficultyLevel: DifficultyLevel.easy, score: 2)
+            diffLevel: Difficulty(difficultyLevel: DifficultyLevel.easy)
         )
         
         return [resolution1, resolution2]
+    }
+
+    func finalTitle() -> String {
+        let resolutionResult = ResolutionEditorResult(
+            resolutionTitle: title,
+            frequencyType: frequency.frequencyType,
+            frequencyQuantity: frequency.count,
+            extractedQuantity: quantity,
+            difficulty: diffLevel.difficultyLevel
+        )
+
+        return resolutionResult.finalResolutionTitle
     }
 }

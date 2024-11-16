@@ -113,7 +113,7 @@ class FirebaseDataManager: DatabaseServiceProtocol {
         return progressList
     }
     
-    private func fetchResolutionFromDB(resolutionID: String) async throws -> Resolution? {
+    func fetchResolutionFromDB(resolutionID: String) async throws -> Resolution {
         let documentSnapshot = try await db.collection("resolutions").document(resolutionID).getDocument()
         return try documentSnapshot.data(as: Resolution.self)
     }
@@ -121,9 +121,9 @@ class FirebaseDataManager: DatabaseServiceProtocol {
     func fetchResolutionsFromDB(resolutionIDs: [String]) async throws -> [Resolution] {
         var resolutions: [Resolution] = []
         for resolutionID in resolutionIDs {
-            if let resolution = try await fetchResolutionFromDB(resolutionID: resolutionID) {
+            let resolution = try await fetchResolutionFromDB(resolutionID: resolutionID) 
                 resolutions.append(resolution)
-            }
+            
         }
         return resolutions
     }

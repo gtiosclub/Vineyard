@@ -147,7 +147,7 @@ struct GroupView: View {
                                 Circle()
                                     .foregroundStyle(resolution.diffLevel.difficultyLevel == DifficultyLevel.easy ? .green : (resolution.diffLevel.difficultyLevel == DifficultyLevel.medium ? .yellow : .red))
                                     .frame(width: 10, height: 10)
-                                Text(resolution.title.replacingOccurrences(of: "qtt_position", with: "___"))
+                                Text(resolution.finalTitle())
                             }
                         }
                         
