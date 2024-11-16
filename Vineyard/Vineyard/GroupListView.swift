@@ -76,6 +76,7 @@ struct GroupListView: View {
             CreateGroupView().environment(viewModel)
         }
         .onAppear {
+            print("called appear group list")
             viewModel.setUser(user: loginViewModel.currentUser)
             viewModel.loadGroups()
         }
