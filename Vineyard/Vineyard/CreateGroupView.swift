@@ -105,7 +105,11 @@ struct GoalsListView: View {
     @Binding var groupName: String
     @Binding var resolution: String
     @Binding var deadline: Date
-    
+    @State var scoreGoal: String = ""
+    var currentDate = Date()
+    var timeDifference: Int {
+        Int(Calendar.current.dateComponents([.day, .hour, .minute, .second], from: currentDate, to: deadline).day ?? 0) + 1 // calculating time until goal needs to end and then
+    }
     
         
     var body: some View {
@@ -117,6 +121,10 @@ struct GoalsListView: View {
             Text("Start with small goals to reach your big goal")
                 .font(.subheadline)
                 .foregroundColor(.gray)
+            TextField("Enter score goal", text: $scoreGoal)
+                .keyboardType(.numberPad)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+            Text("Recommended score goal \(goals.count > 0 ? goals.count * 300 * timeDifference : 10000)")
             HStack {
                 Text("Goal List")
                 Button {
@@ -153,7 +161,7 @@ struct GoalsListView: View {
             Spacer()
             
             Button {
-                viewModel.createGroup(withGroupName: groupName, withGroupGoal: resolution, withDeadline: deadline, withScoreGoal: 4, resolutions: goals)
+                viewModel.createGroup(withGroupName: groupName, withGroupGoal: resolution, withDeadline: deadline, withScoreGoal: Int(scoreGoal) ?? 10000, resolutions: goals)
                 viewModel.isPresentingCreateGroupView = false
                 viewModel.isPresentingCreateGoalView = false
             } label: {
@@ -204,7 +212,7 @@ struct InviteFriendsView: View {
         Text("Invite Your Friends").font(.largeTitle).bold()
     }
 }
-
+//
 //#Preview {
 //    CreateGroupView(onNext: {})
 //}
