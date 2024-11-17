@@ -117,6 +117,13 @@ struct ProfileView: View {
                 Task {
                     await viewModel.getCurrentUserBadges()
                 }
+                
+                LazyVGrid(columns: columns, spacing: 10) {
+                    ForEach(loginViewModel.currentUser?.badges ?? []) { badge in
+                        BadgeView(badge: badge)
+                    }
+                }
+                .padding(.top, 17)
             }
             .popup(isPresented: $inviteViewModel.invitedToGroup) {
                 InvitePopupView()

@@ -12,6 +12,9 @@ struct ToDoListView: View {
     @EnvironmentObject var loginViewModel: LoginViewModel
     let progressTypes: [String] = ["Daily", "Weekly", "Monthly"]
     @State var viewModel : ToDoListViewModel
+    var textColor = Color(UIColor {traitCollection in
+        return traitCollection.userInterfaceStyle == .dark ? UIColor.white: UIColor.black
+    })
     
     var body: some View {
         VStack {
@@ -49,7 +52,7 @@ struct ToDoListView: View {
                                 
                         }
                         .font(.system(size: 16))
-                        .foregroundStyle(.black)
+                        .foregroundStyle(textColor)
                         .padding(.trailing, 8)
                     }
                 }
@@ -80,9 +83,9 @@ struct ToDoListView: View {
                         }
                             
                     ) { progress in
-                        if viewModel.toDoResDict[progress]!.frequency.frequencyType == .daily {
+                        if viewModel.toDoResDict[progress]?.frequency.frequencyType == .daily {
                             ToDoCardView(toDoItemProgress: progress, toDoItemResolution: viewModel.toDoResDict[progress]!, toDoItemCompletionCount: $viewModel.toDoCountDict, progress: $viewModel.dailyProgress)
-                        } else if viewModel.toDoResDict[progress]!.frequency.frequencyType == .weekly {
+                        } else if viewModel.toDoResDict[progress]?.frequency.frequencyType == .weekly {
                             ToDoCardView(toDoItemProgress: progress, toDoItemResolution: viewModel.toDoResDict[progress]!, toDoItemCompletionCount: $viewModel.toDoCountDict, progress: $viewModel.weeklyProgress)
                         } else  {
                             ToDoCardView(toDoItemProgress: progress, toDoItemResolution: viewModel.toDoResDict[progress]!, toDoItemCompletionCount: $viewModel.toDoCountDict, progress: $viewModel.monthlyProgress)
@@ -97,12 +100,14 @@ struct ToDoListView: View {
                 Image("topBackground")
             }.ignoresSafeArea(.container, edges: .top)
             .onAppear {
-                Task {
-                    do {
-                        loginViewModel.currentUser!.allProgress = try await dataManager.fetchProgressFromDB(progressIDs: loginViewModel.currentUser!.allProgressIDs)
-                        await viewModel.getToDoToShow(user: loginViewModel.currentUser!, dataManager: dataManager)
-                    } catch {
-                        print(error)
+                if loginViewModel.isLoggedIn {
+                    Task {
+                        do {
+                            loginViewModel.currentUser!.allProgress = try await dataManager.fetchProgressFromDB(progressIDs: loginViewModel.currentUser!.allProgressIDs)
+                            await viewModel.getToDoToShow(user: loginViewModel.currentUser!, dataManager: dataManager)
+                        } catch {
+                            print(error)
+                        }
                     }
                 }
             }

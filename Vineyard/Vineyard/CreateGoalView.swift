@@ -86,8 +86,7 @@ struct CreateGoalView: View {
                         count: resolutionResult.frequencyQuantity
                     ),
                     diffLevel: Difficulty(
-                        difficultyLevel: resolutionResult.difficulty,
-                        score: 10
+                        difficultyLevel: resolutionResult.difficulty
                     )
                 )
             } else {
@@ -103,8 +102,7 @@ struct CreateGoalView: View {
                                 count: resolutionResult.frequencyQuantity
                             ),
                             diffLevel: Difficulty(
-                                difficultyLevel: resolutionResult.difficulty,
-                                score: 10
+                                difficultyLevel: resolutionResult.difficulty
                             )
                         )
                     )
