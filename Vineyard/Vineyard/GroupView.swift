@@ -28,6 +28,10 @@ struct GroupView: View {
                         .font(.headline)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
+                    Text("Score Goal: \(group.scoreGoal)")
+                        .font(.headline)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
                     VStack(alignment: .leading, spacing: 10) {
                         Spacer()
                         ProgressView(value: 0.20)

@@ -143,6 +143,11 @@ struct GoalsListView: View {
     @Binding var groupName: String
     @Binding var resolution: String
     @Binding var deadline: Date
+    @State var scoreGoal: String = ""
+    var currentDate = Date()
+    var timeDifference: Int {
+        Int(Calendar.current.dateComponents([.day, .hour, .minute, .second], from: currentDate, to: deadline).day ?? 0) + 1 // calculating time until goal needs to end and then
+    }
 
     var body: some View {
         @Bindable var viewModel = viewModel
@@ -156,9 +161,24 @@ struct GoalsListView: View {
                 Text("Start with small goals to reach your big goal")
                     .font(.subheadline)
                     .foregroundColor(.gray)
+              
+                TextField("Enter score goal", text: $scoreGoal)
+                                .keyboardType(.numberPad)
+                                .padding()
+                                .background(Color(.systemGray6))
+                                .cornerRadius(15)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 15)
+                                        .stroke(Color.gray.opacity(0.5), lineWidth: 1)
+                                )
+                                .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
+
+                Text("Recommended score goal \(goals.count > 0 ? goals.count * 300 * timeDifference : 10000) points")
+                    .font(.headline)
+                    .foregroundColor(.secondary)
             }
 
-            HStack {
+          HStack {
                 Text("Goal List")
                     .font(.title3)
                     .bold()
@@ -213,7 +233,7 @@ struct GoalsListView: View {
                     withGroupName: groupName,
                     withGroupGoal: resolution,
                     withDeadline: deadline,
-                    withScoreGoal: 4,
+                    withScoreGoal: Int(scoreGoal) ?? 10000,
                     resolutions: goals
                 )
                 viewModel.isPresentingCreateGroupView = false
