@@ -163,10 +163,19 @@ struct GoalsListView: View {
                     .foregroundColor(.gray)
               
                 TextField("Enter score goal", text: $scoreGoal)
-                    .keyboardType(.numberPad)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-              
-                Text("Recommended score goal \(goals.count > 0 ? goals.count * 300 * timeDifference : 10000)")
+                                .keyboardType(.numberPad)
+                                .padding()
+                                .background(Color(.systemGray6))
+                                .cornerRadius(15)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 15)
+                                        .stroke(Color.gray.opacity(0.5), lineWidth: 1)
+                                )
+                                .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
+
+                Text("Recommended score goal \(goals.count > 0 ? goals.count * 300 * timeDifference : 10000) points")
+                    .font(.headline)
+                    .foregroundColor(.secondary)
             }
 
           HStack {
