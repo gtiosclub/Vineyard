@@ -92,7 +92,7 @@ struct GroupsWidgetHalf: Widget {
             VStack(alignment: .leading) {
                 HStack {
                     Text(title)
-                        .font(.system(size: 19))
+                        .font(.callout)
                         .fontWeight(.bold)
                         .foregroundColor(.black)
                 }
