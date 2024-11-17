@@ -16,6 +16,7 @@
 		192EBFFB2C90F62F00AF8528 /* VineyardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192EBFFA2C90F62F00AF8528 /* VineyardUITests.swift */; };
 		192EBFFD2C90F62F00AF8528 /* VineyardUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192EBFFC2C90F62F00AF8528 /* VineyardUITestsLaunchTests.swift */; };
 		87A161762CE8255A006ED65F /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A161752CE8255A006ED65F /* ProfileViewModel.swift */; };
+		87A161782CEAA51E006ED65F /* GroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A161772CEAA51E006ED65F /* GroupViewModel.swift */; };
 		951CF8F02CC5C0650016B06A /* GroupListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951CF8EF2CC5C0650016B06A /* GroupListView.swift */; };
 		957E87DC2CDAEC4400F10864 /* VineBranchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957E87DB2CDAEC4400F10864 /* VineBranchView.swift */; };
 		95BE42E62CCEF4940031547F /* GroupCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BE42E52CCEF4940031547F /* GroupCardView.swift */; };
@@ -86,6 +87,7 @@
 		192EBFFA2C90F62F00AF8528 /* VineyardUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VineyardUITests.swift; sourceTree = "<group>"; };
 		192EBFFC2C90F62F00AF8528 /* VineyardUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VineyardUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		87A161752CE8255A006ED65F /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		87A161772CEAA51E006ED65F /* GroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewModel.swift; sourceTree = "<group>"; };
 		951CF8EF2CC5C0650016B06A /* GroupListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListView.swift; sourceTree = "<group>"; };
 		957E87DB2CDAEC4400F10864 /* VineBranchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VineBranchView.swift; sourceTree = "<group>"; };
 		95BE42E52CCEF4940031547F /* GroupCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCardView.swift; sourceTree = "<group>"; };
@@ -317,6 +319,7 @@
 			isa = PBXGroup;
 			children = (
 				B40B894B2C9364F4006B1771 /* GroupsListViewModel.swift */,
+				87A161772CEAA51E006ED65F /* GroupViewModel.swift */,
 			);
 			name = ViewModels;
 			sourceTree = "<group>";
@@ -564,6 +567,7 @@
 				192EBFE02C90F62E00AF8528 /* VineyardApp.swift in Sources */,
 				F13306EC2CD3E678002BA300 /* RecentActivitiesWidget.swift in Sources */,
 				B40B894E2C936DE0006B1771 /* ResolutionView.swift in Sources */,
+				87A161782CEAA51E006ED65F /* GroupViewModel.swift in Sources */,
 				F10167662CA37B180004260E /* Progress.swift in Sources */,
 				DA17B8F52CD3AC59007D5EB1 /* InviteViewModel.swift in Sources */,
 				951CF8F02CC5C0650016B06A /* GroupListView.swift in Sources */,

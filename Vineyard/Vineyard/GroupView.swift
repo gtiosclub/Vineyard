@@ -13,7 +13,14 @@ struct GroupView: View {
     @Namespace private var animation
     @State var membersExpanded: Bool = false
     @State var group: Group
+    @StateObject var groupViewModel: GroupViewModel
     @State private var isPresentingCreateGoalView = false
+    @Environment(\.colorScheme) var colorScheme
+    
+    init(group: Group) {
+        _groupViewModel = StateObject(wrappedValue: GroupViewModel(group: group))
+        self.group = group
+    }
     
     var body: some View {
         ScrollView {
@@ -27,12 +34,10 @@ struct GroupView: View {
                 VineBranchView(isStaticPreview: false)
                     .frame(maxWidth: .infinity, maxHeight: 120)
                     .clipShape(RoundedRectangle(cornerRadius: 15))
-                    .overlay(
-                        ZStack{
-                            RoundedRectangle(cornerRadius: 15)
-                                .stroke(Color.purple, lineWidth: 4)
-                        }
-                    )
+//                    .overlay(
+//                        RoundedRectangle(cornerRadius: 15)
+//                            .stroke(Color(red: 220/255, green: 243/255, blue: 223/255), lineWidth: 4)
+//                    )
                     .shadow(radius: 4)
                     .padding(.all)
                 
@@ -65,7 +70,7 @@ struct GroupView: View {
                     .background {
                         RoundedRectangle(cornerRadius: 20)
 //                            .foregroundStyle(.ultraThinMaterial)
-                            .fill(Color.purple.opacity(0.2))
+                            .fill(Color.green.opacity(0.2))
                     }
                     .padding(.bottom, 20)
                     .onTapGesture {
@@ -106,7 +111,7 @@ struct GroupView: View {
                     .background {
                         RoundedRectangle(cornerRadius: 20)
 //                            .foregroundStyle(.ultraThinMaterial)
-                            .fill(Color.purple.opacity(0.2))
+                            .fill(Color.green.opacity(0.2))
                     }
                     .padding(.bottom, 20)
                     .onTapGesture {
@@ -116,9 +121,10 @@ struct GroupView: View {
                     }
                 }
                 
-                Text("Todo")
+                Text("Tasks")
                     .font(.headline)
                     .frame(maxWidth: .infinity, alignment: .leading)
+
                 
                 VStack(alignment: .leading) {
                     if let resolutions = group.resolutions, !resolutions.isEmpty {
@@ -142,6 +148,7 @@ struct GroupView: View {
                 .background {
                     RoundedRectangle(cornerRadius: 20)
                         .fill(Color.purple.opacity(0.2))
+//                        .foregroundStyle(.thinMaterial)
                 }
                 
                 Text("Recent Activites")
@@ -160,13 +167,6 @@ struct GroupView: View {
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 ShareLink(item: generateInviteLink())
-            }
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {
-                    isPresentingCreateGoalView = true
-                }) {
-                    Image(systemName: "plus")
-                }
             }
         }
         .onAppear {
@@ -190,14 +190,3 @@ struct GroupView: View {
         
     }
 }
-
-
-//#Preview {
-//    GroupView(group: .constant(Group.samples[0])).environment(GroupsListViewModel())
-//}
-
-
-
-//#Preview {
-//    GroupView(group: .constant(Group.samples[0])).environment(GroupsListViewModel())
-//}
