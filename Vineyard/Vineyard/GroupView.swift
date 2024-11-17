@@ -13,14 +13,8 @@ struct GroupView: View {
     @Namespace private var animation
     @State var membersExpanded: Bool = false
     @State var group: Group
-    @StateObject var groupViewModel: GroupViewModel
     @State private var isPresentingCreateGoalView = false
     @Environment(\.colorScheme) var colorScheme
-    
-    init(group: Group) {
-        _groupViewModel = StateObject(wrappedValue: GroupViewModel(group: group))
-        self.group = group
-    }
     
     var body: some View {
         ScrollView {
@@ -31,15 +25,19 @@ struct GroupView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.top)
                 
-                VineBranchView(isStaticPreview: false)
-                    .frame(maxWidth: .infinity, maxHeight: 120)
-                    .clipShape(RoundedRectangle(cornerRadius: 15))
-//                    .overlay(
-//                        RoundedRectangle(cornerRadius: 15)
-//                            .stroke(Color(red: 220/255, green: 243/255, blue: 223/255), lineWidth: 4)
-//                    )
+                VineBranchView()
+                    .frame(maxWidth: .infinity, maxHeight: 220)
+                    .clipShape(RoundedRectangle(cornerRadius: 15).offset(y:-20))
                     .shadow(radius: 4)
-                    .padding(.all)
+                    .padding(.top)
+                
+                //
+                Text("Score Goal: \(group.scoreGoal)")
+                    .font(.headline)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.bottom)
+                
+                //
                 
                 
                 if !membersExpanded {
@@ -148,18 +146,16 @@ struct GroupView: View {
                 .background {
                     RoundedRectangle(cornerRadius: 20)
                         .fill(Color.purple.opacity(0.2))
-//                        .foregroundStyle(.thinMaterial)
                 }
                 
-                Text("Recent Activites")
-                    .font(.headline)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.top, 20)
+//                Text("Recent Activites")
+//                    .font(.headline)
+//                    .frame(maxWidth: .infinity, alignment: .leading)
+//                    .padding(.top, 20)
                 
             }
             .padding(.horizontal, 20)
         }
-//        .frame(maxHeight: .infinity)
         .toolbar {
             ToolbarItem(placement: .principal) {
                 Text("\(group.name)")
