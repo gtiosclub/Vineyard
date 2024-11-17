@@ -24,9 +24,9 @@ struct TodaysTasksWidgetFull: Widget {
             VStack(alignment: .leading) {
                 HStack {
                     Text(title)
-                        .font(.title3)
+                        .font(.system(size: 19))
                         .fontWeight(.bold)
-                        .foregroundColor(.white)
+                        .foregroundColor(.black)
                     
                     Spacer()
 
@@ -43,11 +43,12 @@ struct TodaysTasksWidgetFull: Widget {
                     .background(Color.black.opacity(0.6))
                     .frame(maxWidth: .infinity)
                 
-                .padding(.top, -5)
+                .padding(.top, -4)
+                .padding(.bottom, 4)
                 
                 VStack(alignment: .leading, spacing: 12) {
                     ForEach($todaysTasks) { $task in
-                        HStack(alignment: .top){
+                        HStack(alignment: .top, spacing: 12){
                             Button(action: {
                                 task.isCompleted = true
                             }) {
@@ -66,14 +67,14 @@ struct TodaysTasksWidgetFull: Widget {
                             VStack(alignment: .leading, spacing: 2) {
                                 Text(task.taskText)
                                     .font(.system(size: 15))
-                                    .foregroundColor(.white)
+                                    .foregroundColor(.black)
                                     .fontWeight(.medium)
                                     .lineLimit(1)
                                     .truncationMode(.tail)
                                 
                                 Text(task.group)
                                     .font(.system(size: 11))
-                                    .foregroundColor(Color(red: 118/255, green: 81/255, blue: 140/255))
+                                    .foregroundColor(.gray)
                             }
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -81,13 +82,14 @@ struct TodaysTasksWidgetFull: Widget {
                 }
             }
             .padding()
-            .frame(height: 200)
-            .background(Color.gray.opacity(0.4)) //try 0.35
+            .frame(height: 190)
+            .background(Color(red: 240/255, green: 240/255, blue: 240/255).opacity(0.8))
             .cornerRadius(10)
             .shadow(radius: 5)
         )
     }
 }
+
 
 struct TodaysTasksWidgetHalf: Widget {
     var span: Int { 1 }
@@ -110,16 +112,16 @@ struct TodaysTasksWidgetHalf: Widget {
                         .foregroundColor(.white)
 
                 }
-                .padding(.bottom, 7)
                 Divider()
                     .background(Color.black.opacity(0.6))
                     .frame(maxWidth: .infinity)
                 
-                .padding(.top, -5)
+                .padding(.top, -4)
+                .padding(.bottom, 4)
                 
-                VStack(alignment: .leading, spacing: 13) {
+                VStack(alignment: .leading, spacing: 12) {
                     ForEach($todaysTasks) { $task in
-                        HStack{
+                        HStack(spacing: 12){
                             Button(action: {
                                 task.isCompleted = true
                             }) {
@@ -153,8 +155,8 @@ struct TodaysTasksWidgetHalf: Widget {
                 .padding(.top, -3)
             }
             .padding()
-            .frame(height: 200)
-            .background(Color.purple.opacity(0.6))
+            .frame(height: 190)
+            .background(Color(red: 0.55, green: 0.3, blue: 0.75).opacity(0.8))
             .cornerRadius(10)
             .shadow(radius: 5)
         )
