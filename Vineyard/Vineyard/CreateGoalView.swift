@@ -124,11 +124,11 @@ struct CreateGoalView: View {
 
 }
 
-
-
-
-
-//#imageLiteral(resourceName: "simulator_screenshot_26595B77-5231-4870-9E2D-292AA5A640FA.png")
-//#Preview {
-//    CreateGoalView()
-//}
+#Preview {
+    CreateGoalView(
+        indexOfGoal: .constant(0),
+        goals: .constant([]),
+        editMode: .constant(false)
+    )
+    .environment(GroupsListViewModel())
+}
