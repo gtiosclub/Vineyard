@@ -20,11 +20,13 @@ struct VineBranchView: View {
                         Image("random\(index)")
                             .resizable()
                             .scaledToFit()
-                            .frame(height: 200)
+                            .frame(height: 550)
                     }
                 }
             }
-            .frame(height: 300)
+            .frame(height: 250)
+            .border(Color.gray, width: 5)
+            .padding()
             .ignoresSafeArea()
             if hasScrolledToEnd {
                 arrowView(direction: .left)
@@ -48,7 +50,7 @@ struct VineBranchView: View {
                 .font(.title)
                 .opacity(0.4)
         }
-        .position(x: direction == .left ? 30 : UIScreen.main.bounds.width - 60, y: 150)
+        .position(x: direction == .left ? 47 : UIScreen.main.bounds.width - 80, y: 150)
         .transition(.opacity)
         .animation(.easeInOut, value: direction)
     }
