@@ -103,7 +103,7 @@ struct GroupsWidgetHalf: Widget {
                 .padding(.top, -4)
                 .padding(.bottom, 4)
 
-                VStack(spacing: 5) {
+                VStack(spacing: 3) {
                     ForEach(Array(sortedGroups.prefix(4).enumerated()), id: \.element.id) { index, group in
                         let color = barColors[index % barColors.count]
                         GroupProgressBar(group: group, barColor: color)
@@ -143,6 +143,7 @@ struct GroupProgressBar: View {
                     .fontWeight(.bold)
                     .foregroundColor(.white)
                     .padding(.leading, 8)
+                    .lineLimit(1)
 
 //                Spacer()
 
@@ -154,7 +155,6 @@ struct GroupProgressBar: View {
 //                    .padding(.trailing, 8)
             }
         }
-        .frame(height: 27)
     }
 }
 

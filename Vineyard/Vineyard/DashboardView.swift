@@ -80,13 +80,13 @@ struct DashboardView: View {
         ZStack(alignment: .top) {
             ScrollView {
                 VStack {
-                    Spacer().frame(height: 133)
+                    Spacer().frame(height: 130)
                     // Grid for Widgets
                     LazyVGrid(
                         columns: [
                             GridItem(.adaptive(minimum: UIScreen.main.bounds.width * 0.4))
                         ],
-                        spacing: 25
+                        spacing: 23
                     ) {
                         ForEach(Array(widgets.enumerated()), id: \.offset) { index, widget in
                             if widget.span == 2 {
@@ -108,7 +108,7 @@ struct DashboardView: View {
                                                             .font(.body)
                                                             .foregroundColor(.white)
                                                     )
-                                                    .offset(x: 110, y: -20)
+                                                    .offset(x: 110, y: -17)
                                             }
                                         }
                                     }

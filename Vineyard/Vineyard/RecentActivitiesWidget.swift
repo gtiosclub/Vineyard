@@ -146,7 +146,7 @@ struct RecentActivitiesWidgetHalf: Widget {
             }
             .padding()
             .frame(height: 190)
-            .background(Color.purple.opacity(0.8))
+            .background(Color(red: 0.55, green: 0.3, blue: 0.75).opacity(0.8))
             .cornerRadius(10)
             .shadow(radius: 5)
         )
