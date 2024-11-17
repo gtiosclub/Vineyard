@@ -148,10 +148,6 @@ struct GroupView: View {
                         .fill(Color.purple.opacity(0.2))
                 }
                 
-//                Text("Recent Activites")
-//                    .font(.headline)
-//                    .frame(maxWidth: .infinity, alignment: .leading)
-//                    .padding(.top, 20)
                 
             }
             .padding(.horizontal, 20)
