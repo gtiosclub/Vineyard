@@ -13,6 +13,7 @@ struct GroupView: View {
     @Namespace private var animation
     @State var membersExpanded: Bool = false
     @State var group: Group
+    @State var recentActivity: [(Progress, Resolution, Person)] = []
     var body: some View {
         
         NavigationStack {
@@ -159,6 +160,35 @@ struct GroupView: View {
                             .foregroundStyle(.ultraThinMaterial)
                         
                     }
+                    Text("Recent activity")
+                        .font(.headline)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    VStack {
+                        ForEach(recentActivity, id: \.0) { (progress, resolution, person) in
+                            
+                            
+                            VStack {
+                                HStack {
+                                    Text(person.name)
+                                        .font(.system(size: 14, weight: .bold))
+                                    Text(progress.completionArray.last!.formatted(date: .abbreviated, time: .shortened))
+                                        .font(.system(size: 14, weight: .light))
+                                    
+                                }
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                Text(resolution.finalTitle())
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .font(.system(size: 14))
+                            }
+                            .padding()
+                            .background {
+                                RoundedRectangle(cornerRadius: 20)
+                                    .foregroundStyle(.ultraThinMaterial)
+                            }
+                            
+                            
+                        }
+                    }
                     
                     
                     
@@ -206,8 +236,13 @@ struct GroupView: View {
         }
         .onAppear {
             Task {
-                group.people = try await dm.fetchPeopleFromDB(peopleIDs: group.peopleIDs)
-                group.resolutions = try await dm.fetchResolutionsFromDB(resolutionIDs: group.resolutionIDs)
+                do {
+                    group.people = try await dm.fetchPeopleFromDB(peopleIDs: group.peopleIDs)
+                    group.resolutions = try await dm.fetchResolutionsFromDB(resolutionIDs: group.resolutionIDs)
+                    recentActivity = try await dm.fetchRecentActivity(group: group)
+                } catch {
+                    print(error)
+                }
             }
         }
     }
