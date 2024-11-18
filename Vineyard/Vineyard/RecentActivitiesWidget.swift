@@ -12,9 +12,9 @@ struct RecentActivitiesWidgetFull: Widget {
     var span: Int { 2 }
     
     var recentActivities: [Tsk] = [
-        Tsk(userName: "Amy", taskText: "Completed task A", group: "groupA"),
-        Tsk(userName: "Bob", taskText: "Completed task B", group: "another group name"),
-        Tsk(userName: "Personwithlongname", taskText: "Completed task C, task D, and task E", group: "groupC")
+        Tsk(userName: "Rahul", taskText: "Completed \"study as a group\"", group: "Study Buddies"),
+        Tsk(userName: "Josheev", taskText: "Completed \"go to the gym\"", group: "Healthy Boyz"),
+        Tsk(userName: "Stepan", taskText: "Completed \"apply to internships\"", group: "Road to a Job")
     ]
     
     var title: String = "Recent Activities"
@@ -95,9 +95,9 @@ struct RecentActivitiesWidgetHalf: Widget {
     var span: Int { 1 }
     
     var recentActivities: [Tsk] = [
-        Tsk(userName: "Amy", taskText: "Completed task A", group: "groupA"),
-        Tsk(userName: "Bob", taskText: "Completed task B", group: "groupB"),
-        Tsk(userName: "Chris", taskText: "Completed task C, task D, and task E", group: "groupC")
+        Tsk(userName: "Rahul", taskText: "Completed \"study as a group\"", group: "Study Buddies"),
+        Tsk(userName: "Josheev", taskText: "Completed \"go to the gym\"", group: "groupB"),
+        Tsk(userName: "Stepan", taskText: "Completed \"apply to internships\"", group: "groupC")
     ]
     
     var title: String = "Recent Activities"
