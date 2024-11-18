@@ -178,9 +178,6 @@ struct GroupView: View {
                         }
                     }
 
-                    
-                }
-
             }
             
 //            .toolbar {
