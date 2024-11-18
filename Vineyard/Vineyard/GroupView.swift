@@ -177,7 +177,7 @@ struct GroupView: View {
                             }
                         }
                     }
-                }
+//                }
             }
             
 //            .toolbar {
