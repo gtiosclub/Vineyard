@@ -152,45 +152,33 @@ struct GroupView: View {
                         .fill(Color.purple.opacity(0.2))
                 }
 
-                    Text("Recent activity")
-                        .font(.headline)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    VStack {
-                        ForEach(recentActivity, id: \.0) { (progress, resolution, person) in
-                            VStack {
-                                HStack {
-                                    Text(person.name)
-                                        .font(.system(size: 14, weight: .bold))
-                                    Text(progress.completionArray.last!.formatted(date: .abbreviated, time: .shortened))
-                                        .font(.system(size: 14, weight: .light))
-                                    
-                                }
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                Text(resolution.finalTitle())
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .font(.system(size: 14))
-                            }
-                            .padding()
-                            .background {
-                                RoundedRectangle(cornerRadius: 20)
-                                    .fill(Color.purple.opacity(0.2))
-                            }
-                        }
-                    }
+//                    Text("Recent activity")
+//                        .font(.headline)
+//                        .frame(maxWidth: .infinity, alignment: .leading)
+//                    VStack {
+//                        ForEach(recentActivity, id: \.0) { (progress, resolution, person) in
+//                            VStack {
+//                                HStack {
+//                                    Text(person.name)
+//                                        .font(.system(size: 14, weight: .bold))
+//                                    Text(progress.completionArray.last!.formatted(date: .abbreviated, time: .shortened))
+//                                        .font(.system(size: 14, weight: .light))
+//                                    
+//                                }
+//                                .frame(maxWidth: .infinity, alignment: .leading)
+//                                Text(resolution.finalTitle())
+//                                    .frame(maxWidth: .infinity, alignment: .leading)
+//                                    .font(.system(size: 14))
+//                            }
+//                            .padding()
+//                            .background {
+//                                RoundedRectangle(cornerRadius: 20)
+//                                    .fill(Color.purple.opacity(0.2))
+//                            }
+//                        }
+//                    }
 
             }
-            
-//            .toolbar {
-//                ToolbarItem(placement: .principal) {
-//                    Text("\(group.name)")
-//                        .font(.system(size: 24, weight: .bold))
-//
-//                }
-//                .frame(maxWidth: .infinity, alignment: .leading)
-                
-//                
-//                
-//            }
             .padding(.horizontal, 20)
         }
         .toolbar {
