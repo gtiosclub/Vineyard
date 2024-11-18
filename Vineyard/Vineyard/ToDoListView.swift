@@ -10,6 +10,7 @@ import SwiftUI
 struct ToDoListView: View {
     let dataManager = FirebaseDataManager.shared
     @EnvironmentObject var loginViewModel: LoginViewModel
+    @EnvironmentObject var inviteViewModel: InviteViewModel
     let progressTypes: [String] = ["Daily", "Weekly", "Monthly"]
     @State var viewModel : ToDoListViewModel
     var textColor = Color(UIColor {traitCollection in
@@ -99,6 +100,17 @@ struct ToDoListView: View {
             .background(alignment: .top) {
                 Image("topBackground")
             }.ignoresSafeArea(.container, edges: .top)
+            .popup(isPresented: $inviteViewModel.invitedToGroup) {
+                InvitePopupView()
+            } customize: {
+                $0
+                    .type(.floater())
+                    .appearFrom(.bottomSlide)
+                
+            }
+            .alert(isPresented: $inviteViewModel.inviteErrorStatus) {
+                Alert(title: Text(inviteViewModel.inviteError ?? ""))
+            }
             .onAppear {
                 if loginViewModel.isLoggedIn {
                     Task {

@@ -42,7 +42,7 @@ struct GroupView: View {
                 
                 if !membersExpanded {
                     HStack {
-                        HStack(spacing: -20 * 0.5) {
+                        HStack(spacing: -30 * 0.5) {
                             ForEach(0..<group.peopleIDs.count) { index in
                                 ZStack {
                                     Circle()
@@ -52,6 +52,10 @@ struct GroupView: View {
                                     Circle()
                                         .foregroundStyle(.ultraThinMaterial)
                                         .frame(width: 20, height: 20)
+                                        .zIndex(Double(group.peopleIDs.count - index))
+                                    Image(systemName: "person.circle")
+                                        .foregroundColor(Color.gray.opacity(1))
+                                        .frame(width: 25, height: 25)
                                         .zIndex(Double(group.peopleIDs.count - index))
                                     
                                 }
@@ -91,7 +95,7 @@ struct GroupView: View {
                                         .foregroundStyle(.ultraThinMaterial)
                                         .frame(width: 20, height: 20)
                                     
-                                    Image(systemName: "person.circle.fill")
+                                    Image(systemName: "person.circle")
                                         .foregroundColor(Color.gray.opacity(1))
                                         .frame(width: 25, height: 25)
                                     
