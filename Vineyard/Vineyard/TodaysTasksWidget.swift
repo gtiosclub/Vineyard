@@ -12,9 +12,9 @@ struct TodaysTasksWidgetFull: Widget {
     var span: Int { 2 }
     
     @State var todaysTasks: [Tsk] = [
-        Tsk(userName: "Amy", taskText: "Go complete task A", group: "groupA", isCompleted: true),
-        Tsk(userName: "Bob", taskText: "Go complete task B", group: "another group"),
-        Tsk(userName: "Chris", taskText: "Go complete task that is long enough to test the truncation", group: "groupC")
+        Tsk(userName: "Amy", taskText: "I want to run a 5k once a month", group: "Healthy Boyz", isCompleted: true),
+        Tsk(userName: "Bob", taskText: "I want to study as a group once a week", group: "Study Buddies"),
+        Tsk(userName: "Chris", taskText: "I want to apply to internships 2 times a day", group: "Road to a Job")
     ]
     
     var title: String = "Today's Tasks"

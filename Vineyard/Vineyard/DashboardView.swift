@@ -12,53 +12,53 @@ struct DashboardView: View {
     private var sampleGroups = [
             Group(
                 id: "group1",
-                name: "running club",
+                name: "Healthy Boyz",
                 groupGoal: "run",
                 peopleIDs: [],
                 resolutionIDs: [],
                 deadline: Date(),
                 scoreGoal: 100,
-                currScore: 75
+                currScore: 5
             ),
             Group(
                 id: "group2",
-                name: "Bookworms",
+                name: "Study Buddies",
                 groupGoal: "Books",
                 peopleIDs: [],
                 resolutionIDs: [],
                 deadline: Date(),
-                scoreGoal: 50,
-                currScore: 20
+                scoreGoal: 100,
+                currScore: 5
             ),
             Group(
                 id: "group3",
-                name: "Fitness Enthusiasts",
+                name: "Road to a Job",
                 groupGoal: "Fit",
                 peopleIDs: [],
                 resolutionIDs: [],
                 deadline: Date(),
-                scoreGoal: 80,
-                currScore: 40
-            ),
-            Group(
-                id: "group4",
-                name: "Study group - CS2110 students",
-                groupGoal: "Study",
-                peopleIDs: [],
-                resolutionIDs: [],
-                deadline: Date(),
-                scoreGoal: 60,
-                currScore: 60
-            ),
-            Group(
-                id: "group5",
-                name: "Drawing club",
-                groupGoal: "draw",
-                peopleIDs: [],
-                resolutionIDs: [],
-                deadline: Date(),
-                scoreGoal: 90,
-                currScore: 45
+                scoreGoal: 100,
+                currScore: 20
+//            ),
+//            Group(
+//                id: "group4",
+//                name: "Study group - CS2110 students",
+//                groupGoal: "Study",
+//                peopleIDs: [],
+//                resolutionIDs: [],
+//                deadline: Date(),
+//                scoreGoal: 60,
+//                currScore: 60
+//            ),
+//            Group(
+//                id: "group5",
+//                name: "Drawing club",
+//                groupGoal: "draw",
+//                peopleIDs: [],
+//                resolutionIDs: [],
+//                deadline: Date(),
+//                scoreGoal: 90,
+//                currScore: 45
             )
         ]
 
