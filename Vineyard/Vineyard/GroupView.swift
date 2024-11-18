@@ -25,7 +25,7 @@ struct GroupView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.top)
                 
-                VineBranchView()
+                VineBranchView(groupScore: group.currScore, groupTotalScore: group.scoreGoal)
                     .frame(maxWidth: .infinity, maxHeight: 220)
                     .clipShape(RoundedRectangle(cornerRadius: 15).offset(y:-20))
                     .shadow(radius: 4)
