@@ -175,45 +175,9 @@ struct GroupView: View {
                                 RoundedRectangle(cornerRadius: 20)
                                     .fill(Color.purple.opacity(0.2))
                             }
-                            
-                            
                         }
                     }
-                    
-                    
-                    
-                    //                    Text("Recent Activities")
-                    //                        .font(.headline)
-                    //                        .frame(maxWidth: .infinity, alignment: .leading)
-                    
-                    
-                    //                    ForEach(group.people) {people in
-                    //                        VStack(alignment: .leading, spacing: 10) {
-                    //                            HStack {
-                    //                                Image(systemName: "person.crop.circle")
-                    //                                    .resizable()
-                    //                                    .frame(width: 30, height: 30)
-                    //                                Text("\(people.name)")
-                    //                                Spacer()
-                    //
-                    //                                VStack {
-                    //                                    Text("Lorem Ipsum")
-                    //                                        .font(.subheadline)
-                    //                                    Text("Lorem Ipsum")
-                    //                                        .font(.caption)
-                    //                                        .foregroundColor(Color.black.opacity(0.5))
-                    //                                }
-                    //                            }
-                    //                        }
-                    //                        .padding()
-                    //                        .frame(height: 60)
-                    //                        .background(Color.gray.opacity(0.5))
-                    //                        .cornerRadius(10)
-                    //                    }
-                    
-                
-                
-                
+//                }
             }
             
 //            .toolbar {

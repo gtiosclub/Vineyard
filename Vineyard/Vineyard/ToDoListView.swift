@@ -88,7 +88,7 @@ struct ToDoListView: View {
                             ToDoCardView(toDoItemProgress: progress, toDoItemResolution: viewModel.toDoResDict[progress]!, toDoItemCompletionCount: $viewModel.toDoCountDict, progress: $viewModel.dailyProgress)
                         } else if viewModel.toDoResDict[progress]?.frequency.frequencyType == .weekly {
                             ToDoCardView(toDoItemProgress: progress, toDoItemResolution: viewModel.toDoResDict[progress]!, toDoItemCompletionCount: $viewModel.toDoCountDict, progress: $viewModel.weeklyProgress)
-                        } else  {
+                        } else if viewModel.toDoResDict[progress]?.frequency.frequencyType == .monthly{
                             ToDoCardView(toDoItemProgress: progress, toDoItemResolution: viewModel.toDoResDict[progress]!, toDoItemCompletionCount: $viewModel.toDoCountDict, progress: $viewModel.monthlyProgress)
                         }
                     }

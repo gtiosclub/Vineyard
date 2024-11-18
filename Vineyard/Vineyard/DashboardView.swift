@@ -77,26 +77,50 @@ struct DashboardView: View {
     @EnvironmentObject var inviteViewModel: InviteViewModel
 
     var body: some View {
-        ZStack(alignment: .top) {
-            ScrollView {
-                VStack {
-                    Spacer().frame(height: 130)
-                    // Grid for Widgets
-                    LazyVGrid(
-                        columns: [
-                            GridItem(.adaptive(minimum: UIScreen.main.bounds.width * 0.4))
-                        ],
-                        spacing: 23
-                    ) {
-                        ForEach(Array(widgets.enumerated()), id: \.offset) { index, widget in
-                            if widget.span == 2 {
-                                // Full-width widget
-                                Section {
+        NavigationStack{
+            ZStack(alignment: .top) {
+                ScrollView {
+                    VStack {
+                        Spacer().frame(height: 130)
+                        // Grid for Widgets
+                        LazyVGrid(
+                            columns: [
+                                GridItem(.adaptive(minimum: UIScreen.main.bounds.width * 0.4))
+                            ],
+                            spacing: 23
+                        ) {
+                            ForEach(Array(widgets.enumerated()), id: \.offset) { index, widget in
+                                if widget.span == 2 {
+                                    // Full-width widget
+                                    Section {
+                                        ZStack(alignment: .topTrailing) {
+                                            widget.render()
+                                                .frame(width: UIScreen.main.bounds.width * 0.91, height: 190)
+                                                .offset(x: 96)
+                                            
+                                            if widget.title == "Recent Activities" {
+                                                let taskCount = getTaskCount(for: widget)
+                                                if taskCount > 0 {
+                                                    Circle()
+                                                        .fill(Color.red)
+                                                        .frame(width: 30, height: 30)
+                                                        .overlay(
+                                                            Text("\(taskCount)")
+                                                                .font(.body)
+                                                                .foregroundColor(.white)
+                                                        )
+                                                        .offset(x: 110, y: -17)
+                                                }
+                                            }
+                                        }
+                                        .frame(maxWidth: .infinity)
+                                    }
+                                } else {
+                                    // Half-width widget
                                     ZStack(alignment: .topTrailing) {
                                         widget.render()
-                                            .frame(width: UIScreen.main.bounds.width * 0.91, height: 190)
-                                            .offset(x: 96)
-
+                                            .frame(height: 180)
+                                        
                                         if widget.title == "Recent Activities" {
                                             let taskCount = getTaskCount(for: widget)
                                             if taskCount > 0 {
@@ -108,75 +132,56 @@ struct DashboardView: View {
                                                             .font(.body)
                                                             .foregroundColor(.white)
                                                     )
-                                                    .offset(x: 110, y: -17)
+                                                    .offset(x: 13, y: -20)
                                             }
                                         }
                                     }
-                                    .frame(maxWidth: .infinity)
+                                    .frame(width: UIScreen.main.bounds.width * 0.44)
                                 }
-                            } else {
-                                // Half-width widget
-                                ZStack(alignment: .topTrailing) {
-                                    widget.render()
-                                        .frame(height: 180)
-
-                                    if widget.title == "Recent Activities" {
-                                        let taskCount = getTaskCount(for: widget)
-                                        if taskCount > 0 {
-                                            Circle()
-                                                .fill(Color.red)
-                                                .frame(width: 30, height: 30)
-                                                .overlay(
-                                                    Text("\(taskCount)")
-                                                        .font(.body)
-                                                        .foregroundColor(.white)
-                                                )
-                                                .offset(x: 13, y: -20)
-                                        }
-                                    }
-                                }
-                                .frame(width: UIScreen.main.bounds.width * 0.44)
                             }
                         }
+                        .padding()
+                        .padding(.horizontal, 11)
                     }
-                    .padding()
-                    .padding(.horizontal, 11)
                 }
-            }
-            .scrollIndicators(.hidden)
-
-            Image("topBackground")
-                .ignoresSafeArea(.container, edges: .top)
-                .zIndex(1)
-
-            VStack(alignment: .leading, spacing: 10) {
-                HStack(spacing: 95) {
-                    VStack(alignment: .leading) {
-                        Text("Dashboard")
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
-
-                        Text(Date.now, style: .date)
-                            .font(.subheadline)
-                            .foregroundColor(.white)
+                .scrollIndicators(.hidden)
+                
+                Image("topBackground")
+                    .ignoresSafeArea(.container, edges: .top)
+                    .zIndex(1)
+                
+                VStack(alignment: .leading, spacing: 10) {
+                    HStack(spacing: 95) {
+                        VStack(alignment: .leading) {
+                            Text("Dashboard")
+                                .font(.largeTitle)
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                            
+                            Text(Date.now, style: .date)
+                                .font(.subheadline)
+                                .foregroundColor(.white)
+                        }
+                        
+                        NavigationLink(destination: { ProfileView()
+                        }, label: {
+                            Image(systemName: "person.crop.circle")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .foregroundColor(Color.white)
+                                .frame(width: 30, height: 30)
+                                .clipShape(Circle())
+                                .overlay(
+                                    Circle()
+                                        .stroke(Color.white, lineWidth: 5)
+                                        .opacity(0.5)
+                                )
+                        })
                     }
-                    
-
-                    Image(profileImage)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 50, height: 50)
-                        .clipShape(Circle())
-                        .overlay(
-                            Circle()
-                                .stroke(Color.white, lineWidth: 5)
-                                .opacity(0.5)
-                        )
+                    .padding(.top, 15)
                 }
-                .padding(.top, 15)
+                .zIndex(2)
             }
-            .zIndex(2)
         }
         .navigationBarHidden(true)
         .popup(isPresented: $inviteViewModel.invitedToGroup) {
