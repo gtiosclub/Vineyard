@@ -172,10 +172,7 @@ class FirebaseDataManager: DatabaseServiceProtocol {
     }
     
     func fetchRecentActivity(group: Group) async throws -> [(Progress, Resolution, Person)] {
-        var potentialActivity: [String] = []
-        for p in (group.people ?? []) {
-            potentialActivity.append(contentsOf: p.allProgressIDs)
-        }
+        
         let progressRef = db.collection("progress")
         var groupResFilter: [String] = []
         // fiter for queries has to be a non-empty array, and group.resolutionIDs could be empty
@@ -186,7 +183,6 @@ class FirebaseDataManager: DatabaseServiceProtocol {
         }
         
         let querySnapshot = try await progressRef
-            .whereField(FieldPath.documentID(), in: potentialActivity)
             .whereField("resolutionID", in: groupResFilter).getDocuments()
         var activityProgress: [(Progress, Resolution, Person)] = []
         for document in querySnapshot.documents {
