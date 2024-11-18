@@ -53,6 +53,8 @@
 		F10167662CA37B180004260E /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10167652CA37B150004260E /* Progress.swift */; };
 		F13306EA2CD3E3C1002BA300 /* TodaysTasksWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13306E92CD3E3B1002BA300 /* TodaysTasksWidget.swift */; };
 		F13306EC2CD3E678002BA300 /* RecentActivitiesWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13306EB2CD3E674002BA300 /* RecentActivitiesWidget.swift */; };
+		F17808962CE924730094C8E7 /* ProgressWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17808952CE9246B0094C8E7 /* ProgressWidget.swift */; };
+		F17808982CE941D30094C8E7 /* GroupsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17808972CE941CD0094C8E7 /* GroupsWidget.swift */; };
 		F1E19F872CAB58DC00463111 /* Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E19F862CAB58D800463111 /* Widget.swift */; };
 		F1E19F892CAB5B9F00463111 /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E19F882CAB5B9500463111 /* DashboardViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -122,6 +124,8 @@
 		F10167652CA37B150004260E /* Progress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Progress.swift; sourceTree = "<group>"; };
 		F13306E92CD3E3B1002BA300 /* TodaysTasksWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaysTasksWidget.swift; sourceTree = "<group>"; };
 		F13306EB2CD3E674002BA300 /* RecentActivitiesWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivitiesWidget.swift; sourceTree = "<group>"; };
+		F17808952CE9246B0094C8E7 /* ProgressWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressWidget.swift; sourceTree = "<group>"; };
+		F17808972CE941CD0094C8E7 /* GroupsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsWidget.swift; sourceTree = "<group>"; };
 		F1E19F862CAB58D800463111 /* Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Widget.swift; sourceTree = "<group>"; };
 		F1E19F882CAB5B9500463111 /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -345,6 +349,8 @@
 			isa = PBXGroup;
 			children = (
 				F13306EB2CD3E674002BA300 /* RecentActivitiesWidget.swift */,
+				F17808972CE941CD0094C8E7 /* GroupsWidget.swift */,
+				F17808952CE9246B0094C8E7 /* ProgressWidget.swift */,
 				F13306E92CD3E3B1002BA300 /* TodaysTasksWidget.swift */,
 			);
 			name = Models;
@@ -545,6 +551,7 @@
 				190E033D2CE6A70D0054D5E5 /* ToDoListViewModel.swift in Sources */,
 				DAB5CAEE2CE4243E004BC8BD /* ToDoListView.swift in Sources */,
 				F05361C82CAF1462009DE1E3 /* TodoViewModel.swift in Sources */,
+				F17808982CE941D30094C8E7 /* GroupsWidget.swift in Sources */,
 				192EBFE22C90F62E00AF8528 /* HomeView.swift in Sources */,
 				B43CD6C52CB608200079CCBF /* CreateGoalView.swift in Sources */,
 				B40B894C2C9364F4006B1771 /* GroupsListViewModel.swift in Sources */,
@@ -577,6 +584,7 @@
 				EAC3806B2CA36B5600EBEF4C /* SignUpView.swift in Sources */,
 				F05361C62CAF0AA1009DE1E3 /* TodoView.swift in Sources */,
 				B43CD6BD2CB5F23A0079CCBF /* CreateGroupView.swift in Sources */,
+				F17808962CE924730094C8E7 /* ProgressWidget.swift in Sources */,
 				F10167642CA37B080004260E /* Badge.swift in Sources */,
 				BB40EDFA2C991C9D006BA1E3 /* Resolution.swift in Sources */,
 				EAC3806D2CA36B7400EBEF4C /* ResetPasswordView.swift in Sources */,

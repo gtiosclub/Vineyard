@@ -13,9 +13,9 @@ struct GroupView: View {
     @Namespace private var animation
     @State var membersExpanded: Bool = false
     @State var group: Group
-    @State private var isPresentingCreateGoalView = false
-    @Environment(\.colorScheme) var colorScheme
-    
+
+    @State var recentActivity: [(Progress, Resolution, Person)] = []
+
     var body: some View {
         ScrollView {
             VStack {
@@ -144,6 +144,76 @@ struct GroupView: View {
                             .font(.subheadline)
                             .padding(10)
                     }
+
+                    Text("Recent activity")
+                        .font(.headline)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    VStack {
+                        ForEach(recentActivity, id: \.0) { (progress, resolution, person) in
+                            
+                            
+                            VStack {
+                                HStack {
+                                    Text(person.name)
+                                        .font(.system(size: 14, weight: .bold))
+                                    Text(progress.completionArray.last!.formatted(date: .abbreviated, time: .shortened))
+                                        .font(.system(size: 14, weight: .light))
+                                    
+                                }
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                Text(resolution.finalTitle())
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .font(.system(size: 14))
+                            }
+                            .padding()
+                            .background {
+                                RoundedRectangle(cornerRadius: 20)
+                                    .foregroundStyle(.ultraThinMaterial)
+                            }
+                            
+                            
+                        }
+                    }
+                    
+                    
+                    
+                    //                    Text("Recent Activities")
+                    //                        .font(.headline)
+                    //                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    
+                    //                    ForEach(group.people) {people in
+                    //                        VStack(alignment: .leading, spacing: 10) {
+                    //                            HStack {
+                    //                                Image(systemName: "person.crop.circle")
+                    //                                    .resizable()
+                    //                                    .frame(width: 30, height: 30)
+                    //                                Text("\(people.name)")
+                    //                                Spacer()
+                    //
+                    //                                VStack {
+                    //                                    Text("Lorem Ipsum")
+                    //                                        .font(.subheadline)
+                    //                                    Text("Lorem Ipsum")
+                    //                                        .font(.caption)
+                    //                                        .foregroundColor(Color.black.opacity(0.5))
+                    //                                }
+                    //                            }
+                    //                        }
+                    //                        .padding()
+                    //                        .frame(height: 60)
+                    //                        .background(Color.gray.opacity(0.5))
+                    //                        .cornerRadius(10)
+                    //                    }
+                    
+                }
+                .padding(.horizontal, 20)
+            }
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("\(group.name)")
+                        .font(.system(size: 24, weight: .bold))
+
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(8)
@@ -167,9 +237,15 @@ struct GroupView: View {
         }
         .onAppear {
             Task {
-                group.people = try await dm.fetchPeopleFromDB(peopleIDs: group.peopleIDs)
-                group.resolutions = try await dm.fetchResolutionsFromDB(resolutionIDs: group.resolutionIDs)
-                isPresentingCreateGoalView = false
+
+                do {
+                    group.people = try await dm.fetchPeopleFromDB(peopleIDs: group.peopleIDs)
+                    group.resolutions = try await dm.fetchResolutionsFromDB(resolutionIDs: group.resolutionIDs)
+                    recentActivity = try await dm.fetchRecentActivity(group: group)
+                } catch {
+                    print(error)
+                }
+
             }
         }
     }
