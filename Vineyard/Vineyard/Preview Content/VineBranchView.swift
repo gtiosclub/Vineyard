@@ -51,7 +51,7 @@ struct VineBranchView: View {
         }
     }
     private func randomize() -> [Int] {
-        let progressCount = max(ceil(Double(groupScore) / Double(groupTotalScore)), 2) - 2
+        let progressCount = max(ceil(Double(groupScore) / Double(groupTotalScore)) * 4, 2) - 2
         let array = Array(1...4)
         let randomizeArray = array.shuffled()
         return Array(randomizeArray.prefix(Int(progressCount)))
