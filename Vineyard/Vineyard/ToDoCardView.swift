@@ -168,7 +168,7 @@ struct ToDoCardView: View {
                             .frame(width: 14, height: 14)
                         Circle()
                             .frame(width: 14, height: 14)
-                            .foregroundStyle(index < toDoItemCompletionCount[toDoItemProgress.id!]! ? .purple : .clear)
+                            .foregroundStyle(index < toDoItemCompletionCount[toDoItemProgress.id!]! ? .purple : .clear) // cringeee errors heree
                     }
                 }
             }

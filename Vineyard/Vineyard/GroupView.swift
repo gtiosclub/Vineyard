@@ -222,7 +222,7 @@ struct GroupView: View {
         components.host = "join-group"
         components.queryItems = [
             URLQueryItem(name: "group", value: group.id!),
-            URLQueryItem(name: "inviter", value: loginViewModel.currentUser!.id!)
+            URLQueryItem(name: "inviter", value: loginViewModel.currentUser?.id ?? "") // brooo sooo cringgggeee
         ]
         let url = components.url
         return url!
