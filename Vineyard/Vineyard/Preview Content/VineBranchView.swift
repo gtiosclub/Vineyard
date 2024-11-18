@@ -11,17 +11,30 @@ import SwiftUI
 struct VineBranchView: View {
     @State private var hasScrolledToEnd: Bool = false
     @State private var hasScrolledToStart: Bool = true
+    let groupScore: Int
+    let groupTotalScore: Int
     var body: some View {
         ZStack {
             EndDetectionScrollView(.horizontal, showIndicators: false, hasScrolledToEnd: $hasScrolledToEnd, hasScrolledToStart: $hasScrolledToStart) {
 
-                HStack(spacing: 0) {
-                    ForEach(0..<6, id:\.self) {index in
+                HStack(spacing:0) {
+                    Image("random0")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 250)
+                    
+                    ForEach(randomize(), id: \.self) { index in
                         Image("random\(index)")
                             .resizable()
                             .scaledToFit()
-                            .frame(height: 550)
+                            .frame(height: 250)
                     }
+                    
+                    // End Image
+                    Image("random5")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 250)
                 }
             }
             .frame(height: 250)
@@ -37,7 +50,12 @@ struct VineBranchView: View {
             }
         }
     }
-
+    private func randomize() -> [Int] {
+        let progressCount = max(ceil(Double(groupScore) / Double(groupTotalScore)) * 4, 2) - 2
+        let array = Array(1...4)
+        let randomizeArray = array.shuffled()
+        return Array(randomizeArray.prefix(Int(progressCount)))
+    }
     private func arrowView(direction: ArrowDirection) -> some View {
         ZStack {
 //            Color.clear
@@ -108,5 +126,5 @@ struct EndDetectionScrollView<Content: View>: View {
 }
 
 #Preview {
-    VineBranchView()
+    VineBranchView(groupScore: 30, groupTotalScore: 10)
 }
