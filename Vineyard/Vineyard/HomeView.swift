@@ -31,6 +31,9 @@ struct HomeView: View {
 //                }
                 
             }
+            .onAppear {
+                UITabBar.appearance().scrollEdgeAppearance = UITabBarAppearance.init(idiom: .unspecified)
+            }
             .environmentObject(inviteViewModel)
             .onOpenURL { incomingURL in
                         print("App was opened via URL: \(incomingURL)")
