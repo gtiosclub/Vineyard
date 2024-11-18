@@ -170,5 +170,32 @@ class FirebaseDataManager: DatabaseServiceProtocol {
             try await addResolutionToDB(resolution: resolution)
         }
     }
+    
+    func fetchRecentActivity(group: Group) async throws -> [(Progress, Resolution, Person)] {
+        
+        let progressRef = db.collection("progress")
+        var groupResFilter: [String] = []
+        // fiter for queries has to be a non-empty array, and group.resolutionIDs could be empty
+        if group.resolutionIDs.isEmpty {
+            groupResFilter.append("")
+        } else {
+            groupResFilter = group.resolutionIDs
+        }
+        
+        let querySnapshot = try await progressRef
+            .whereField("resolutionID", in: groupResFilter).getDocuments()
+        var activityProgress: [(Progress, Resolution, Person)] = []
+        for document in querySnapshot.documents {
+            let progress = try document.data(as: Progress.self)
+            
+            if progress.completionArray.isEmpty { continue }
+            let resolution = (group.resolutions ?? []).first(where: {return $0.id == progress.resolutionID})
+            let person = (group.people ?? []).first(where: {return $0.id == progress.personID})
+            if let person = person, let resolution = resolution {
+                activityProgress.append((progress, resolution, person))
+            }
+        }
+        return activityProgress
+    }
 
 }

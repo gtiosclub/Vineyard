@@ -27,13 +27,13 @@ struct GroupListView: View {
                         
                     }
                     Spacer()
-                    Button(action: {
-                        print("changing mode")
-                    }) {
-                        Image(systemName: "list.bullet")
-                            .foregroundColor(.white)
-                            .font(.system(size: 25))
-                    }
+//                    Button(action: {
+//                        print("changing mode")
+//                    }) {
+//                        Image(systemName: "list.bullet")
+//                            .foregroundColor(.white)
+//                            .font(.system(size: 25))
+//                    }
                     Button(action: {
                         print("add")
                         viewModel.isPresentingCreateGroupView = true
@@ -76,6 +76,7 @@ struct GroupListView: View {
             CreateGroupView().environment(viewModel)
         }
         .onAppear {
+            print("called appear group list")
             viewModel.setUser(user: loginViewModel.currentUser)
             viewModel.loadGroups()
         }

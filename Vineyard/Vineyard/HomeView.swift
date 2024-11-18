@@ -18,7 +18,7 @@ struct HomeView: View {
         if loginViewModel.isLoggedIn {
             TabView {
                 DashboardView().tabItem {
-                    Label("Dashboard", systemImage: "flame")
+                    Label("Dashboard", systemImage: "leaf.circle.fill")
                 }
                 GroupListView(viewModel: groupViewModel).tabItem {
                     Label("Groups", systemImage: "figure.2.and.child.holdinghands")
@@ -30,6 +30,9 @@ struct HomeView: View {
 //                    Label("Profile", systemImage: "brain.head.profile")
 //                }
                 
+            }
+            .onAppear {
+                UITabBar.appearance().scrollEdgeAppearance = UITabBarAppearance.init(idiom: .unspecified)
             }
             .environmentObject(inviteViewModel)
             .onOpenURL { incomingURL in

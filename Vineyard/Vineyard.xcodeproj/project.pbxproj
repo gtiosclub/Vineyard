@@ -15,6 +15,8 @@
 		192EBFF12C90F62F00AF8528 /* VineyardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192EBFF02C90F62F00AF8528 /* VineyardTests.swift */; };
 		192EBFFB2C90F62F00AF8528 /* VineyardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192EBFFA2C90F62F00AF8528 /* VineyardUITests.swift */; };
 		192EBFFD2C90F62F00AF8528 /* VineyardUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192EBFFC2C90F62F00AF8528 /* VineyardUITestsLaunchTests.swift */; };
+		87A161762CE8255A006ED65F /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A161752CE8255A006ED65F /* ProfileViewModel.swift */; };
+		87A161782CEAA51E006ED65F /* GroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A161772CEAA51E006ED65F /* GroupViewModel.swift */; };
 		951CF8F02CC5C0650016B06A /* GroupListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951CF8EF2CC5C0650016B06A /* GroupListView.swift */; };
 		957E87DC2CDAEC4400F10864 /* VineBranchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957E87DB2CDAEC4400F10864 /* VineBranchView.swift */; };
 		95BE42E62CCEF4940031547F /* GroupCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BE42E52CCEF4940031547F /* GroupCardView.swift */; };
@@ -51,6 +53,8 @@
 		F10167662CA37B180004260E /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10167652CA37B150004260E /* Progress.swift */; };
 		F13306EA2CD3E3C1002BA300 /* TodaysTasksWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13306E92CD3E3B1002BA300 /* TodaysTasksWidget.swift */; };
 		F13306EC2CD3E678002BA300 /* RecentActivitiesWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13306EB2CD3E674002BA300 /* RecentActivitiesWidget.swift */; };
+		F17808962CE924730094C8E7 /* ProgressWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17808952CE9246B0094C8E7 /* ProgressWidget.swift */; };
+		F17808982CE941D30094C8E7 /* GroupsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17808972CE941CD0094C8E7 /* GroupsWidget.swift */; };
 		F1E19F872CAB58DC00463111 /* Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E19F862CAB58D800463111 /* Widget.swift */; };
 		F1E19F892CAB5B9F00463111 /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E19F882CAB5B9500463111 /* DashboardViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -84,6 +88,8 @@
 		192EBFF62C90F62F00AF8528 /* VineyardUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VineyardUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		192EBFFA2C90F62F00AF8528 /* VineyardUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VineyardUITests.swift; sourceTree = "<group>"; };
 		192EBFFC2C90F62F00AF8528 /* VineyardUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VineyardUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		87A161752CE8255A006ED65F /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		87A161772CEAA51E006ED65F /* GroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewModel.swift; sourceTree = "<group>"; };
 		951CF8EF2CC5C0650016B06A /* GroupListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListView.swift; sourceTree = "<group>"; };
 		957E87DB2CDAEC4400F10864 /* VineBranchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VineBranchView.swift; sourceTree = "<group>"; };
 		95BE42E52CCEF4940031547F /* GroupCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCardView.swift; sourceTree = "<group>"; };
@@ -118,6 +124,8 @@
 		F10167652CA37B150004260E /* Progress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Progress.swift; sourceTree = "<group>"; };
 		F13306E92CD3E3B1002BA300 /* TodaysTasksWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaysTasksWidget.swift; sourceTree = "<group>"; };
 		F13306EB2CD3E674002BA300 /* RecentActivitiesWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivitiesWidget.swift; sourceTree = "<group>"; };
+		F17808952CE9246B0094C8E7 /* ProgressWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressWidget.swift; sourceTree = "<group>"; };
+		F17808972CE941CD0094C8E7 /* GroupsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsWidget.swift; sourceTree = "<group>"; };
 		F1E19F862CAB58D800463111 /* Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Widget.swift; sourceTree = "<group>"; };
 		F1E19F882CAB5B9500463111 /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -315,6 +323,7 @@
 			isa = PBXGroup;
 			children = (
 				B40B894B2C9364F4006B1771 /* GroupsListViewModel.swift */,
+				87A161772CEAA51E006ED65F /* GroupViewModel.swift */,
 			);
 			name = ViewModels;
 			sourceTree = "<group>";
@@ -340,6 +349,8 @@
 			isa = PBXGroup;
 			children = (
 				F13306EB2CD3E674002BA300 /* RecentActivitiesWidget.swift */,
+				F17808972CE941CD0094C8E7 /* GroupsWidget.swift */,
+				F17808952CE9246B0094C8E7 /* ProgressWidget.swift */,
 				F13306E92CD3E3B1002BA300 /* TodaysTasksWidget.swift */,
 			);
 			name = Models;
@@ -372,6 +383,7 @@
 			isa = PBXGroup;
 			children = (
 				EAC3806E2CA36B8800EBEF4C /* LoginViewModel.swift */,
+				87A161752CE8255A006ED65F /* ProfileViewModel.swift */,
 			);
 			name = ViewModels;
 			sourceTree = "<group>";
@@ -539,6 +551,7 @@
 				190E033D2CE6A70D0054D5E5 /* ToDoListViewModel.swift in Sources */,
 				DAB5CAEE2CE4243E004BC8BD /* ToDoListView.swift in Sources */,
 				F05361C82CAF1462009DE1E3 /* TodoViewModel.swift in Sources */,
+				F17808982CE941D30094C8E7 /* GroupsWidget.swift in Sources */,
 				192EBFE22C90F62E00AF8528 /* HomeView.swift in Sources */,
 				B43CD6C52CB608200079CCBF /* CreateGoalView.swift in Sources */,
 				B40B894C2C9364F4006B1771 /* GroupsListViewModel.swift in Sources */,
@@ -555,11 +568,13 @@
 				95BE42E62CCEF4940031547F /* GroupCardView.swift in Sources */,
 				EAC380712CA36B9A00EBEF4C /* LoginModel.swift in Sources */,
 				EAC380692CA36B3100EBEF4C /* LoginView.swift in Sources */,
+				87A161762CE8255A006ED65F /* ProfileViewModel.swift in Sources */,
 				DA17B8F72CD3B044007D5EB1 /* InvitePopupView.swift in Sources */,
 				EAC3806F2CA36B8800EBEF4C /* LoginViewModel.swift in Sources */,
 				192EBFE02C90F62E00AF8528 /* VineyardApp.swift in Sources */,
 				F13306EC2CD3E678002BA300 /* RecentActivitiesWidget.swift in Sources */,
 				B40B894E2C936DE0006B1771 /* ResolutionView.swift in Sources */,
+				87A161782CEAA51E006ED65F /* GroupViewModel.swift in Sources */,
 				F10167662CA37B180004260E /* Progress.swift in Sources */,
 				DA17B8F52CD3AC59007D5EB1 /* InviteViewModel.swift in Sources */,
 				951CF8F02CC5C0650016B06A /* GroupListView.swift in Sources */,
@@ -569,6 +584,7 @@
 				EAC3806B2CA36B5600EBEF4C /* SignUpView.swift in Sources */,
 				F05361C62CAF0AA1009DE1E3 /* TodoView.swift in Sources */,
 				B43CD6BD2CB5F23A0079CCBF /* CreateGroupView.swift in Sources */,
+				F17808962CE924730094C8E7 /* ProgressWidget.swift in Sources */,
 				F10167642CA37B080004260E /* Badge.swift in Sources */,
 				BB40EDFA2C991C9D006BA1E3 /* Resolution.swift in Sources */,
 				EAC3806D2CA36B7400EBEF4C /* ResetPasswordView.swift in Sources */,

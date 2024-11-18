@@ -117,8 +117,9 @@ class LoginViewModel: ObservableObject {
     public func signOut() async {
         do {
             try await loginModel.signOut()
-            currentUser = nil
             isLoggedIn = false
+            currentUser = nil
+            
         } catch {
             //add signout error handleFirebaseError(error: )
             errorMessage = "Error signing out: \(error.localizedDescription)"
