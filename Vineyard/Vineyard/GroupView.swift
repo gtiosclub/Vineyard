@@ -13,153 +13,138 @@ struct GroupView: View {
     @Namespace private var animation
     @State var membersExpanded: Bool = false
     @State var group: Group
+
     @State var recentActivity: [(Progress, Resolution, Person)] = []
+
     var body: some View {
-        
-        NavigationStack {
-            ScrollView {
+        ScrollView {
+            VStack {
+                Text("Goal: \(group.groupGoal)")
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.top)
+                
                 VineBranchView()
-                    .padding()
-                VStack(spacing: 20) {
-                    Text("Goal: \(group.groupGoal)")
-                        .font(.headline)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    
-                    Text("Score Goal: \(group.scoreGoal)")
-                        .font(.headline)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    
-                    VStack(alignment: .leading, spacing: 10) {
-                        Spacer()
-                        ProgressView(value: 0.20)
-                            .accentColor(.white)
-                            .background(Color.gray.opacity(0.5))
-                            .frame(height: 10)
-                    }
-                    .padding()
-                    .frame(height: 160)
-                    .background {
-                        RoundedRectangle(cornerRadius: 20)
-                            .foregroundStyle(.ultraThinMaterial)
-                    }
-                    if !membersExpanded {
-                        HStack {
-                            HStack(spacing: -20 * 0.5) {
-                                ForEach(0..<group.peopleIDs.count) { index in
-                                    ZStack {
-                                        Circle()
-                                            .foregroundStyle(Color.black.opacity(0.3))
-                                            .frame(width: 21, height: 21)
-                                            .zIndex(Double(group.peopleIDs.count - index))
-                                        Circle()
-                                            .foregroundStyle(.ultraThinMaterial)
-                                            .frame(width: 20, height: 20)
-                                            .zIndex(Double(group.peopleIDs.count - index))
-                                        
-                                    }
-                                    .matchedGeometryEffect(id: "memberCircle\(index)", in: animation)
-                                    
-                                    
-                                }
-                            }
-                            Text("Members (\(group.peopleIDs.count))")
-                                .font(.headline)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                        }
-                        .padding(8)
-                        .background {
-                            RoundedRectangle(cornerRadius: 20)
-                                .foregroundStyle(.ultraThinMaterial)
-                        }
-                        .onTapGesture {
-                            withAnimation {
-                                membersExpanded.toggle()
-                            }
-                        }
-                    } else {
-                        
-                        VStack (alignment: .leading){
+                    .frame(maxWidth: .infinity, maxHeight: 220)
+                    .clipShape(RoundedRectangle(cornerRadius: 15).offset(y:-20))
+                    .shadow(radius: 4)
+                    .padding(.top)
+                
+                //
+                Text("Score Goal: \(group.scoreGoal)")
+                    .font(.headline)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.bottom)
+                
+                //
+                
+                
+                if !membersExpanded {
+                    HStack {
+                        HStack(spacing: -30 * 0.5) {
                             ForEach(0..<group.peopleIDs.count) { index in
-                                HStack {
-                                    ZStack {
-                                        Circle()
-                                            .foregroundStyle(Color.black.opacity(0.3))
-                                            .frame(width: 21, height: 21)
-                                        
-                                        Circle()
-                                            .foregroundStyle(.ultraThinMaterial)
-                                            .frame(width: 20, height: 20)
-                                        
-                                        
-                                    }
-                                    .matchedGeometryEffect(id: "memberCircle\(index)", in: animation)
-                                    Text((group.people ?? [])[index].name)
+                                ZStack {
+                                    Circle()
+                                        .foregroundStyle(Color.gray.opacity(0.3))
+                                        .frame(width: 21, height: 21)
+                                        .zIndex(Double(group.peopleIDs.count - index))
+                                    Circle()
+                                        .foregroundStyle(.ultraThinMaterial)
+                                        .frame(width: 20, height: 20)
+                                        .zIndex(Double(group.peopleIDs.count - index))
+                                    Image(systemName: "person.circle")
+                                        .foregroundColor(Color.gray.opacity(1))
+                                        .frame(width: 25, height: 25)
+                                        .zIndex(Double(group.peopleIDs.count - index))
+                                    
                                 }
+                                .matchedGeometryEffect(id: "memberCircle\(index)", in: animation)
+                                
                                 
                             }
                         }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        
-                        
-                        .padding(8)
-                        .background {
-                            RoundedRectangle(cornerRadius: 20)
-                                .foregroundStyle(.ultraThinMaterial)
-                        }
-                        .onTapGesture {
-                            withAnimation {
-                                membersExpanded.toggle()
-                            }
-                        }
+                        Text("Members (\(group.peopleIDs.count))")
+                            .font(.headline)
+                            .frame(maxWidth: .infinity, alignment: .leading)
                     }
-                    
-                    //                    ForEach(group.people) {people in
-                    //
-                    //                        VStack(alignment: .leading, spacing: 10) {
-                    //                            HStack {
-                    //                                Image(systemName: "person.crop.circle")
-                    //                                    .resizable()
-                    //                                    .frame(width: 30, height: 30)
-                    //
-                    //                                Text("\(people.name)")
-                    //                                Spacer()
-                    //                                ProgressView(value: 0.20)
-                    //                                    .accentColor(.white)
-                    //                                    .frame(width: 200, height: 10)
-                    //                                    .background(Color.gray.opacity(0.5))
-                    //                            }
-                    //                        }
-                    //                        .padding()
-                    //                        .frame(height: 60)
-                    //                        .background(Color.gray.opacity(0.5))
-                    //                        .cornerRadius(10)
-                    //                    }
-                    
-                    
-                    Text("Todo")
-                        .font(.headline)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    
-                    VStack(alignment: .leading) {
-                        
-                        
-                        ForEach(group.resolutions ?? []) { resolution in
-                            HStack {
-                                Circle()
-                                    .foregroundStyle(resolution.diffLevel.difficultyLevel == DifficultyLevel.easy ? .green : (resolution.diffLevel.difficultyLevel == DifficultyLevel.medium ? .yellow : .red))
-                                    .frame(width: 10, height: 10)
-                                Text(resolution.finalTitle())
-                            }
-                        }
-                        
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(8)
                     .background {
                         RoundedRectangle(cornerRadius: 20)
-                            .foregroundStyle(.ultraThinMaterial)
-                        
+//                            .foregroundStyle(.ultraThinMaterial)
+                            .fill(Color.green.opacity(0.2))
                     }
+                    .padding(.bottom, 20)
+                    .onTapGesture {
+                        withAnimation {
+                            membersExpanded.toggle()
+                        }
+                    }
+                } else {
+                    
+                    VStack (alignment: .leading){
+                        ForEach(0..<group.peopleIDs.count) { index in
+                            HStack {
+                                ZStack {
+                                    
+                                    Circle()
+                                        .foregroundStyle(Color.gray.opacity(0.3))
+                                        .frame(width: 21, height: 21)
+                                    
+                                    Circle()
+                                        .foregroundStyle(.ultraThinMaterial)
+                                        .frame(width: 20, height: 20)
+                                    
+                                    Image(systemName: "person.circle")
+                                        .foregroundColor(Color.gray.opacity(1))
+                                        .frame(width: 25, height: 25)
+                                    
+                                }
+                                .matchedGeometryEffect(id: "memberCircle\(index)", in: animation)
+                                Text((group.people ?? [])[index].name)
+                            }
+                            
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    
+                    .padding(8)
+                    .background {
+                        RoundedRectangle(cornerRadius: 20)
+//                            .foregroundStyle(.ultraThinMaterial)
+                            .fill(Color.green.opacity(0.2))
+                    }
+                    .padding(.bottom, 20)
+                    .onTapGesture {
+                        withAnimation {
+                            membersExpanded.toggle()
+                        }
+                    }
+                }
+                
+                Text("Tasks")
+                    .font(.headline)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+
+                
+                VStack(alignment: .leading) {
+                    if let resolutions = group.resolutions, !resolutions.isEmpty {
+                        ForEach(resolutions) { resolution in
+                            HStack {
+                                Circle()
+                                    .foregroundStyle(resolution.diffLevel.difficultyLevel == DifficultyLevel.easy ? .green : (resolution.diffLevel.difficultyLevel == DifficultyLevel.medium ? .yellow : .red))
+                                    .frame(width: 12, height: 12)
+                                Text(resolution.finalTitle())
+                                    .padding(10)
+                            }
+                        }
+                    } else {
+                        Text("No goals yet? Make some!")
+                            .font(.subheadline)
+                            .padding(10)
+                    }
+
                     Text("Recent activity")
                         .font(.headline)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -228,14 +213,31 @@ struct GroupView: View {
                 ToolbarItem(placement: .principal) {
                     Text("\(group.name)")
                         .font(.system(size: 24, weight: .bold))
+
                 }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    ShareLink(item: generateInviteLink())
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(8)
+                .background {
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(Color.purple.opacity(0.2))
                 }
+                
+                
+            }
+            .padding(.horizontal, 20)
+        }
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text("\(group.name)")
+                    .font(.system(size: 24, weight: .bold))
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                ShareLink(item: generateInviteLink())
             }
         }
         .onAppear {
             Task {
+
                 do {
                     group.people = try await dm.fetchPeopleFromDB(peopleIDs: group.peopleIDs)
                     group.resolutions = try await dm.fetchResolutionsFromDB(resolutionIDs: group.resolutionIDs)
@@ -243,6 +245,7 @@ struct GroupView: View {
                 } catch {
                     print(error)
                 }
+
             }
         }
     }
@@ -259,14 +262,3 @@ struct GroupView: View {
         
     }
 }
-
-
-//#Preview {
-//    GroupView(group: .constant(Group.samples[0])).environment(GroupsListViewModel())
-//}
-
-
-
-//#Preview {
-//    GroupView(group: .constant(Group.samples[0])).environment(GroupsListViewModel())
-//}

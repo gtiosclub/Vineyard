@@ -25,7 +25,7 @@ struct VineBranchView: View {
                 }
             }
             .frame(height: 250)
-            .border(Color.gray, width: 5)
+//            .border(Color.gray, width: 5)
             .padding()
             .ignoresSafeArea()
             if hasScrolledToEnd {
@@ -40,12 +40,12 @@ struct VineBranchView: View {
 
     private func arrowView(direction: ArrowDirection) -> some View {
         ZStack {
-            Color.clear
-                .background(.ultraThinMaterial)
-                .frame(width: 50, height: 50)
-                .cornerRadius(25)
-                .opacity(0.7)
-            Image(systemName: direction == .left ? "lessthan" : "greaterthan")
+//            Color.clear
+//                .background(.ultraThinMaterial)
+//                .frame(width: 50, height: 50)
+//                .cornerRadius(25)
+//                .opacity(0.7)
+            Image(systemName: direction == .left ? "arrow.left" : "arrow.right")
                 .foregroundColor(.black)
                 .font(.title)
                 .opacity(0.4)
